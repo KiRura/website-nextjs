@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": []
+		"ignore": [".next/", "src/components/ui/"]
 	},
 	"formatter": {
 		"enabled": true,
@@ -24,7 +24,8 @@
 				"all": true
 			},
 			"correctness": {
-				"all": true
+				"all": true,
+				"useImportExtensions": "off"
 			},
 			"security": {
 				"all": true

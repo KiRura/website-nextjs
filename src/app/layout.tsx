@@ -1,6 +1,7 @@
-import type React from "react";
-import type { Metadata } from "next";
+import Header from "@/components/header";
 import { Provider } from "@/components/ui/provider";
+import type { Metadata } from "next";
+import type React from "react";
 
 export const metadata: Metadata = {
 	title: "きるら",
@@ -15,7 +16,10 @@ export default function RootLayout({
 	return (
 		<html lang="ja" suppressHydrationWarning>
 			<body>
-				<Provider>{children}</Provider>
+				<Provider>
+					<Header />
+					{children}
+				</Provider>
 			</body>
 		</html>
 	);
