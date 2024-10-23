@@ -18,7 +18,7 @@ export default function Home() {
 					きるら, (7)KiRura,
 				</Heading>
 			</Center>
-			<Center>
+			<Center mb={6}>
 				<Flex direction="column" align="center">
 					<Heading mb={4}>Discord鯖</Heading>
 					<SimpleGrid
