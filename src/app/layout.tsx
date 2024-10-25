@@ -1,5 +1,6 @@
 import Header from "@/components/header";
 import { Provider } from "@/components/ui/provider";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import type React from "react";
 
@@ -19,6 +20,7 @@ export default function RootLayout({
 				<Provider>
 					<Header />
 					{children}
+					<SpeedInsights />
 				</Provider>
 			</body>
 		</html>
