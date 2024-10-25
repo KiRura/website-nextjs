@@ -18,23 +18,21 @@ export default function Home() {
 					きるら, (7)KiRura,
 				</Heading>
 			</Center>
-			<Center mb={6}>
-				<Flex direction="column" align="center">
-					<Heading mb={4}>Discord鯖</Heading>
-					<SimpleGrid
-						columns={{
-							base: 1,
-							sm: 1,
-							md: 2,
-						}}
-						gap={4}
-						maxW={720}
-						w="100%"
-					>
-						<Servers />
-					</SimpleGrid>
-				</Flex>
-			</Center>
+			<Flex direction="column" align="center" mb={6}>
+				<Heading mb={4}>Discord鯖</Heading>
+				<SimpleGrid
+					columns={{
+						base: 1,
+						sm: 1,
+						md: 2,
+					}}
+					gap={4}
+					maxW={720}
+					w="100%"
+				>
+					<Servers />
+				</SimpleGrid>
+			</Flex>
 		</Container>
 	);
 }
