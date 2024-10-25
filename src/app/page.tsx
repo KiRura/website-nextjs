@@ -1,5 +1,6 @@
 import { Center, Container, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
 import Servers from "./servers";
+import Accounts from "./accounts";
 
 export default function Home() {
 	return (
@@ -31,6 +32,21 @@ export default function Home() {
 					w="100%"
 				>
 					<Servers />
+				</SimpleGrid>
+			</Flex>
+			<Flex direction="column" align="center" mb={6}>
+				<Heading mb={4}>他リンク</Heading>
+				<SimpleGrid
+					columns={{
+						base: 1,
+						sm: 2,
+						md: 3,
+						lg: 4,
+					}}
+					gap={4}
+					w="100%"
+				>
+					<Accounts />
 				</SimpleGrid>
 			</Flex>
 		</Container>

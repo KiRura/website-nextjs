@@ -7,6 +7,14 @@ import type React from "react";
 export const metadata: Metadata = {
 	title: "きるら",
 	description: "しがない個人サイト with Chakra UI v3",
+	icons: "https://kirura.vercel.app/kirura_rounded.png",
+	twitter: {
+		card: "summary",
+		images: "https://kirura.vercel.app/kirura.png",
+	},
+	openGraph: {
+		images: "https://kirura.vercel.app/kirura.png",
+	},
 };
 
 export default function RootLayout({
