@@ -1,7 +1,18 @@
 "use client";
 
+import { toaster } from "@/components/ui/toaster";
+import { ToggleTip } from "@/components/ui/toggle-tip";
 import { Tooltip } from "@/components/ui/tooltip";
-import { Card, Flex, For, HStack, Icon, Link } from "@chakra-ui/react";
+import {
+	Card,
+	Flex,
+	For,
+	HStack,
+	Icon,
+	IconButton,
+	Link,
+} from "@chakra-ui/react";
+import NextLink from "next/link";
 import { useState } from "react";
 import {
 	FaBluesky,
@@ -19,6 +30,7 @@ import {
 	MdDelete,
 	MdFireplace,
 	MdGrass,
+	MdInfo,
 	MdSmartToy,
 	MdTrain,
 } from "react-icons/md";
@@ -133,7 +145,6 @@ const accounts = [
 export default function Accounts() {
 	const [copied, setCopied] = useState(-1);
 	const [errored, setErrored] = useState(-1);
-	const [open, setOpen] = useState(-1);
 
 	return (
 		<For each={accounts}>
@@ -145,7 +156,17 @@ export default function Accounts() {
 								<Icon boxSize={5}>
 									<account.icon />
 								</Icon>
-								<Card.Title>{account.name}</Card.Title>
+								<Card.Title>
+									{account.href ? (
+										<Link asChild variant="underline">
+											<NextLink href={account.href} target="_blank">
+												{account.name}
+											</NextLink>
+										</Link>
+									) : (
+										account.name
+									)}
+								</Card.Title>
 							</HStack>
 							<Tooltip
 								content={
@@ -155,10 +176,6 @@ export default function Accounts() {
 											? "コピーできませんでした"
 											: "コピー"
 								}
-								open={open === i}
-								onOpenChange={(e) => {
-									setOpen(e.open ? i : -1);
-								}}
 								showArrow
 								positioning={{ placement: "top" }}
 								onExitComplete={() => {
@@ -171,25 +188,43 @@ export default function Accounts() {
 							>
 								<Link
 									fontStyle="italic"
+									colorPalette="gray"
 									fontSize="sm"
 									overflowWrap="anywhere"
 									ml={2}
-									onMouseDown={() => {
+									onClick={() => {
 										try {
 											navigator.clipboard.writeText(account.accountId);
+											toaster.create({
+												title: "コピーされました",
+												description: (
+													<ToggleTip
+														content={
+															<>
+																ToasterにResponsiveを追加しろChakraUI
+																<br />
+																ToasterのactionにIconButtonを使わせろChakraUI
+																<br />
+																zIndex diff
+															</>
+														}
+													>
+														<IconButton variant="surface" size="xs">
+															<Icon>
+																<MdInfo />
+															</Icon>
+														</IconButton>
+													</ToggleTip>
+												),
+												action: {
+													label: "閉じる",
+													onClick() {},
+												},
+											});
 											setCopied(i);
 										} catch (_error) {
 											setErrored(i);
 										}
-									}}
-									onTouchEnd={() => {
-										try {
-											navigator.clipboard.writeText(account.accountId);
-											setCopied(i);
-										} catch (_error) {
-											setErrored(i);
-										}
-										setOpen(i);
 									}}
 								>
 									{account.accountId}

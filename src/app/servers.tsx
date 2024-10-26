@@ -19,14 +19,8 @@ const servers = [
 		),
 	},
 	{
-		name: "ゆた鯖",
-		description: (
-			<>
-				→ ってなんだよ！: 人の集まり / Discord鯖
-				<br />→ ってどんな場所: 身内ノリ多め
-				<br />→ に入ったら良い事ある？: とても良い事も悪い事もある
-			</>
-		),
+		name: "ゆた鯖【多様性】",
+		description: <>身内ノリ多めDiscord鯖 / 人の集まり</>,
 		footer: (
 			<>
 				<NextLink

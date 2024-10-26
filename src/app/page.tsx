@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import { Center, Container, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
 import Accounts from "./accounts";
 import Servers from "./servers";
@@ -5,11 +6,12 @@ import Servers from "./servers";
 export default function Home() {
 	return (
 		<Container maxW="8xl">
+			<Toaster />
 			<Center my={24}>
 				<Heading
 					as="h1"
 					size={{
-						base: "5xl",
+						base: "4xl",
 						sm: "5xl",
 						md: "6xl",
 					}}

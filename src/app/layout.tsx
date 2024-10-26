@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import { Provider } from "@/components/ui/provider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import type React from "react";
 
 export const metadata: Metadata = {
@@ -17,13 +18,17 @@ export const metadata: Metadata = {
 	},
 };
 
+const inter = Inter({
+	subsets: ["latin"],
+});
+
 export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="ja" suppressHydrationWarning>
+		<html lang="ja" suppressHydrationWarning className={inter.className}>
 			<body>
 				<Provider>
 					<Header />
