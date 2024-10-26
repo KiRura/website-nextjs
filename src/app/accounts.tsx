@@ -133,6 +133,7 @@ const accounts = [
 export default function Accounts() {
 	const [copied, setCopied] = useState(-1);
 	const [errored, setErrored] = useState(-1);
+	const [open, setOpen] = useState(-1);
 
 	return (
 		<For each={accounts}>
@@ -154,6 +155,10 @@ export default function Accounts() {
 											? "コピーできませんでした"
 											: "コピー"
 								}
+								open={open === i}
+								onOpenChange={(e) => {
+									setOpen(e.open ? i : -1);
+								}}
 								showArrow
 								positioning={{ placement: "top" }}
 								onExitComplete={() => {
@@ -176,6 +181,9 @@ export default function Accounts() {
 										} catch (_error) {
 											setErrored(i);
 										}
+									}}
+									onTouchEnd={() => {
+										setOpen(i);
 									}}
 								>
 									{account.accountId}
