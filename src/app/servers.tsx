@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card, Icon } from "@chakra-ui/react";
+import { Card, For, Icon } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { MdOpenInNew } from "react-icons/md";
 
@@ -54,15 +54,17 @@ const servers = [
 ];
 
 export default function Servers() {
-	return servers.map((server) => {
-		return (
-			<Card.Root key={server.name}>
-				<Card.Body>
-					<Card.Title>{server.name}</Card.Title>
-					<Card.Description>{server.description}</Card.Description>
-				</Card.Body>
-				<Card.Footer justifyContent="end">{server.footer}</Card.Footer>
-			</Card.Root>
-		);
-	});
+	return (
+		<For each={servers}>
+			{(server) => (
+				<Card.Root key={server.name}>
+					<Card.Body>
+						<Card.Title>{server.name}</Card.Title>
+						<Card.Description>{server.description}</Card.Description>
+					</Card.Body>
+					<Card.Footer justifyContent="end">{server.footer}</Card.Footer>
+				</Card.Root>
+			)}
+		</For>
+	);
 }

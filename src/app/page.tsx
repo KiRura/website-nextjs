@@ -1,6 +1,6 @@
 import { Center, Container, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
-import Servers from "./servers";
 import Accounts from "./accounts";
+import Servers from "./servers";
 
 export default function Home() {
 	return (

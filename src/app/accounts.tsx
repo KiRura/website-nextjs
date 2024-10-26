@@ -1,7 +1,8 @@
 "use client";
 
 import { Tooltip } from "@/components/ui/tooltip";
-import { Card, Flex, HStack, Icon, Link } from "@chakra-ui/react";
+import { Card, Flex, For, HStack, Icon, Link } from "@chakra-ui/react";
+import { useState } from "react";
 import {
 	FaBluesky,
 	FaDiscord,
@@ -130,31 +131,61 @@ const accounts = [
 ];
 
 export default function Accounts() {
-	return accounts.map((account) => {
-		return (
-			<Card.Root key={account.name} size="sm" w="100%">
-				<Card.Body>
-					<Flex align="start" justify="space-between">
-						<HStack mb={2}>
-							<Icon boxSize={6}>
-								<account.icon />
-							</Icon>
-							<Card.Title>{account.name}</Card.Title>
-						</HStack>
-						{/* <Tooltip content="コピー" closeOnClick={false} showArrow> */}
-						<Link
-							fontStyle="italic"
-							fontSize="sm"
-							overflowWrap="anywhere"
-							ml={2}
-						>
-							{account.accountId}
-						</Link>
-						{/* </Tooltip> */}
-					</Flex>
-					<Card.Description>{account.description}</Card.Description>
-				</Card.Body>
-			</Card.Root>
-		);
-	});
+	const [copied, setCopied] = useState(-1);
+	const [errored, setErrored] = useState(-1);
+
+	return (
+		<For each={accounts}>
+			{(account, i) => (
+				<Card.Root key={account.name} size="sm" w="100%">
+					<Card.Body>
+						<Flex align="start" justify="space-between">
+							<HStack mb={2}>
+								<Icon boxSize={5}>
+									<account.icon />
+								</Icon>
+								<Card.Title>{account.name}</Card.Title>
+							</HStack>
+							<Tooltip
+								content={
+									copied === i
+										? "コピーされました"
+										: errored === i
+											? "コピーできませんでした"
+											: "コピー"
+								}
+								showArrow
+								positioning={{ placement: "top" }}
+								onExitComplete={() => {
+									setCopied(-1);
+									setErrored(-1);
+								}}
+								closeOnPointerDown={false}
+								closeOnClick={false}
+								openDelay={0}
+							>
+								<Link
+									fontStyle="italic"
+									fontSize="sm"
+									overflowWrap="anywhere"
+									ml={2}
+									onClick={() => {
+										try {
+											navigator.clipboard.writeText(account.accountId);
+											setCopied(i);
+										} catch (_error) {
+											setErrored(i);
+										}
+									}}
+								>
+									{account.accountId}
+								</Link>
+							</Tooltip>
+						</Flex>
+						<Card.Description>{account.description}</Card.Description>
+					</Card.Body>
+				</Card.Root>
+			)}
+		</For>
+	);
 }
