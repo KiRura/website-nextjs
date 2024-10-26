@@ -174,7 +174,7 @@ export default function Accounts() {
 									fontSize="sm"
 									overflowWrap="anywhere"
 									ml={2}
-									onClick={() => {
+									onMouseDown={() => {
 										try {
 											navigator.clipboard.writeText(account.accountId);
 											setCopied(i);
@@ -183,6 +183,12 @@ export default function Accounts() {
 										}
 									}}
 									onTouchEnd={() => {
+										try {
+											navigator.clipboard.writeText(account.accountId);
+											setCopied(i);
+										} catch (_error) {
+											setErrored(i);
+										}
 										setOpen(i);
 									}}
 								>
