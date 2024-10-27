@@ -195,36 +195,39 @@ export default function Accounts() {
 									onClick={() => {
 										try {
 											navigator.clipboard.writeText(account.accountId);
-											toaster.create({
-												title: "コピーされました",
-												description: (
-													<ToggleTip
-														content={
-															<>
-																ToasterにResponsiveを追加しろChakraUI
-																<br />
-																ToasterのactionにIconButtonを使わせろChakraUI
-																<br />
-																zIndex diff
-															</>
-														}
-													>
-														<IconButton variant="surface" size="xs">
-															<Icon>
-																<MdInfo />
-															</Icon>
-														</IconButton>
-													</ToggleTip>
-												),
-												action: {
-													label: "閉じる",
-													onClick() {},
-												},
-											});
+
 											setCopied(i);
 										} catch (_error) {
 											setErrored(i);
 										}
+									}}
+									onTouchEnd={() => {
+										toaster.create({
+											title: "コピーされました",
+											description: (
+												<ToggleTip
+													content={
+														<>
+															ToasterにResponsiveを追加しろChakraUI
+															<br />
+															ToasterのactionにIconButtonを使わせろChakraUI
+															<br />
+															zIndex diff
+														</>
+													}
+												>
+													<IconButton variant="surface" size="xs">
+														<Icon>
+															<MdInfo />
+														</Icon>
+													</IconButton>
+												</ToggleTip>
+											),
+											action: {
+												label: "閉じる",
+												onClick() {},
+											},
+										});
 									}}
 								>
 									{account.accountId}

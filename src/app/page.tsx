@@ -1,6 +1,14 @@
 import { Toaster } from "@/components/ui/toaster";
-import { Center, Container, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
+import {
+	Center,
+	Container,
+	Flex,
+	HStack,
+	Heading,
+	SimpleGrid,
+} from "@chakra-ui/react";
 import Accounts from "./accounts";
+import Intro from "./intro";
 import Servers from "./servers";
 
 export default function Home() {
@@ -50,6 +58,12 @@ export default function Home() {
 				>
 					<Accounts />
 				</SimpleGrid>
+			</Flex>
+			<Flex direction="column" align="center" mb={6}>
+				<Heading mb={4}>自己紹介</Heading>
+				<HStack wrap="wrap" gap={4}>
+					<Intro />
+				</HStack>
 			</Flex>
 		</Container>
 	);
