@@ -6,9 +6,8 @@ import { Tooltip } from "@/components/ui/tooltip";
 import {
 	Card,
 	Flex,
-	For,
+	GridItem,
 	HStack,
-	Icon,
 	IconButton,
 	Link,
 } from "@chakra-ui/react";
@@ -16,24 +15,22 @@ import NextLink from "next/link";
 import { useState } from "react";
 import {
 	FaBluesky,
+	FaBolt,
+	FaCloudMoon,
 	FaDiscord,
+	FaFire,
 	FaGithub,
 	FaGitlab,
+	FaInfo,
 	FaInstagram,
+	FaRobot,
+	FaStopwatch,
+	FaTrain,
+	FaTrash,
 	FaTwitter,
+	FaWind,
 	FaYoutube,
 } from "react-icons/fa6";
-import {
-	MdAir,
-	MdAlarm,
-	MdBolt,
-	MdDelete,
-	MdFireplace,
-	MdGrass,
-	MdInfo,
-	MdSmartToy,
-	MdTrain,
-} from "react-icons/md";
 
 const accounts = [
 	{
@@ -90,55 +87,55 @@ const accounts = [
 		name: "Refind Self",
 		description: "全人類やれ",
 		href: "https://store.steampowered.com/app/2514960/Refind_Self",
-		icon: MdSmartToy,
+		icon: FaRobot,
 	},
 	{
 		accountId: "俺のオーディン#KiR",
 		name: "VALORANT",
 		description: "基本マルチ",
 		href: "https://playvalorant.com",
-		icon: MdAir,
+		icon: FaWind,
 	},
 	{
 		accountId: "KiRura#1579",
 		name: "Overwatch",
 		description: "ゲンボを一番やってる",
 		href: "https://overwatch.blizzard.com/",
-		icon: MdAlarm,
+		icon: FaStopwatch,
 	},
 	{
 		accountId: "1301188343",
 		name: "ZZZ",
 		description: "全人類やれ",
 		href: "https://zenless.hoyoverse.com/",
-		icon: MdBolt,
+		icon: FaBolt,
 	},
 	{
 		accountId: "803854671",
 		name: "原神",
 		description: "フォンテーヌまでやれ",
 		href: "https://genshin.hoyoverse.com/",
-		icon: MdGrass,
+		icon: FaCloudMoon,
 	},
 	{
 		accountId: "802728892",
 		name: "スタレ",
 		description: "ピノコニーまでやれ",
 		href: "https://hsr.hoyoverse.com/",
-		icon: MdTrain,
+		icon: FaTrain,
 	},
 	{
 		accountId: "21132502",
 		name: "崩壊3rd",
 		description: "Steam版とデータが上手く連携できてない",
 		href: "https://www.houkai3rd.com/",
-		icon: MdFireplace,
+		icon: FaFire,
 	},
 	{
 		accountId: "きるら",
 		name: "apex legends",
 		description: "カス",
-		icon: MdDelete,
+		icon: FaTrash,
 	},
 ];
 
@@ -146,98 +143,92 @@ export default function Accounts() {
 	const [copied, setCopied] = useState(-1);
 	const [errored, setErrored] = useState(-1);
 
-	return (
-		<For each={accounts}>
-			{(account, i) => (
-				<Card.Root key={account.name} size="sm" w="100%">
-					<Card.Body>
-						<Flex align="start" justify="space-between">
-							<HStack mb={2}>
-								<Icon boxSize={5}>
-									<account.icon />
-								</Icon>
-								<Card.Title>
-									{account.href ? (
-										<Link asChild variant="underline">
-											<NextLink href={account.href} target="_blank">
-												{account.name}
-											</NextLink>
-										</Link>
-									) : (
-										account.name
-									)}
-								</Card.Title>
-							</HStack>
-							<Tooltip
-								content={
-									copied === i
-										? "コピーされました"
-										: errored === i
-											? "コピーできませんでした"
-											: "コピー"
-								}
-								showArrow
-								positioning={{ placement: "top" }}
-								onExitComplete={() => {
-									setCopied(-1);
-									setErrored(-1);
-								}}
-								closeOnPointerDown={false}
-								closeOnClick={false}
-								openDelay={0}
-							>
-								<Link
-									fontStyle="italic"
-									colorPalette="gray"
-									fontSize="sm"
-									overflowWrap="anywhere"
-									ml={2}
-									onClick={() => {
-										try {
-											navigator.clipboard.writeText(account.accountId);
+	return accounts.map((account, i) => (
+		<GridItem key={account.name}>
+			<Card.Root size="sm" h="100%" variant="subtle">
+				<Card.Body>
+					<Flex align="start" justify="space-between">
+						<HStack mb={2}>
+							<account.icon />
+							<Card.Title>
+								{account.href ? (
+									<Link asChild variant="underline">
+										<NextLink href={account.href} target="_blank">
+											{account.name}
+										</NextLink>
+									</Link>
+								) : (
+									account.name
+								)}
+							</Card.Title>
+						</HStack>
+						<Tooltip
+							content={
+								copied === i
+									? "コピーされました"
+									: errored === i
+										? "コピーできませんでした"
+										: "コピー"
+							}
+							showArrow
+							positioning={{ placement: "top" }}
+							onExitComplete={() => {
+								setCopied(-1);
+								setErrored(-1);
+							}}
+							closeOnPointerDown={false}
+							closeOnClick={false}
+							openDelay={0}
+						>
+							<Link
+								fontStyle="italic"
+								colorPalette="gray"
+								fontSize="sm"
+								overflowWrap="anywhere"
+								ml={2}
+								onClick={() => {
+									try {
+										navigator.clipboard.writeText(account.accountId);
 
-											setCopied(i);
-										} catch (_error) {
-											setErrored(i);
-										}
-									}}
-									onTouchEnd={() => {
-										toaster.create({
-											title: "コピーされました",
-											description: (
-												<ToggleTip
-													content={
-														<>
-															ToasterにResponsiveを追加しろChakraUI
-															<br />
-															ToasterのactionにIconButtonを使わせろChakraUI
-															<br />
-															zIndex diff
-														</>
-													}
-												>
-													<IconButton variant="surface" size="xs">
-														<Icon>
-															<MdInfo />
-														</Icon>
-													</IconButton>
-												</ToggleTip>
-											),
-											action: {
-												label: "閉じる",
-												onClick() {},
-											},
-										});
-									}}
-								>
-									{account.accountId}
-								</Link>
-							</Tooltip>
-						</Flex>
-						<Card.Description>{account.description}</Card.Description>
-					</Card.Body>
-				</Card.Root>
-			)}
-		</For>
-	);
+										setCopied(i);
+									} catch (_error) {
+										setErrored(i);
+									}
+								}}
+								onTouchEnd={() => {
+									toaster.create({
+										title: "コピーされました",
+										description: (
+											<ToggleTip
+												content={
+													<>
+														ToasterにResponsiveを追加しろChakraUI
+														<br />
+														ToasterのactionにIconButtonを使わせろChakraUI
+														<br />
+														zIndex diff
+													</>
+												}
+											>
+												<IconButton variant="surface" size="xs">
+													<FaInfo />
+												</IconButton>
+											</ToggleTip>
+										),
+										action: {
+											label: "閉じる",
+											onClick() {},
+										},
+									});
+								}}
+							>
+								{account.accountId}
+							</Link>
+						</Tooltip>
+					</Flex>
+					<Card.Description>{account.description}</Card.Description>
+				</Card.Body>
+			</Card.Root>
+		</GridItem>
+	));
 }

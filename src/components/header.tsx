@@ -1,16 +1,8 @@
 "use client";
 
-import {
-	Box,
-	Container,
-	Flex,
-	HStack,
-	Icon,
-	IconButton,
-} from "@chakra-ui/react";
+import { Box, Container, Flex, HStack, IconButton } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { FaGitlab } from "react-icons/fa6";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { FaGitlab, FaMoon, FaSun } from "react-icons/fa6";
 import { Button } from "./ui/button";
 import { useColorMode } from "./ui/color-mode";
 import { Tooltip } from "./ui/tooltip";
@@ -24,15 +16,16 @@ export default function Header() {
 			zIndex="docked"
 			top={0}
 			bg="bg"
+			borderBottomColor="border"
 			borderBottomWidth="1px"
 			borderBottomStyle="solid"
 		>
 			<Container maxW="8xl">
 				<Flex w="100%" justify="space-between" align="center" py={2}>
 					<HStack>
-						<NextLink href="/">
-							<Button variant="ghost">KiRura</Button>
-						</NextLink>
+						<Button variant="ghost" asChild>
+							<NextLink href="/">KiRura</NextLink>
+						</Button>
 						<Tooltip content="coming soon...">
 							<Button disabled variant="ghost">
 								Tools
@@ -40,20 +33,16 @@ export default function Header() {
 						</Tooltip>
 					</HStack>
 					<HStack>
-						<NextLink
-							href="https://gitlab.com/KiRura/kirura-website-chakra-v3"
-							target="_blank"
-						>
-							<IconButton variant="ghost">
-								<Icon>
-									<FaGitlab />
-								</Icon>
-							</IconButton>
-						</NextLink>
+						<IconButton variant="ghost" asChild>
+							<NextLink
+								href="https://gitlab.com/KiRura/kirura-website-chakra-v3"
+								target="_blank"
+							>
+								<FaGitlab />
+							</NextLink>
+						</IconButton>
 						<IconButton onClick={toggleColorMode} variant="ghost">
-							<Icon>
-								{colorMode === "light" ? <MdLightMode /> : <MdDarkMode />}
-							</Icon>
+							{colorMode === "light" ? <FaSun /> : <FaMoon />}
 						</IconButton>
 					</HStack>
 				</Flex>

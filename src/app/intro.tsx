@@ -1,6 +1,22 @@
-import { Card, HStack, Icon, Link } from "@chakra-ui/react";
+import { DataListItem } from "@/components/ui/data-list";
+import {
+	type ConditionalValue,
+	HStack,
+	Link,
+	Table,
+	Text,
+} from "@chakra-ui/react";
 import NextLink from "next/link";
-import { MdThumbDown, MdThumbUp } from "react-icons/md";
+import type React from "react";
+import type { IconType } from "react-icons";
+import {
+	FaFlask,
+	FaPerson,
+	FaThumbsDown,
+	FaThumbsUp,
+	FaWrench,
+} from "react-icons/fa6";
+import { RxDividerVertical } from "react-icons/rx";
 
 const likes = [
 	{
@@ -51,39 +67,93 @@ const disLikes = [
 	},
 ];
 
-const intros = [
+const langs = [
+	{
+		name: "JavaScript(Bun)",
+		href: "https://bun.sh",
+	},
+	{
+		name: "Kotlin",
+	},
+	{
+		name: "YMM4",
+		href: "https://manjubox.net/ymm4",
+	},
+];
+
+const things = [
+	{
+		name: "Next.js",
+		href: "https://nextjs.org",
+	},
+	{
+		name: "discord.js",
+		href: "https://discord.js.org",
+	},
+	{
+		name: "Jetpack Compose",
+		href: "https://developer.android.com/compose",
+	},
+];
+
+const intros: Intros[] = [
 	{
 		title: "好き",
 		description: <TextsToLinks likesArray={likes} />,
-		icon: MdThumbUp,
+		icon: FaThumbsUp,
+		colSpan: { sm: 2, md: 1, lg: 2 },
 	},
 	{
 		title: "嫌い",
 		description: <TextsToLinks likesArray={disLikes} />,
-		icon: MdThumbDown,
+		icon: FaThumbsDown,
+		colSpan: { sm: 2, md: 1, lg: 2 },
 	},
 	{
 		title: "年齢",
-		description: <Card.Description>16歳 / 高2</Card.Description>,
+		description: "16歳 / 高2",
+		icon: FaPerson,
+	},
+	{
+		title: "まあまあできる",
+		description: <TextsToLinks likesArray={langs} />,
+		icon: FaWrench,
+	},
+	{
+		title: "触ってみてる",
+		description: <TextsToLinks likesArray={things} />,
+		icon: FaFlask,
 	},
 ];
+
+type Intros = {
+	title: string;
+	description: React.JSX.Element | string;
+	icon: IconType;
+	colSpan?: ConditionalValue<number | "auto">;
+};
 
 function TextsToLinks(props: TextsToLinksProps) {
 	const { likesArray } = props;
 
 	return (
-		<HStack wrap="wrap">
+		<HStack wrap="wrap" separator={<RxDividerVertical />}>
 			{likesArray.map((data) => {
 				if (data.href) {
 					return (
-						<Link asChild variant="underline">
+						<Link
+							asChild
+							variant="underline"
+							key={data.name}
+							colorPalette="orange"
+						>
 							<NextLink href={data.href} target="_blank">
-								<Card.Description>{data.name}</Card.Description>
+								{data.name}
 							</NextLink>
 						</Link>
 					);
 				}
-				return <Card.Description key={data.name}>{data.name}</Card.Description>;
+				return <Text key={data.name}>{data.name}</Text>;
 			})}
 		</HStack>
 	);
@@ -98,22 +168,34 @@ type TextsToLinksProps = {
 	likesArray: Likes[];
 };
 
-export default function Intro() {
+export function Intro() {
 	return intros.map((intro) => (
-		<Card.Root key={intro.title} size="sm">
-			<Card.Body>
-				<HStack mb={2}>
-					{intro.icon ? (
-						<Icon boxSize={5}>
-							<intro.icon />
-						</Icon>
-					) : (
-						<></>
-					)}
-					<Card.Title>{intro.title}</Card.Title>
+		<>
+			<Table.Row key={intro.title}>
+				<Table.Cell color="fg.muted">
+					<HStack>
+						<intro.icon />
+						{intro.title}
+					</HStack>
+				</Table.Cell>
+				<Table.Cell>{intro.description}</Table.Cell>
+			</Table.Row>
+		</>
+	));
+}
+
+export function IntroSm() {
+	return intros.map((intro) => (
+		<DataListItem
+			key={intro.title}
+			label={
+				<HStack>
+					<intro.icon />
+					{intro.title}
 				</HStack>
-				{intro.description}
-			</Card.Body>
-		</Card.Root>
+			}
+			value={intro.description}
+			hideFrom="md"
+		/>
 	));
 }

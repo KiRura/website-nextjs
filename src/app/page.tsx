@@ -1,14 +1,15 @@
+import { DataListRoot } from "@/components/ui/data-list";
 import { Toaster } from "@/components/ui/toaster";
 import {
 	Center,
 	Container,
-	Flex,
-	HStack,
+	Grid,
 	Heading,
-	SimpleGrid,
+	Table,
+	VStack,
 } from "@chakra-ui/react";
 import Accounts from "./accounts";
-import Intro from "./intro";
+import { Intro, IntroSm } from "./intro";
 import Servers from "./servers";
 
 export default function Home() {
@@ -29,42 +30,46 @@ export default function Home() {
 					きるら, (7)KiRura,
 				</Heading>
 			</Center>
-			<Flex direction="column" align="center" mb={6}>
-				<Heading mb={4}>Discord鯖</Heading>
-				<SimpleGrid
-					columns={{
-						base: 1,
-						sm: 1,
-						md: 2,
+			<VStack gap={4} mb={6}>
+				<Heading>Discord鯖</Heading>
+				<Grid
+					templateColumns={{
+						base: "repeat(1, 1fr)",
+						md: "repeat(2, 1fr)",
 					}}
-					gap={4}
-					maxW={720}
+					gap={3}
+					maxW="3xl"
 					w="100%"
 				>
 					<Servers />
-				</SimpleGrid>
-			</Flex>
-			<Flex direction="column" align="center" mb={6}>
-				<Heading mb={4}>他リンク</Heading>
-				<SimpleGrid
-					columns={{
-						base: 1,
-						sm: 2,
-						md: 3,
-						lg: 4,
+				</Grid>
+			</VStack>
+			<VStack gap={4} mb={6}>
+				<Heading>他リンク</Heading>
+				<Grid
+					templateColumns={{
+						base: "repeat(1, 1fr)",
+						sm: "repeat(2, 1fr)",
+						md: "repeat(3, 1fr)",
+						lg: "repeat(4, 1fr)",
 					}}
-					gap={4}
+					gap={3}
 					w="100%"
 				>
 					<Accounts />
-				</SimpleGrid>
-			</Flex>
-			<Flex direction="column" align="center" mb={6}>
-				<Heading mb={4}>自己紹介</Heading>
-				<HStack wrap="wrap" gap={4}>
-					<Intro />
-				</HStack>
-			</Flex>
+				</Grid>
+			</VStack>
+			<VStack gap={4} mb={6}>
+				<Heading>自己紹介</Heading>
+				<Table.Root w="fit" hideBelow="md">
+					<Table.Body>
+						<Intro />
+					</Table.Body>
+				</Table.Root>
+				<DataListRoot hideFrom="md">
+					<IntroSm />
+				</DataListRoot>
+			</VStack>
 		</Container>
 	);
 }
