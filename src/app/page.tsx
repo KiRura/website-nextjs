@@ -5,6 +5,7 @@ import {
 	Container,
 	Grid,
 	Heading,
+	Highlight,
 	Table,
 	VStack,
 } from "@chakra-ui/react";
@@ -27,7 +28,12 @@ export default function Home() {
 				>
 					Hello!,
 					<br />
-					きるら, (7)KiRura,
+					<Highlight
+						query={["きるら", "(7)KiRura"]}
+						styles={{ color: "orange.300" }}
+					>
+						きるら, (7)KiRura,
+					</Highlight>
 				</Heading>
 			</Center>
 			<VStack gap={4} mb={6}>
