@@ -25,7 +25,8 @@
 			},
 			"correctness": {
 				"all": true,
-				"useImportExtensions": "off"
+				"useImportExtensions": "off",
+				"noNodejsModules": "off"
 			},
 			"security": {
 				"all": true

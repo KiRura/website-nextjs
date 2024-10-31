@@ -2,13 +2,33 @@
 
 import { Box, Container, Flex, HStack, IconButton } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { FaGitlab, FaMoon, FaSun } from "react-icons/fa6";
+import { usePathname } from "next/navigation";
+import {
+	FaFileSignature,
+	FaGitlab,
+	FaHouse,
+	FaMoon,
+	FaSun,
+} from "react-icons/fa6";
 import { Button } from "./ui/button";
 import { useColorMode } from "./ui/color-mode";
-import { Tooltip } from "./ui/tooltip";
+
+const pages = [
+	{
+		name: "KiRura",
+		href: "/",
+		icon: FaHouse,
+	},
+	{
+		name: "License",
+		href: "/license",
+		icon: FaFileSignature,
+	},
+];
 
 export default function Header() {
 	const { colorMode, toggleColorMode } = useColorMode();
+	const path = usePathname();
 	return (
 		<Box
 			as="header"
@@ -23,14 +43,23 @@ export default function Header() {
 			<Container maxW="8xl">
 				<Flex w="100%" justify="space-between" align="center" py={2}>
 					<HStack>
-						<Button variant="ghost" asChild>
-							<NextLink href="/">KiRura</NextLink>
-						</Button>
-						<Tooltip content="coming soon...">
-							<Button disabled variant="ghost">
-								Tools
-							</Button>
-						</Tooltip>
+						{pages.map((page) => {
+							let isActive = false;
+							if (page.href === path) isActive = true;
+							if (page.href !== "/" && path.match(page.href)) isActive = true;
+							return (
+								<Button
+									key={page.name}
+									variant={isActive ? "subtle" : "ghost"}
+									asChild
+									color={isActive ? "fg" : "fg.subtle"}
+								>
+									<NextLink href={page.href}>
+										<page.icon /> {page.name}
+									</NextLink>
+								</Button>
+							);
+						})}
 					</HStack>
 					<HStack>
 						<IconButton variant="ghost" asChild>
