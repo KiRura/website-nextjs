@@ -3,9 +3,11 @@ import { Toaster } from "@/components/ui/toaster";
 import {
 	Center,
 	Container,
+	Flex,
 	Grid,
 	Heading,
 	Highlight,
+	Image,
 	Table,
 	VStack,
 } from "@chakra-ui/react";
@@ -65,7 +67,7 @@ export default function Home() {
 					<Accounts />
 				</Grid>
 			</VStack>
-			<VStack gap={4} mb={6}>
+			<VStack gap={4} mb={24}>
 				<Heading>自己紹介</Heading>
 				<Table.Root w="fit" hideBelow="md">
 					<Table.Body>
@@ -76,6 +78,9 @@ export default function Home() {
 					<IntroSm />
 				</DataListRoot>
 			</VStack>
+			<Flex justify="right" mb={12}>
+				<Image src="https://count.getloli.com/@kirura-website" />
+			</Flex>
 		</Container>
 	);
 }

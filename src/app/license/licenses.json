@@ -102,18 +102,5 @@
 		"installedVersion": "5.3.0",
 		"definedVersion": "^5.3.0",
 		"author": "Goran Gajic"
-	},
-	{
-		"department": "kessler",
-		"relatedTo": "stuff",
-		"name": "react-markdown",
-		"licensePeriod": "perpetual",
-		"material": "material",
-		"licenseType": "MIT",
-		"link": "git+https://github.com/remarkjs/react-markdown.git",
-		"remoteVersion": "9.0.1",
-		"installedVersion": "9.0.1",
-		"definedVersion": "^9.0.1",
-		"author": "Espen Hovlandsdal <espen@hovlandsdal.com>"
 	}
 ]
