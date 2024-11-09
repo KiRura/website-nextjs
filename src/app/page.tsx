@@ -78,7 +78,7 @@ export default function Home() {
 					<IntroSm />
 				</DataListRoot>
 			</VStack>
-			<Flex justify="right" mb={12}>
+			<Flex justify="center" mb={32}>
 				<Image src="https://count.getloli.com/@kirura-website" />
 			</Flex>
 		</Container>

@@ -60,7 +60,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="ja" suppressHydrationWarning className={interJp.className}>
+		<html lang="ja" className={interJp.className} suppressHydrationWarning>
 			<body>
 				<Provider>
 					<Header />

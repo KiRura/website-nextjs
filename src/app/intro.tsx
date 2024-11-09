@@ -3,6 +3,7 @@ import {
 	type ConditionalValue,
 	HStack,
 	Link,
+	Separator,
 	Table,
 	Text,
 } from "@chakra-ui/react";
@@ -16,7 +17,6 @@ import {
 	FaThumbsUp,
 	FaWrench,
 } from "react-icons/fa6";
-import { RxDividerVertical } from "react-icons/rx";
 
 const likes = [
 	{
@@ -137,7 +137,10 @@ function TextsToLinks(props: TextsToLinksProps) {
 	const { likesArray } = props;
 
 	return (
-		<HStack wrap="wrap" separator={<RxDividerVertical />}>
+		<HStack
+			wrap="wrap"
+			separator={<Separator orientation="vertical" height={4} />}
+		>
 			{likesArray.map((data) => {
 				if (data.href) {
 					return (
