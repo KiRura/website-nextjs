@@ -7,7 +7,7 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/chakra-ui/chakra-ui.git",
-		"remoteVersion": "3.1.0",
+		"remoteVersion": "3.1.1",
 		"installedVersion": "3.1.0",
 		"definedVersion": "^3.1.0",
 		"author": "Segun Adebayo <sage@adebayosegun.com>"

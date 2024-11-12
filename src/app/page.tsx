@@ -1,3 +1,6 @@
+import Accounts from "@/components/accounts";
+import { Intro, IntroSm } from "@/components/intro";
+import Servers from "@/components/servers";
 import { DataListRoot } from "@/components/ui/data-list";
 import { Toaster } from "@/components/ui/toaster";
 import {
@@ -11,9 +14,6 @@ import {
 	Table,
 	VStack,
 } from "@chakra-ui/react";
-import Accounts from "./accounts";
-import { Intro, IntroSm } from "./intro";
-import Servers from "./servers";
 
 export default function Home() {
 	return (

@@ -3,14 +3,14 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
-		"build": "npm run dep:gen && npm run lint && next build",
+		"dev": "next dev --turbopack",
+		"build": "bun run dep:gen && bun run lint && next build",
 		"start": "next start",
 		"lint": "biome check --unsafe --write .",
 		"dep:gen": "license-report --only=prod --output=json > src/app/license/licenses.json"
 	},
 	"dependencies": {
-		"@chakra-ui/react": "^3.1.0",
+		"@chakra-ui/react": "^3.1.1",
 		"@emotion/react": "^11.13.3",
 		"@vercel/speed-insights": "^1.1.0",
 		"next": "15.0.3",
