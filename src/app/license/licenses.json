@@ -7,9 +7,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/chakra-ui/chakra-ui.git",
-		"remoteVersion": "3.1.1",
-		"installedVersion": "3.1.0",
-		"definedVersion": "^3.1.0",
+		"remoteVersion": "3.2.0",
+		"installedVersion": "3.2.0",
+		"definedVersion": "^3.2.0",
 		"author": "Segun Adebayo <sage@adebayosegun.com>"
 	},
 	{
@@ -20,9 +20,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/emotion-js/emotion.git#main",
-		"remoteVersion": "11.13.3",
-		"installedVersion": "11.13.3",
-		"definedVersion": "^11.13.3",
+		"remoteVersion": "11.13.5",
+		"installedVersion": "11.13.5",
+		"definedVersion": "^11.13.5",
 		"author": "Emotion Contributors"
 	},
 	{
