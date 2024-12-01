@@ -2,26 +2,11 @@ html {
 	font-family: var(--font-interjp);
 }
 
-h1 {
-	font-family: var(--font-interjp);
-}
-
-h2 {
-	font-family: var(--font-interjp);
-}
-
-h3 {
-	font-family: var(--font-interjp);
-}
-
-h4 {
-	font-family: var(--font-interjp);
-}
-
-h5 {
-	font-family: var(--font-interjp);
-}
-
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
 	font-family: var(--font-interjp);
 }

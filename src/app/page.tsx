@@ -1,25 +1,31 @@
-import Accounts from "@/components/accounts";
 import { Intro, IntroSm } from "@/components/intro";
-import Servers from "@/components/servers";
+import LinksParent from "@/components/links_parent";
 import { DataListRoot } from "@/components/ui/data-list";
 import { Toaster } from "@/components/ui/toaster";
 import {
-	Center,
 	Container,
 	Flex,
-	Grid,
 	Heading,
 	Highlight,
 	Image,
+	Stack,
 	Table,
 	VStack,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { Suspense } from "react";
 
 export default function Home() {
 	return (
 		<Container maxW="8xl">
 			<Toaster />
-			<Center my={24}>
+			<Stack
+				my={24}
+				direction={{ base: "column", sm: "column", md: "row" }}
+				align="center"
+				justify="center"
+				gap={8}
+			>
 				<Heading
 					as="h1"
 					size={{
@@ -37,35 +43,18 @@ export default function Home() {
 						きるら, (7)KiRura,
 					</Highlight>
 				</Heading>
-			</Center>
-			<VStack gap={4} mb={6}>
-				<Heading>Discord鯖</Heading>
-				<Grid
-					templateColumns={{
-						base: "repeat(1, 1fr)",
-						md: "repeat(2, 1fr)",
-					}}
-					gap={3}
-					maxW="3xl"
-					w="100%"
+
+				<NextLink
+					href="https://discord.com/users/606093171151208448"
+					target="_blank"
 				>
-					<Servers />
-				</Grid>
-			</VStack>
+					<Image src="https://lanyard.cnrad.dev/api/606093171151208448?idleMessage=%E7%8F%BE%E5%AE%9F%E3%82%92%E3%83%97%E3%83%AC%E3%82%A4%E4%B8%AD&animated=false&showDisplayName=true" />
+				</NextLink>
+			</Stack>
 			<VStack gap={4} mb={6}>
-				<Heading>他リンク</Heading>
-				<Grid
-					templateColumns={{
-						base: "repeat(1, 1fr)",
-						sm: "repeat(2, 1fr)",
-						md: "repeat(3, 1fr)",
-						lg: "repeat(4, 1fr)",
-					}}
-					gap={3}
-					w="100%"
-				>
-					<Accounts />
-				</Grid>
+				<Suspense>
+					<LinksParent />
+				</Suspense>
 			</VStack>
 			<VStack gap={4} mb={24}>
 				<Heading>自己紹介</Heading>
