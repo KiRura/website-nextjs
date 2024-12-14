@@ -8,13 +8,8 @@ export default function Page() {
 			<VStack gap={8}>
 				<VStack>
 					<Heading>Deps</Heading>
-					<Flex
-						w="100vw"
-						maxW="8xl"
-						px={{ base: 3, sm: 3, md: 5, lg: 7 }}
-						overflow="scroll"
-					>
-						<Table.Root whiteSpace="nowrap">
+					<Flex w="92vw" maxW="8xl" overflow="auto" whiteSpace="pre">
+						<Table.Root>
 							<Table.Header>
 								<Table.Row>
 									<DepsHeader />

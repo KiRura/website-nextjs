@@ -1,3 +1,4 @@
+import DiscordProf from "@/components/discord_prof";
 import { Intro, IntroSm } from "@/components/intro";
 import LinksParent from "@/components/links_parent";
 import { DataListRoot } from "@/components/ui/data-list";
@@ -12,7 +13,6 @@ import {
 	Table,
 	VStack,
 } from "@chakra-ui/react";
-import NextLink from "next/link";
 import { Suspense } from "react";
 
 export default function Home() {
@@ -43,13 +43,7 @@ export default function Home() {
 						きるら, (7)KiRura,
 					</Highlight>
 				</Heading>
-
-				<NextLink
-					href="https://discord.com/users/606093171151208448"
-					target="_blank"
-				>
-					<Image src="https://lanyard.cnrad.dev/api/606093171151208448?idleMessage=%E7%8F%BE%E5%AE%9F%E3%82%92%E3%83%97%E3%83%AC%E3%82%A4%E4%B8%AD&animated=false&showDisplayName=true" />
-				</NextLink>
+				<DiscordProf />
 			</Stack>
 			<VStack gap={4} mb={6}>
 				<Suspense>
@@ -68,7 +62,10 @@ export default function Home() {
 				</DataListRoot>
 			</VStack>
 			<Flex justify="center" mb={32}>
-				<Image src="https://count.getloli.com/@kirura-website" />
+				<Image
+					src="https://count.getloli.com/@kirura-website?darkmode=auto"
+					alt="getloliのカウンター"
+				/>
 			</Flex>
 		</Container>
 	);

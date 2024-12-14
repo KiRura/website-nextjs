@@ -69,9 +69,9 @@ export default function Links({ category }: { category: CategoryQuery }) {
 									onClick={() => {
 										try {
 											navigator.clipboard.writeText(link.accountId);
-
 											setCopied(i);
-										} catch (_error) {
+											/* eslint @typescript-eslint/no-unused-vars: 0 */
+										} catch (_) {
 											setErrored(i);
 										}
 									}}

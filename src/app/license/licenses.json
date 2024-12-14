@@ -7,9 +7,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/chakra-ui/chakra-ui.git",
-		"remoteVersion": "3.2.2",
-		"installedVersion": "3.2.2",
-		"definedVersion": "^3.2.2",
+		"remoteVersion": "3.2.3",
+		"installedVersion": "3.2.3",
+		"definedVersion": "^3.2.3",
 		"author": "Segun Adebayo <sage@adebayosegun.com>"
 	},
 	{
@@ -20,9 +20,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/emotion-js/emotion.git#main",
-		"remoteVersion": "11.13.5",
-		"installedVersion": "11.13.5",
-		"definedVersion": "^11.13.5",
+		"remoteVersion": "11.14.0",
+		"installedVersion": "11.14.0",
+		"definedVersion": "^11.14.0",
 		"author": "Emotion Contributors"
 	},
 	{
@@ -46,9 +46,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/vercel/next.js.git",
-		"remoteVersion": "15.0.3",
-		"installedVersion": "15.0.3",
-		"definedVersion": "15.0.3",
+		"remoteVersion": "15.1.0",
+		"installedVersion": "15.1.0",
+		"definedVersion": "^15.1.0",
 		"author": "n/a"
 	},
 	{
@@ -59,9 +59,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/pacocoursey/next-themes.git",
-		"remoteVersion": "0.4.3",
-		"installedVersion": "0.4.3",
-		"definedVersion": "^0.4.3",
+		"remoteVersion": "0.4.4",
+		"installedVersion": "0.4.4",
+		"definedVersion": "^0.4.4",
 		"author": "n/a"
 	},
 	{
@@ -72,9 +72,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/facebook/react.git",
-		"remoteVersion": "18.3.1",
-		"installedVersion": "18.3.1",
-		"definedVersion": "^18.3.1",
+		"remoteVersion": "19.0.0",
+		"installedVersion": "19.0.0",
+		"definedVersion": "^19.0.0",
 		"author": "n/a"
 	},
 	{
@@ -85,9 +85,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/facebook/react.git",
-		"remoteVersion": "18.3.1",
-		"installedVersion": "18.3.1",
-		"definedVersion": "^18.3.1",
+		"remoteVersion": "19.0.0",
+		"installedVersion": "19.0.0",
+		"definedVersion": "^19.0.0",
 		"author": "n/a"
 	},
 	{
@@ -98,9 +98,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+ssh://git@github.com/react-icons/react-icons.git",
-		"remoteVersion": "5.3.0",
-		"installedVersion": "5.3.0",
-		"definedVersion": "^5.3.0",
+		"remoteVersion": "5.4.0",
+		"installedVersion": "5.4.0",
+		"definedVersion": "^5.4.0",
 		"author": "Goran Gajic"
 	}
 ]
