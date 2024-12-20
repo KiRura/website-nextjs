@@ -46,9 +46,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/vercel/next.js.git",
-		"remoteVersion": "15.1.0",
-		"installedVersion": "15.1.0",
-		"definedVersion": "^15.1.0",
+		"remoteVersion": "15.1.2",
+		"installedVersion": "15.1.2",
+		"definedVersion": "^15.1.2",
 		"author": "n/a"
 	},
 	{
