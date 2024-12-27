@@ -14,12 +14,11 @@ import {
 	Bleed,
 	Flex,
 	Grid,
-	HStack,
 	Heading,
 	createListCollection,
 } from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const categories = createListCollection({
 	items: [

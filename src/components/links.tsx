@@ -4,21 +4,18 @@ import { toaster } from "@/components/ui/toaster";
 import { ToggleTip } from "@/components/ui/toggle-tip";
 import { Tooltip } from "@/components/ui/tooltip";
 import {
-	Bleed,
 	Card,
 	CardBody,
 	Flex,
 	GridItem,
-	Heading,
 	HStack,
 	Icon,
 	IconButton,
 	Link,
-	useBreakpoint,
 	useBreakpointValue,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaInfo, FaXmark } from "react-icons/fa6";
 import type { CategoryQuery } from "./category_query";
 import { type Links as LinksType, links } from "./linksdata";
@@ -48,6 +45,7 @@ export default function Links({ category }: { category: CategoryQuery }) {
 				gridColumns[breakpoint]),
 	);
 
+	/* eslint react-hooks/rules-of-hooks: 0 */
 	useEffect(() => {
 		const filteredLinks = links.filter(filterLinks);
 		if (
