@@ -17,7 +17,7 @@ import {
 	FaYoutube,
 } from "react-icons/fa6";
 
-type Links = {
+export type Links = {
 	accountId: string;
 	name: string;
 	description: string;

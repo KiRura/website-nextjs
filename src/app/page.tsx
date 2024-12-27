@@ -45,7 +45,7 @@ export default function Home() {
 				</Heading>
 				<DiscordProf />
 			</Stack>
-			<VStack gap={4} mb={6}>
+			<VStack gap={4} mb={6} align="start">
 				<Suspense>
 					<LinksParent />
 				</Suspense>

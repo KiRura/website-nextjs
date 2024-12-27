@@ -10,9 +10,16 @@ import {
 	SelectTrigger,
 	SelectValueText,
 } from "@/components/ui/select";
-import { Grid, createListCollection } from "@chakra-ui/react";
+import {
+	Bleed,
+	Flex,
+	Grid,
+	HStack,
+	Heading,
+	createListCollection,
+} from "@chakra-ui/react";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const categories = createListCollection({
 	items: [
@@ -29,23 +36,42 @@ export default function LinksParent() {
 
 	return (
 		<>
-			<SelectRoot
-				collection={categories}
-				onValueChange={(e) => setValue(e.value as CategoryQuery[])}
-				value={value}
+			<Flex
+				align={{ base: "center", sm: "center", md: "center" }}
+				justify={{ md: "space-between" }}
+				w="100%"
+				direction={{ base: "column", sm: "column", md: "row" }}
+				gap={4}
 			>
-				<SelectLabel>カテゴリー</SelectLabel>
-				<SelectTrigger>
-					<SelectValueText placeholder="選択" />
-				</SelectTrigger>
-				<SelectContent>
-					{categories.items.map((category) => (
-						<SelectItem key={category.value} item={category}>
-							{category.label}
-						</SelectItem>
-					))}
-				</SelectContent>
-			</SelectRoot>
+				<Bleed w={{ md: 48 }} hideBelow="sm" />
+				<Heading>他リンク</Heading>
+				<SelectRoot
+					collection={categories}
+					onValueChange={(e) => {
+						setValue(e.value as CategoryQuery[]);
+					}}
+					value={value}
+					w={{
+						smDown: "100%",
+						md: 48,
+					}}
+					minW={{
+						md: "fit",
+					}}
+				>
+					<SelectLabel>カテゴリー</SelectLabel>
+					<SelectTrigger>
+						<SelectValueText placeholder="選択" />
+					</SelectTrigger>
+					<SelectContent>
+						{categories.items.map((category) => (
+							<SelectItem key={category.value} item={category}>
+								{category.label}
+							</SelectItem>
+						))}
+					</SelectContent>
+				</SelectRoot>
+			</Flex>
 			<Grid
 				templateColumns={{
 					base: "repeat(1, 1fr)",
