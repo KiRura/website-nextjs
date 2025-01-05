@@ -206,7 +206,6 @@ export default function Links({ category }: { category: CategoryQuery }) {
 			</Card.Root>
 		</GridItem>
 	));
-	console.log(cards.concat(bleeds));
 
 	return cards.concat(bleeds);
 }
