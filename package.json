@@ -4,9 +4,9 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev --turbopack",
-		"build": "bun run dep:gen && bun run lint && next build",
+		"build": "bun run dep:gen && bun run check && next build",
 		"start": "next start",
-		"lint": "biome check --unsafe --write . && next lint && tsc",
+		"check": "biome check --unsafe --write . && next lint && tsc",
 		"dep:gen": "license-report --only=prod --output=json > src/app/license/licenses.json"
 	},
 	"dependencies": {
