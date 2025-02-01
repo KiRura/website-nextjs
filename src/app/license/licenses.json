@@ -7,9 +7,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/chakra-ui/chakra-ui.git",
-		"remoteVersion": "3.2.5",
-		"installedVersion": "3.2.5",
-		"definedVersion": "^3.2.5",
+		"remoteVersion": "3.5.1",
+		"installedVersion": "3.5.1",
+		"definedVersion": "^3.5.1",
 		"author": "Segun Adebayo <sage@adebayosegun.com>"
 	},
 	{
@@ -46,9 +46,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/vercel/next.js.git",
-		"remoteVersion": "15.1.3",
-		"installedVersion": "15.1.3",
-		"definedVersion": "^15.1.3",
+		"remoteVersion": "15.1.6",
+		"installedVersion": "15.1.6",
+		"definedVersion": "^15.1.6",
 		"author": "n/a"
 	},
 	{
