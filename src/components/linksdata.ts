@@ -39,7 +39,7 @@ export const links: Links[] = [
 		accountId: "@7KiRura",
 		name: "Twitter",
 		description: "ただ思ったことを言い続ける",
-		href: "https://twitter.com/7KiRura",
+		href: "https://twitter.com/i/user/1165939887998025728",
 		icon: FaTwitter,
 		category: "social",
 	},
@@ -92,7 +92,7 @@ export const links: Links[] = [
 		category: "game",
 	},
 	{
-		accountId: "俺のオーディン#KiR",
+		accountId: "KiRura#371",
 		name: "VALORANT",
 		description: "基本マルチ",
 		href: "https://playvalorant.com",
