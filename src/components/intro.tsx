@@ -57,6 +57,10 @@ const disLikes = [
 		name: "Discord",
 	},
 	{
+		name: "ニトリ",
+		href: "https://twitter.com/i/status/1885911562457858488"
+	},
+	{
 		name: "アビス",
 	},
 	{
