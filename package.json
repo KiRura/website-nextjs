@@ -10,10 +10,10 @@
 		"dep:gen": "license-report --only=prod --output=json > src/app/license/licenses.json"
 	},
 	"dependencies": {
-		"@chakra-ui/react": "^3.5.1",
+		"@chakra-ui/react": "^3.8.0",
 		"@emotion/react": "^11.14.0",
-		"@vercel/speed-insights": "^1.1.0",
-		"next": "^15.1.6",
+		"@vercel/speed-insights": "^1.2.0",
+		"next": "^15.1.7",
 		"next-themes": "^0.4.4",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
@@ -21,14 +21,14 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
-		"@types/node": "^22.13.0",
+		"@types/node": "^22.13.1",
 		"@types/react": "^19.0.8",
 		"@types/react-dom": "^19.0.3",
-		"eslint": "9.19.0",
-		"eslint-config-next": "15.1.6",
+		"eslint": "9.20.0",
+		"eslint-config-next": "15.1.7",
 		"license-report": "^6.7.1",
 		"typescript": "^5.7.3",
-		"typescript-eslint": "^8.22.0"
+		"typescript-eslint": "^8.24.0"
 	},
 	"trustedDependencies": ["@biomejs/biome", "@vercel/speed-insights"]
 }

@@ -7,9 +7,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/chakra-ui/chakra-ui.git",
-		"remoteVersion": "3.5.1",
-		"installedVersion": "3.5.1",
-		"definedVersion": "^3.5.1",
+		"remoteVersion": "3.8.0",
+		"installedVersion": "3.8.0",
+		"definedVersion": "^3.8.0",
 		"author": "Segun Adebayo <sage@adebayosegun.com>"
 	},
 	{
@@ -33,9 +33,9 @@
 		"material": "material",
 		"licenseType": "Apache-2.0",
 		"link": "git+https://github.com/vercel/speed-insights.git",
-		"remoteVersion": "1.1.0",
-		"installedVersion": "1.1.0",
-		"definedVersion": "^1.1.0",
+		"remoteVersion": "1.2.0",
+		"installedVersion": "1.2.0",
+		"definedVersion": "^1.2.0",
 		"author": "n/a"
 	},
 	{
@@ -46,9 +46,9 @@
 		"material": "material",
 		"licenseType": "MIT",
 		"link": "git+https://github.com/vercel/next.js.git",
-		"remoteVersion": "15.1.6",
-		"installedVersion": "15.1.6",
-		"definedVersion": "^15.1.6",
+		"remoteVersion": "15.1.7",
+		"installedVersion": "15.1.7",
+		"definedVersion": "^15.1.7",
 		"author": "n/a"
 	},
 	{
