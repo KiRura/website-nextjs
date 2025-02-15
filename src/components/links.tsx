@@ -95,7 +95,7 @@ export default function Links({ category }: { category: CategoryQuery }) {
 						: "scale-in, fade-in",
 				animationDuration: "moderate",
 			}}
-			hidden={i > opened}
+			visibility={i > opened ? "hidden" : "visible"}
 		>
 			<Card.Root size="sm" h="100%" variant="subtle" borderWidth={1}>
 				<Card.Body>
@@ -192,7 +192,7 @@ export default function Links({ category }: { category: CategoryQuery }) {
 			key={`bleed_${i}`}
 			data-state={i + previewLinks.length - 1 <= opened ? "open" : "closed"}
 			_open={{ animationName: "scale-in", animationDuration: "fast" }}
-			hidden={i + previewLinks.length - 1 > opened}
+			visibility={i + previewLinks.length - 1 > opened ? "hidden" : "visible"}
 		>
 			<Card.Root size="sm" h="100%" borderWidth={0} bg="bg.subtle">
 				<CardBody>
