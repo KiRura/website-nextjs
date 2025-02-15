@@ -6,7 +6,7 @@
 		"dev": "next dev --turbopack",
 		"build": "bun run dep:gen && bun run check && next build",
 		"start": "next start",
-		"check": "biome check --unsafe --write . && next lint && tsc",
+		"check": "biome check --unsafe --write . && tsc",
 		"dep:gen": "license-report --only=prod --output=json > src/app/license/licenses.json"
 	},
 	"dependencies": {
@@ -21,14 +21,11 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
-		"@types/node": "^22.13.1",
+		"@types/node": "^22.13.4",
 		"@types/react": "^19.0.8",
 		"@types/react-dom": "^19.0.3",
-		"eslint": "9.20.0",
-		"eslint-config-next": "15.1.7",
 		"license-report": "^6.7.1",
-		"typescript": "^5.7.3",
-		"typescript-eslint": "^8.24.0"
+		"typescript": "^5.7.3"
 	},
 	"trustedDependencies": ["@biomejs/biome", "@vercel/speed-insights"]
 }
