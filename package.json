@@ -22,8 +22,8 @@
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@types/node": "^22.13.4",
-		"@types/react": "^19.0.9",
-		"@types/react-dom": "^19.0.3",
+		"@types/react": "^19.0.10",
+		"@types/react-dom": "^19.0.4",
 		"license-report": "^6.7.1",
 		"typescript": "^5.7.3"
 	},
