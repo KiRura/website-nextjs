@@ -1,6 +1,5 @@
 "use client";
 
-import interJp from "@/app/license/interjp";
 import { Heading, Link, VStack } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useState } from "react";
@@ -23,13 +22,7 @@ type Licenses = {
 	href?: string;
 };
 
-const licenses: Licenses[] = [
-	{
-		title: "Inter JP",
-		license: interJp,
-		href: "https://crea.techblog.jp/FontStudio/index.html#four",
-	},
-];
+const licenses: Licenses[] = [];
 
 export default function Licenses() {
 	const [multiple, setMultiple] = useState(true);

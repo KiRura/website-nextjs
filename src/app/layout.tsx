@@ -2,7 +2,7 @@ import Header from "@/components/header";
 import { Provider } from "@/components/ui/provider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Inter, JetBrains_Mono, Noto_Sans_JP } from "next/font/google";
 import type React from "react";
 import "./global.css";
 
@@ -19,39 +19,17 @@ export const metadata: Metadata = {
 	},
 };
 
-const interJp = localFont({
-	src: [
-		{
-			path: "fonts/InterJP-Thin.ttf",
-			weight: "100",
-			style: "normal",
-		},
-		{
-			path: "fonts/InterJP-Light.ttf",
-			weight: "300",
-			style: "normal",
-		},
-		{
-			path: "fonts/InterJP-Regular.ttf",
-			weight: "400",
-			style: "normal",
-		},
-		{
-			path: "fonts/InterJP-Medium.ttf",
-			weight: "500",
-			style: "normal",
-		},
-		{
-			path: "fonts/InterJP-Bold.ttf",
-			weight: "700",
-			style: "normal",
-		},
-		{
-			path: "fonts/InterJP-Black.ttf",
-			weight: "900",
-			style: "normal",
-		},
-	],
+const notoSansJp = Noto_Sans_JP({
+	variable: "--font-noto-sans-jp",
+	subsets: ["latin"],
+});
+const inter = Inter({
+	variable: "--font-inter",
+	subsets: ["latin"],
+});
+const jetBrainsMono = JetBrains_Mono({
+	variable: "--font-jetbrains-mono",
+	subsets: ["latin"],
 });
 
 export default function RootLayout({
@@ -60,7 +38,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="ja" className={interJp.className} suppressHydrationWarning>
+		<html
+			lang="ja"
+			className={`${inter.variable} ${notoSansJp.variable} ${jetBrainsMono.variable}`}
+			suppressHydrationWarning
+		>
 			<body>
 				<Provider>
 					<Header />

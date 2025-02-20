@@ -1,12 +1,16 @@
-html {
-	font-family: var(--font-interjp);
+:root {
+	--main-font: var(--font-inter), var(--font-noto-sans-jp), sans-serif;
+	--mono-font: var(--font-jetbrains-mono), monospace;
+
+	--chakra-fonts-body: var(--main-font);
+	--chakra-fonts-heading: var(--main-font);
+	--chakra-fonts-mono: var(--mono-font);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: var(--font-interjp);
+body {
+	font-family: var(--main-font);
+}
+
+code {
+	font-family: var(--mono-font);
 }
