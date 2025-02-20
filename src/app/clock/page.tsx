@@ -2,14 +2,10 @@
 
 import {
 	AbsoluteCenter,
-	Box,
-	Center,
 	Code,
 	Container,
-	Flex,
 	HStack,
 	ProgressCircle,
-	Text,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
@@ -22,7 +18,6 @@ export default function Page() {
 			const date = new Date();
 			setTime(date.getTime().toString());
 			setPercentage(Math.floor((date.getMilliseconds() / 1000) * 100));
-			console.log(percentage);
 		}, 1);
 
 		return () => clearTimeout(timeout);
