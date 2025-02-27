@@ -1,19 +1,17 @@
-import DiscordProf from "@/components/discord_prof";
+import DiscordProf from "@/components/image/discord_prof";
 import { Intro, IntroSm } from "@/components/intro";
-import LinksParent from "@/components/links_parent";
+import { Links } from "@/components/links";
 import { DataListRoot } from "@/components/ui/data-list";
 import { Toaster } from "@/components/ui/toaster";
 import {
 	Container,
-	Flex,
+	Grid,
 	Heading,
 	Highlight,
-	Image,
 	Stack,
 	Table,
 	VStack,
 } from "@chakra-ui/react";
-import { Suspense } from "react";
 
 export default function Home() {
 	return (
@@ -21,7 +19,7 @@ export default function Home() {
 			<Toaster />
 			<Stack
 				my={24}
-				direction={{ base: "column", sm: "column", md: "row" }}
+				direction={{ smDown: "column", smToLg: "column", lg: "row" }}
 				align="center"
 				justify="center"
 				gap={8}
@@ -29,7 +27,7 @@ export default function Home() {
 				<Heading
 					as="h1"
 					size={{
-						base: "4xl",
+						smDown: "5xl",
 						sm: "5xl",
 						md: "6xl",
 					}}
@@ -45,12 +43,20 @@ export default function Home() {
 				</Heading>
 				<DiscordProf />
 			</Stack>
-			<VStack gap={4} mb={6} align="start">
-				<Suspense>
-					<LinksParent />
-				</Suspense>
-			</VStack>
-			<VStack gap={4} mb={24}>
+			<VStack gap={6} mb={24}>
+				<Heading>他リンク</Heading>
+				<Grid
+					templateColumns={{
+						smDown: "repeat(1, 1fr)",
+						md: "repeat(2, 1fr)",
+						lg: "repeat(3, 1fr)",
+						xl: "repeat(4, 1fr)",
+					}}
+					gap={3}
+					w="100%"
+				>
+					<Links />
+				</Grid>
 				<Heading>自己紹介</Heading>
 				<Table.Root w="fit" hideBelow="md">
 					<Table.Body>
@@ -61,12 +67,6 @@ export default function Home() {
 					<IntroSm />
 				</DataListRoot>
 			</VStack>
-			<Flex justify="center" mb={32}>
-				<Image
-					src="https://count.getloli.com/@kirura-website?darkmode=auto"
-					alt="getloliのカウンター"
-				/>
-			</Flex>
 		</Container>
 	);
 }
