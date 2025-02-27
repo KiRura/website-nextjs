@@ -1,27 +1,32 @@
-import Licenses from "@/components/license/licenses";
-import { Container, Flex, Heading, Table, VStack } from "@chakra-ui/react";
-import { DepsBody, DepsHeader } from "../../components/license/deps";
+import {
+	Card,
+	Container,
+	Flex,
+	Grid,
+	Heading,
+	Table,
+	VStack,
+} from "@chakra-ui/react";
+import { Deps } from "../../components/license/deps";
 
 export default function Page() {
 	return (
-		<Container maxW="8xl" my={12}>
-			<VStack gap={8}>
-				<VStack>
-					<Heading>Deps</Heading>
-					<Flex w="92vw" maxW="8xl" overflow="auto" whiteSpace="pre">
-						<Table.Root>
-							<Table.Header>
-								<Table.Row>
-									<DepsHeader />
-								</Table.Row>
-							</Table.Header>
-							<Table.Body>
-								<DepsBody />
-							</Table.Body>
-						</Table.Root>
-					</Flex>
-				</VStack>
-				<Licenses />
+		<Container maxW="8xl" my={4}>
+			<VStack gap={4}>
+				<Heading>Deps</Heading>
+				<Grid
+					templateColumns={{
+						smDown: "repeat(1, 1fr)",
+						md: "repeat(2, 1fr)",
+						lg: "repeat(3, 1fr)",
+						xl: "repeat(4, 1fr)",
+					}}
+					gap={3}
+					w="100%"
+				>
+					<Deps />
+				</Grid>
+				{/* <Licenses /> */}
 			</VStack>
 		</Container>
 	);
