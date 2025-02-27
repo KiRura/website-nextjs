@@ -1,12 +1,4 @@
-import {
-	Card,
-	Container,
-	Flex,
-	Grid,
-	Heading,
-	Table,
-	VStack,
-} from "@chakra-ui/react";
+import { Container, Grid, Heading, VStack } from "@chakra-ui/react";
 import { Deps } from "../../components/license/deps";
 
 export default function Page() {
