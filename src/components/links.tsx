@@ -9,7 +9,6 @@ import {
 	Link,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { FaInfo } from "react-icons/fa6";
 import { links } from "./linksdata";
@@ -18,8 +17,6 @@ import { ToggleTip } from "./ui/toggle-tip";
 import { Tooltip } from "./ui/tooltip";
 
 export function Links() {
-	let query = useSearchParams().get("category");
-	if (query !== "social" && query !== "game") query = "all";
 	const [copied, setCopied] = useState(-1);
 	const [errored, setErrored] = useState(-1);
 
