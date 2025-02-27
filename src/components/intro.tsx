@@ -177,17 +177,15 @@ type TextsToLinksProps = {
 
 export function Intro() {
 	return intros.map((intro) => (
-		<>
-			<Table.Row key={intro.title}>
-				<Table.Cell color="fg.muted">
-					<HStack>
-						<intro.icon />
-						{intro.title}
-					</HStack>
-				</Table.Cell>
-				<Table.Cell>{intro.description}</Table.Cell>
-			</Table.Row>
-		</>
+		<Table.Row key={intro.title}>
+			<Table.Cell color="fg.muted">
+				<HStack>
+					<intro.icon />
+					{intro.title}
+				</HStack>
+			</Table.Cell>
+			<Table.Cell>{intro.description}</Table.Cell>
+		</Table.Row>
 	));
 }
 
