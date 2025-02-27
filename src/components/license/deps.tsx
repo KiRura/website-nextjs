@@ -1,55 +1,36 @@
 import deps from "@/app/license/licenses.json";
-import { Table } from "@chakra-ui/react";
+import { Card, Code, Flex, GridItem, Link, Tag } from "@chakra-ui/react";
+import NextLink from "next/link";
 
-type DepData = {
-	department: string;
-	relatedTo: string;
-	name: string;
-	licensePeriod: string;
-	material: string;
-	licenseType: string;
-	link: string;
-	remoteVersion: string;
-	installedVersion: string;
-	definedVersion: string;
-	author: string;
-};
+const regex =
+	/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
 
-function ForInDepData(depData: DepData) {
-	const data = [];
+export function Deps() {
+	return deps.map((dep) => {
+		const link = (dep.link.match(regex) || [dep.link])[0];
 
-	for (const key in depData) {
-		data.push({
-			header: key,
-			data: (depData as Record<string, string>)[key],
-		});
-	}
-
-	return data;
-}
-
-export function DepsHeader() {
-	return ForInDepData(deps[0]).map((data) => (
-		<Table.ColumnHeader
-			key={data.header}
-			textAlign={data.header.match("Version") ? "right" : "left"}
-		>
-			{`${data.header.charAt(0).toUpperCase()}${data.header.replace(/([A-Z])/g, " $1").slice(1)}`}
-		</Table.ColumnHeader>
-	));
-}
-
-export function DepsBody() {
-	return deps.map((dep) => (
-		<Table.Row key={dep.name}>
-			{ForInDepData(dep).map((data) => (
-				<Table.Cell
-					key={data.header}
-					textAlign={data.header.match("Version") ? "right" : "left"}
-				>
-					{data.data}
-				</Table.Cell>
-			))}
-		</Table.Row>
-	));
+		return (
+			<GridItem key={dep.name}>
+				<Card.Root size="sm">
+					<Card.Body gap={4}>
+						<Flex align="start" justify="space-between">
+							<Card.Title asChild>
+								<Link asChild variant="underline">
+									<NextLink href={link} target="_blank">
+										{dep.name}
+									</NextLink>
+								</Link>
+							</Card.Title>
+							<Code>{dep.installedVersion}</Code>
+						</Flex>
+						<Flex>
+							<Tag.Root>
+								<Tag.Label>{dep.licenseType}</Tag.Label>
+							</Tag.Root>
+						</Flex>
+					</Card.Body>
+				</Card.Root>
+			</GridItem>
+		);
+	});
 }
