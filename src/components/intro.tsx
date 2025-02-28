@@ -20,19 +20,7 @@ import {
 
 const likes = [
 	{
-		name: "ドゥームフィスト",
-		href: "https://overwatch.blizzard.com/heroes/doomfist",
-	},
-	{
-		name: "ラマットラ",
-		href: "https://overwatch.blizzard.com/heroes/ramattra",
-	},
-	{
-		name: "バスティオン",
-		href: "https://overwatch.blizzard.com/heroes/bastion",
-	},
-	{
-		name: "miHoYoの大部分",
+		name: "miHoYo",
 	},
 	{
 		name: "タルレミ・エラ",
@@ -51,23 +39,11 @@ const disLikes = [
 		name: "Apple",
 	},
 	{
-		name: "Microsoft",
-	},
-	{
 		name: "Discord",
 	},
 	{
 		name: "ニトリ",
 		href: "https://twitter.com/i/status/1885911562457858488",
-	},
-	{
-		name: "アビス",
-	},
-	{
-		name: "ブリーズ",
-	},
-	{
-		name: "miHoYoの一部",
 	},
 ];
 
@@ -75,9 +51,6 @@ const langs = [
 	{
 		name: "JavaScript(Bun)",
 		href: "https://bun.sh",
-	},
-	{
-		name: "Kotlin",
 	},
 	{
 		name: "YMM4",
@@ -95,8 +68,8 @@ const things = [
 		href: "https://discord.js.org",
 	},
 	{
-		name: "Jetpack Compose",
-		href: "https://developer.android.com/compose",
+		name: "Remix",
+		href: "https://remix.run/",
 	},
 ];
 
