@@ -39,7 +39,9 @@ export default function Home() {
 						きるら, (7)KiRura,
 					</Highlight>
 				</Heading>
-				<DiscordProf />
+				<VStack>
+					<DiscordProf />
+				</VStack>
 			</Stack>
 			<VStack gap={6} mb={24}>
 				<Heading>他リンク</Heading>
