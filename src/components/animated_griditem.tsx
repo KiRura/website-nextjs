@@ -3,19 +3,23 @@
 import { GridItem } from "@chakra-ui/react";
 import { type JSX, useEffect, useState } from "react";
 
-type ElementWithKey = {
+export type ElementWithKey = {
 	key: string;
 	element: JSX.Element;
 };
 
-export function AnimatedGridItem(props: { elementArray: ElementWithKey[] }) {
+export function AnimatedGridItem(props: {
+	elementArray: ElementWithKey[];
+	emptiesNumber?: number;
+}) {
 	const [showedIndex, setShowedIndex] = useState(-1);
 
 	useEffect(() => {
 		const intervalId = setInterval(
 			() => {
 				setShowedIndex((i) => {
-					if (i >= props.elementArray.length - 1) {
+					console.log(i);
+					if (i >= props.elementArray.length + (props.emptiesNumber || 0) - 1) {
 						clearInterval(intervalId);
 						return i;
 					}
@@ -28,7 +32,7 @@ export function AnimatedGridItem(props: { elementArray: ElementWithKey[] }) {
 		return () => {
 			clearInterval(intervalId);
 		};
-	}, [props.elementArray]);
+	}, [props.elementArray, props.emptiesNumber]);
 
 	return props.elementArray.map((children, i) => (
 		<GridItem
