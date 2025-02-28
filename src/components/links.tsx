@@ -63,8 +63,9 @@ export function Links(props: { columns: ColumnsType }) {
 										>
 											<Link
 												fontStyle="italic"
-												colorPalette="gray"
+												color="fg.subtle"
 												fontSize="sm"
+												fontFamily="mono"
 												overflowWrap="anywhere"
 												ml={2}
 												onClick={() => {

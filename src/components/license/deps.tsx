@@ -1,7 +1,7 @@
 "use client";
 
 import deps from "@/app/license/licenses.json";
-import { Card, Code, Flex, Link, Tag } from "@chakra-ui/react";
+import { Card, Flex, Link, Tag, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { AnimatedGridItem } from "../animated_griditem";
 import { type ColumnsType, Empties } from "../empties_number";
@@ -30,7 +30,14 @@ export function Deps(props: { columns: ColumnsType }) {
 												</NextLink>
 											</Link>
 										</Card.Title>
-										<Code>{dep.installedVersion}</Code>
+										<Text
+											fontFamily="mono"
+											fontSize="sm"
+											fontStyle="italic"
+											color="fg.subtle"
+										>
+											{dep.installedVersion}
+										</Text>
 									</Flex>
 									<Flex>
 										<Tag.Root>

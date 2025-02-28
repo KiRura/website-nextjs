@@ -23,12 +23,12 @@ export default function Home() {
 				gap={8}
 			>
 				<Heading
-					as="h1"
 					size={{
 						smDown: "5xl",
 						sm: "5xl",
 						md: "6xl",
 					}}
+					fontFamily="mono"
 				>
 					Hello!,
 					<br />
