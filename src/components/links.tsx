@@ -1,13 +1,13 @@
 "use client";
 
-import { Card, Flex, HStack, Icon, Link } from "@chakra-ui/react";
+import { Card, Flex, HStack, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useState } from "react";
-import { AnimatedGridItem, type ElementWithKey } from "./animated_griditem";
-import { Empties, type ColumnsType } from "./empties_number";
+import { AnimatedGridItem } from "./animated_griditem";
+import { type ColumnsType, Empties } from "./empties_number";
+import { EmptyCard } from "./empty_card";
 import { links } from "./linksdata";
 import { Tooltip } from "./ui/tooltip";
-import { EmptyCard } from "./empty_card";
 
 export function Links(props: { columns: ColumnsType }) {
 	const [copied, setCopied] = useState(-1);

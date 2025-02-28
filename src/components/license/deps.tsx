@@ -4,7 +4,7 @@ import deps from "@/app/license/licenses.json";
 import { Card, Code, Flex, Link, Tag } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { AnimatedGridItem } from "../animated_griditem";
-import { Empties, type ColumnsType } from "../empties_number";
+import { type ColumnsType, Empties } from "../empties_number";
 import { EmptyCard } from "../empty_card";
 
 const regex =
