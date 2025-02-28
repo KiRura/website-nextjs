@@ -5,12 +5,11 @@ import { type JSX, useEffect, useState } from "react";
 
 export type ElementWithKey = {
 	key: string;
-	element: JSX.Element;
+	children: JSX.Element;
 };
 
 export function AnimatedGridItem(props: {
 	elementArray: ElementWithKey[];
-	emptiesNumber?: number;
 }) {
 	const [showedIndex, setShowedIndex] = useState(-1);
 
@@ -19,7 +18,7 @@ export function AnimatedGridItem(props: {
 			() => {
 				setShowedIndex((i) => {
 					console.log(i);
-					if (i >= props.elementArray.length + (props.emptiesNumber || 0) - 1) {
+					if (i >= props.elementArray.length - 1) {
 						clearInterval(intervalId);
 						return i;
 					}
@@ -32,7 +31,7 @@ export function AnimatedGridItem(props: {
 		return () => {
 			clearInterval(intervalId);
 		};
-	}, [props.elementArray, props.emptiesNumber]);
+	}, [props.elementArray]);
 
 	return props.elementArray.map((children, i) => (
 		<GridItem
@@ -45,7 +44,7 @@ export function AnimatedGridItem(props: {
 				animationDuration: "faster",
 			}}
 		>
-			{children.element}
+			{children.children}
 		</GridItem>
 	));
 }

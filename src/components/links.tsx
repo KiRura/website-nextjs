@@ -1,76 +1,37 @@
 "use client";
 
-import {
-	Card,
-	Flex,
-	HStack,
-	Icon,
-	Link,
-	useBreakpoint,
-} from "@chakra-ui/react";
+import { Card, Flex, HStack, Icon, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useEffect, useState } from "react";
-import { FaXmark } from "react-icons/fa6";
+import { useState } from "react";
 import { AnimatedGridItem, type ElementWithKey } from "./animated_griditem";
+import { Empties, type ColumnsType } from "./empties_number";
 import { links } from "./linksdata";
 import { Tooltip } from "./ui/tooltip";
+import { EmptyCard } from "./empty_card";
 
-const columns = {
-	base: 1,
-	sm: 1,
-	md: 2,
-	lg: 3,
-	xl: 4,
-};
-
-export function Links() {
+export function Links(props: { columns: ColumnsType }) {
 	const [copied, setCopied] = useState(-1);
 	const [errored, setErrored] = useState(-1);
-	const breakpoint = useBreakpoint({
-		breakpoints: ["base", "sm", "md", "lg", "xl"],
-	}) as "base" | "sm" | "md" | "lg" | "xl";
-	const [emptiesNumber, setBleedsNumber] = useState(0);
 
-	useEffect(() => {
-		const column = columns[breakpoint];
-		let num = column - (links.length % column);
-		if (column === num) num = 0;
-		setBleedsNumber(num);
-	}, [breakpoint]);
-
-	const empties: ElementWithKey[] = [];
-	for (let i = 0; i < emptiesNumber; i++) {
-		empties.push({
-			key: i.toString(),
-			element: (
-				<Card.Root size="sm" h="100%" borderWidth={0} bg="bg.subtle">
-					<Card.Body>
-						<HStack>
-							<Icon color="fg.subtle">
-								<FaXmark />
-							</Icon>
-							<Card.Title color="fg.subtle">Empty</Card.Title>
-						</HStack>
-					</Card.Body>
-				</Card.Root>
-			),
-		});
-	}
+	const empties = Empties({
+		columns: props.columns,
+		arrayLength: links.length,
+		children: <EmptyCard />,
+	});
 
 	return (
 		<AnimatedGridItem
-			emptiesNumber={emptiesNumber}
 			elementArray={links
 				.map((link, i) => {
 					return {
 						key: link.name,
-						element: (
+						children: (
 							<Card.Root size="sm" h="100%" variant="subtle" borderWidth={1}>
 								<Card.Body>
 									<Flex align="start" justify="space-between">
 										<HStack mb={2}>
 											<link.icon />
-											<Card.Title>
+											<Card.Title asChild={Boolean(link.href)}>
 												{link.href ? (
 													<Link asChild variant="underline">
 														<NextLink href={link.href} target="_blank">

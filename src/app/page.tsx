@@ -53,7 +53,15 @@ export default function Home() {
 					gap={3}
 					w="100%"
 				>
-					<Links />
+					<Links
+						columns={{
+							base: 1,
+							sm: 1,
+							md: 2,
+							lg: 3,
+							xl: 4,
+						}}
+					/>
 				</Grid>
 				<Heading>自己紹介</Heading>
 				<Table.Root w="fit" hideBelow="md">

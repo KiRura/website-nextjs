@@ -16,7 +16,15 @@ export default function Page() {
 					gap={3}
 					w="100%"
 				>
-					<Deps />
+					<Deps
+						columns={{
+							base: 1,
+							sm: 1,
+							md: 2,
+							lg: 3,
+							xl: 4,
+						}}
+					/>
 				</Grid>
 				{/* <Licenses /> */}
 			</VStack>
