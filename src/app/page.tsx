@@ -64,12 +64,12 @@ export default function Home() {
 					/>
 				</Grid>
 				<Heading>自己紹介</Heading>
-				<Table.Root w="fit" hideBelow="md">
+				<Table.Root w="fit" hideBelow="sm">
 					<Table.Body>
 						<Intro />
 					</Table.Body>
 				</Table.Root>
-				<DataListRoot hideFrom="md">
+				<DataListRoot hideFrom="sm">
 					<IntroSm />
 				</DataListRoot>
 			</VStack>
