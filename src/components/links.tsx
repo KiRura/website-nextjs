@@ -1,19 +1,9 @@
 "use client";
 
-import {
-	Card,
-	Flex,
-	GridItem,
-	HStack,
-	IconButton,
-	Link,
-} from "@chakra-ui/react";
+import { Card, Flex, GridItem, HStack, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useState } from "react";
-import { FaInfo } from "react-icons/fa6";
 import { links } from "./linksdata";
-import { toaster } from "./ui/toaster";
-import { ToggleTip } from "./ui/toggle-tip";
 import { Tooltip } from "./ui/tooltip";
 
 export function Links() {
@@ -70,32 +60,6 @@ export function Links() {
 									} catch (_) {
 										setErrored(i);
 									}
-								}}
-								onTouchEnd={() => {
-									toaster.create({
-										title: "コピーされました",
-										description: (
-											<ToggleTip
-												content={
-													<>
-														ToasterにResponsiveを追加しろChakraUI
-														<br />
-														ToasterのactionにIconButtonを使わせろChakraUI
-														<br />
-														zIndex diff
-													</>
-												}
-											>
-												<IconButton variant="surface" size="xs">
-													<FaInfo />
-												</IconButton>
-											</ToggleTip>
-										),
-										action: {
-											label: "閉じる",
-											onClick() {},
-										},
-									});
 								}}
 							>
 								{link.accountId}

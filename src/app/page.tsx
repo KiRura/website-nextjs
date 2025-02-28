@@ -2,7 +2,6 @@ import DiscordProf from "@/components/image/discord_prof";
 import { Intro, IntroSm } from "@/components/intro";
 import { Links } from "@/components/links";
 import { DataListRoot } from "@/components/ui/data-list";
-import { Toaster } from "@/components/ui/toaster";
 import {
 	Container,
 	Grid,
@@ -16,7 +15,6 @@ import {
 export default function Home() {
 	return (
 		<Container maxW="8xl">
-			<Toaster />
 			<Stack
 				my={24}
 				direction={{ smDown: "column", smToLg: "column", lg: "row" }}
