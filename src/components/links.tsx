@@ -2,16 +2,46 @@
 
 import { Card, Flex, GridItem, HStack, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { links } from "./linksdata";
 import { Tooltip } from "./ui/tooltip";
 
 export function Links() {
 	const [copied, setCopied] = useState(-1);
 	const [errored, setErrored] = useState(-1);
+	const [showedIndex, setShowedIndex] = useState(-1);
+
+	useEffect(() => {
+		const intervalId = setInterval(
+			() => {
+				setShowedIndex((i) => {
+					console.log(i);
+					if (i >= links.length - 1) {
+						clearInterval(intervalId);
+						return i;
+					}
+					return i + 2;
+				});
+			},
+			(1 / 120) * 1000,
+		);
+
+		return () => {
+			clearInterval(intervalId);
+		};
+	}, []);
 
 	return links.map((link, i) => (
-		<GridItem key={link.name}>
+		<GridItem
+			key={link.name}
+			visibility={showedIndex >= i ? "visible" : "hidden"}
+			data-state={showedIndex >= i ? "open" : "closed"}
+			_open={{
+				animation: "ease-out",
+				animationName: "scale-in, fade-in",
+				animationDuration: "faster",
+			}}
+		>
 			<Card.Root size="sm" h="100%" variant="subtle" borderWidth={1}>
 				<Card.Body>
 					<Flex align="start" justify="space-between">
