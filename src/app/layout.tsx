@@ -43,6 +43,9 @@ export default function RootLayout({
 			className={`${inter.variable} ${notoSansJp.variable} ${jetBrainsMono.variable}`}
 			suppressHydrationWarning
 		>
+			<head>
+				<meta name="darkreader-lock" />
+			</head>
 			<body>
 				<Provider>
 					<Header />
