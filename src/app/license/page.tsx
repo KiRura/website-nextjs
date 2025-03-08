@@ -1,6 +1,6 @@
+import { config } from "@/config";
 import { Container, Grid, Heading, VStack } from "@chakra-ui/react";
 import { Deps } from "../../components/license/deps";
-import { config } from "@/config";
 
 export default function Page() {
 	return (
