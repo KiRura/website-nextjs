@@ -26,6 +26,10 @@ const likes = [
 		name: "タルレミ・エラ",
 		href: "https://lit.link/tallemiella",
 	},
+	{
+		name: "柊マグネタイト",
+		href: "https://x.com/i/user/1300838650637242370",
+	},
 ];
 
 const disLikes = [
