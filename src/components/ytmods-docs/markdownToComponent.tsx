@@ -39,7 +39,6 @@ export function MarkdownToComponent() {
 								</ProgressCircle.Circle>
 							</ProgressCircle.Root>
 						</EmptyState.Indicator>
-						<EmptyState.Title>読み込み中...</EmptyState.Title>
 					</EmptyState.Content>
 				</EmptyState.Root>
 			}
