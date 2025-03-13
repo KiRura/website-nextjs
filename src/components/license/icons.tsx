@@ -1,6 +1,6 @@
 import type { IconType } from "react-icons";
 import { FaReact } from "react-icons/fa6";
-import { SiChakraui, SiNextdotjs, SiVercel } from "react-icons/si";
+import { SiChakraui, SiNextdotjs, SiRemark, SiVercel } from "react-icons/si";
 
 type IconsType = {
 	[key: string]: IconType;
@@ -15,4 +15,6 @@ export const Icons: IconsType = {
 	"@emotion/react": FaReact,
 	"@chakra-ui/react": SiChakraui,
 	"@vercel/speed-insights": SiVercel,
+	"react-markdown": SiRemark,
+	"remark-gfm": SiRemark,
 };
