@@ -3,32 +3,15 @@
 import { Box, Container, Flex, HStack, IconButton } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
-import {
-	FaFileSignature,
-	FaGithub,
-	FaHouse,
-	FaMoon,
-	FaSun,
-} from "react-icons/fa6";
+import { FaGithub, FaMoon, FaSun } from "react-icons/fa6";
+import { pages } from "./pages";
 import { Button } from "./ui/button";
 import { useColorMode } from "./ui/color-mode";
-
-const pages = [
-	{
-		name: "KiRura",
-		href: "/",
-		icon: FaHouse,
-	},
-	{
-		name: "License",
-		href: "/license",
-		icon: FaFileSignature,
-	},
-];
 
 export default function Header() {
 	const { colorMode, toggleColorMode } = useColorMode();
 	const path = usePathname();
+
 	return (
 		<Box
 			as="header"
@@ -39,6 +22,7 @@ export default function Header() {
 			borderBottomColor="border"
 			borderBottomWidth="1px"
 			borderBottomStyle="solid"
+			hideBelow="md"
 		>
 			<Container maxW="8xl">
 				<Flex w="100%" justify="space-between" align="center" py={2}>
