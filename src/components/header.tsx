@@ -45,8 +45,12 @@ export default function Header() {
 					<HStack>
 						{pages.map((page) => {
 							let isActive = false;
-							if (page.href === path) isActive = true;
-							if (page.href !== "/" && path.match(page.href)) isActive = true;
+							if (
+								page.href === path ||
+								(page.href !== "/" && path.match(page.href))
+							)
+								isActive = true;
+
 							return (
 								<Button
 									key={page.name}
