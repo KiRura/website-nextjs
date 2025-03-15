@@ -15,7 +15,7 @@ import {
 
 export default function Home() {
 	return (
-		<Container as="main" maxW="8xl" {...config.transitionAnimation}>
+		<Container maxW="8xl" {...config.transitionAnimation}>
 			<Stack
 				my={24}
 				direction={{ smDown: "column", smToLg: "column", lg: "row" }}

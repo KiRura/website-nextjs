@@ -4,7 +4,7 @@ import { Deps } from "../../components/license/deps";
 
 export default function Page() {
 	return (
-		<Container maxW="8xl" as="main" {...config.transitionAnimation} my={4}>
+		<Container maxW="8xl" {...config.transitionAnimation} my={4}>
 			<VStack gap={4}>
 				<Heading>Deps</Heading>
 				<Grid

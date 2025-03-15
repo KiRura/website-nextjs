@@ -1,5 +1,6 @@
 "use client";
 
+import { config } from "@/config";
 import {
 	AbsoluteCenter,
 	Code,
@@ -126,7 +127,7 @@ export default function Page() {
 	];
 
 	return (
-		<Container maxW="8xl">
+		<Container maxW="8xl" {...config.transitionAnimation}>
 			<VStack justify="center" align="center" my={32} gap={8}>
 				<Heading>coming soon...</Heading>
 				<Wrap gap={6} w="fit">

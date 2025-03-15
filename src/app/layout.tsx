@@ -49,7 +49,7 @@ export default function RootLayout({
 			<body>
 				<Provider>
 					<Header />
-					{children}
+					<main>{children}</main>
 					<SpeedInsights />
 				</Provider>
 			</body>
