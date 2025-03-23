@@ -5,10 +5,7 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import useSWR from "swr";
 import { Prose } from "../ui/prose";
-
-async function fetcher(key: string) {
-	return fetch(key).then((res) => res.json());
-}
+import { fetcher } from "@/app/lib/fetcher";
 
 export function MarkdownToComponent() {
 	const { data, error, isLoading } = useSWR(

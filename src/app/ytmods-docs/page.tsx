@@ -1,4 +1,4 @@
-import { MarkdownToComponent } from "@/components/ytmods-docs/markdownToComponent";
+import { MarkdownToComponent } from "@/components/ytmods-docs/markdown_to_component";
 import { Container, VStack } from "@chakra-ui/react";
 
 export default function Page() {
