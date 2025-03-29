@@ -1,11 +1,11 @@
 "use client";
 
+import { fetcher } from "@/app/lib/fetcher";
 import { EmptyState, ProgressCircle, Text } from "@chakra-ui/react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import useSWR from "swr";
 import { Prose } from "../ui/prose";
-import { fetcher } from "@/app/lib/fetcher";
 
 export function MarkdownToComponent() {
 	const { data, error, isLoading } = useSWR(

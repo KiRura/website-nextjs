@@ -75,10 +75,10 @@ const things = [
 		name: "Remix",
 		href: "https://remix.run/",
 	},
- {
-  name: "WinUI",
-  href: "https://learn.microsoft.com/ja-jp/windows/apps/winui/"
- }
+	{
+		name: "WinUI",
+		href: "https://learn.microsoft.com/ja-jp/windows/apps/winui/",
+	},
 ];
 
 const intros: Intros[] = [
