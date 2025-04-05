@@ -96,7 +96,7 @@ const intros: Intros[] = [
 	},
 	{
 		title: "年齢",
-		description: "16歳 / 高2",
+		description: "17歳 / 高3",
 		icon: FaPerson,
 	},
 	{
