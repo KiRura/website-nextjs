@@ -1,6 +1,5 @@
 import Header from "@/components/header";
 import { Provider } from "@/components/ui/provider";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Noto_Sans_JP } from "next/font/google";
 import type React from "react";
@@ -56,7 +55,6 @@ export default function RootLayout({
 						{children}
 					</Box>
 					<Footer />
-					<SpeedInsights />
 				</Provider>
 			</body>
 		</html>
