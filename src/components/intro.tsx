@@ -21,6 +21,7 @@ import {
 const likes = [
 	{
 		name: "miHoYo",
+		href: "https://www.mihoyo.com"
 	},
 	{
 		name: "タルレミ・エラ",
@@ -73,12 +74,12 @@ const things = [
 	},
 	{
 		name: "Remix",
-		href: "https://remix.run/",
+		href: "https://remix.run",
 	},
 	{
-		name: "WinUI",
-		href: "https://learn.microsoft.com/ja-jp/windows/apps/winui/",
-	},
+		name: "Flutter",
+		href: "https://flutter.dev"
+	}
 ];
 
 const intros: Intros[] = [
