@@ -11,13 +11,13 @@ import { Box } from "@chakra-ui/react";
 export const metadata: Metadata = {
 	title: "きるら",
 	description: "しがない個人サイト with Chakra UI v3",
-	icons: "https://kirura.vercel.app/kirura_rounded.png",
+	icons: "https://kirura.f5.si/kirura_rounded.png",
 	twitter: {
 		card: "summary",
-		images: "https://kirura.vercel.app/kirura.png",
+		images: "https://kirura.f5.si/kirura.png",
 	},
 	openGraph: {
-		images: "https://kirura.vercel.app/kirura.png",
+		images: "https://kirura.f5.si/kirura.png",
 	},
 };
 
