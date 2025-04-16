@@ -17,7 +17,6 @@ export function AnimatedGridItem(props: {
 		const intervalId = setInterval(
 			() => {
 				setShowedIndex((i) => {
-					console.log(i);
 					if (i >= props.elementArray.length - 1) {
 						clearInterval(intervalId);
 						return i;
