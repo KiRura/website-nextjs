@@ -5,8 +5,6 @@ import { Inter, JetBrains_Mono, Noto_Sans_JP } from "next/font/google";
 import type React from "react";
 import "./global.css";
 import { Footer } from "@/components/footer";
-import { config } from "@/config";
-import { Box } from "@chakra-ui/react";
 
 export const metadata: Metadata = {
 	title: "きるら",
@@ -51,9 +49,7 @@ export default function RootLayout({
 			<body>
 				<Provider>
 					<Header />
-					<Box as="main" minH="100vh" {...config.transitionAnimation}>
-						{children}
-					</Box>
+					{children}
 					<Footer />
 				</Provider>
 			</body>

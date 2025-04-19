@@ -1,9 +1,10 @@
+import { config } from "@/config";
 import { Container, Grid, Heading, VStack } from "@chakra-ui/react";
 import { Deps } from "../../components/license/deps";
 
 export default function Page() {
 	return (
-		<Container maxW="8xl" my={4}>
+		<Container as="main" maxW="8xl" my={4} {...config.transitionAnimation}>
 			<VStack gap={4}>
 				<Heading>Deps</Heading>
 				<Grid

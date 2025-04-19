@@ -21,7 +21,7 @@ import {
 const likes = [
 	{
 		name: "miHoYo",
-		href: "https://www.mihoyo.com"
+		href: "https://www.mihoyo.com",
 	},
 	{
 		name: "タルレミ・エラ",
@@ -78,8 +78,8 @@ const things = [
 	},
 	{
 		name: "Flutter",
-		href: "https://flutter.dev"
-	}
+		href: "https://flutter.dev",
+	},
 ];
 
 const intros: Intros[] = [
