@@ -1,22 +1,31 @@
 import Header from "@/components/header";
 import { Provider } from "@/components/ui/provider";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Noto_Sans_JP } from "next/font/google";
 import type React from "react";
 import "./global.css";
 import { Footer } from "@/components/footer";
+import { config } from "@/config";
 
 export const metadata: Metadata = {
-	title: "きるら",
+	title: { template: "%s - きるら", default: "きるら" },
 	description: "しがない個人サイト with Chakra UI v3",
-	icons: "https://kirura.f5.si/kirura_rounded.png",
+	icons: `https://${config.domain}/kirura_rounded.png`,
 	twitter: {
 		card: "summary",
-		images: "https://kirura.f5.si/kirura.png",
 	},
 	openGraph: {
-		images: "https://kirura.f5.si/kirura.png",
+		images: `https://${config.domain}/kirura.png`,
+		locale: "ja_JP",
+		type: "website",
 	},
+	authors: {
+		name: "きるら",
+	},
+};
+
+export const viewport: Viewport = {
+	themeColor: "#FFBF7F",
 };
 
 const notoSansJp = Noto_Sans_JP({
