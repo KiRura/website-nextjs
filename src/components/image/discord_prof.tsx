@@ -17,9 +17,9 @@ export default function DiscordProf() {
 	return (
 		<>
 			<Skeleton asChild loading={loading}>
-				<Image asChild fit="contain">
+				<Image asChild rounded="md" w="full">
 					<NextImage
-						src={`https://lanyard.cnrad.dev/api/606093171151208448?theme=${colorMode || "dark"}&borderRadius=6px&idleMessage=現実をプレイ中 * ${count}`}
+						src={`https://lanyard.cnrad.dev/api/606093171151208448?theme=${colorMode === "light" ? "light" : "dark"}&borderRadius=0px&idleMessage=現実をプレイ中 * ${count}&bg=${colorMode === "light" ? "FFFFFF" : "111111"}`}
 						alt="discord profile image"
 						unoptimized
 						width={410}
@@ -31,7 +31,7 @@ export default function DiscordProf() {
 				</Image>
 			</Skeleton>
 			<Button
-				w="100%"
+				w="full"
 				variant="outline"
 				color="fg.subtle"
 				onClick={() => {
