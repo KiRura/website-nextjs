@@ -1,32 +1,27 @@
 import { config } from "@/config";
-import { Container, Grid, Heading, VStack } from "@chakra-ui/react";
+import { Container, Heading, SimpleGrid, VStack } from "@chakra-ui/react";
+import type { Metadata } from "next";
 import { Deps } from "../../components/license/deps";
+
+export const metadata: Metadata = {
+	title: "ライセンス",
+	description: "ライセンス一覧",
+};
 
 export default function Page() {
 	return (
-		<Container as="main" maxW="8xl" my={4} {...config.transitionAnimation}>
+		<Container
+			as="main"
+			maxW="8xl"
+			minH="vh"
+			my={4}
+			{...config.transitionAnimation}
+		>
 			<VStack gap={4}>
 				<Heading>Deps</Heading>
-				<Grid
-					templateColumns={{
-						smDown: "repeat(1, 1fr)",
-						md: "repeat(2, 1fr)",
-						lg: "repeat(3, 1fr)",
-						xl: "repeat(4, 1fr)",
-					}}
-					gap={3}
-					w="100%"
-				>
-					<Deps
-						columns={{
-							base: 1,
-							sm: 1,
-							md: 2,
-							lg: 3,
-							xl: 4,
-						}}
-					/>
-				</Grid>
+				<SimpleGrid minChildWidth="xs" gap={2} w="full">
+					<Deps />
+				</SimpleGrid>
 				{/* <Licenses /> */}
 			</VStack>
 		</Container>

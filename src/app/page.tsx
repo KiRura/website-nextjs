@@ -4,24 +4,27 @@ import { Links } from "@/components/links";
 import { DataListRoot } from "@/components/ui/data-list";
 import { config } from "@/config";
 import {
+	ClientOnly,
 	Container,
-	Grid,
 	Heading,
 	Highlight,
+	SimpleGrid,
 	Stack,
 	Table,
+	Text,
 	VStack,
 } from "@chakra-ui/react";
 
 export default function Home() {
 	return (
-		<Container as="main" maxW="8xl" {...config.transitionAnimation}>
+		<Container minH="vh" as="main" maxW="8xl" {...config.transitionAnimation}>
 			<Stack
 				my={24}
-				direction={{ smDown: "column", smToLg: "column", lg: "row" }}
+				direction={{ lgDown: "column", lg: "row" }}
 				align="center"
 				justify="center"
 				gap={8}
+				w="full"
 			>
 				<Heading
 					size={{
@@ -40,39 +43,34 @@ export default function Home() {
 						きるら, (7)KiRura,
 					</Highlight>
 				</Heading>
-				<VStack>
+				<VStack w={{ smDown: "full", sm: "md" }}>
 					<DiscordProf />
 				</VStack>
 			</Stack>
 			<VStack gap={6} mb={24}>
 				<Heading>他リンク</Heading>
-				<Grid
-					templateColumns={{
-						smDown: "repeat(1, 1fr)",
-						md: "repeat(2, 1fr)",
-						lg: "repeat(3, 1fr)",
-						xl: "repeat(4, 1fr)",
-					}}
-					gap={3}
-					w="100%"
-				>
-					<Links
+				<ClientOnly fallback={<Text color="fg.muted">Wait a moment...</Text>}>
+					<SimpleGrid
 						columns={{
-							base: 1,
+							smDown: 1,
 							sm: 1,
 							md: 2,
 							lg: 3,
 							xl: 4,
 						}}
-					/>
-				</Grid>
+						w="full"
+						gap={2}
+					>
+						<Links />
+					</SimpleGrid>
+				</ClientOnly>
 				<Heading>自己紹介</Heading>
-				<Table.Root w="fit" hideBelow="sm">
+				<Table.Root w="fit" hideBelow="md">
 					<Table.Body>
 						<Intro />
 					</Table.Body>
 				</Table.Root>
-				<DataListRoot hideFrom="sm">
+				<DataListRoot hideFrom="md">
 					<IntroSm />
 				</DataListRoot>
 			</VStack>

@@ -1,93 +1,78 @@
 "use client";
 
-import { Card, Flex, HStack, Link } from "@chakra-ui/react";
+import { Card, Flex, For, HStack, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useState } from "react";
-import { AnimatedGridItem } from "./animated_griditem";
-import { type ColumnsType, Empties } from "./empties_number";
-import { EmptyCard } from "./empty_card";
 import { links } from "./linksdata";
 import { Tooltip } from "./ui/tooltip";
 
-export function Links(props: { columns: ColumnsType }) {
+export function Links() {
 	const [copied, setCopied] = useState(-1);
 	const [errored, setErrored] = useState(-1);
 
-	const empties = Empties({
-		columns: props.columns,
-		arrayLength: links.length,
-		children: <EmptyCard />,
-	});
-
 	return (
-		<AnimatedGridItem
-			elementArray={links
-				.map((link, i) => {
-					return {
-						key: link.name,
-						children: (
-							<Card.Root size="sm" h="100%" variant="subtle" borderWidth={1}>
-								<Card.Body>
-									<Flex align="start" justify="space-between">
-										<HStack mb={2}>
-											<link.icon />
-											<Card.Title asChild={Boolean(link.href)}>
-												{link.href ? (
-													<Link asChild variant="underline">
-														<NextLink href={link.href} target="_blank">
-															{link.name}
-														</NextLink>
-													</Link>
-												) : (
-													link.name
-												)}
-											</Card.Title>
-										</HStack>
-										<Tooltip
-											content={
-												copied === i
-													? "コピーされました"
-													: errored === i
-														? "コピーできませんでした"
-														: "コピー"
-											}
-											showArrow
-											positioning={{ placement: "top" }}
-											onExitComplete={() => {
-												setCopied(-1);
-												setErrored(-1);
-											}}
-											closeOnPointerDown={false}
-											closeOnClick={false}
-											openDelay={0}
-										>
-											<Link
-												fontStyle="italic"
-												color="fg.subtle"
-												fontSize="sm"
-												fontFamily="mono"
-												overflowWrap="anywhere"
-												ml={2}
-												onClick={() => {
-													try {
-														navigator.clipboard.writeText(link.accountId);
-														setCopied(i);
-													} catch (_) {
-														setErrored(i);
-													}
-												}}
-											>
-												{link.accountId}
-											</Link>
-										</Tooltip>
-									</Flex>
-									<Card.Description>{link.description}</Card.Description>
-								</Card.Body>
-							</Card.Root>
-						),
-					};
-				})
-				.concat(empties)}
-		/>
+		<For each={links}>
+			{(link, i) => (
+				<Card.Root key={link.name} size="sm">
+					<Card.Header>
+						<Flex justify="space-between" align="start">
+							<HStack>
+								<link.icon />
+								<Card.Title asChild={Boolean(link.href)}>
+									{link.href ? (
+										<Link asChild variant="underline">
+											<NextLink href={link.href} target="_blank">
+												{link.name}
+											</NextLink>
+										</Link>
+									) : (
+										link.name
+									)}
+								</Card.Title>
+							</HStack>
+							<Tooltip
+								content={
+									copied === i
+										? "コピーされました"
+										: errored === i
+											? "コピーできませんでした"
+											: "コピー"
+								}
+								showArrow
+								positioning={{ placement: "top" }}
+								onExitComplete={() => {
+									setCopied(-1);
+									setErrored(-1);
+								}}
+								closeOnPointerDown={false}
+								closeOnClick={false}
+								openDelay={0}
+							>
+								<Link
+									fontStyle="italic"
+									color="fg.subtle"
+									fontSize="sm"
+									fontFamily="mono"
+									overflowWrap="anywhere"
+									onClick={() => {
+										try {
+											navigator.clipboard.writeText(link.accountId);
+											setCopied(i);
+										} catch (_) {
+											setErrored(i);
+										}
+									}}
+								>
+									{link.accountId}
+								</Link>
+							</Tooltip>
+						</Flex>
+					</Card.Header>
+					<Card.Body pt={2}>
+						<Card.Description>{link.description}</Card.Description>
+					</Card.Body>
+				</Card.Root>
+			)}
+		</For>
 	);
 }
