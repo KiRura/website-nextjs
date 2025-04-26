@@ -1,5 +1,6 @@
 import type { IconType } from "react-icons";
 import {
+	FaBlog,
 	FaBluesky,
 	FaBolt,
 	FaCloudMoon,
@@ -34,6 +35,14 @@ export const links: Links[] = [
 		description: "一応お仕事用 引き受けるかは気分次第",
 		href: "mailto://kirura@kirura.f5.si",
 		icon: FaEnvelope,
+		category: "social",
+	},
+	{
+		accountId: "blog.kirura.f5.si",
+		name: "Blog",
+		description: "ブログ",
+		href: "https://blog.kirura.f5.si",
+		icon: FaBlog,
 		category: "social",
 	},
 	{

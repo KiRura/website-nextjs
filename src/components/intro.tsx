@@ -11,6 +11,7 @@ import NextLink from "next/link";
 import type React from "react";
 import type { IconType } from "react-icons";
 import {
+	FaBlog,
 	FaFlask,
 	FaPerson,
 	FaThumbsDown,
@@ -72,14 +73,6 @@ const things = [
 		name: "discord.js",
 		href: "https://discord.js.org",
 	},
-	{
-		name: "Remix",
-		href: "https://remix.run",
-	},
-	{
-		name: "Flutter",
-		href: "https://flutter.dev",
-	},
 ];
 
 const intros: Intros[] = [
@@ -109,6 +102,20 @@ const intros: Intros[] = [
 		title: "触ってみてる",
 		description: <TextsToLinks likesArray={things} />,
 		icon: FaFlask,
+	},
+	{
+		title: "ブログ",
+		description: (
+			<Link asChild variant="underline" colorPalette="orange">
+				<NextLink
+					href="https://blog.kirura.f5.si/posts/who-is-kirura"
+					target="_blank"
+				>
+					自己紹介の投稿
+				</NextLink>
+			</Link>
+		),
+		icon: FaBlog,
 	},
 ];
 
