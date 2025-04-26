@@ -1,10 +1,13 @@
-import { FaFileSignature, FaHouse } from "react-icons/fa6";
+import { FaFileSignature } from "react-icons/fa6";
 
 export const pages = [
 	{
 		name: "KiRura",
 		href: "/",
-		icon: FaHouse,
+		image: {
+			src: "/kirura.png",
+			alt: "kirura icon",
+		},
 	},
 	{
 		name: "License",

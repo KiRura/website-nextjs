@@ -6,9 +6,11 @@ import {
 	Drawer,
 	Flex,
 	IconButton,
+	Image,
 	Portal,
 	VStack,
 } from "@chakra-ui/react";
+import NextImage from "next/image";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -68,12 +70,23 @@ export function Footer() {
 														variant={isActive ? "subtle" : "ghost"}
 														asChild
 														color={isActive ? "fg" : "fg.subtle"}
-														w="100%"
+														w="full"
 														justifyContent="start"
 														onClick={() => setOpen(false)}
 													>
 														<NextLink href={page.href}>
-															<page.icon /> {page.name}
+															{page.icon ? <page.icon /> : null}
+															{page.image ? (
+																<Image asChild boxSize={5} rounded="full">
+																	<NextImage
+																		src={page.image.src}
+																		alt={page.image.alt}
+																		width={256}
+																		height={256}
+																	/>
+																</Image>
+															) : null}
+															{page.name}
 														</NextLink>
 													</Button>
 												);
