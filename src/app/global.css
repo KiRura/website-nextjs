@@ -6,11 +6,3 @@
 	--chakra-fonts-heading: var(--main-font);
 	--chakra-fonts-mono: var(--mono-font);
 }
-
-body {
-	font-family: var(--main-font);
-}
-
-code {
-	font-family: var(--mono-font);
-}
