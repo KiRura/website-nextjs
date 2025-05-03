@@ -9,8 +9,8 @@
 		"ignoreUnknown": false,
 		"ignore": [
 			".next/",
-			"./public/",
-			"./src/components/ui/",
+			"public/",
+
 			"./src/app/license/licenses.json"
 		]
 	},
@@ -25,18 +25,11 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true,
-			"performance": {
-				"all": true
-			},
 			"correctness": {
-				"all": true,
-				"useImportExtensions": "off",
-				"noNodejsModules": "off"
-			},
-			"security": {
-				"all": true
+				"noUnusedImports": "warn"
 			}
-		}
+		},
+		"ignore": ["./src/components/ui/"]
 	},
 	"javascript": {
 		"formatter": {

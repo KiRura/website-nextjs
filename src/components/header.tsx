@@ -8,13 +8,13 @@ import {
 	IconButton,
 	Image,
 } from "@chakra-ui/react";
+import NextImage from "next/image";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { FaGithub, FaMoon, FaSun } from "react-icons/fa6";
 import { pages } from "./pages";
 import { Button } from "./ui/button";
 import { useColorMode } from "./ui/color-mode";
-import NextImage from "next/image";
 
 export default function Header() {
 	const { colorMode, toggleColorMode } = useColorMode();
