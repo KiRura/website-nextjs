@@ -1,25 +1,21 @@
-"use client";
-
 import {
 	Box,
+	ClientOnly,
 	Container,
 	Flex,
 	HStack,
 	IconButton,
 	Image,
+	Link,
+	Separator,
 } from "@chakra-ui/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { usePathname } from "next/navigation";
-import { FaGithub, FaMoon, FaSun } from "react-icons/fa6";
-import { pages } from "./pages";
-import { Button } from "./ui/button";
-import { useColorMode } from "./ui/color-mode";
+import { FaGithub } from "react-icons/fa6";
+import { Pages } from "./pages";
+import { ColorModeButton } from "./ui/color-mode";
 
 export default function Header() {
-	const { colorMode, toggleColorMode } = useColorMode();
-	const path = usePathname();
-
 	return (
 		<Box
 			as="header"
@@ -30,43 +26,28 @@ export default function Header() {
 			borderBottomColor="border"
 			borderBottomWidth="1px"
 			borderBottomStyle="solid"
-			hideBelow="md"
 		>
 			<Container maxW="8xl">
-				<Flex w="100%" justify="space-between" align="center" py={2}>
-					<HStack>
-						{pages.map((page) => {
-							let isActive = false;
-							if (
-								page.href === path ||
-								(page.href !== "/" && path.match(page.href))
-							)
-								isActive = true;
-
-							return (
-								<Button
-									key={page.name}
-									variant={isActive ? "subtle" : "ghost"}
-									asChild
-									color={isActive ? "fg" : "fg.subtle"}
-								>
-									<NextLink href={page.href}>
-										{page.icon ? <page.icon /> : null}
-										{page.image ? (
-											<Image asChild boxSize={8} rounded="full">
-												<NextImage
-													src={page.image.src}
-													alt={page.image.alt}
-													width={256}
-													height={256}
-												/>
-											</Image>
-										) : null}
-										{page.name}
-									</NextLink>
-								</Button>
-							);
-						})}
+				<Flex justify="space-between" align="center" py={2}>
+					<HStack separator={<Separator orientation="vertical" h={6} />}>
+						<HStack>
+							<Link asChild fontWeight="bold">
+								<NextLink href="/">
+									<Image asChild boxSize={8} rounded="full">
+										<NextImage
+											src="/kirura.png"
+											alt="kirura logo"
+											width={256}
+											height={256}
+										/>
+									</Image>
+									<Box hideBelow="md">KiRura</Box>
+								</NextLink>
+							</Link>
+						</HStack>
+						<ClientOnly>
+							<Pages />
+						</ClientOnly>
 					</HStack>
 					<HStack>
 						<IconButton variant="ghost" asChild>
@@ -77,9 +58,7 @@ export default function Header() {
 								<FaGithub />
 							</NextLink>
 						</IconButton>
-						<IconButton onClick={toggleColorMode} variant="ghost">
-							{colorMode === "light" ? <FaSun /> : <FaMoon />}
-						</IconButton>
+						<ColorModeButton />
 					</HStack>
 				</Flex>
 			</Container>
