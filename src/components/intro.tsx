@@ -185,7 +185,6 @@ export function IntroSm() {
 						</HStack>
 					}
 					value={intro.description}
-					hideFrom="md"
 				/>
 			)}
 		</For>
