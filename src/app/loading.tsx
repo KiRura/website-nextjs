@@ -1,9 +1,8 @@
-import { config } from "@/config";
 import { Container, EmptyState, Spinner } from "@chakra-ui/react";
 
 export default function Loading() {
 	return (
-		<Container as="main" maxW="8xl" minH="vh" {...config.transitionAnimation}>
+		<Container as="main" maxW="8xl" minH="vh">
 			<EmptyState.Root>
 				<EmptyState.Content>
 					<EmptyState.Indicator>

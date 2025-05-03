@@ -1,10 +1,9 @@
-import { config } from "@/config";
 import { Container, EmptyState, VStack } from "@chakra-ui/react";
 import { FaXmark } from "react-icons/fa6";
 
 export default function NotFound() {
 	return (
-		<Container as="main" maxW="8xl" minH="vh" {...config.transitionAnimation}>
+		<Container as="main" maxW="8xl" minH="vh">
 			<EmptyState.Root>
 				<EmptyState.Content gap={20}>
 					<EmptyState.Indicator>

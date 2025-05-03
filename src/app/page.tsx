@@ -2,7 +2,6 @@ import DiscordProf from "@/components/image/discord_prof";
 import { Intro, IntroSm } from "@/components/intro";
 import { Links } from "@/components/links";
 import { DataListRoot } from "@/components/ui/data-list";
-import { config } from "@/config";
 import {
 	ClientOnly,
 	Container,
@@ -17,7 +16,7 @@ import {
 
 export default function Home() {
 	return (
-		<Container minH="vh" as="main" maxW="8xl" {...config.transitionAnimation}>
+		<Container minH="vh" as="main" maxW="8xl">
 			<Stack
 				my={24}
 				direction={{ lgDown: "column", lg: "row" }}
