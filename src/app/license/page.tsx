@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
 	return (
-		<Container as="main" maxW="8xl" minH="vh" my={4}>
+		<Container as="main" maxW="8xl" my={4}>
 			<VStack gap={4}>
 				<Heading>Deps</Heading>
 				<SimpleGrid minChildWidth="xs" gap={2} w="full">

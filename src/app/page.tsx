@@ -16,7 +16,7 @@ import {
 
 export default function Home() {
 	return (
-		<Container minH="vh" as="main" maxW="8xl">
+		<Container as="main" maxW="8xl">
 			<Stack
 				my={24}
 				direction={{ lgDown: "column", lg: "row" }}
@@ -31,7 +31,7 @@ export default function Home() {
 						sm: "5xl",
 						md: "6xl",
 					}}
-					fontFamily="mono"
+					fontFamily="var(--font-jetbrains-mono), var(--font-noto-sans-jp), monospace"
 				>
 					Hello!,
 					<br />
