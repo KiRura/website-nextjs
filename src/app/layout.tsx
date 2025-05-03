@@ -1,9 +1,13 @@
-import { Footer } from "@/components/footer";
 import Header from "@/components/header";
 import { Provider } from "@/components/ui/provider";
 import { config } from "@/config";
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono, Noto_Sans_JP } from "next/font/google";
+import {
+	Inter,
+	JetBrains_Mono,
+	M_PLUS_1_Code,
+	Noto_Sans_JP,
+} from "next/font/google";
 import type React from "react";
 
 export const metadata: Metadata = {
@@ -35,6 +39,10 @@ const inter = Inter({
 	variable: "--font-inter",
 	subsets: ["latin"],
 });
+const mPlus1Code = M_PLUS_1_Code({
+	variable: "--font-m-plus-1-code",
+	subsets: ["latin"],
+});
 const jetBrainsMono = JetBrains_Mono({
 	variable: "--font-jetbrains-mono",
 	subsets: ["latin"],
@@ -48,7 +56,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="ja"
-			className={`${inter.variable} ${notoSansJp.variable} ${jetBrainsMono.variable}`}
+			className={`${inter.variable} ${notoSansJp.variable} ${mPlus1Code.variable} ${jetBrainsMono.variable}`}
 			suppressHydrationWarning
 		>
 			<head>
@@ -58,7 +66,6 @@ export default function RootLayout({
 				<Provider>
 					<Header />
 					{children}
-					<Footer />
 				</Provider>
 			</body>
 		</html>
