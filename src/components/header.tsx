@@ -14,6 +14,7 @@ import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
 import { Pages } from "./pages";
 import { ColorModeButton } from "./ui/color-mode";
+import { Skeleton } from "./ui/skeleton";
 
 export default function Header() {
 	return (
@@ -45,7 +46,7 @@ export default function Header() {
 								</NextLink>
 							</Link>
 						</HStack>
-						<ClientOnly>
+						<ClientOnly fallback={<Skeleton w={24} h={10} />}>
 							<Pages />
 						</ClientOnly>
 					</HStack>

@@ -1,16 +1,18 @@
 import DiscordProf from "@/components/image/discord_prof";
 import { Intro, IntroSm } from "@/components/intro";
 import { Links } from "@/components/links";
+import { links } from "@/components/linksdata";
 import { DataListRoot } from "@/components/ui/data-list";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
 	ClientOnly,
 	Container,
+	For,
 	Heading,
 	Highlight,
 	SimpleGrid,
 	Stack,
 	Table,
-	Text,
 	VStack,
 } from "@chakra-ui/react";
 
@@ -43,26 +45,34 @@ export default function Home() {
 					</Highlight>
 				</Heading>
 				<VStack w={{ smDown: "full", sm: "md" }}>
-					<DiscordProf />
+					<ClientOnly fallback={<Skeleton w="full" h="260px" />}>
+						<DiscordProf />
+					</ClientOnly>
 				</VStack>
 			</Stack>
 			<VStack gap={6} mb={24}>
 				<Heading>他リンク</Heading>
-				<ClientOnly fallback={<Text color="fg.muted">Wait a moment...</Text>}>
-					<SimpleGrid
-						columns={{
-							smDown: 1,
-							sm: 1,
-							md: 2,
-							lg: 3,
-							xl: 4,
-						}}
-						w="full"
-						gap={2}
+				<SimpleGrid
+					columns={{
+						smDown: 1,
+						sm: 1,
+						md: 2,
+						lg: 3,
+						xl: 4,
+					}}
+					w="full"
+					gap={2}
+				>
+					<ClientOnly
+						fallback={
+							<For each={Array.from({ length: links.length }, (_, i) => i)}>
+								{(num) => <Skeleton key={num.toString()} h="81.6px" />}
+							</For>
+						}
 					>
 						<Links />
-					</SimpleGrid>
-				</ClientOnly>
+					</ClientOnly>
+				</SimpleGrid>
 				<Heading>自己紹介</Heading>
 				<Table.Root w="fit" hideBelow="md">
 					<Table.Body>
