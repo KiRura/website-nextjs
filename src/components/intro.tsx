@@ -1,18 +1,8 @@
 import { DataListItem } from "@/components/ui/data-list";
-import {
-	type ConditionalValue,
-	HStack,
-	Link,
-	Separator,
-	Table,
-	Text,
-} from "@chakra-ui/react";
+import { For, HStack, Link, Separator, Table, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
-import type React from "react";
-import type { IconType } from "react-icons";
 import {
 	FaBlog,
-	FaFlask,
 	FaPerson,
 	FaThumbsDown,
 	FaThumbsUp,
@@ -29,8 +19,28 @@ const likes = [
 		href: "https://lit.link/tallemiella",
 	},
 	{
+		name: "LΛMPLIGHT",
+		href: "https://lamplight0.sakura.ne.jp/a",
+	},
+	{
+		name: "FUZI × MAAS - Circle of Karma",
+		href: "https://youtu.be/lW_Ae03xvM0",
+	},
+	{
+		name: "Lizardry",
+		href: "https://x.com/Lizardry_dev",
+	},
+	{
+		name: "tayama",
+		href: "https://x.com/tayama222",
+	},
+	{
+		name: "Rafutsuri",
+		href: "https://lit.link/rafutsuri",
+	},
+	{
 		name: "柊マグネタイト",
-		href: "https://x.com/i/user/1300838650637242370",
+		href: "https://x.com/hiiragi_magne",
 	},
 ];
 
@@ -49,22 +59,19 @@ const disLikes = [
 	},
 	{
 		name: "ニトリ",
-		href: "https://twitter.com/i/status/1885911562457858488",
+		href: "https://x.com/i/status/1885911562457858488",
 	},
 ];
 
 const langs = [
 	{
-		name: "JavaScript(Bun)",
+		name: "JavaScript / TypeScript (Bun)",
 		href: "https://bun.sh",
 	},
 	{
 		name: "YMM4",
 		href: "https://manjubox.net/ymm4",
 	},
-];
-
-const things = [
 	{
 		name: "Next.js",
 		href: "https://nextjs.org",
@@ -75,18 +82,16 @@ const things = [
 	},
 ];
 
-const intros: Intros[] = [
+const intros = [
 	{
 		title: "好き",
-		description: <TextsToLinks likesArray={likes} />,
+		description: <TextsToLinks things={likes} />,
 		icon: FaThumbsUp,
-		colSpan: { sm: 2, md: 1, lg: 2 },
 	},
 	{
 		title: "嫌い",
-		description: <TextsToLinks likesArray={disLikes} />,
+		description: <TextsToLinks things={disLikes} />,
 		icon: FaThumbsDown,
-		colSpan: { sm: 2, md: 1, lg: 2 },
 	},
 	{
 		title: "年齢",
@@ -95,101 +100,94 @@ const intros: Intros[] = [
 	},
 	{
 		title: "まあまあできる",
-		description: <TextsToLinks likesArray={langs} />,
+		description: <TextsToLinks things={langs} />,
 		icon: FaWrench,
-	},
-	{
-		title: "触ってみてる",
-		description: <TextsToLinks likesArray={things} />,
-		icon: FaFlask,
 	},
 	{
 		title: "ブログ",
 		description: (
-			<Link asChild variant="underline" colorPalette="orange">
-				<NextLink
-					href="https://blog.kirura.f5.si/posts/who-is-kirura"
-					target="_blank"
-				>
-					自己紹介の投稿
-				</NextLink>
-			</Link>
+			<TextsToLinks
+				things={[
+					{
+						name: "自己紹介の投稿",
+						href: "https://blog.kirura.f5.si/posts/who-is-kirura",
+					},
+				]}
+			/>
 		),
 		icon: FaBlog,
 	},
 ];
 
-type Intros = {
-	title: string;
-	description: React.JSX.Element | string;
-	icon: IconType;
-	colSpan?: ConditionalValue<number | "auto">;
-};
-
-function TextsToLinks(props: TextsToLinksProps) {
-	const { likesArray } = props;
-
+function TextsToLinks({
+	things,
+}: {
+	things: {
+		name: string;
+		href?: string;
+	}[];
+}) {
 	return (
 		<HStack
 			wrap="wrap"
-			separator={<Separator orientation="vertical" height={4} />}
+			separator={<Separator orientation="vertical" h="1em" />}
 		>
-			{likesArray.map((data) => {
-				if (data.href) {
+			<For each={things}>
+				{(thing) => {
+					if (!thing.href) return <Text key={thing.name}>{thing.name}</Text>;
+
 					return (
 						<Link
 							asChild
 							variant="underline"
-							key={data.name}
+							key={thing.name}
 							colorPalette="orange"
 						>
-							<NextLink href={data.href} target="_blank">
-								{data.name}
+							<NextLink href={thing.href} target="_blank">
+								{thing.name}
 							</NextLink>
 						</Link>
 					);
-				}
-				return <Text key={data.name}>{data.name}</Text>;
-			})}
+				}}
+			</For>
 		</HStack>
 	);
 }
 
-type Likes = {
-	name: string;
-	href?: string;
-};
-
-type TextsToLinksProps = {
-	likesArray: Likes[];
-};
-
 export function Intro() {
-	return intros.map((intro) => (
-		<Table.Row key={intro.title}>
-			<Table.Cell color="fg.muted">
-				<HStack>
-					<intro.icon />
-					{intro.title}
-				</HStack>
-			</Table.Cell>
-			<Table.Cell>{intro.description}</Table.Cell>
-		</Table.Row>
-	));
+	return (
+		<For each={intros}>
+			{(intro) => (
+				<Table.Row key={intro.title}>
+					<Table.Cell color="fg.muted">
+						<HStack>
+							<intro.icon />
+							{intro.title}
+						</HStack>
+					</Table.Cell>
+					<Table.Cell>{intro.description}</Table.Cell>
+				</Table.Row>
+			)}
+		</For>
+	);
 }
 
 export function IntroSm() {
-	return intros.map((intro) => (
-		<DataListItem
-			key={intro.title}
-			label={
-				<HStack>
-					<intro.icon />
-					{intro.title}
-				</HStack>
-			}
-			value={intro.description}
-			hideFrom="md"
-		/>
-	));
+	return (
+		<For each={intros}>
+			{(intro) => (
+				<DataListItem
+					key={intro.title}
+					label={
+						<HStack>
+							<intro.icon />
+							{intro.title}
+						</HStack>
+					}
+					value={intro.description}
+					hideFrom="md"
+				/>
+			)}
+		</For>
+	);
 }
