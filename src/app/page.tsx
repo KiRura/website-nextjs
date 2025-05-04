@@ -1,13 +1,11 @@
 import DiscordProf from "@/components/image/discord_prof";
 import { Intro, IntroSm } from "@/components/intro";
 import { Links } from "@/components/links";
-import { links } from "@/components/linksdata";
 import { DataListRoot } from "@/components/ui/data-list";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
-	ClientOnly,
+	Box,
 	Container,
-	For,
+	Flex,
 	Heading,
 	Highlight,
 	SimpleGrid,
@@ -18,40 +16,63 @@ import {
 
 export default function Home() {
 	return (
-		<Container as="main" maxW="8xl">
-			<Stack
-				my={24}
-				direction={{ lgDown: "column", lg: "row" }}
+		<>
+			<Flex
+				pos="absolute"
 				align="center"
 				justify="center"
-				gap={8}
-				w="full"
+				overflow="hidden"
+				zIndex={-1}
+				w="vw"
+				top="28"
+				animation="ease-out"
+				animationDuration="slow"
+				animationName="fade-in"
 			>
 				<Heading
-					size={{
-						smDown: "5xl",
-						sm: "5xl",
-						md: "6xl",
-					}}
-					fontFamily="var(--font-jetbrains-mono), var(--font-noto-sans-jp), monospace"
+					mx="auto"
+					whiteSpace="none"
+					rotate="12deg"
+					fontSize={{ lgDown: "18rem", lg: "20rem", xl: "27rem" }}
+					color="bg.subtle"
+					userSelect="none"
+					lineHeight="unset"
+					fontWeight="extrabold"
+					letterSpacing="wider"
 				>
-					Hello!,
-					<br />
-					<Highlight
-						query={["きるら", "(7)KiRura"]}
-						styles={{ color: "orange.300" }}
-					>
-						きるら, (7)KiRura,
-					</Highlight>
+					KiRura
 				</Heading>
-				<VStack w={{ smDown: "full", sm: "md" }}>
-					<ClientOnly fallback={<Skeleton w="full" h="260px" />}>
+			</Flex>
+			<Container as="main" maxW="8xl" mb="10" fluid centerContent spaceY="6">
+				<Stack
+					direction={{ lgDown: "column", lg: "row" }}
+					align="center"
+					justify="center"
+					gap="8"
+					my="24"
+				>
+					<Heading
+						size={{
+							smDown: "5xl",
+							sm: "5xl",
+							md: "6xl",
+						}}
+						fontFamily="var(--font-jetbrains-mono), var(--font-noto-sans-jp), monospace"
+					>
+						Hello!,
+						<br />
+						<Highlight
+							query={["きるら", "(7)KiRura"]}
+							styles={{ color: "orange.300" }}
+						>
+							きるら, (7)KiRura,
+						</Highlight>
+					</Heading>
+					<VStack w={{ smDown: "full", sm: "md" }}>
 						<DiscordProf />
-					</ClientOnly>
-				</VStack>
-			</Stack>
-			<VStack gap={6} mb={24}>
-				<Heading>他リンク</Heading>
+					</VStack>
+				</Stack>
+				<Heading size="2xl">他リンク</Heading>
 				<SimpleGrid
 					columns={{
 						smDown: 1,
@@ -60,29 +81,23 @@ export default function Home() {
 						lg: 3,
 						xl: 4,
 					}}
+					gap="2"
 					w="full"
-					gap={2}
 				>
-					<ClientOnly
-						fallback={
-							<For each={Array.from({ length: links.length }, (_, i) => i)}>
-								{(num) => <Skeleton key={num.toString()} h="81.6px" />}
-							</For>
-						}
-					>
-						<Links />
-					</ClientOnly>
+					<Links />
 				</SimpleGrid>
-				<Heading>自己紹介</Heading>
-				<Table.Root w="fit" hideBelow="md">
-					<Table.Body>
-						<Intro />
-					</Table.Body>
-				</Table.Root>
-				<DataListRoot hideFrom="md">
-					<IntroSm />
-				</DataListRoot>
-			</VStack>
-		</Container>
+				<Heading size="2xl">自己紹介</Heading>
+				<Box>
+					<Table.Root w="full" hideBelow="md">
+						<Table.Body>
+							<Intro />
+						</Table.Body>
+					</Table.Root>
+					<DataListRoot hideFrom="md">
+						<IntroSm />
+					</DataListRoot>
+				</Box>
+			</Container>
+		</>
 	);
 }
