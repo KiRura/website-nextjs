@@ -22,19 +22,19 @@ export default function Header() {
 			as="header"
 			pos="sticky"
 			zIndex="docked"
-			top={0}
 			bg="bg"
+			top="0px"
 			borderBottomColor="border"
 			borderBottomWidth="1px"
 			borderBottomStyle="solid"
 		>
 			<Container maxW="8xl">
-				<Flex justify="space-between" align="center" py={2}>
-					<HStack separator={<Separator orientation="vertical" h={6} />}>
+				<Flex justify="space-between" align="center" py="2">
+					<HStack separator={<Separator orientation="vertical" h="6" />}>
 						<HStack>
 							<Link asChild fontWeight="bold">
 								<NextLink href="/">
-									<Image asChild boxSize={8} rounded="full">
+									<Image asChild boxSize="8" rounded="full">
 										<NextImage
 											src="/kirura.png"
 											alt="kirura logo"
@@ -46,7 +46,7 @@ export default function Header() {
 								</NextLink>
 							</Link>
 						</HStack>
-						<ClientOnly fallback={<Skeleton w={24} h={10} />}>
+						<ClientOnly fallback={<Skeleton w="28" h="10" />}>
 							<Pages />
 						</ClientOnly>
 					</HStack>

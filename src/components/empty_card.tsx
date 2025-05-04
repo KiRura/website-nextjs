@@ -3,7 +3,7 @@ import { FaXmark } from "react-icons/fa6";
 
 export function EmptyCard() {
 	return (
-		<Card.Root size="sm" h="100%" borderWidth={0} bg="bg.subtle">
+		<Card.Root size="sm" h="full" borderWidth={0} bg="bg.subtle">
 			<Card.Body>
 				<HStack>
 					<Icon color="fg.subtle">

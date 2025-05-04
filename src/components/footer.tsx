@@ -14,7 +14,7 @@ export function Footer() {
 			hideFrom="md"
 		>
 			<Container maxW="8xl">
-				<Flex justify="space-between" align="center" py={2}>
+				<Flex justify="space-between" align="center" py="2">
 					<FooterDrawer />
 					<ColorModeButton />
 				</Flex>
