@@ -1,9 +1,10 @@
 "use client";
 
-import { Card, Flex, For, HStack, Link } from "@chakra-ui/react";
+import { Card, ClientOnly, Flex, For, HStack, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useState } from "react";
 import { links } from "./linksdata";
+import { Skeleton } from "./ui/skeleton";
 import { Tooltip } from "./ui/tooltip";
 
 export function Links() {
@@ -30,45 +31,47 @@ export function Links() {
 									)}
 								</Card.Title>
 							</HStack>
-							<Tooltip
-								content={
-									copied === i
-										? "コピーされました"
-										: errored === i
-											? "コピーできませんでした"
-											: "コピー"
-								}
-								showArrow
-								positioning={{ placement: "top" }}
-								onExitComplete={() => {
-									setCopied(-1);
-									setErrored(-1);
-								}}
-								closeOnPointerDown={false}
-								closeOnClick={false}
-								openDelay={0}
-							>
-								<Link
-									fontStyle="italic"
-									color="fg.subtle"
-									fontSize="sm"
-									fontFamily="mono"
-									overflowWrap="anywhere"
-									onClick={() => {
-										try {
-											navigator.clipboard.writeText(link.accountId);
-											setCopied(i);
-										} catch (_) {
-											setErrored(i);
-										}
+							<ClientOnly fallback={<Skeleton h="1em" w="10" />}>
+								<Tooltip
+									content={
+										copied === i
+											? "コピーされました"
+											: errored === i
+												? "コピーできませんでした"
+												: "コピー"
+									}
+									showArrow
+									positioning={{ placement: "top" }}
+									onExitComplete={() => {
+										setCopied(-1);
+										setErrored(-1);
 									}}
+									closeOnPointerDown={false}
+									closeOnClick={false}
+									openDelay={0}
 								>
-									{link.accountId}
-								</Link>
-							</Tooltip>
+									<Link
+										fontStyle="italic"
+										color="fg.subtle"
+										fontSize="sm"
+										fontFamily="mono"
+										overflowWrap="anywhere"
+										onClick={() => {
+											try {
+												navigator.clipboard.writeText(link.accountId);
+												setCopied(i);
+											} catch (_) {
+												setErrored(i);
+											}
+										}}
+									>
+										{link.accountId}
+									</Link>
+								</Tooltip>
+							</ClientOnly>
 						</Flex>
 					</Card.Header>
-					<Card.Body pt={2}>
+					<Card.Body pt="2">
 						<Card.Description>{link.description}</Card.Description>
 					</Card.Body>
 				</Card.Root>
