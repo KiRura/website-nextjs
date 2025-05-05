@@ -1,5 +1,12 @@
 import { DataListItem } from "@/components/ui/data-list";
-import { For, HStack, Link, Separator, Table, Text } from "@chakra-ui/react";
+import {
+	For,
+	HStack,
+	Link,
+	StackSeparator,
+	Table,
+	Text,
+} from "@chakra-ui/react";
 import NextLink from "next/link";
 import {
 	FaBlog,
@@ -128,10 +135,7 @@ function TextsToLinks({
 	}[];
 }) {
 	return (
-		<HStack
-			wrap="wrap"
-			separator={<Separator orientation="vertical" h="1em" />}
-		>
+		<HStack wrap="wrap" separator={<StackSeparator />}>
 			<For each={things}>
 				{(thing) => {
 					if (!thing.href) return <Text key={thing.name}>{thing.name}</Text>;
