@@ -6,13 +6,16 @@ import {
 	Box,
 	Container,
 	Flex,
+	HStack,
 	Heading,
 	Highlight,
+	Icon,
 	SimpleGrid,
 	Stack,
 	Table,
 	VStack,
 } from "@chakra-ui/react";
+import { FaDatabase, FaLink } from "react-icons/fa6";
 
 export default function Home() {
 	return (
@@ -72,7 +75,12 @@ export default function Home() {
 						<DiscordProf />
 					</VStack>
 				</Stack>
-				<Heading size="2xl">他リンク</Heading>
+				<HStack>
+					<Icon boxSize="6">
+						<FaLink />
+					</Icon>
+					<Heading size="2xl">他リンク</Heading>
+				</HStack>
 				<SimpleGrid
 					columns={{
 						smDown: 1,
@@ -86,7 +94,12 @@ export default function Home() {
 				>
 					<Links />
 				</SimpleGrid>
-				<Heading size="2xl">自己紹介</Heading>
+				<HStack>
+					<Icon boxSize="6">
+						<FaDatabase />
+					</Icon>
+					<Heading size="2xl">自己紹介</Heading>
+				</HStack>
 				<Box>
 					<Table.Root w="full" hideBelow="md">
 						<Table.Body>
