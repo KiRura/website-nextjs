@@ -65,6 +65,9 @@ const disLikes = [
 		name: "Discord",
 	},
 	{
+		name: "Riot Games"
+	},
+	{
 		name: "ニトリ",
 		href: "https://x.com/i/status/1885911562457858488",
 	},
