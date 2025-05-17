@@ -2,6 +2,7 @@ import DiscordProf from "@/components/image/discord_prof";
 import { Intro, IntroSm } from "@/components/intro";
 import { Links } from "@/components/links";
 import { DataListRoot } from "@/components/ui/data-list";
+import { config } from "@/config";
 import {
 	Box,
 	Container,
@@ -28,9 +29,7 @@ export default function Home() {
 				zIndex={-1}
 				w="vw"
 				top="28"
-				animation="ease-out"
-				animationDuration="slow"
-				animationName="fade-in"
+				{...config.inAnimation}
 			>
 				<Heading
 					mx="auto"
@@ -101,7 +100,7 @@ export default function Home() {
 					<Heading size="2xl">自己紹介</Heading>
 				</HStack>
 				<Box>
-					<Table.Root w="full" hideBelow="md">
+					<Table.Root fontSize="md" w="full" hideBelow="md">
 						<Table.Body>
 							<Intro />
 						</Table.Body>

@@ -65,7 +65,7 @@ const disLikes = [
 		name: "Discord",
 	},
 	{
-		name: "Riot Games"
+		name: "Riot Games",
 	},
 	{
 		name: "ニトリ",
@@ -185,8 +185,10 @@ export function IntroSm() {
 			{(intro) => (
 				<DataListItem
 					key={intro.title}
+					fontSize="md"
+					gap="2"
 					label={
-						<HStack>
+						<HStack fontSize="lg">
 							<intro.icon />
 							{intro.title}
 						</HStack>
