@@ -120,7 +120,7 @@ const intros = [
 				things={[
 					{
 						name: "自己紹介の投稿",
-						href: "https://blog.kirura.f5.si/posts/who-is-kirura",
+						href: "https://kirura-blog.vercel.app/posts/u00ox7m9qwi5",
 					},
 				]}
 			/>
