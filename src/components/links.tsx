@@ -15,7 +15,7 @@ export function Links() {
 		<For each={links}>
 			{(link, i) => (
 				<Card.Root key={link.name} size="sm">
-					<Card.Header>
+					<Card.Body gap="1.5">
 						<Flex justify="space-between" align="start">
 							<HStack>
 								<link.icon />
@@ -70,10 +70,15 @@ export function Links() {
 								</Tooltip>
 							</ClientOnly>
 						</Flex>
-					</Card.Header>
-					<Card.Body pt="2">
-						<Card.Description>{link.description}</Card.Description>
+						<Card.Description fontSize="md">
+							{link.description}
+						</Card.Description>
 					</Card.Body>
+					{link.external ? (
+						<Card.Footer justifyContent="end">
+							<link.external />
+						</Card.Footer>
+					) : null}
 				</Card.Root>
 			)}
 		</For>

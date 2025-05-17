@@ -1,3 +1,5 @@
+import { TwitterFooter } from "@/components/links/twitter";
+import type { JSX } from "react";
 import type { IconType } from "react-icons";
 import {
 	FaBlog,
@@ -26,6 +28,7 @@ export type Links = {
 	href?: string;
 	icon: IconType;
 	category: "social" | "game";
+	external?: () => JSX.Element | Promise<JSX.Element>;
 };
 
 export const links: Links[] = [
@@ -60,8 +63,8 @@ export const links: Links[] = [
 		href: "https://twitter.com/i/user/1165939887998025728",
 		icon: FaTwitter,
 		category: "social",
+		external: TwitterFooter,
 	},
-
 	{
 		accountId: "KiRura",
 		name: "GitHub",
