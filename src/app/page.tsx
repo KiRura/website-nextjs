@@ -1,21 +1,21 @@
 import DiscordProf from "@/components/image/discord_prof";
-import { Intro, IntroSm } from "@/components/intro";
+import { Intro } from "@/components/intro";
 import { Links } from "@/components/links";
-import { DataListRoot } from "@/components/ui/data-list";
 import { config } from "@/config";
 import {
-	Box,
 	Container,
+	DataList,
 	Flex,
 	HStack,
 	Heading,
 	Highlight,
 	Icon,
+	Image,
 	SimpleGrid,
 	Stack,
-	Table,
 	VStack,
 } from "@chakra-ui/react";
+import NextImage from "next/image";
 import { FaDatabase, FaLink } from "react-icons/fa6";
 
 export default function Home() {
@@ -82,8 +82,7 @@ export default function Home() {
 				</HStack>
 				<SimpleGrid
 					columns={{
-						smDown: 1,
-						sm: 1,
+						mdDown: 1,
 						md: 2,
 						lg: 3,
 						xl: 4,
@@ -97,18 +96,35 @@ export default function Home() {
 					<Icon boxSize="6">
 						<FaDatabase />
 					</Icon>
-					<Heading size="2xl">自己紹介</Heading>
+					<Heading size="2xl">自己紹介 (改修中)</Heading>
 				</HStack>
-				<Box>
-					<Table.Root fontSize="md" w="full" hideBelow="md">
-						<Table.Body>
-							<Intro />
-						</Table.Body>
-					</Table.Root>
-					<DataListRoot hideFrom="md">
-						<IntroSm />
-					</DataListRoot>
-				</Box>
+				<SimpleGrid
+					columns={{
+						xlDown: 1,
+						xl: 2,
+					}}
+					alignItems="center"
+					gap="4"
+				>
+					<Flex justify="center">
+						<Image asChild rounded="full" boxSize={{ xlDown: "24", xl: "xs" }}>
+							<NextImage
+								src="/kirura.png"
+								alt="kirura icon"
+								height={400}
+								width={400}
+							/>
+						</Image>
+					</Flex>
+
+					<DataList.Root
+						variant="bold"
+						orientation="horizontal"
+						justifyContent="center"
+					>
+						<Intro />
+					</DataList.Root>
+				</SimpleGrid>
 			</Container>
 		</>
 	);

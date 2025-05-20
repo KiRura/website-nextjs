@@ -1,12 +1,4 @@
-import { DataListItem } from "@/components/ui/data-list";
-import {
-	For,
-	HStack,
-	Link,
-	StackSeparator,
-	Table,
-	Text,
-} from "@chakra-ui/react";
+import { DataList, HStack, Link, StackSeparator } from "@chakra-ui/react";
 import NextLink from "next/link";
 import {
 	FaBlog,
@@ -92,6 +84,36 @@ const langs = [
 	},
 ];
 
+function TextsToLinks({
+	things,
+}: {
+	things: {
+		name: string;
+		href?: string;
+	}[];
+}) {
+	return (
+		<HStack wrap="wrap" separator={<StackSeparator />}>
+			{things.map((thing) => {
+				if (!thing.href) return <div key={thing.name}>{thing.name}</div>;
+
+				return (
+					<Link
+						asChild
+						variant="underline"
+						key={thing.name}
+						colorPalette="orange"
+					>
+						<NextLink href={thing.href} target="_blank">
+							{thing.name}
+						</NextLink>
+					</Link>
+				);
+			})}
+		</HStack>
+	);
+}
+
 const intros = [
 	{
 		title: "好き",
@@ -104,14 +126,14 @@ const intros = [
 		icon: FaThumbsDown,
 	},
 	{
-		title: "年齢",
-		description: "17歳 / 高3",
-		icon: FaPerson,
-	},
-	{
 		title: "まあまあできる",
 		description: <TextsToLinks things={langs} />,
 		icon: FaWrench,
+	},
+	{
+		title: "年齢",
+		description: "17歳 / 高3",
+		icon: FaPerson,
 	},
 	{
 		title: "ブログ",
@@ -129,73 +151,15 @@ const intros = [
 	},
 ];
 
-function TextsToLinks({
-	things,
-}: {
-	things: {
-		name: string;
-		href?: string;
-	}[];
-}) {
-	return (
-		<HStack wrap="wrap" separator={<StackSeparator />}>
-			<For each={things}>
-				{(thing) => {
-					if (!thing.href) return <Text key={thing.name}>{thing.name}</Text>;
-
-					return (
-						<Link
-							asChild
-							variant="underline"
-							key={thing.name}
-							colorPalette="orange"
-						>
-							<NextLink href={thing.href} target="_blank">
-								{thing.name}
-							</NextLink>
-						</Link>
-					);
-				}}
-			</For>
-		</HStack>
-	);
-}
-
 export function Intro() {
-	return (
-		<For each={intros}>
-			{(intro) => (
-				<Table.Row key={intro.title}>
-					<Table.Cell color="fg.muted">
-						<HStack>
-							<intro.icon />
-							{intro.title}
-						</HStack>
-					</Table.Cell>
-					<Table.Cell>{intro.description}</Table.Cell>
-				</Table.Row>
-			)}
-		</For>
-	);
-}
-
-export function IntroSm() {
-	return (
-		<For each={intros}>
-			{(intro) => (
-				<DataListItem
-					key={intro.title}
-					fontSize="md"
-					gap="2"
-					label={
-						<HStack fontSize="lg">
-							<intro.icon />
-							{intro.title}
-						</HStack>
-					}
-					value={intro.description}
-				/>
-			)}
-		</For>
-	);
+	return intros.map((intro, i) => (
+		<DataList.Item key={intro.title}>
+			<DataList.ItemLabel>
+				<HStack>
+					<intro.icon /> {intro.title}
+				</HStack>
+			</DataList.ItemLabel>
+			<DataList.ItemValue>{intro.description}</DataList.ItemValue>
+		</DataList.Item>
+	));
 }
