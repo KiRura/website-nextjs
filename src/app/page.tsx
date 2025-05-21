@@ -11,11 +11,14 @@ import {
 	Highlight,
 	Icon,
 	Image,
+	Link,
 	SimpleGrid,
 	Stack,
+	Text,
 	VStack,
 } from "@chakra-ui/react";
 import NextImage from "next/image";
+import NextLink from "next/link";
 import { FaDatabase, FaLink } from "react-icons/fa6";
 
 export default function Home() {
@@ -98,33 +101,68 @@ export default function Home() {
 					</Icon>
 					<Heading size="2xl">自己紹介 (改修中)</Heading>
 				</HStack>
-				<SimpleGrid
-					columns={{
-						xlDown: 1,
-						xl: 2,
-					}}
-					alignItems="center"
-					gap="4"
+				<Flex
+					align="center"
+					w="full"
+					direction={{ lgDown: "column", lg: "row" }}
 				>
-					<Flex justify="center">
-						<Image asChild rounded="full" boxSize={{ xlDown: "24", xl: "xs" }}>
-							<NextImage
-								src="/kirura.png"
-								alt="kirura icon"
-								height={400}
-								width={400}
-							/>
-						</Image>
+					<VStack w={{ lg: "1/2" }}>
+						<Heading>アイコン</Heading>
+						<Flex gap="4">
+							<VStack w="1/2">
+								<Image
+									asChild
+									rounded="full"
+									boxSize={{ xlDown: "32", xl: "48", "2xl": "xs" }}
+								>
+									<NextImage
+										src="/kirura.png"
+										alt="kirura icon"
+										height={400}
+										width={400}
+									/>
+								</Image>
+								<Text fontSize="sm" color="fg.subtle" textAlign="center">
+									ブランド的なもの
+									<br />
+									プロジェクトファイルは紛失した
+								</Text>
+							</VStack>
+							<VStack w="1/2">
+								<Image
+									asChild
+									rounded="full"
+									boxSize={{ xlDown: "32", xl: "48", "2xl": "xs" }}
+								>
+									<NextImage
+										src="/kirura_2.png"
+										alt="kirura icon 2"
+										height={400}
+										width={400}
+									/>
+								</Image>
+								<Text fontSize="sm" color="fg.subtle" textAlign="center">
+									Art:{" "}
+									<Link asChild colorPalette="orange">
+										<NextLink href="https://x.com/meltqc" target="_blank">
+											@meltqc
+										</NextLink>
+									</Link>
+								</Text>
+							</VStack>
+						</Flex>
+					</VStack>
+					<Flex w={{ lg: "1/2" }} justify="center">
+						<DataList.Root
+							variant="bold"
+							orientation="horizontal"
+							justifyContent="center"
+							divideY="1px"
+						>
+							<Intro />
+						</DataList.Root>
 					</Flex>
-
-					<DataList.Root
-						variant="bold"
-						orientation="horizontal"
-						justifyContent="center"
-					>
-						<Intro />
-					</DataList.Root>
-				</SimpleGrid>
+				</Flex>
 			</Container>
 		</>
 	);

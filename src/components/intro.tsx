@@ -1,4 +1,4 @@
-import { DataList, HStack, Link, StackSeparator } from "@chakra-ui/react";
+import { DataList, Flex, HStack, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import {
 	FaBlog,
@@ -93,24 +93,27 @@ function TextsToLinks({
 	}[];
 }) {
 	return (
-		<HStack wrap="wrap" separator={<StackSeparator />}>
+		<Flex direction="column" gap="1">
 			{things.map((thing) => {
-				if (!thing.href) return <div key={thing.name}>{thing.name}</div>;
+				if (!thing.href)
+					return (
+						<Flex key={thing.name} gap="0.5">
+							・<div>{thing.name}</div>
+						</Flex>
+					);
 
 				return (
-					<Link
-						asChild
-						variant="underline"
-						key={thing.name}
-						colorPalette="orange"
-					>
-						<NextLink href={thing.href} target="_blank">
-							{thing.name}
-						</NextLink>
-					</Link>
+					<Flex key={thing.name} gap="0.5">
+						・
+						<Link asChild variant="underline" colorPalette="orange">
+							<NextLink href={thing.href} target="_blank">
+								{thing.name}
+							</NextLink>
+						</Link>
+					</Flex>
 				);
 			})}
-		</HStack>
+		</Flex>
 	);
 }
 
@@ -132,7 +135,15 @@ const intros = [
 	},
 	{
 		title: "年齢",
-		description: "17歳 / 高3",
+		description: (
+			<TextsToLinks
+				things={[
+					{
+						name: "17歳 / 高3",
+					},
+				]}
+			/>
+		),
 		icon: FaPerson,
 	},
 	{
@@ -153,7 +164,7 @@ const intros = [
 
 export function Intro() {
 	return intros.map((intro, i) => (
-		<DataList.Item key={intro.title}>
+		<DataList.Item key={intro.title} pt="4">
 			<DataList.ItemLabel>
 				<HStack>
 					<intro.icon /> {intro.title}
