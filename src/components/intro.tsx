@@ -1,12 +1,6 @@
 import { DataList, Flex, HStack, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
-import {
-	FaBlog,
-	FaPerson,
-	FaThumbsDown,
-	FaThumbsUp,
-	FaWrench,
-} from "react-icons/fa6";
+import { FaBlog, FaPerson, FaThumbsDown, FaThumbsUp } from "react-icons/fa6";
 
 const likes = [
 	{
@@ -63,25 +57,6 @@ const disLikes = [
 	},
 ];
 
-const langs = [
-	{
-		name: "JavaScript / TypeScript (Bun)",
-		href: "https://bun.sh",
-	},
-	{
-		name: "YMM4",
-		href: "https://manjubox.net/ymm4",
-	},
-	{
-		name: "Next.js",
-		href: "https://nextjs.org",
-	},
-	{
-		name: "discord.js",
-		href: "https://discord.js.org",
-	},
-];
-
 function TextsToLinks({
 	things,
 }: {
@@ -125,11 +100,6 @@ const intros = [
 		title: "嫌い",
 		description: <TextsToLinks things={disLikes} />,
 		icon: FaThumbsDown,
-	},
-	{
-		title: "まあまあできる",
-		description: <TextsToLinks things={langs} />,
-		icon: FaWrench,
 	},
 	{
 		title: "年齢",
