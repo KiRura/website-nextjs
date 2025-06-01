@@ -1,15 +1,16 @@
+import { Guilds } from "@/components/guilds";
 import DiscordProf from "@/components/image/discord_prof";
 import { Intro } from "@/components/intro";
 import { Links } from "@/components/links";
+import { MaybeICanUseThese } from "@/components/maybeicanusethese";
+import { Aria } from "@/components/ui/aria";
 import { config } from "@/config";
 import {
 	Container,
 	DataList,
 	Flex,
-	HStack,
 	Heading,
 	Highlight,
-	Icon,
 	Image,
 	Link,
 	SimpleGrid,
@@ -19,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { FaDatabase, FaLink } from "react-icons/fa6";
+import { FaDatabase, FaDiscord, FaLink, FaWrench } from "react-icons/fa6";
 
 export default function Home() {
 	return (
@@ -30,8 +31,8 @@ export default function Home() {
 				justify="center"
 				overflow="hidden"
 				zIndex={-1}
-				w="vw"
-				top="28"
+				w="full"
+				top={{ xlDown: "52", xl: "28" }}
 				{...config.inAnimation}
 			>
 				<Heading
@@ -48,13 +49,13 @@ export default function Home() {
 					KiRura
 				</Heading>
 			</Flex>
-			<Container as="main" maxW="8xl" mb="10" fluid centerContent spaceY="6">
+			<Container as="main" maxW="8xl" mb="10" fluid centerContent spaceY="16">
 				<Stack
 					direction={{ lgDown: "column", lg: "row" }}
 					align="center"
 					justify="center"
 					gap="8"
-					my="24"
+					my="48"
 				>
 					<Heading
 						size={{
@@ -77,92 +78,97 @@ export default function Home() {
 						<DiscordProf />
 					</VStack>
 				</Stack>
-				<HStack>
-					<Icon boxSize="6">
-						<FaLink />
-					</Icon>
-					<Heading size="2xl">他リンク</Heading>
-				</HStack>
-				<SimpleGrid
-					columns={{
-						mdDown: 1,
-						md: 2,
-						lg: 3,
-						xl: 4,
-					}}
-					gap="2"
-					w="full"
-				>
-					<Links />
-				</SimpleGrid>
-				<HStack>
-					<Icon boxSize="6">
-						<FaDatabase />
-					</Icon>
-					<Heading size="2xl">自己紹介 (改修中)</Heading>
-				</HStack>
-				<Flex
-					align="center"
-					w="full"
-					direction={{ lgDown: "column", lg: "row" }}
-				>
-					<VStack w={{ lg: "1/2" }}>
-						<Heading>アイコン</Heading>
-						<Flex gap="4">
-							<VStack w="1/2">
-								<Image
-									asChild
-									rounded="full"
-									boxSize={{ xlDown: "32", xl: "48", "2xl": "xs" }}
-								>
-									<NextImage
-										src="/kirura.png"
-										alt="kirura icon"
-										height={400}
-										width={400}
-									/>
-								</Image>
-								<Text fontSize="sm" color="fg.subtle" textAlign="center">
-									ブランド的なもの
-									<br />
-									プロジェクトファイルは紛失した
-								</Text>
-							</VStack>
-							<VStack w="1/2">
-								<Image
-									asChild
-									rounded="full"
-									boxSize={{ xlDown: "32", xl: "48", "2xl": "xs" }}
-								>
-									<NextImage
-										src="/kirura_2.png"
-										alt="kirura icon 2"
-										height={400}
-										width={400}
-									/>
-								</Image>
-								<Text fontSize="sm" color="fg.subtle" textAlign="center">
-									Art:{" "}
-									<Link asChild colorPalette="orange">
-										<NextLink href="https://x.com/meltqc" target="_blank">
-											@meltqc
-										</NextLink>
-									</Link>
-								</Text>
-							</VStack>
+				<Aria title="Discord鯖" icon={<FaDiscord />}>
+					<Guilds />
+				</Aria>
+				<Aria title="他リンク" icon={<FaLink />}>
+					<SimpleGrid
+						columns={{
+							mdDown: 1,
+							md: 2,
+							lg: 3,
+							xl: 4,
+						}}
+						gap="2"
+						w="full"
+					>
+						<Links />
+					</SimpleGrid>
+				</Aria>
+				<Aria title="自己紹介" icon={<FaDatabase />}>
+					<Flex
+						align="center"
+						w="full"
+						direction={{ lgDown: "column", lg: "row" }}
+					>
+						<VStack w={{ lg: "1/2" }}>
+							<Heading>アイコン</Heading>
+							<Flex gap="4">
+								<VStack w="1/2">
+									<Image
+										asChild
+										rounded="full"
+										boxSize={{ xlDown: "32", xl: "48", "2xl": "xs" }}
+									>
+										<NextImage
+											src="/kirura.png"
+											alt="kirura icon"
+											height={400}
+											width={400}
+										/>
+									</Image>
+									<Text fontSize="sm" color="fg.subtle" textAlign="center">
+										ブランド的なもの
+										<br />
+										プロジェクトファイルは紛失した
+									</Text>
+								</VStack>
+								<VStack w="1/2">
+									<Image
+										asChild
+										rounded="full"
+										boxSize={{ xlDown: "32", xl: "48", "2xl": "xs" }}
+									>
+										<NextImage
+											src="/kirura_2.png"
+											alt="kirura icon 2"
+											height={400}
+											width={400}
+										/>
+									</Image>
+									<Text fontSize="sm" color="fg.subtle" textAlign="center">
+										Art:{" "}
+										<Link asChild colorPalette="orange">
+											<NextLink href="https://x.com/meltqc" target="_blank">
+												@meltqc
+											</NextLink>
+										</Link>
+									</Text>
+								</VStack>
+							</Flex>
+						</VStack>
+						<Flex w={{ lg: "1/2" }} justify="center">
+							<DataList.Root
+								variant="bold"
+								orientation="horizontal"
+								justifyContent="center"
+								divideY="1px"
+							>
+								<Intro />
+							</DataList.Root>
 						</Flex>
-					</VStack>
-					<Flex w={{ lg: "1/2" }} justify="center">
-						<DataList.Root
-							variant="bold"
-							orientation="horizontal"
-							justifyContent="center"
-							divideY="1px"
-						>
-							<Intro />
-						</DataList.Root>
 					</Flex>
-				</Flex>
+				</Aria>
+				<Aria title="まあまあできる (作り途中)" icon={<FaWrench />}>
+					<SimpleGrid
+						columns={{
+							xl: 4,
+						}}
+						gap="4"
+					>
+						<MaybeICanUseThese />
+					</SimpleGrid>
+				</Aria>
 			</Container>
 		</>
 	);
