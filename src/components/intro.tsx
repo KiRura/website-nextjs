@@ -55,6 +55,10 @@ const disLikes = [
 		name: "ニトリ",
 		href: "https://x.com/i/status/1885911562457858488",
 	},
+	{
+		name: "明治エッセルスーパーカップ SNS広報",
+		href: "https://x.com/i/status/1929471107523899612",
+	},
 ];
 
 function TextsToLinks({
