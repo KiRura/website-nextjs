@@ -4,7 +4,7 @@ import { For } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { FaFileSignature } from "react-icons/fa6";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 const pages = [
 	{

@@ -13,8 +13,8 @@ import NextImage from "next/image";
 import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
 import { Pages } from "./pages";
-import { ColorModeButton } from "./ui/color-mode";
-import { Skeleton } from "./ui/skeleton";
+import { ColorModeButton } from "../ui/color-mode";
+import { Skeleton } from "../ui/skeleton";
 
 export default function Header() {
 	return (
@@ -24,9 +24,7 @@ export default function Header() {
 			zIndex="docked"
 			bg="bg"
 			top="0px"
-			borderBottomColor="border"
 			borderBottomWidth="1px"
-			borderBottomStyle="solid"
 		>
 			<Container maxW="8xl">
 				<Flex justify="space-between" align="center" py="2">
