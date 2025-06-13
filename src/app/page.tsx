@@ -109,6 +109,8 @@ export default function Home() {
 										asChild
 										rounded="full"
 										boxSize={{ xlDown: "32", xl: "48", "2xl": "xs" }}
+										borderWidth="2px"
+										borderStyle="solid"
 									>
 										<NextImage
 											src="/kirura.png"
@@ -128,6 +130,8 @@ export default function Home() {
 										asChild
 										rounded="full"
 										boxSize={{ xlDown: "32", xl: "48", "2xl": "xs" }}
+										borderWidth="2px"
+										borderStyle="solid"
 									>
 										<NextImage
 											src="/kirura_2.png"
