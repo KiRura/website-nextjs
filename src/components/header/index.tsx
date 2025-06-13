@@ -12,9 +12,9 @@ import {
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
-import { Pages } from "./pages";
 import { ColorModeButton } from "../ui/color-mode";
 import { Skeleton } from "../ui/skeleton";
+import { Pages } from "./pages";
 
 export default function Header() {
 	return (

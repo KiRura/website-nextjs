@@ -3,7 +3,7 @@
 import { Drawer, IconButton, Portal, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa6";
-import { Pages } from "./pages";
+import { Pages } from "./header/pages";
 import { CloseButton } from "./ui/close-button";
 
 export function FooterDrawer() {
