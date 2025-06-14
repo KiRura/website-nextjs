@@ -1,15 +1,5 @@
-import {
-	Box,
-	HStack,
-	Heading,
-	Icon,
-	Separator,
-	StackSeparator,
-	VStack,
-} from "@chakra-ui/react";
+import { HStack, Heading, Icon, Separator, VStack } from "@chakra-ui/react";
 import type { JSX } from "react";
-import type { IconType } from "react-icons";
-import { FaDatabase } from "react-icons/fa6";
 
 export function Aria({
 	title,
