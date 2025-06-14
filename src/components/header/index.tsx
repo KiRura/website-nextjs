@@ -12,9 +12,9 @@ import {
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
-import { ColorModeButton } from "../ui/color-mode";
 import { Skeleton } from "../ui/skeleton";
 import { Pages } from "./pages";
+import { Settings } from "./settings";
 
 export default function Header() {
 	return (
@@ -49,7 +49,7 @@ export default function Header() {
 						</ClientOnly>
 					</HStack>
 					<HStack>
-						<IconButton variant="ghost" asChild>
+						<IconButton variant="outline" asChild>
 							<NextLink
 								href="https://github.com/KiRura/website-nextjs"
 								target="_blank"
@@ -57,7 +57,9 @@ export default function Header() {
 								<FaGithub />
 							</NextLink>
 						</IconButton>
-						<ColorModeButton />
+						<ClientOnly fallback={<Skeleton boxSize={10} />}>
+							<Settings />
+						</ClientOnly>
 					</HStack>
 				</Flex>
 			</Container>
