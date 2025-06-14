@@ -31,8 +31,8 @@ export function Theme() {
 	}, []);
 
 	return (
-		<Box spaceY="2">
-			<Group grow attached w="full">
+		<Box spaceY="2" w="full">
+			<Group grow attached>
 				{modes.map((mode) => {
 					return (
 						<Button
@@ -41,6 +41,7 @@ export function Theme() {
 							py="2"
 							variant="outline"
 							colorScheme={mode.value}
+							disabled={!localStorageTheme}
 							{...(colorMode === mode.value
 								? { color: "orange.fg" }
 								: {
