@@ -55,7 +55,7 @@ export default function Home() {
 					align="center"
 					justify="center"
 					gap="8"
-					my="48"
+					my={{ lgDown: "32", lg: "48" }}
 				>
 					<Heading
 						size={{
