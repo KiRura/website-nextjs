@@ -1,8 +1,9 @@
 "use client";
 
+import { Aria } from "@/components/ui/aria";
 import { CloseButton } from "@/components/ui/close-button";
 import { Drawer, IconButton, Portal } from "@chakra-ui/react";
-import { FaGear } from "react-icons/fa6";
+import { FaGear, FaPalette } from "react-icons/fa6";
 import { Theme } from "./theme";
 
 export function Settings() {
@@ -21,7 +22,9 @@ export function Settings() {
 							<Drawer.Title>設定</Drawer.Title>
 						</Drawer.Header>
 						<Drawer.Body>
-							<Theme />
+							<Aria title="明暗" icon={<FaPalette />}>
+								<Theme />
+							</Aria>
 						</Drawer.Body>
 						<Drawer.CloseTrigger asChild>
 							<CloseButton />
