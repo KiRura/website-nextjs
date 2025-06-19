@@ -1,7 +1,5 @@
 "use client";
 
-import { config } from "@/config";
-import { fetcher } from "@/lib/fetcher";
 import {
 	FormatNumber,
 	HStack,
@@ -12,6 +10,8 @@ import {
 } from "@chakra-ui/react";
 import { FaHeart, FaUser, FaUsers } from "react-icons/fa6";
 import useSWR from "swr";
+import { config } from "@/config";
+import { fetcher } from "@/lib/fetcher";
 
 export function TwitterFooter() {
 	const { data, error, isLoading } = useSWR<{

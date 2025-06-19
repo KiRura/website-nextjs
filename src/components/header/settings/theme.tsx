@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { useColorMode } from "@/components/ui/color-mode";
 import { Box, Group, HStack, Switch, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { FaComputer, FaMoon, FaSun } from "react-icons/fa6";
+import { Button } from "@/components/ui/button";
+import { useColorMode } from "@/components/ui/color-mode";
 
 export function Theme() {
 	const [localStorageTheme, setLocalStorageTheme] = useState<string | null>(

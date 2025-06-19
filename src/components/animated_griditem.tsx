@@ -8,9 +8,7 @@ export type ElementWithKey = {
 	children: JSX.Element;
 };
 
-export function AnimatedGridItem(props: {
-	elementArray: ElementWithKey[];
-}) {
+export function AnimatedGridItem(props: { elementArray: ElementWithKey[] }) {
 	const [showedIndex, setShowedIndex] = useState(-1);
 
 	useEffect(() => {

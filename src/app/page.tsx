@@ -1,10 +1,3 @@
-import { Guilds } from "@/components/guilds";
-import DiscordProf from "@/components/image/discord_prof";
-import { Intro } from "@/components/intro";
-import { Links } from "@/components/links";
-import { MaybeICanUseThese } from "@/components/maybeicanusethese";
-import { Aria } from "@/components/ui/aria";
-import { config } from "@/config";
 import {
 	Container,
 	DataList,
@@ -21,6 +14,13 @@ import {
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { FaDatabase, FaDiscord, FaLink, FaWrench } from "react-icons/fa6";
+import { Guilds } from "@/components/guilds";
+import DiscordProf from "@/components/image/discord_prof";
+import { Intro } from "@/components/intro";
+import { Links } from "@/components/links";
+import { MaybeICanUseThese } from "@/components/maybeicanusethese";
+import { Aria } from "@/components/ui/aria";
+import { config } from "@/config";
 
 export default function Home() {
 	return (

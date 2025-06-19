@@ -20,7 +20,7 @@ export const Blockquote = React.forwardRef<HTMLDivElement, BlockquoteProps>(
 				</ChakraBlockquote.Content>
 				{cite && (
 					<ChakraBlockquote.Caption>
-						{showDash ? <>&mdash;</> : null} <cite>{cite}</cite>
+						{showDash ? "&mdash;" : null} <cite>{cite}</cite>
 					</ChakraBlockquote.Caption>
 				)}
 			</ChakraBlockquote.Root>

@@ -1,10 +1,10 @@
-import deps from "@/app/license/licenses.json";
 import { Card, Flex, HStack, Link, Tag, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
+import deps from "@/app/license/licenses.json";
 import { Icons } from "./icons";
 
 const regex =
-	/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+	/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
 
 export function Deps() {
 	return deps.map((dep, _i) => {

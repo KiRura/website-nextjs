@@ -1,11 +1,15 @@
-import { HStack, Heading, Icon, Separator, VStack } from "@chakra-ui/react";
+import { Heading, HStack, Icon, Separator, VStack } from "@chakra-ui/react";
 import type { JSX } from "react";
 
 export function Aria({
 	title,
 	icon,
 	children,
-}: { title: string; icon: JSX.Element; children: JSX.Element }) {
+}: {
+	title: string;
+	icon: JSX.Element;
+	children: JSX.Element;
+}) {
 	return (
 		<VStack w="full" gap="4">
 			<HStack w="full">

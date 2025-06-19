@@ -1,6 +1,3 @@
-import Header from "@/components/header";
-import { Provider } from "@/components/ui/provider";
-import { config } from "@/config";
 import type { Metadata, Viewport } from "next";
 import {
 	Inter,
@@ -9,6 +6,9 @@ import {
 	Noto_Sans_JP,
 } from "next/font/google";
 import type React from "react";
+import Header from "@/components/header";
+import { Provider } from "@/components/ui/provider";
+import { config } from "@/config";
 
 export const metadata: Metadata = {
 	title: { template: "%s - きるら", default: "きるら" },

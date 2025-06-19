@@ -135,7 +135,7 @@ const intros = [
 ];
 
 export function Intro() {
-	return intros.map((intro, i) => (
+	return intros.map((intro, _i) => (
 		<DataList.Item key={intro.title} pt="4">
 			<DataList.ItemLabel>
 				<HStack>

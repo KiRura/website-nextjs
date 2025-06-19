@@ -31,7 +31,7 @@ export function Attachments({
 					/>
 				</Image>
 			) : (
-				// biome-ignore lint/a11y/useMediaCaption: <explanation>
+				// biome-ignore lint/a11y/useMediaCaption: <false>
 				<video src={`/maybeicanusethese/${current.src}`} controls />
 			)}
 			<Pagination.Root

@@ -1,4 +1,3 @@
-import { TwitterFooter } from "@/components/links/twitter";
 import type { JSX } from "react";
 import type { IconType } from "react-icons";
 import {
@@ -20,6 +19,7 @@ import {
 	FaWind,
 	FaYoutube,
 } from "react-icons/fa6";
+import { TwitterFooter } from "@/components/links/twitter";
 
 export type Links = {
 	accountId: string;
