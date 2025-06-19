@@ -1,10 +1,9 @@
 "use client";
 
-import { ClientOnly, Image } from "@chakra-ui/react";
+import { Button, ClientOnly, Image } from "@chakra-ui/react";
 import NextImage from "next/image";
 import { useState } from "react";
 import { FaRotateRight } from "react-icons/fa6";
-import { Button } from "../ui/button";
 import { useColorMode } from "../ui/color-mode";
 import { Skeleton } from "../ui/skeleton";
 
