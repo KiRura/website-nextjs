@@ -1,4 +1,5 @@
 import { defineRecipe } from "@chakra-ui/react";
+import { config } from "@/config";
 
 export const containerRecipe = defineRecipe({
 	className: "chakra-container",
@@ -12,9 +13,7 @@ export const containerRecipe = defineRecipe({
 			md: "6",
 			lg: "8",
 		},
-		animation: "ease-out",
-		animationDuration: "slow",
-		animationName: "fade-in",
+		...config.inAnimation,
 	},
 	variants: {
 		centerContent: {

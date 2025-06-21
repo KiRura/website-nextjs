@@ -8,17 +8,17 @@ import {
 import type React from "react";
 import Header from "@/components/header";
 import { Provider } from "@/components/ui/provider";
-import { config } from "@/config";
 
 export const metadata: Metadata = {
+	metadataBase: new URL("https://kirura.f5.si"),
 	title: { template: "%s - きるら", default: "きるら" },
 	description: "しがない個人サイト with Chakra UI v3",
-	icons: `https://${config.domain}/kirura_rounded.png`,
+	icons: `/kirura_rounded.png`,
 	twitter: {
 		card: "summary",
 	},
 	openGraph: {
-		images: `https://${config.domain}/kirura.png`,
+		images: `/kirura.png`,
 		locale: "ja_JP",
 		type: "website",
 	},
