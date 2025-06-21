@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, ClientOnly, Image } from "@chakra-ui/react";
+import { Button, Image } from "@chakra-ui/react";
 import NextImage from "next/image";
 import { useState } from "react";
 import { FaRotateRight } from "react-icons/fa6";
@@ -29,25 +29,23 @@ export default function DiscordProf() {
 					/>
 				</Image>
 			</Skeleton>
-			<ClientOnly fallback={<Skeleton w="full" h="10" />}>
-				<Button
-					w="full"
-					variant="outline"
-					color="fg.subtle"
-					onClick={() => {
-						setLoading(true);
-						setCount((i) => i + 1);
-						setDisabled(true);
-						setTimeout(() => {
-							setDisabled(false);
-						}, 3 * 1000);
-					}}
-					loading={loading}
-					disabled={disabled}
-				>
-					<FaRotateRight /> リロード
-				</Button>
-			</ClientOnly>
+			<Button
+				w="full"
+				variant="outline"
+				color="fg.subtle"
+				onClick={() => {
+					setLoading(true);
+					setCount((i) => i + 1);
+					setDisabled(true);
+					setTimeout(() => {
+						setDisabled(false);
+					}, 3 * 1000);
+				}}
+				loading={loading}
+				disabled={disabled}
+			>
+				<FaRotateRight /> リロード
+			</Button>
 		</>
 	);
 }

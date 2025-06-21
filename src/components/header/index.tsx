@@ -57,9 +57,7 @@ export default function Header() {
 								<FaGithub />
 							</NextLink>
 						</IconButton>
-						<ClientOnly fallback={<Skeleton boxSize={10} />}>
-							<Settings />
-						</ClientOnly>
+						<Settings />
 					</HStack>
 				</Flex>
 			</Container>
