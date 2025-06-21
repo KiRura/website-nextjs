@@ -1,86 +1,117 @@
 "use client";
 
-import { Card, ClientOnly, Flex, For, HStack, Link } from "@chakra-ui/react";
+import {
+	Box,
+	Card,
+	Flex,
+	HStack,
+	IconButton,
+	Link,
+	LinkBox,
+	LinkOverlay,
+	Text,
+} from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FaCheck, FaCopy, FaXmark } from "react-icons/fa6";
 import { links } from "./linksdata";
-import { Skeleton } from "./ui/skeleton";
-import { Tooltip } from "./ui/tooltip";
 
 export function Links() {
 	const [copied, setCopied] = useState(-1);
 	const [errored, setErrored] = useState(-1);
 
-	return (
-		<For each={links}>
-			{(link, i) => (
-				<Card.Root key={link.name} size="sm">
-					<Card.Body gap="1.5">
-						<Flex justify="space-between" align="start">
-							<HStack>
-								<link.icon />
-								<Card.Title asChild={Boolean(link.href)}>
-									{link.href ? (
-										<Link asChild variant="underline">
-											<NextLink href={link.href} target="_blank">
-												{link.name}
-											</NextLink>
-										</Link>
-									) : (
-										link.name
-									)}
-								</Card.Title>
-							</HStack>
-							<ClientOnly fallback={<Skeleton h="1em" w="10" />}>
-								<Tooltip
-									content={
-										copied === i
-											? "コピーされました"
-											: errored === i
-												? "コピーできませんでした"
-												: "コピー"
-									}
-									showArrow
-									positioning={{ placement: "top" }}
-									onExitComplete={() => {
-										setCopied(-1);
-										setErrored(-1);
-									}}
-									closeOnPointerDown={false}
-									closeOnClick={false}
-									openDelay={0}
-								>
-									<Link
-										fontStyle="italic"
-										color="fg.subtle"
-										fontSize="sm"
-										fontFamily="mono"
-										overflowWrap="anywhere"
-										onClick={() => {
-											try {
-												navigator.clipboard.writeText(link.accountId);
-												setCopied(i);
-											} catch (_) {
-												setErrored(i);
-											}
-										}}
+	useEffect(() => {
+		if (copied !== -1 || errored !== -1) {
+			const timeout = setTimeout(() => {
+				setCopied(-1);
+				setErrored(-1);
+			}, 1500);
+
+			return () => {
+				clearTimeout(timeout);
+			};
+		}
+	}, [copied, errored]);
+
+	return links.map((link, i) => {
+		return (
+			<Card.Root key={link.name} size="sm" h="full">
+				<Flex w="full" h="full">
+					<LinkBox w="full">
+						<Card.Body gap="1.5">
+							<Flex gap="1.5" justify="space-between" align="start">
+								<HStack>
+									<link.icon />
+									<Card.Title
+										asChild={Boolean(link.href)}
+										color={link.href ? "fg" : "fg.muted"}
 									>
-										{link.accountId}
-									</Link>
-								</Tooltip>
-							</ClientOnly>
-						</Flex>
-						<Card.Description fontSize="md">
-							{link.description}
-						</Card.Description>
-					</Card.Body>
-					{link.external ? (
-						<Card.Footer justifyContent="end">
-							<link.external />
-						</Card.Footer>
-					) : null}
-				</Card.Root>
-			)}
-		</For>
-	);
+										{link.href ? (
+											<LinkOverlay asChild>
+												<Link asChild variant="underline">
+													<NextLink href={link.href} target="_blank">
+														{link.name}
+													</NextLink>
+												</Link>
+											</LinkOverlay>
+										) : (
+											link.name
+										)}
+									</Card.Title>
+								</HStack>
+								<Text
+									fontStyle="italic"
+									color="fg.subtle"
+									fontSize="sm"
+									fontFamily="mono"
+									overflowWrap="anywhere"
+									textAlign="right"
+								>
+									{link.accountId}
+								</Text>
+							</Flex>
+							<Card.Description fontSize="md">
+								{link.description}
+							</Card.Description>
+						</Card.Body>
+						{link.external ? (
+							<Card.Footer justifyContent="end">
+								<link.external />
+							</Card.Footer>
+						) : null}
+					</LinkBox>
+					<IconButton
+						h="full"
+						color="fg.muted"
+						rounded="none"
+						variant="ghost"
+						borderLeftColor="border"
+						onClick={() => {
+							try {
+								navigator.clipboard.writeText(link.accountId);
+								setCopied(i);
+							} catch (_) {
+								setErrored(i);
+							}
+						}}
+					>
+						<Box
+							asChild
+							animation="ease-out"
+							animationDuration="slow"
+							animationName="scale-in, fade-in"
+						>
+							{copied === i ? (
+								<FaCheck />
+							) : errored === i ? (
+								<FaXmark />
+							) : (
+								<FaCopy />
+							)}
+						</Box>
+					</IconButton>
+				</Flex>
+			</Card.Root>
+		);
+	});
 }
