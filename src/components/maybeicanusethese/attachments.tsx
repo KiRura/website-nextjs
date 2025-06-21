@@ -1,6 +1,7 @@
 "use client";
 
 import {
+	Box,
 	ButtonGroup,
 	IconButton,
 	Image,
@@ -20,9 +21,9 @@ export function Attachments({
 	const current = attachments[currentIndex - 1];
 
 	return (
-		<VStack w="2/3">
+		<VStack>
 			{current.type === "image" ? (
-				<Image asChild>
+				<Image asChild rounded="md">
 					<NextImage
 						src={`/maybeicanusethese/${current.src}`}
 						alt={current.src}
@@ -31,8 +32,10 @@ export function Attachments({
 					/>
 				</Image>
 			) : (
-				// biome-ignore lint/a11y/useMediaCaption: <false>
-				<video src={`/maybeicanusethese/${current.src}`} controls />
+				<Box asChild rounded="md" maxH="xs" h="full" aspectRatio={16 / 9}>
+					{/** biome-ignore lint/a11y/useMediaCaption: <false> */}
+					<video src={`/maybeicanusethese/${current.src}`} controls />
+				</Box>
 			)}
 			<Pagination.Root
 				count={attachments.length}

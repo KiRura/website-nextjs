@@ -166,9 +166,12 @@ export default function Home() {
 				<Aria title="まあまあできる (作り途中)" icon={<FaWrench />}>
 					<SimpleGrid
 						columns={{
+							mdDown: 1,
+							mdToXl: 2,
 							xl: 4,
 						}}
-						gap="4"
+						gap="2"
+						w="full"
 					>
 						<MaybeICanUseThese />
 					</SimpleGrid>

@@ -1,5 +1,16 @@
-import { Flex, GridItem, Heading, Link, Text } from "@chakra-ui/react";
+import {
+	Accordion,
+	Card,
+	GridItem,
+	Heading,
+	HStack,
+	Link,
+	Span,
+	Text,
+	VStack,
+} from "@chakra-ui/react";
 import NextLink from "next/link";
+import { FaFile } from "react-icons/fa6";
 import { Attachments } from "./attachments";
 
 const langs = [
@@ -50,21 +61,44 @@ const langs = [
 export function MaybeICanUseThese() {
 	return langs.map((lang) => (
 		<GridItem key={lang.name} colSpan={lang.colSpan}>
-			<Flex gap="2.5">
-				<Flex direction="column" gap="1.5" w="1/3">
-					<Heading asChild>
-						<Link colorPalette="orange" variant="underline" asChild>
-							<NextLink href={lang.href} target="_blank">
-								{lang.name}
-							</NextLink>
-						</Link>
-					</Heading>
-					<Text>{lang.description}</Text>
-				</Flex>
-				{lang.attachments ? (
-					<Attachments attachments={lang.attachments} />
-				) : null}
-			</Flex>
+			<Card.Root h="full">
+				<Card.Body gap="5">
+					<VStack align="start">
+						<Heading asChild>
+							<Link colorPalette="orange" variant="underline" asChild>
+								<NextLink href={lang.href} target="_blank">
+									{lang.name}
+								</NextLink>
+							</Link>
+						</Heading>
+						<Text>{lang.description}</Text>
+					</VStack>
+					{lang.attachments && (
+						<Accordion.Root
+							collapsible
+							defaultValue={["attachment"]}
+							variant="enclosed"
+							rounded="md"
+						>
+							<Accordion.Item value="attachment">
+								<Accordion.ItemTrigger>
+									<Span flex="1" color="fg.muted">
+										<HStack>
+											<FaFile /> 画像 / 動画
+										</HStack>
+									</Span>
+									<Accordion.ItemIndicator />
+								</Accordion.ItemTrigger>
+								<Accordion.ItemContent>
+									<Accordion.ItemBody>
+										<Attachments attachments={lang.attachments} />
+									</Accordion.ItemBody>
+								</Accordion.ItemContent>
+							</Accordion.Item>
+						</Accordion.Root>
+					)}
+				</Card.Body>
+			</Card.Root>
 		</GridItem>
 	));
 }
