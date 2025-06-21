@@ -8,7 +8,7 @@ export function Aria({
 }: {
 	title: string;
 	icon: JSX.Element;
-	children: JSX.Element;
+	children: JSX.Element | JSX.Element[];
 }) {
 	return (
 		<VStack w="full" gap="4">
