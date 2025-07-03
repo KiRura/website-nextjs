@@ -40,11 +40,11 @@ export function TwitterFooter() {
 	}>("https://api.fxtwitter.com/7KiRura", fetcher);
 
 	if (isLoading) return <Spinner color="fg.muted" />;
-	if (error) return <Text>取得に失敗しました。</Text>;
-	if (!data) return <Text>これは何</Text>;
+	if (error) return <Text {...config.inAnimation}>取得に失敗しました。</Text>;
+	if (!data) return <Text {...config.inAnimation}>これは何</Text>;
 	if (data.code !== 200)
 		return (
-			<Code>
+			<Code {...config.inAnimation}>
 				{data.code} エラー: {data.message}
 			</Code>
 		);
