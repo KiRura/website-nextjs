@@ -41,10 +41,10 @@ export const links: Links[] = [
 		category: "social",
 	},
 	{
-		accountId: "kirura-blog.vercel.app",
+		accountId: "blog.kirura.f5.si",
 		name: "Blog",
 		description: "ブログ",
-		href: "https://kirura-blog.vercel.app",
+		href: "https://blog.kirura.f5.si",
 		icon: FaBlog,
 		category: "social",
 	},
