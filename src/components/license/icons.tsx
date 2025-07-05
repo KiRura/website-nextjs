@@ -1,4 +1,5 @@
 import type { IconType } from "react-icons";
+import { FaCloudflare } from "react-icons/fa6";
 import {
 	SiChakraui,
 	SiNextdotjs,
@@ -22,4 +23,5 @@ export const Icons: IconsType = {
 	"react-markdown": SiRemark,
 	"remark-gfm": SiRemark,
 	swr: SiSwr,
+	"@opennextjs/cloudflare": FaCloudflare,
 };
