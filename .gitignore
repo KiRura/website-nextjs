@@ -12,6 +12,7 @@
 # next.js
 /.next/
 /out/
+/.open-next/
 
 # production
 /build
@@ -35,3 +36,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 src/app/license/licenses.json
+
+/.wrangler/
+.dev.vars
