@@ -1,11 +1,16 @@
 "use client";
 
-import { Button } from "@chakra-ui/react";
+import { Button, ButtonGroup, type ButtonProps } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
-import { FaFileSignature } from "react-icons/fa6";
+import { FaFileSignature, FaToolbox } from "react-icons/fa6";
 
 const pages = [
+	{
+		name: "Tools",
+		href: "/tools",
+		icon: FaToolbox,
+	},
 	{
 		name: "License",
 		href: "/license",
@@ -13,26 +18,30 @@ const pages = [
 	},
 ];
 
-export function Pages() {
+export function Pages(props: ButtonProps) {
 	const path = usePathname();
 
-	return pages.map((page) => {
-		let isActive = false;
-		if (page.href === path || (page.href !== "/" && path.match(page.href)))
-			isActive = true;
+	return (
+		<ButtonGroup attached>
+			{pages.map((page) => {
+				let active = false;
+				if (page.href === path || (page.href !== "/" && path.match(page.href)))
+					active = true;
 
-		return (
-			<Button
-				key={page.name}
-				variant={isActive ? "subtle" : "outline"}
-				asChild
-				color={isActive ? "fg" : "fg.subtle"}
-			>
-				<NextLink href={page.href}>
-					{page.icon ? <page.icon /> : null}
-					{page.name}
-				</NextLink>
-			</Button>
-		);
-	});
+				return (
+					<Button
+						key={page.href}
+						variant={active ? "solid" : "outline"}
+						asChild
+						{...props}
+					>
+						<NextLink href={page.href}>
+							{page.icon ? <page.icon /> : null}
+							{page.name}
+						</NextLink>
+					</Button>
+				);
+			})}
+		</ButtonGroup>
+	);
 }
