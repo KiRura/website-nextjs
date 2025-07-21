@@ -17,7 +17,7 @@
 		"@chakra-ui/react": "^3.22.0",
 		"@emotion/react": "^11.14.0",
 		"@opennextjs/cloudflare": "^1.5.1",
-		"next": "^15.4.1",
+		"next": "^15.4.2",
 		"next-themes": "^0.4.6",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
@@ -25,13 +25,13 @@
 		"swr": "^2.3.4"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.1.1",
-		"@types/node": "^24.0.14",
+		"@biomejs/biome": "2.1.2",
+		"@types/node": "^24.0.15",
 		"@types/react": "^19.1.8",
 		"@types/react-dom": "^19.1.6",
 		"license-report": "^6.8.0",
 		"typescript": "^5.8.3",
-		"wrangler": "^4.24.4"
+		"wrangler": "^4.25.0"
 	},
 	"trustedDependencies": [
 		"@biomejs/biome",
