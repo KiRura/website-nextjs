@@ -83,11 +83,9 @@ function TextsToLinks({
 					<Flex key={thing.name} gap="0.5">
 						・
 						<Link asChild variant="underline" colorPalette="orange">
-							<div>
-								<NextLink href={thing.href} target="_blank">
-									{thing.name}
-								</NextLink>
-							</div>
+							<NextLink href={thing.href} target="_blank">
+								{thing.name}
+							</NextLink>
 						</Link>
 					</Flex>
 				);
