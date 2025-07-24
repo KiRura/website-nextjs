@@ -6,7 +6,8 @@ import { useEffect, useState } from "react";
 import { config } from "@/config";
 
 export function Herta() {
-	const [playing, setPlaying] = useState(0);
+	const [playing, setPlaying] = useState(false);
+	const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 	const [kurukuru, setKurukuru] = useState<HTMLAudioElement[]>([]);
 	useEffect(() => {
 		setKurukuru([new Audio("/kuru1.flac"), new Audio("/kuru2.flac")]);
@@ -23,15 +24,19 @@ export function Herta() {
 				maxW={{ smDown: "24", sm: "32" }}
 				w="full"
 				onClick={() => {
-					setPlaying((playing) => playing + 1);
+					if (timeoutId) clearTimeout(timeoutId);
+					setPlaying(true);
 
 					const audio =
 						kurukuru[Math.round(Math.random() * (kurukuru.length - 1))];
 					audio.volume = 0.3;
 					audio.play();
-					audio.addEventListener("ended", () => {
-						setPlaying((playing) => (playing <= 0 ? 0 : playing - 1));
-					});
+
+					setTimeoutId(
+						setTimeout(() => {
+							setPlaying(false);
+						}, 1000),
+					);
 				}}
 				{...config.inAnimation}
 			>
