@@ -15,6 +15,7 @@ import NextImage from "next/image";
 import NextLink from "next/link";
 import { FaDatabase, FaDiscord, FaLink, FaWrench } from "react-icons/fa6";
 import { Guilds } from "@/components/guilds";
+import { Herta } from "@/components/herta";
 import DiscordProf from "@/components/image/discord_prof";
 import { Intro } from "@/components/intro";
 import { Links } from "@/components/links";
@@ -49,6 +50,7 @@ export default function Home() {
 					KiRura
 				</Heading>
 			</Flex>
+			<Herta />
 			<Container as="main" maxW="8xl" mb="10" fluid centerContent spaceY="16">
 				<Stack
 					direction={{ lgDown: "column", lg: "row" }}
