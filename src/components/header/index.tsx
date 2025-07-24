@@ -5,14 +5,12 @@ import {
 	Flex,
 	HStack,
 	IconButton,
-	Image,
-	Link,
 	Separator,
 } from "@chakra-ui/react";
-import NextImage from "next/image";
 import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
 import { Skeleton } from "../ui/skeleton";
+import { HomeLink } from "./homelink";
 import { Pages } from "./pages";
 import { Settings } from "./settings";
 
@@ -29,21 +27,7 @@ export default function Header() {
 			<Container maxW="8xl">
 				<Flex justify="space-between" align="center" py="2">
 					<HStack separator={<Separator orientation="vertical" h="6" />}>
-						<HStack>
-							<Link asChild fontWeight="bold">
-								<NextLink href="/">
-									<Image asChild boxSize="8" rounded="full">
-										<NextImage
-											src="/kirura.png"
-											alt="kirura logo"
-											width={256}
-											height={256}
-										/>
-									</Image>
-									<Box hideBelow="md">KiRura</Box>
-								</NextLink>
-							</Link>
-						</HStack>
+						<HomeLink />
 						<ClientOnly fallback={<Skeleton w="28" h="10" />}>
 							<Pages />
 						</ClientOnly>
