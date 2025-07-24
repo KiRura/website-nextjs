@@ -17,7 +17,6 @@ export function HomeLink() {
 					asChild
 					fontWeight="bold"
 					onClick={() => {
-						console.log(i);
 						if (timeoutId) clearTimeout(timeoutId);
 						setI((i) => i + 1);
 
