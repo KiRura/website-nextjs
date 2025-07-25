@@ -45,7 +45,7 @@ export function Herta() {
 					alt="kurukuru~ herta"
 					width={500}
 					height={500}
-					quality={100}
+					unoptimized
 				/>
 			</Image>
 		);
