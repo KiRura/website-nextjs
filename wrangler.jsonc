@@ -13,11 +13,5 @@
 			"binding": "WORKER_SELF_REFERENCE",
 			"service": "website-nextjs"
 		}
-	],
-	"kv_namespaces": [
-		{
-			"binding": "NEXT_INC_CACHE_KV",
-			"id": "039346a8566a4a2f96312cfd61cf21cd"
-		}
 	]
 }
