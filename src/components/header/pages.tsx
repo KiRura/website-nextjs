@@ -3,14 +3,9 @@
 import { Button, ButtonGroup, type ButtonProps } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
-import { FaFileSignature, FaToolbox } from "react-icons/fa6";
+import { FaFileSignature } from "react-icons/fa6";
 
 const pages = [
-	{
-		name: "Tools",
-		href: "/tools",
-		icon: FaToolbox,
-	},
 	{
 		name: "License",
 		href: "/license",

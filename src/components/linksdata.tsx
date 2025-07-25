@@ -13,6 +13,7 @@ import {
 	FaInstagram,
 	FaRobot,
 	FaStopwatch,
+	FaToolbox,
 	FaTrain,
 	FaTrash,
 	FaTwitter,
@@ -46,6 +47,14 @@ export const links: Links[] = [
 		description: "ブログ",
 		href: "https://blog.kirura.f5.si",
 		icon: FaBlog,
+		category: "social",
+	},
+	{
+		accountId: "tools.kirura.f5.si",
+		name: "Tools",
+		description: "しがないツール集",
+		href: "https://tools.kirura.f5.si",
+		icon: FaToolbox,
 		category: "social",
 	},
 	{
