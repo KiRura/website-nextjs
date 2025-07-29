@@ -41,7 +41,7 @@ export function Links() {
 					size="sm"
 					h="full"
 					flexDir="row"
-					bg={{ base: "bg.panel", _hover: "bg.muted" }}
+					bg={{ base: "bg.panel", ...(link.href && { _hover: "bg.muted" }) }}
 				>
 					<Box flex={1} overflow="hidden">
 						<Card.Body gap="1.5">
@@ -130,9 +130,11 @@ export function Links() {
 							</Card.Footer>
 						) : null}
 					</Box>
-					<Center color="fg.muted" p="1.5" borderLeftWidth={1}>
-						<FaUpRightFromSquare />
-					</Center>
+					{link.href ? (
+						<Center color="fg.muted" p="1.5" borderLeftWidth={1}>
+							<FaUpRightFromSquare />
+						</Center>
+					) : null}
 				</Card.Root>
 			</LinkBox>
 		);
