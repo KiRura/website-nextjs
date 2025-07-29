@@ -3,9 +3,10 @@
 import {
 	Box,
 	Card,
+	Center,
 	Flex,
 	HStack,
-	IconButton,
+	Icon,
 	Link,
 	LinkBox,
 	LinkOverlay,
@@ -13,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
-import { FaCheck, FaCopy, FaXmark } from "react-icons/fa6";
+import { FaCheck, FaCopy, FaUpRightFromSquare, FaXmark } from "react-icons/fa6";
 import { links } from "./linksdata";
 
 export function Links() {
@@ -35,11 +36,21 @@ export function Links() {
 
 	return links.map((link, i) => {
 		return (
-			<Card.Root key={link.name} size="sm" h="full">
-				<Flex w="full" h="full">
-					<LinkBox w="full">
+			<LinkBox key={link.name}>
+				<Card.Root
+					size="sm"
+					h="full"
+					flexDir="row"
+					bg={{ base: "bg.panel", _hover: "bg.muted" }}
+				>
+					<Box flex={1} overflow="hidden">
 						<Card.Body gap="1.5">
-							<Flex gap="1.5" justify="space-between" align="start">
+							<Flex
+								gap="1.5"
+								justify="space-between"
+								align="start"
+								overflow="hidden"
+							>
 								<HStack>
 									<link.icon />
 									<Card.Title
@@ -47,28 +58,67 @@ export function Links() {
 										color={link.href ? "fg" : "fg.muted"}
 									>
 										{link.href ? (
-											<LinkOverlay asChild>
-												<Link asChild variant="underline">
+											<Link asChild variant="underline">
+												<LinkOverlay asChild>
 													<NextLink href={link.href} target="_blank">
 														{link.name}
 													</NextLink>
-												</Link>
-											</LinkOverlay>
+												</LinkOverlay>
+											</Link>
 										) : (
 											link.name
 										)}
 									</Card.Title>
 								</HStack>
-								<Text
+
+								<Link
 									fontStyle="italic"
-									color="fg.subtle"
+									color={{
+										base: copied === i ? "fg" : "fg.subtle",
+										_hover: "fg",
+									}}
 									fontSize="sm"
 									fontFamily="mono"
-									overflowWrap="anywhere"
 									textAlign="right"
+									variant="underline"
+									onClick={() => {
+										try {
+											navigator.clipboard.writeText(link.accountId);
+											setCopied(i);
+										} catch (_) {
+											setErrored(i);
+										}
+									}}
+									overflow="hidden"
+									zIndex="base"
 								>
-									{link.accountId}
-								</Text>
+									<Text
+										overflow="hidden"
+										textOverflow="ellipsis"
+										whiteSpace="nowrap"
+										pr="0.5"
+									>
+										{link.accountId}
+									</Text>
+									<Box
+										asChild
+										animation="ease-out"
+										animationDuration="slow"
+										animationName="scale-in, fade-in"
+										pos="sticky"
+										right={0}
+									>
+										<Icon>
+											{copied === i ? (
+												<FaCheck />
+											) : errored === i ? (
+												<FaXmark />
+											) : (
+												<FaCopy />
+											)}
+										</Icon>
+									</Box>
+								</Link>
 							</Flex>
 							<Card.Description fontSize="md">
 								{link.description}
@@ -79,39 +129,12 @@ export function Links() {
 								<link.external />
 							</Card.Footer>
 						) : null}
-					</LinkBox>
-					<IconButton
-						h="full"
-						color="fg.muted"
-						rounded="none"
-						variant="ghost"
-						borderLeftColor="border"
-						onClick={() => {
-							try {
-								navigator.clipboard.writeText(link.accountId);
-								setCopied(i);
-							} catch (_) {
-								setErrored(i);
-							}
-						}}
-					>
-						<Box
-							asChild
-							animation="ease-out"
-							animationDuration="slow"
-							animationName="scale-in, fade-in"
-						>
-							{copied === i ? (
-								<FaCheck />
-							) : errored === i ? (
-								<FaXmark />
-							) : (
-								<FaCopy />
-							)}
-						</Box>
-					</IconButton>
-				</Flex>
-			</Card.Root>
+					</Box>
+					<Center color="fg.muted" p="1.5" borderLeftWidth={1}>
+						<FaUpRightFromSquare />
+					</Center>
+				</Card.Root>
+			</LinkBox>
 		);
 	});
 }
