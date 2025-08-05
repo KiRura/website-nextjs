@@ -1,19 +1,11 @@
 "use client";
 
-import {
-	Box,
-	Card,
-	ClientOnly,
-	HStack,
-	Image,
-	Skeleton,
-} from "@chakra-ui/react";
+import { Accordion, Button, Card, HStack, Image, Span } from "@chakra-ui/react";
 import NextImage from "next/image";
-import { useColorMode } from "./ui/color-mode";
+import NextLink from "next/link";
+import { FaUpRightFromSquare } from "react-icons/fa6";
 
 export function Guilds() {
-	const { colorMode } = useColorMode();
-
 	return (
 		<Card.Root maxW="lg">
 			<Card.Body spaceY="3">
@@ -31,19 +23,33 @@ export function Guilds() {
 				<Card.Description fontSize="md">
 					GitHubのコミット通知とかTwitch配信の通知とかたまにTwitterに載せる程でもないお知らせが来たりとかする
 				</Card.Description>
+				<Accordion.Root variant="enclosed" collapsible>
+					<Accordion.Item value="a">
+						<Accordion.ItemTrigger>
+							<Span flex="1">チャンネル一覧</Span>
+							<Accordion.ItemIndicator />
+						</Accordion.ItemTrigger>
+						<Accordion.ItemContent>
+							<Accordion.ItemBody display="flex" justifyContent="center">
+								<Image asChild rounded="xs">
+									<NextImage
+										src="/discord.png"
+										alt="Discordサーバーのチャンネル一覧"
+										width={301}
+										height={632}
+									/>
+								</Image>
+							</Accordion.ItemBody>
+						</Accordion.ItemContent>
+					</Accordion.Item>
+				</Accordion.Root>
 			</Card.Body>
-			<Card.Footer justifyContent="center">
-				<ClientOnly fallback={<Skeleton w="100%" h="300px" />}>
-					<Box rounded="5px" w="full" overflow="hidden">
-						<iframe
-							title="discord embed"
-							src={`https://discord.com/widget?id=1280092185286541333&theme=${colorMode}`}
-							width="100%"
-							height="300"
-							sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-						/>
-					</Box>
-				</ClientOnly>
+			<Card.Footer justifyContent="end">
+				<Button asChild>
+					<NextLink href="/discord" target="_blank">
+						招待リンク <FaUpRightFromSquare />
+					</NextLink>
+				</Button>
 			</Card.Footer>
 		</Card.Root>
 	);
