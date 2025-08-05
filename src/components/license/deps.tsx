@@ -9,9 +9,9 @@ import {
 	Text,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
+import { FaUpRightFromSquare } from "react-icons/fa6";
 import deps from "@/app/license/licenses.json";
 import { Icons } from "./icons";
-import { FaUpRightFromSquare } from "react-icons/fa6";
 
 const regex =
 	/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
