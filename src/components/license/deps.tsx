@@ -1,7 +1,17 @@
-import { Card, Flex, HStack, Link, Tag, Text } from "@chakra-ui/react";
+import {
+	Card,
+	Flex,
+	HStack,
+	Icon,
+	Link,
+	LinkOverlay,
+	Tag,
+	Text,
+} from "@chakra-ui/react";
 import NextLink from "next/link";
 import deps from "@/app/license/licenses.json";
 import { Icons } from "./icons";
+import { FaUpRightFromSquare } from "react-icons/fa6";
 
 const regex =
 	/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
@@ -12,17 +22,22 @@ export function Deps() {
 		const DepIcon = Icons[dep.name];
 
 		return (
-			<Card.Root key={dep.name} size="sm" h="full">
+			<Card.Root key={dep.name} size="sm" h="full" bg={{ _hover: "bg.muted" }}>
 				<Card.Header>
 					<Flex align="start" justify="space-between">
 						<HStack>
 							<DepIcon />
 							<Card.Title asChild>
-								<Link asChild variant="underline">
-									<NextLink href={link} target="_blank">
-										{dep.name}
-									</NextLink>
-								</Link>
+								<LinkOverlay asChild>
+									<Link asChild variant="underline">
+										<NextLink href={link} target="_blank">
+											{dep.name}{" "}
+											<Icon boxSize="0.7em">
+												<FaUpRightFromSquare />
+											</Icon>
+										</NextLink>
+									</Link>
+								</LinkOverlay>
 							</Card.Title>
 						</HStack>
 						<Text
