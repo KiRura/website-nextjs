@@ -1,4 +1,6 @@
 import {
+	Box,
+	ClientOnly,
 	Container,
 	DataList,
 	Flex,
@@ -16,7 +18,6 @@ import NextLink from "next/link";
 import { FaDatabase, FaDiscord, FaLink, FaWrench } from "react-icons/fa6";
 import { Guilds } from "@/components/guilds";
 import { Herta } from "@/components/herta";
-import DiscordProf from "@/components/image/discord_prof";
 import { Intro } from "@/components/intro";
 import { Links } from "@/components/links";
 import { MaybeICanUseThese } from "@/components/maybeicanusethese";
@@ -76,9 +77,6 @@ export default function Home() {
 							きるら, (7)KiRura,
 						</Highlight>
 					</Heading>
-					<VStack w={{ smDown: "full", sm: "md" }}>
-						<DiscordProf />
-					</VStack>
 				</Stack>
 				<Aria title="Discord鯖" icon={<FaDiscord />}>
 					<Guilds />
@@ -179,6 +177,15 @@ export default function Home() {
 					</SimpleGrid>
 				</Aria>
 			</Container>
+			<Box borderTopWidth={1}>
+				<Container pt="8" pb="28" centerContent>
+					<ClientOnly>
+						<Image
+							src={`https://count.getloli.com/@KiRura?name=website${process.env.NODE_ENV === "development" ? "-dev" : ""}&darkmode=auto`}
+						/>
+					</ClientOnly>
+				</Container>
+			</Box>
 		</>
 	);
 }

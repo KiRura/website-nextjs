@@ -1,6 +1,5 @@
 import {
 	Box,
-	ClientOnly,
 	Container,
 	Flex,
 	HStack,
@@ -9,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
-import { Skeleton } from "../ui/skeleton";
 import { HomeLink } from "./homelink";
 import { Pages } from "./pages";
 import { Settings } from "./settings";
@@ -28,9 +26,7 @@ export default function Header() {
 				<Flex justify="space-between" align="center" py="2">
 					<HStack separator={<Separator orientation="vertical" h="6" />}>
 						<HomeLink />
-						<ClientOnly fallback={<Skeleton w="28" h="10" />}>
-							<Pages />
-						</ClientOnly>
+						<Pages />
 					</HStack>
 					<HStack>
 						<IconButton variant="outline" asChild>
