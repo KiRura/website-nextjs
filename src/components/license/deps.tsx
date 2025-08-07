@@ -18,7 +18,10 @@ const regex =
 
 export function Deps() {
 	return deps.map((dep, _i) => {
-		const link = (dep.link.match(regex) || [dep.link])[0];
+		const link = (dep.link.match(regex) || [dep.link])[0].replace(
+			"git+ssh://",
+			"https://",
+		);
 		const DepIcon = Icons[dep.name];
 
 		return (
