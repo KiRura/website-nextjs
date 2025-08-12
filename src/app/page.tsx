@@ -66,7 +66,7 @@ export default function Home() {
 							sm: "5xl",
 							md: "6xl",
 						}}
-						fontFamily="var(--font-jetbrains-mono), var(--font-noto-sans-jp), monospace"
+						fontFamily="var(--font-monaspace-neon), var(--font-noto-sans-jp), monospace"
 					>
 						Hello!,
 						<br />
