@@ -184,6 +184,9 @@ export default function Home() {
 							src={`https://count.getloli.com/@KiRura?name=website${process.env.NODE_ENV === "development" ? "-dev" : ""}&darkmode=auto`}
 						/>
 					</ClientOnly>
+					<Text color="bg">
+						ヘッダーにある左上のアイコンを連打するとサプライズがあるよ！
+					</Text>
 				</Container>
 			</Box>
 		</>
