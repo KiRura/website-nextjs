@@ -55,7 +55,7 @@ export default function Home() {
 					KiRura
 				</Heading>
 			</Flex>
-			<Herta />
+
 			<Container as="main" pb="10" spaceY="16">
 				<Flex
 					align="center"
@@ -186,9 +186,13 @@ export default function Home() {
 							src={`https://count.getloli.com/@KiRura?name=website${process.env.NODE_ENV === "development" ? "-dev" : ""}&darkmode=auto`}
 						/>
 					</ClientOnly>
-					<Text color="bg">
+					<Text color="bg" hideBelow="sm">
 						ヘッダーにある左上のアイコンを連打するとサプライズがあるよ！
 					</Text>
+					<Text color="bg" hideFrom="sm">
+						メニューにあるKiRuraを連打するとサプライズがあるよ！
+					</Text>
+					<Herta />
 				</Container>
 			</Box>
 		</>

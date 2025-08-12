@@ -17,11 +17,13 @@ export function Herta() {
 		return (
 			<Image
 				asChild
-				pos="fixed"
-				zIndex="overlay"
+				pos={{ smDown: "absolute", sm: "fixed" }}
+				zIndex={{ sm: "overlay" }}
 				bottom={0}
-				right={0}
-				maxW={{ smDown: "24", sm: "32" }}
+				left={{ smDown: "50%" }}
+				ml={{ smDown: "-10" }}
+				right={{ sm: "0" }}
+				maxW={{ smDown: "20", sm: "32" }}
 				w="full"
 				onClick={() => {
 					if (timeoutId) clearTimeout(timeoutId);

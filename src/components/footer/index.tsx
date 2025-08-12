@@ -1,35 +1,24 @@
-import {
-	Box,
-	Container,
-	Flex,
-	HStack,
-	IconButton,
-	Separator,
-} from "@chakra-ui/react";
+import { Box, Container, Flex, Group, IconButton } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
-import { HomeLink } from "./homelink";
+import { Settings } from "../header/settings";
 import { Pages } from "./pages";
-import { Settings } from "./settings";
 
-export default function Header() {
+export function Footer() {
 	return (
 		<Box
-			as="header"
+			as="footer"
 			pos="sticky"
+			bottom={0}
 			zIndex="docked"
 			bg="bg"
-			top="0px"
-			borderBottomWidth="1px"
-			hideBelow="sm"
+			borderTopWidth={1}
+			hideFrom="sm"
 		>
 			<Container>
 				<Flex justify="space-between" align="center" py="2">
-					<HStack separator={<Separator orientation="vertical" h="6" />}>
-						<HomeLink />
-						<Pages />
-					</HStack>
-					<HStack>
+					<Pages />
+					<Group>
 						<IconButton variant="outline" asChild>
 							<NextLink
 								href="https://github.com/KiRura/website-nextjs"
@@ -39,7 +28,7 @@ export default function Header() {
 							</NextLink>
 						</IconButton>
 						<Settings />
-					</HStack>
+					</Group>
 				</Flex>
 			</Container>
 		</Box>
