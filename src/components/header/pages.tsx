@@ -5,7 +5,7 @@ import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { FaAddressCard, FaFileSignature } from "react-icons/fa6";
 
-const pages = [
+export const pages = [
 	{
 		name: "Profile",
 		href: "/profile",

@@ -27,7 +27,7 @@ export function Deps() {
 		return (
 			<Card.Root key={dep.name} size="sm" h="full" bg={{ _hover: "bg.muted" }}>
 				<Card.Header>
-					<Flex align="start" justify="space-between">
+					<Flex align="start" justify="space-between" gap="2.5">
 						<HStack>
 							<DepIcon />
 							<Card.Title asChild>

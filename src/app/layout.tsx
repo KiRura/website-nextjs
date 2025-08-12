@@ -1,7 +1,9 @@
+import { Box } from "@chakra-ui/react";
 import type { Metadata, Viewport } from "next";
 import { Inter, M_PLUS_1_Code, Noto_Sans_JP } from "next/font/google";
 import localFont from "next/font/local";
 import type React from "react";
+import { Footer } from "@/components/footer";
 import Header from "@/components/header";
 import { Provider } from "@/components/ui/provider";
 
@@ -60,8 +62,11 @@ export default function RootLayout({
 			</head>
 			<body>
 				<Provider>
-					<Header />
-					{children}
+					<Box minH="vh">
+						<Header />
+						{children}
+						<Footer />
+					</Box>
 				</Provider>
 			</body>
 		</html>
