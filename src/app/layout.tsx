@@ -1,10 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import {
-	Inter,
-	JetBrains_Mono,
-	M_PLUS_1_Code,
-	Noto_Sans_JP,
-} from "next/font/google";
+import { Inter, M_PLUS_1_Code, Noto_Sans_JP } from "next/font/google";
+import localFont from "next/font/local";
 import type React from "react";
 import Header from "@/components/header";
 import { Provider } from "@/components/ui/provider";
@@ -43,9 +39,9 @@ const mPlus1Code = M_PLUS_1_Code({
 	variable: "--font-m-plus-1-code",
 	subsets: ["latin"],
 });
-const jetBrainsMono = JetBrains_Mono({
-	variable: "--font-jetbrains-mono",
-	subsets: ["latin"],
+const monaspaceNeon = localFont({
+	src: "../font/MonaspaceNeonVarVF[wght,wdth,slnt].woff2",
+	variable: "--font-monaspace-neon",
 });
 
 export default function RootLayout({
@@ -56,7 +52,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="ja"
-			className={`${inter.variable} ${notoSansJp.variable} ${mPlus1Code.variable} ${jetBrainsMono.variable}`}
+			className={`${inter.variable} ${notoSansJp.variable} ${mPlus1Code.variable} ${monaspaceNeon.variable}`}
 			suppressHydrationWarning
 		>
 			<head>

@@ -9,18 +9,22 @@ import {
 	Image,
 	Link,
 	SimpleGrid,
-	Stack,
 	Text,
 	VStack,
 } from "@chakra-ui/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { FaDatabase, FaDiscord, FaLink, FaWrench } from "react-icons/fa6";
-import { Guilds } from "@/components/guilds";
+import {
+	FaDatabase,
+	FaLink,
+	FaUpRightFromSquare,
+	FaWrench,
+} from "react-icons/fa6";
 import { Herta } from "@/components/herta";
 import { Intro } from "@/components/intro";
 import { Links } from "@/components/links";
 import { MaybeICanUseThese } from "@/components/maybeicanusethese";
+import { TopButtons } from "@/components/top-buttons";
 import { Aria } from "@/components/ui/aria";
 import { config } from "@/config";
 
@@ -52,21 +56,20 @@ export default function Home() {
 				</Heading>
 			</Flex>
 			<Herta />
-			<Container as="main" maxW="8xl" mb="10" fluid centerContent spaceY="16">
-				<Stack
-					direction={{ lgDown: "column", lg: "row" }}
+			<Container as="main" pb="10" spaceY="16">
+				<Flex
 					align="center"
-					justify="center"
-					gap="8"
+					direction="column"
+					gap={{ smDown: "4", sm: "8" }}
 					my={{ lgDown: "32", lg: "48" }}
+					flexWrap={{ smDown: "wrap" }}
 				>
 					<Heading
 						size={{
-							smDown: "5xl",
-							sm: "5xl",
+							mdDown: "5xl",
 							md: "6xl",
 						}}
-						fontFamily="var(--font-jetbrains-mono), var(--font-noto-sans-jp), monospace"
+						fontFamily="var(--font-monaspace-neon), var(--font-noto-sans-jp), monospace"
 					>
 						Hello!,
 						<br />
@@ -77,10 +80,8 @@ export default function Home() {
 							きるら, (7)KiRura,
 						</Highlight>
 					</Heading>
-				</Stack>
-				<Aria title="Discord鯖" icon={<FaDiscord />}>
-					<Guilds />
-				</Aria>
+					<TopButtons />
+				</Flex>
 				<Aria title="他リンク" icon={<FaLink />}>
 					<SimpleGrid
 						columns={{
@@ -145,6 +146,7 @@ export default function Home() {
 										<Link asChild colorPalette="orange">
 											<NextLink href="https://x.com/meltqc" target="_blank">
 												@meltqc
+												<FaUpRightFromSquare />
 											</NextLink>
 										</Link>
 									</Text>
@@ -184,6 +186,9 @@ export default function Home() {
 							src={`https://count.getloli.com/@KiRura?name=website${process.env.NODE_ENV === "development" ? "-dev" : ""}&darkmode=auto`}
 						/>
 					</ClientOnly>
+					<Text color="bg">
+						ヘッダーにある左上のアイコンを連打するとサプライズがあるよ！
+					</Text>
 				</Container>
 			</Box>
 		</>
