@@ -11,7 +11,7 @@ export function HomeLink() {
 	const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
 	return (
-		<Tooltip content="🤔" open={i >= 10} showArrow>
+		<Tooltip content="🤔" open={i >= 10} disabled={i < 10} showArrow>
 			<HStack>
 				<Link
 					asChild
