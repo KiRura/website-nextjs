@@ -22,7 +22,7 @@ export default function Header() {
 			top="0px"
 			borderBottomWidth="1px"
 		>
-			<Container maxW="8xl">
+			<Container>
 				<Flex justify="space-between" align="center" py="2">
 					<HStack separator={<Separator orientation="vertical" h="6" />}>
 						<HomeLink />
