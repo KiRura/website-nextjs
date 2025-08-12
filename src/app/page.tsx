@@ -9,18 +9,17 @@ import {
 	Image,
 	Link,
 	SimpleGrid,
-	Stack,
 	Text,
 	VStack,
 } from "@chakra-ui/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { FaDatabase, FaDiscord, FaLink, FaWrench } from "react-icons/fa6";
-import { Guilds } from "@/components/guilds";
+import { FaDatabase, FaLink, FaWrench } from "react-icons/fa6";
 import { Herta } from "@/components/herta";
 import { Intro } from "@/components/intro";
 import { Links } from "@/components/links";
 import { MaybeICanUseThese } from "@/components/maybeicanusethese";
+import { TopButtons } from "@/components/top-buttons";
 import { Aria } from "@/components/ui/aria";
 import { config } from "@/config";
 
@@ -52,13 +51,13 @@ export default function Home() {
 				</Heading>
 			</Flex>
 			<Herta />
-			<Container as="main" maxW="8xl" mb="10" fluid centerContent spaceY="16">
-				<Stack
-					direction={{ lgDown: "column", lg: "row" }}
+			<Container as="main" pb="10" spaceY="16">
+				<Flex
 					align="center"
-					justify="center"
-					gap="8"
+					direction="column"
+					gap={{ smDown: "4", sm: "8" }}
 					my={{ lgDown: "32", lg: "48" }}
+					flexWrap={{ smDown: "wrap" }}
 				>
 					<Heading
 						size={{
@@ -76,10 +75,8 @@ export default function Home() {
 							きるら, (7)KiRura,
 						</Highlight>
 					</Heading>
-				</Stack>
-				<Aria title="Discord鯖" icon={<FaDiscord />}>
-					<Guilds />
-				</Aria>
+					<TopButtons />
+				</Flex>
 				<Aria title="他リンク" icon={<FaLink />}>
 					<SimpleGrid
 						columns={{

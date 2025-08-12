@@ -1,14 +1,12 @@
 import type { JSX } from "react";
 import type { IconType } from "react-icons";
 import {
-	FaBlog,
 	FaBluesky,
 	FaBolt,
 	FaCloudMoon,
 	FaDiscord,
 	FaEnvelope,
 	FaFire,
-	FaGithub,
 	FaGitlab,
 	FaInstagram,
 	FaRobot,
@@ -16,11 +14,8 @@ import {
 	FaToolbox,
 	FaTrain,
 	FaTrash,
-	FaTwitter,
 	FaWind,
-	FaYoutube,
 } from "react-icons/fa6";
-import { TwitterFooter } from "@/components/links/twitter";
 
 export type Links = {
 	accountId: string;
@@ -42,14 +37,6 @@ export const links: Links[] = [
 		category: "social",
 	},
 	{
-		accountId: "blog.kirura.f5.si",
-		name: "Blog",
-		description: "ブログ",
-		href: "https://blog.kirura.f5.si",
-		icon: FaBlog,
-		category: "social",
-	},
-	{
 		accountId: "tools.kirura.f5.si",
 		name: "Tools",
 		description: "しがないツール集",
@@ -58,28 +45,12 @@ export const links: Links[] = [
 		category: "social",
 	},
 	{
-		accountId: "@7KiRura",
-		name: "YouTube",
-		description: "思い付いたものをポンポン上げる",
-		href: "https://www.youtube.com/channel/UCmPBPQzdqk3LhvxpadSdzDA",
-		icon: FaYoutube,
-		category: "social",
-	},
-	{
-		accountId: "@7KiRura",
-		name: "Twitter",
-		description: "ただ思ったことを言い続ける",
-		href: "https://twitter.com/i/user/1165939887998025728",
-		icon: FaTwitter,
-		category: "social",
-		external: TwitterFooter,
-	},
-	{
-		accountId: "KiRura",
-		name: "GitHub",
-		description: "負債",
-		href: "https://github.com/KiRura",
-		icon: FaGithub,
+		accountId: "/discord",
+		name: "Discord Server",
+		description:
+			"GitHubのコミット通知とかTwitch配信の通知とかたまにTwitterに載せる程でもないお知らせが来たりとかする",
+		href: "/discord",
+		icon: FaDiscord,
 		category: "social",
 	},
 	{
