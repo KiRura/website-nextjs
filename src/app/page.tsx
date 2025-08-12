@@ -6,7 +6,6 @@ import {
 	Flex,
 	Heading,
 	Highlight,
-	Icon,
 	Image,
 	Link,
 	SimpleGrid,
