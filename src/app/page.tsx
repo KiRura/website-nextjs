@@ -62,8 +62,7 @@ export default function Home() {
 				>
 					<Heading
 						size={{
-							smDown: "5xl",
-							sm: "5xl",
+							mdDown: "5xl",
 							md: "6xl",
 						}}
 						fontFamily="var(--font-monaspace-neon), var(--font-noto-sans-jp), monospace"

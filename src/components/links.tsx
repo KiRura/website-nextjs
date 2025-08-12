@@ -46,7 +46,7 @@ export function Links() {
 					<Box flex={1} overflow="hidden">
 						<Card.Body gap="1.5">
 							<Flex
-								gap="1.5"
+								gap="2.5"
 								justify="space-between"
 								align="start"
 								overflow="hidden"
@@ -70,7 +70,6 @@ export function Links() {
 										)}
 									</Card.Title>
 								</HStack>
-
 								<Link
 									fontStyle="italic"
 									color={{
