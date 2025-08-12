@@ -6,6 +6,7 @@ import {
 	Flex,
 	Heading,
 	Highlight,
+	Icon,
 	Image,
 	Link,
 	SimpleGrid,
@@ -14,7 +15,12 @@ import {
 } from "@chakra-ui/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { FaDatabase, FaLink, FaWrench } from "react-icons/fa6";
+import {
+	FaDatabase,
+	FaLink,
+	FaUpRightFromSquare,
+	FaWrench,
+} from "react-icons/fa6";
 import { Herta } from "@/components/herta";
 import { Intro } from "@/components/intro";
 import { Links } from "@/components/links";
@@ -141,6 +147,7 @@ export default function Home() {
 										<Link asChild colorPalette="orange">
 											<NextLink href="https://x.com/meltqc" target="_blank">
 												@meltqc
+												<FaUpRightFromSquare />
 											</NextLink>
 										</Link>
 									</Text>
