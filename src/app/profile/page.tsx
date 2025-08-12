@@ -48,7 +48,7 @@ export default function Page() {
 							<Card.Root size="sm" h="fit" bg={{ _hover: "bg.muted" }} w="fit">
 								<Card.Header>
 									<LinkOverlay asChild>
-										<Link fontWeight="bold" asChild>
+										<Link fontWeight="bold" color="blue.fg" asChild>
 											<NextLink href="https://x.com/7KiRura" target="_blank">
 												Twitterのステータス
 												<FaUpRightFromSquare />
