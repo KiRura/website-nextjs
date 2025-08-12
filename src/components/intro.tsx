@@ -1,6 +1,12 @@
-import { DataList, Flex, HStack, Link } from "@chakra-ui/react";
+import { DataList, Flex, HStack, Icon, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { FaBlog, FaPerson, FaThumbsDown, FaThumbsUp } from "react-icons/fa6";
+import {
+	FaBlog,
+	FaPerson,
+	FaThumbsDown,
+	FaThumbsUp,
+	FaUpRightFromSquare,
+} from "react-icons/fa6";
 
 const likes = [
 	{
@@ -85,6 +91,9 @@ function TextsToLinks({
 						<Link asChild variant="underline" colorPalette="orange">
 							<NextLink href={thing.href} target="_blank">
 								{thing.name}
+								<Icon boxSize="0.7em">
+									<FaUpRightFromSquare />
+								</Icon>
 							</NextLink>
 						</Link>
 					</Flex>
