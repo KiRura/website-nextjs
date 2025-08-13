@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
 	return (
-		<Container as="main" py="4" spaceY="8">
+		<Container py="4" spaceY="8">
 			<Aria title="依存関係" icon={<FaFileImport />}>
 				<SimpleGrid
 					columns={{

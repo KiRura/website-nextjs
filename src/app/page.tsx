@@ -56,7 +56,7 @@ export default function Home() {
 				</Heading>
 			</Flex>
 
-			<Container as="main" pb="10" spaceY="16">
+			<Container pb="10" spaceY="16">
 				<Flex
 					align="center"
 					direction="column"
