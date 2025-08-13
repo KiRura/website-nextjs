@@ -64,9 +64,9 @@ export default function RootLayout({
 				<Provider>
 					<Box minH="vh">
 						<Header />
-						{children}
-						<Footer />
+						<main>{children}</main>
 					</Box>
+					<Footer />
 				</Provider>
 			</body>
 		</html>
