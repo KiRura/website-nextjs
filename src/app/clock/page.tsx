@@ -1,16 +1,13 @@
 "use client";
 import {
-	AbsoluteCenter,
-	Code,
 	Container,
+	DataList,
+	Flex,
 	Heading,
 	ProgressCircle,
-	Text,
-	VStack,
-	Wrap,
-	WrapItem,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import Loading from "../loading";
 
 type Progresses = {
 	year: number;
@@ -22,6 +19,7 @@ type Progresses = {
 	second: number;
 };
 
+// GPT-4o君に頑張って貰った関数
 function calculateProgresses(date: Date): Progresses {
 	const startOfYear = new Date(date.getFullYear(), 0, 1);
 	const startOfNextYear = new Date(date.getFullYear() + 1, 0, 1);
@@ -85,19 +83,20 @@ function calculateProgresses(date: Date): Progresses {
 		100;
 
 	return {
-		year: Math.floor(yearProgress),
-		month: Math.floor(monthProgress),
-		week: Math.floor(weekProgress),
-		day: Math.floor(dayProgress),
-		hour: Math.floor(hourProgress),
-		minute: Math.floor(minuteProgress),
-		second: Math.floor(secondProgress),
+		year: yearProgress,
+		month: monthProgress,
+		week: weekProgress,
+		day: dayProgress,
+		hour: hourProgress,
+		minute: minuteProgress,
+		second: secondProgress,
 	};
 }
 
+const colors = ["purple", "blue", "teal", "green", "yellow", "orange", "red"];
+
 export default function Page() {
 	const [mounted, setMounted] = useState(false);
-	const [now, setNow] = useState(new Date());
 	const [progresses, setProgresses] = useState<Progresses>(
 		calculateProgresses(new Date()),
 	);
@@ -105,19 +104,17 @@ export default function Page() {
 	useEffect(() => {
 		setMounted(true);
 		const interval = setInterval(() => {
-			const current = new Date();
-			setNow(current);
-			setProgresses(calculateProgresses(current));
-		});
+			setProgresses(calculateProgresses(new Date()));
+		}, 1);
 		return () => clearInterval(interval);
 	}, []);
 
-	if (!mounted) return null;
+	if (!mounted) return <Loading />;
 
 	const progressData = [
 		{ label: "days / a year", value: progresses.year },
 		{ label: "days / a month", value: progresses.month },
-		{ label: "days / a week", value: progresses.week },
+		{ label: "days / this week", value: progresses.week },
 		{ label: "hours / a day", value: progresses.day },
 		{ label: "minutes / an hour", value: progresses.hour },
 		{ label: "seconds / a minute", value: progresses.minute },
@@ -125,29 +122,49 @@ export default function Page() {
 	];
 
 	return (
-		<Container as="main" maxW="8xl">
-			<VStack justify="center" align="center" my={32} gap={8}>
-				<Heading>coming soon...</Heading>
-				<Wrap gap={6} w="fit">
-					{progressData.map((data) => (
-						<WrapItem key={data.label}>
-							<VStack>
-								<ProgressCircle.Root size="xl" value={data.value}>
-									<ProgressCircle.Circle>
-										<ProgressCircle.Track />
-										<ProgressCircle.Range />
-									</ProgressCircle.Circle>
-									<AbsoluteCenter>
-										<ProgressCircle.ValueText />
-									</AbsoluteCenter>
-								</ProgressCircle.Root>
-								<Text>{data.label}</Text>
-							</VStack>
-						</WrapItem>
+		<Container centerContent alignItems="end" py="4">
+			<Heading>huh</Heading>
+			{progressData.map((data, i) => (
+				<ProgressCircle.Root
+					key={data.label}
+					value={data.value}
+					pos="absolute"
+					left={new Array(5).fill(0).map((_, ii) => `${i * ((ii + 1) * 8)}px`)}
+					top={new Array(5)
+						.fill(0)
+						.map((_, ii) => `${i * ((ii + 1) * 8) + 40}px`)}
+					colorPalette={colors[i]}
+				>
+					<ProgressCircle.Circle
+						css={{
+							"--size": new Array(5)
+								.fill(0)
+								.map(
+									(_, ii) =>
+										`${(progressData.length - i) * (ii + 1) * 16 + 64}px`,
+								),
+							"--thickness": ["3px", "5px", "7px", "9px", "11px"],
+						}}
+					>
+						<ProgressCircle.Track stroke="bg.muted" />
+						<ProgressCircle.Range transition="none" />
+					</ProgressCircle.Circle>
+				</ProgressCircle.Root>
+			))}
+			<Flex maxW="1/2" w="full" justify="center">
+				<DataList.Root divideY="1px" borderWidth={1} rounded="md" pb="5" px="4">
+					{progressData.map((progress, i) => (
+						<DataList.Item key={progress.label} pt="4">
+							<DataList.ItemLabel color={`${colors[i]}.fg`}>
+								{progress.label}
+							</DataList.ItemLabel>
+							<DataList.ItemValue fontFamily="mono">
+								{`${progress.value < 10 ? "0" : ""}${progress.value.toFixed(6)}%`}
+							</DataList.ItemValue>
+						</DataList.Item>
 					))}
-				</Wrap>
-				<Code size="lg">{now.getTime()}</Code>
-			</VStack>
+				</DataList.Root>
+			</Flex>
 		</Container>
 	);
 }
