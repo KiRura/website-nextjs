@@ -2,7 +2,7 @@ import { Container, EmptyState, Spinner } from "@chakra-ui/react";
 
 export default function Loading() {
 	return (
-		<Container as="main" maxW="8xl" minH="vh">
+		<Container>
 			<EmptyState.Root>
 				<EmptyState.Content>
 					<EmptyState.Indicator>
