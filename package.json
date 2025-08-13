@@ -31,7 +31,7 @@
 		"@types/react-dom": "^19.1.7",
 		"license-report": "^6.8.0",
 		"typescript": "^5.9.2",
-		"wrangler": "^4.28.1"
+		"wrangler": "^4.29.0"
 	},
 	"trustedDependencies": [
 		"@biomejs/biome",
