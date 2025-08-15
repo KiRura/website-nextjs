@@ -11,9 +11,10 @@ export function Footer() {
 			pos="sticky"
 			bottom={0}
 			zIndex="docked"
-			bg="bg"
 			borderTopWidth={1}
 			hideFrom="sm"
+			bg="bg/90"
+			backdropFilter="blur(8px)"
 		>
 			<Container>
 				<Flex justify="space-between" align="center" py="2">

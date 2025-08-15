@@ -18,10 +18,11 @@ export default function Header() {
 			as="header"
 			pos="sticky"
 			zIndex="docked"
-			bg="bg"
+			bg="bg/90"
 			top="0px"
 			borderBottomWidth="1px"
 			hideBelow="sm"
+			backdropFilter="blur(8px)"
 		>
 			<Container>
 				<Flex justify="space-between" align="center" py="2">
