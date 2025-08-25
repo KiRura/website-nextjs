@@ -1,16 +1,16 @@
 "use client";
 
-import { Heading, Link, VStack } from "@chakra-ui/react";
+import {
+	Accordion,
+	Heading,
+	Link,
+	Span,
+	Switch,
+	VStack,
+} from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useState } from "react";
 import { FaUpRightFromSquare } from "react-icons/fa6";
-import {
-	AccordionItem,
-	AccordionItemContent,
-	AccordionItemTrigger,
-	AccordionRoot,
-} from "../ui/accordion";
-import { Switch } from "../ui/switch";
 
 type ChildLicenses = {
 	name: string;
@@ -134,12 +134,16 @@ export default function Licenses() {
 	const [multiple, setMultiple] = useState(true);
 	return (
 		<>
-			<Switch
+			<Switch.Root
 				checked={multiple}
 				onCheckedChange={(e) => setMultiple(e.checked)}
 			>
-				複数展開
-			</Switch>
+				<Switch.HiddenInput />
+				<Switch.Control>
+					<Switch.Thumb />
+				</Switch.Control>
+				<Switch.Label>複数展開</Switch.Label>
+			</Switch.Root>
 			{licenses.map((license) => (
 				<VStack key={license.title} w="full" maxW="3xl">
 					{license.href ? (
@@ -158,20 +162,22 @@ export default function Licenses() {
 					) : (
 						<Heading>{license.title}</Heading>
 					)}
-					<AccordionRoot multiple={multiple} collapsible variant="enclosed">
+					<Accordion.Root multiple={multiple} collapsible variant="enclosed">
 						{license.license.map((data, i) => (
-							<AccordionItem key={data.name} value={`${i}`}>
-								<AccordionItemTrigger>{data.name}</AccordionItemTrigger>
-								<AccordionItemContent
+							<Accordion.Item key={data.name} value={`${i}`}>
+								<Accordion.ItemTrigger>
+									<Span flex={1}>{data.name}</Span> <Accordion.ItemIndicator />
+								</Accordion.ItemTrigger>
+								<Accordion.ItemContent
 									whiteSpace="pre-wrap"
 									fontFamily="mono"
 									fontSize="sm"
 								>
-									{data.content}
-								</AccordionItemContent>
-							</AccordionItem>
+									<Accordion.ItemBody>{data.content}</Accordion.ItemBody>
+								</Accordion.ItemContent>
+							</Accordion.Item>
 						))}
-					</AccordionRoot>
+					</Accordion.Root>
 				</VStack>
 			))}
 		</>

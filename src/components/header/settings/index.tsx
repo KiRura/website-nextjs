@@ -1,9 +1,8 @@
 "use client";
 
-import { Drawer, IconButton, Portal } from "@chakra-ui/react";
+import { CloseButton, Drawer, IconButton, Portal } from "@chakra-ui/react";
 import { FaGear, FaPalette } from "react-icons/fa6";
 import { Aria } from "@/components/ui/aria";
-import { CloseButton } from "@/components/ui/close-button";
 import { Theme } from "./theme";
 
 export function Settings() {

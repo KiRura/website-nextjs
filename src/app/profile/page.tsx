@@ -4,6 +4,7 @@ import {
 	Box,
 	Card,
 	Container,
+	EmptyState,
 	Flex,
 	IconButton,
 	Image,
@@ -17,7 +18,6 @@ import NextLink from "next/link";
 import { useState } from "react";
 import { FaInfo, FaUpRightFromSquare } from "react-icons/fa6";
 import { TwitterFooter } from "@/components/links/twitter";
-import { EmptyState } from "@/components/ui/empty-state";
 import { Tooltip } from "@/components/ui/tooltip";
 import { Images } from "./images";
 
@@ -76,11 +76,19 @@ export default function Page() {
 					</Flex>
 				</VStack>
 			) : (
-				<EmptyState
-					icon={<Spinner />}
-					title="ちょっと待ってね"
-					description="テーマを画像に適用中..."
-				/>
+				<EmptyState.Root>
+					<EmptyState.Content>
+						<EmptyState.Indicator>
+							<Spinner />
+						</EmptyState.Indicator>
+						<VStack textAlign="center">
+							<EmptyState.Title>ちょっと待ってね</EmptyState.Title>
+							<EmptyState.Description>
+								テーマを画像に適用中...
+							</EmptyState.Description>
+						</VStack>
+					</EmptyState.Content>
+				</EmptyState.Root>
 			)}
 		</Container>
 	);

@@ -3,14 +3,19 @@
 import { Button, ButtonGroup, type ButtonProps } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
-import { FaAddressCard, FaClock, FaFileSignature } from "react-icons/fa6";
+import { FaBlog, FaClock, FaFileSignature } from "react-icons/fa6";
 
 export const pages = [
 	{
-		name: "Profile",
-		href: "/profile",
-		icon: FaAddressCard,
+		name: "Blog (WIP)",
+		href: "/posts",
+		icon: FaBlog,
 	},
+	// {
+	// 	name: "Profile",
+	// 	href: "/profile",
+	// 	icon: FaAddressCard,
+	// },
 	{
 		name: "Clock",
 		href: "/clock",
