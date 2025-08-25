@@ -2,9 +2,9 @@
 import {
 	Container,
 	DataList,
-	Flex,
-	Heading,
 	ProgressCircle,
+	Switch,
+	VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Loading from "../loading";
@@ -101,13 +101,23 @@ export default function Page() {
 		calculateProgresses(new Date()),
 	);
 
+	const [prevSecond, setPrevSecond] = useState(new Date().getSeconds());
+	const [enableMilli, setEnableMilli] = useState(false);
+
 	useEffect(() => {
 		setMounted(true);
-		const interval = setInterval(() => {
-			setProgresses(calculateProgresses(new Date()));
-		}, 1);
-		return () => clearInterval(interval);
 	}, []);
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			if (enableMilli || prevSecond !== new Date().getSeconds())
+				setProgresses(calculateProgresses(new Date()));
+
+			if (!enableMilli) setPrevSecond(new Date().getSeconds());
+		}, 1);
+
+		return () => clearInterval(interval);
+	}, [enableMilli, prevSecond]);
 
 	if (!mounted) return <Loading />;
 
@@ -118,12 +128,12 @@ export default function Page() {
 		{ label: "hours / a day", value: progresses.day },
 		{ label: "minutes / an hour", value: progresses.hour },
 		{ label: "seconds / a minute", value: progresses.minute },
-		{ label: "milli / a second", value: progresses.second },
 	];
+	if (enableMilli)
+		progressData.push({ label: "milli / a second", value: progresses.second });
 
 	return (
 		<Container centerContent alignItems="end" py="4">
-			<Heading>huh</Heading>
 			{progressData.map((data, i) => (
 				<ProgressCircle.Root
 					key={data.label}
@@ -151,7 +161,15 @@ export default function Page() {
 					</ProgressCircle.Circle>
 				</ProgressCircle.Root>
 			))}
-			<Flex maxW="1/2" w="full" justify="center">
+			<VStack maxW="1/2" w="full">
+				<Switch.Root
+					checked={enableMilli}
+					onCheckedChange={(e) => setEnableMilli(e.checked)}
+				>
+					<Switch.HiddenInput />
+					<Switch.Control />
+					<Switch.Label>ミリ秒</Switch.Label>
+				</Switch.Root>
 				<DataList.Root divideY="1px" borderWidth={1} rounded="md" pb="5" px="4">
 					{progressData.map((progress, i) => (
 						<DataList.Item key={progress.label} pt="4">
@@ -164,7 +182,7 @@ export default function Page() {
 						</DataList.Item>
 					))}
 				</DataList.Root>
-			</Flex>
+			</VStack>
 		</Container>
 	);
 }

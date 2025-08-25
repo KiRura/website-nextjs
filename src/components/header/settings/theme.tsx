@@ -80,6 +80,8 @@ export function Theme() {
 				borderWidth="1px"
 				p="3"
 				rounded="sm"
+				cursor="switch"
+				bg={{ _hover: "bg.muted" }}
 			>
 				<Switch.HiddenInput />
 				<Switch.Label>

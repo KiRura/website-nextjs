@@ -1,10 +1,15 @@
 "use client";
 
-import { Drawer, IconButton, Portal, VStack } from "@chakra-ui/react";
+import {
+	CloseButton,
+	Drawer,
+	IconButton,
+	Portal,
+	VStack,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa6";
 import { Pages } from "./header/pages";
-import { CloseButton } from "./ui/close-button";
 
 export function FooterDrawer() {
 	const [open, setOpen] = useState(false);
