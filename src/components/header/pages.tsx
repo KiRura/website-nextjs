@@ -3,7 +3,12 @@
 import { Button, ButtonGroup, type ButtonProps } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
-import { FaBlog, FaClock, FaFileSignature } from "react-icons/fa6";
+import {
+	FaAddressCard,
+	FaBlog,
+	FaClock,
+	FaFileSignature,
+} from "react-icons/fa6";
 
 export const pages = [
 	{
@@ -11,11 +16,11 @@ export const pages = [
 		href: "/posts",
 		icon: FaBlog,
 	},
-	// {
-	// 	name: "Profile",
-	// 	href: "/profile",
-	// 	icon: FaAddressCard,
-	// },
+	{
+		name: "Profile",
+		href: "/profile",
+		icon: FaAddressCard,
+	},
 	{
 		name: "Clock",
 		href: "/clock",
@@ -32,8 +37,8 @@ export function Pages(props: ButtonProps) {
 	const path = usePathname();
 
 	return (
-		<ButtonGroup attached>
-			{pages.map((page) => {
+		<ButtonGroup attached overflow="auto" rounded="sm" borderWidth={1}>
+			{pages.map((page, i) => {
 				let active = false;
 				if (page.href === path || (page.href !== "/" && path.match(page.href)))
 					active = true;
@@ -42,6 +47,8 @@ export function Pages(props: ButtonProps) {
 					<Button
 						key={page.href}
 						variant={active ? "solid" : "outline"}
+						borderY={0}
+						border={i === 0 || i === pages.length - 1 ? 0 : undefined}
 						asChild
 						{...props}
 					>

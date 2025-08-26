@@ -1,7 +1,6 @@
 import {
 	Box,
 	Container,
-	Flex,
 	HStack,
 	IconButton,
 	Separator,
@@ -25,12 +24,15 @@ export default function Header() {
 			backdropFilter="blur(8px)"
 		>
 			<Container>
-				<Flex justify="space-between" align="center" py="2">
-					<HStack separator={<Separator orientation="vertical" h="6" />}>
+				<HStack justify="space-between" py="2">
+					<HStack
+						overflow="auto"
+						separator={<Separator orientation="vertical" h="6" />}
+					>
 						<HomeLink />
 						<Pages />
 					</HStack>
-					<HStack>
+					<HStack pos="sticky" right={0}>
 						<IconButton variant="outline" asChild>
 							<NextLink
 								href="https://github.com/KiRura/website-nextjs"
@@ -41,7 +43,7 @@ export default function Header() {
 						</IconButton>
 						<Settings />
 					</HStack>
-				</Flex>
+				</HStack>
 			</Container>
 		</Box>
 	);
