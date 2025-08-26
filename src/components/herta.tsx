@@ -50,6 +50,7 @@ export function Herta() {
 					width={500}
 					height={500}
 					unoptimized
+					priority
 				/>
 			</Image>
 		);

@@ -1,7 +1,5 @@
 import {
-	Bleed,
 	Box,
-	Center,
 	ClientOnly,
 	Container,
 	DataList,
@@ -30,75 +28,12 @@ import { Links } from "@/components/links";
 import { MaybeICanUseThese } from "@/components/maybeicanusethese";
 import { TopButtons } from "@/components/top-buttons";
 import { Aria } from "@/components/ui/aria";
-import { config } from "@/config";
-
-function KiRura() {
-	return (
-		<Text
-			whiteSpace="none"
-			fontSize="16rem"
-			userSelect="none"
-			fontWeight="extrabold"
-			letterSpacing={12}
-			h="fit"
-			lineHeight={0.95}
-			color={Math.random() < 0.07 ? "orange.subtle" : "bg.subtle"}
-		>
-			KiRura
-		</Text>
-	);
-}
+import { ZZZ } from "@/components/zzz";
 
 export default function Home() {
-	const kiRuras = Array.from({ length: 500 })
-		.fill(0)
-		.map(() => KiRura);
-	const doubleKiRuras = [];
-	for (let i = 0; i < kiRuras.length; i++) {
-		doubleKiRuras.push(kiRuras.splice(i, 4));
-	}
-
-	const splitKiRuras = [];
-	for (let i = 0; i < doubleKiRuras.length; i++) {
-		splitKiRuras.push(doubleKiRuras.splice(i, 5));
-	}
-
 	return (
 		<>
-			<Center
-				zIndex={0}
-				pos="absolute"
-				overflow="hidden"
-				maxW="full"
-				maxH="75rem"
-				{...config.inAnimation}
-			>
-				<Bleed
-					pos="absolute"
-					w="full"
-					h="full"
-					bgGradient="to-b"
-					gradientFrom="transparent"
-					gradientTo="bg"
-					zIndex={1}
-				/>
-				<Box rotate="-45deg">
-					{splitKiRuras.map((kiRuras, i) => (
-						<HStack key={Math.random()}>
-							{kiRuras.map((doubleKiRuras) => (
-								<HStack
-									key={Math.random()}
-									animation={`slide-to-${i % 2 === 0 ? "left" : "right"}-full 200s linear infinite`}
-								>
-									{doubleKiRuras.map((KiRura) => (
-										<KiRura key={Math.random()} />
-									))}
-								</HStack>
-							))}
-						</HStack>
-					))}
-				</Box>
-			</Center>
+			<ZZZ />
 			<Container pb="10" spaceY="16">
 				<Flex
 					align="center"
