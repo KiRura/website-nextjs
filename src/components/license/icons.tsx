@@ -1,5 +1,5 @@
 import type { IconType } from "react-icons";
-import { FaCloudflare } from "react-icons/fa6";
+import { FaClock, FaCloudflare, FaDatabase } from "react-icons/fa6";
 import {
 	SiChakraui,
 	SiNextdotjs,
@@ -24,4 +24,6 @@ export const Icons: IconsType = {
 	"remark-gfm": SiRemark,
 	swr: SiSwr,
 	"@opennextjs/cloudflare": FaCloudflare,
+	"date-fns": FaClock,
+	"microcms-js-sdk": FaDatabase,
 };
