@@ -6,7 +6,7 @@ import { getList } from "@/lib/microcms";
 
 export default async function Page() {
 	const posts = await getList();
-	const latest = posts.contents[3];
+	const latest = posts.contents[0];
 	posts.contents.shift();
 
 	return (
