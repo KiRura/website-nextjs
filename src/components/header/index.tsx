@@ -3,7 +3,7 @@ import {
 	Container,
 	HStack,
 	IconButton,
-	Separator,
+	StackSeparator,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
@@ -25,10 +25,7 @@ export default function Header() {
 		>
 			<Container>
 				<HStack justify="space-between" py="2">
-					<HStack
-						overflow="auto"
-						separator={<Separator orientation="vertical" h="6" />}
-					>
+					<HStack overflow="hidden" separator={<StackSeparator />}>
 						<HomeLink />
 						<Pages />
 					</HStack>

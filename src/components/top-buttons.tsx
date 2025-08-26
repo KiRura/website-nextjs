@@ -42,7 +42,7 @@ export function TopButtons() {
 	));
 
 	return (
-		<Card.Root size="sm" bg="bg">
+		<Card.Root size="sm" bg="bg" shadow="lg">
 			<Card.Header alignItems="center">
 				<Card.Title color="fg.subtle">
 					<FaUpRightFromSquare />

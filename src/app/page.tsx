@@ -1,14 +1,18 @@
 import {
+	Bleed,
 	Box,
+	Center,
 	ClientOnly,
 	Container,
 	DataList,
 	Flex,
 	Heading,
 	Highlight,
+	HStack,
 	Image,
 	Link,
 	SimpleGrid,
+	Stack,
 	Text,
 	VStack,
 } from "@chakra-ui/react";
@@ -28,40 +32,80 @@ import { TopButtons } from "@/components/top-buttons";
 import { Aria } from "@/components/ui/aria";
 import { config } from "@/config";
 
+function KiRura() {
+	return (
+		<Text
+			whiteSpace="none"
+			fontSize="16rem"
+			userSelect="none"
+			fontWeight="extrabold"
+			letterSpacing={12}
+			h="fit"
+			lineHeight={0.95}
+			color={Math.random() < 0.07 ? "orange.subtle" : "bg.subtle"}
+		>
+			KiRura
+		</Text>
+	);
+}
+
 export default function Home() {
+	const kiRuras = Array.from({ length: 500 })
+		.fill(0)
+		.map(() => KiRura);
+	const doubleKiRuras = [];
+	for (let i = 0; i < kiRuras.length; i++) {
+		doubleKiRuras.push(kiRuras.splice(i, 4));
+	}
+
+	const splitKiRuras = [];
+	for (let i = 0; i < doubleKiRuras.length; i++) {
+		splitKiRuras.push(doubleKiRuras.splice(i, 5));
+	}
+
 	return (
 		<>
-			<Flex
+			<Center
+				zIndex={0}
 				pos="absolute"
-				align="center"
-				justify="center"
 				overflow="hidden"
-				zIndex={-1}
-				w="full"
-				top={{ xlDown: "52", xl: "28" }}
+				maxW="full"
+				maxH="75rem"
 				{...config.inAnimation}
 			>
-				<Heading
-					mx="auto"
-					whiteSpace="none"
-					rotate="12deg"
-					fontSize={{ lgDown: "18rem", lg: "20rem", xl: "27rem" }}
-					color="bg.subtle"
-					userSelect="none"
-					lineHeight="unset"
-					fontWeight="extrabold"
-					letterSpacing="wider"
-				>
-					KiRura
-				</Heading>
-			</Flex>
-
+				<Bleed
+					pos="absolute"
+					w="full"
+					h="full"
+					bgGradient="to-b"
+					gradientFrom="transparent"
+					gradientTo="bg"
+					zIndex={1}
+				/>
+				<Box rotate="-45deg">
+					{splitKiRuras.map((kiRuras, i) => (
+						<HStack key={Math.random()}>
+							{kiRuras.map((doubleKiRuras) => (
+								<HStack
+									key={Math.random()}
+									animation={`slide-to-${i % 2 === 0 ? "left" : "right"}-full 200s linear infinite`}
+								>
+									{doubleKiRuras.map((KiRura) => (
+										<KiRura key={Math.random()} />
+									))}
+								</HStack>
+							))}
+						</HStack>
+					))}
+				</Box>
+			</Center>
 			<Container pb="10" spaceY="16">
 				<Flex
 					align="center"
 					direction="column"
 					gap={{ smDown: "4", sm: "8" }}
-					my={{ lgDown: "32", lg: "48" }}
+					pt={{ lgDown: "32", lg: "48" }}
+					pb={{ lgDown: "16", lg: "32" }}
 					flexWrap={{ smDown: "wrap" }}
 				>
 					<Heading
@@ -70,6 +114,7 @@ export default function Home() {
 							md: "6xl",
 						}}
 						fontFamily="var(--font-monaspace-neon), var(--font-noto-sans-jp), monospace"
+						filter="drop-shadow(0px 4px 8px {colors.gray.900/30})"
 					>
 						Hello!,
 						<br />
@@ -91,25 +136,22 @@ export default function Home() {
 							xl: 4,
 						}}
 						gap="2"
-						w="full"
 					>
 						<Links />
 					</SimpleGrid>
 				</Aria>
 				<Aria title="自己紹介" icon={<FaDatabase />}>
-					<Flex
-						align="center"
-						w="full"
-						direction={{ lgDown: "column", lg: "row" }}
-					>
-						<VStack w={{ lg: "1/2" }}>
+					<Stack direction={{ lgDown: "column", lg: "row" }} align="center">
+						<VStack flex={1} maxW={{ lgDown: "md" }} justify="center">
 							<Heading>アイコン</Heading>
-							<Flex gap="4">
-								<VStack w="1/2">
+							<HStack align="start" justify="center">
+								<VStack w="44%">
 									<Image
 										asChild
 										rounded="full"
-										boxSize={{ xlDown: "32", xl: "48", "2xl": "xs" }}
+										aspectRatio="square"
+										w="full"
+										maxW="xs"
 										borderWidth="2px"
 										borderStyle="solid"
 									>
@@ -126,11 +168,10 @@ export default function Home() {
 										プロジェクトファイルは紛失した
 									</Text>
 								</VStack>
-								<VStack w="1/2">
+								<VStack w="44%">
 									<Image
 										asChild
 										rounded="full"
-										boxSize={{ xlDown: "32", xl: "48", "2xl": "xs" }}
 										borderWidth="2px"
 										borderStyle="solid"
 									>
@@ -151,9 +192,9 @@ export default function Home() {
 										</Link>
 									</Text>
 								</VStack>
-							</Flex>
+							</HStack>
 						</VStack>
-						<Flex w={{ lg: "1/2" }} justify="center">
+						<VStack flex={1}>
 							<DataList.Root
 								variant="bold"
 								orientation="horizontal"
@@ -162,8 +203,8 @@ export default function Home() {
 							>
 								<Intro />
 							</DataList.Root>
-						</Flex>
-					</Flex>
+						</VStack>
+					</Stack>
 				</Aria>
 				<Aria title="まあまあできる (作り途中)" icon={<FaWrench />}>
 					<SimpleGrid
@@ -173,7 +214,6 @@ export default function Home() {
 							xl: 4,
 						}}
 						gap="2"
-						w="full"
 					>
 						<MaybeICanUseThese />
 					</SimpleGrid>

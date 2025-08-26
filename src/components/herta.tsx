@@ -26,6 +26,8 @@ export function Herta() {
 				maxW={{ smDown: "20", sm: "32" }}
 				w="full"
 				onClick={() => {
+					window.scrollTo({ top: 0, behavior: "smooth" });
+
 					if (timeoutId) clearTimeout(timeoutId);
 					setPlaying(true);
 

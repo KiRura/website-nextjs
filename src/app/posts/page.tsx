@@ -1,12 +1,40 @@
-import { Container, Text } from "@chakra-ui/react";
+import { Container, Heading, SimpleGrid, Stack } from "@chakra-ui/react";
+import { FaPenNib } from "react-icons/fa6";
+import { PostCard, RecentPostCards } from "@/components/post_card";
+import { Aria } from "@/components/ui/aria";
 import { getList } from "@/lib/microcms";
 
 export default async function Page() {
 	const posts = await getList();
+	const latest = posts.contents[3];
+	posts.contents.shift();
 
 	return (
-		<Container>
-			<Text fontFamily="mono">{JSON.stringify(posts)}</Text>
+		<Container py="12" spaceY="12">
+			<Stack
+				direction={{ smDown: "column", sm: "row" }}
+				gap="8"
+				w="full"
+				justify="center"
+				align="center"
+			>
+				<Heading hideBelow="sm" size={{ mdDown: "6xl", md: "7xl" }}>
+					The
+					<br />
+					Latest
+					<br />
+					Post
+				</Heading>
+				<Heading hideFrom="sm" size="5xl">
+					The Latest Post
+				</Heading>
+				<PostCard post={latest} />
+			</Stack>
+			<Aria title="Recents" icon={<FaPenNib />}>
+				<SimpleGrid columns={[1, 1, 2, 2, 3]} gap="2">
+					<RecentPostCards posts={posts} />
+				</SimpleGrid>
+			</Aria>
 		</Container>
 	);
 }
