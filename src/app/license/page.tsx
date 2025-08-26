@@ -1,4 +1,4 @@
-import { Container, SimpleGrid } from "@chakra-ui/react";
+import { Container, SimpleGrid, VStack } from "@chakra-ui/react";
 import type { Metadata } from "next";
 import { FaFileImport, FaFileSignature } from "react-icons/fa6";
 import Licenses from "@/components/license/licenses";
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 export default function Page() {
 	return (
-		<Container py="4" spaceY="8">
-			<Aria title="依存関係" icon={<FaFileImport />}>
+		<Container py="4" spaceY="8" centerContent>
+			<Aria title="依存関係" icon={<FaFileImport />} w="full">
 				<SimpleGrid
 					columns={{
 						smDown: 1,
@@ -23,13 +23,14 @@ export default function Page() {
 						xl: 4,
 					}}
 					gap="2"
-					w="full"
 				>
 					<Deps />
 				</SimpleGrid>
 			</Aria>
-			<Aria title="ライセンス" icon={<FaFileSignature />}>
-				<Licenses />
+			<Aria title="ライセンス" icon={<FaFileSignature />} w="full" maxW="3xl">
+				<VStack>
+					<Licenses />
+				</VStack>
 			</Aria>
 		</Container>
 	);

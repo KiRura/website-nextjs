@@ -1,5 +1,6 @@
 import {
 	Box,
+	Center,
 	Container,
 	Heading,
 	HStack,
@@ -11,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import NextImage from "next/image";
 import { FaRotateRight } from "react-icons/fa6";
-import { ToLocaleDate } from "@/components/to_locale_date";
+import { ToClientLocaleDate } from "@/components/to_locale_date";
 import { Prose } from "@/components/ui/prose";
 import { getDetail } from "@/lib/microcms";
 
@@ -43,11 +44,16 @@ export default async function Page({
 						bgColor: { base: "bg/65", _dark: "bg/90" },
 					})}
 				>
-					<Box p={["6", "8", "12", "16", "20"]} backdropFilter="blur(8px)">
+					<Center
+						p={["6", "8", "12", "16", "20"]}
+						{...(res.coverImage && {
+							backdropFilter: "blur(8px)",
+						})}
+					>
 						<Heading size={["2xl", "3xl", "4xl", "5xl", "6xl"]}>
 							{res.title}
 						</Heading>
-					</Box>
+					</Center>
 				</Box>
 				<Stack
 					direction={{ mdDown: "column", md: "row" }}
@@ -79,7 +85,7 @@ export default async function Page({
 										きるら
 									</Text>
 									{res.publishedAt ? (
-										<ToLocaleDate
+										<ToClientLocaleDate
 											color="fg.muted"
 											fontSize="sm"
 											date={res.publishedAt}
@@ -101,7 +107,7 @@ export default async function Page({
 							<FaRotateRight />
 							<Text>最終更新</Text>
 						</HStack>
-						<ToLocaleDate fontFamily="mono" date={res.updatedAt} />
+						<ToClientLocaleDate fontFamily="mono" date={res.updatedAt} />
 					</VStack>
 				</Stack>
 			</VStack>

@@ -145,7 +145,7 @@ export default function Licenses() {
 				<Switch.Label>複数展開</Switch.Label>
 			</Switch.Root>
 			{licenses.map((license) => (
-				<VStack key={license.title} w="full" maxW="3xl">
+				<VStack key={license.title} w="full">
 					{license.href ? (
 						<Link
 							fontSize="xl"

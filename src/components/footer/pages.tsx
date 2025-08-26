@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
-import { FaBars, FaXmark } from "react-icons/fa6";
+import { FaBars } from "react-icons/fa6";
 import { HomeLink } from "../header/homelink";
 import { pages } from "../header/pages";
 
@@ -33,8 +33,8 @@ export function Pages() {
 						</Drawer.Header>
 						<Drawer.Body mb="6">
 							<SimpleGrid columns={2} gap="1.5" w="full">
-								{pages
-									.map((page) => {
+								{
+									pages.map((page) => {
 										let active = false;
 										if (
 											page.href === path ||
@@ -56,18 +56,19 @@ export function Pages() {
 											</Drawer.ActionTrigger>
 										);
 									})
-									.concat(
-										<Button
-											key="empty"
-											disabled
-											variant="outline"
-											justifyContent="start"
-											color="fg.subtle"
-										>
-											<FaXmark />
-											Empty
-										</Button>,
-									)}
+									// .concat(
+									// 	<Button
+									// 		key="empty"
+									// 		disabled
+									// 		variant="outline"
+									// 		justifyContent="start"
+									// 		color="fg.subtle"
+									// 	>
+									// 		<FaXmark />
+									// 		Empty
+									// 	</Button>,
+									// )
+								}
 							</SimpleGrid>
 						</Drawer.Body>
 						<Drawer.CloseTrigger asChild>

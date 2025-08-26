@@ -31,7 +31,13 @@ export function HomeLink({ footer }: { footer?: boolean }) {
 						? { href: "/" }
 						: { href: "https://youtu.be/dQw4w9WgXcQ", target: "_blank" })}
 				>
-					<Image asChild boxSize="8" rounded="full">
+					<Image
+						asChild
+						boxSize="8"
+						minW="8"
+						rounded="full"
+						aspectRatio="square"
+					>
 						<NextImage
 							src="/kirura.png"
 							alt="kirura logo"
