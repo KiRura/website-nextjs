@@ -13,8 +13,7 @@ export function Footer() {
 			zIndex="docked"
 			borderTopWidth={1}
 			hideFrom="sm"
-			bg="bg/90"
-			backdropFilter="blur(8px)"
+			bg="bg"
 		>
 			<Container>
 				<Flex justify="space-between" align="center" py="2">

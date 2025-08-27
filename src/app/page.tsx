@@ -62,7 +62,7 @@ export default function Home() {
 					</Heading>
 					<TopButtons />
 				</Flex>
-				<Aria title="他リンク" icon={<FaLink />}>
+				<Aria title="Links" icon={<FaLink />}>
 					<SimpleGrid
 						columns={{
 							mdDown: 1,
@@ -75,7 +75,7 @@ export default function Home() {
 						<Links />
 					</SimpleGrid>
 				</Aria>
-				<Aria title="自己紹介" icon={<FaDatabase />}>
+				<Aria title="Intro" icon={<FaDatabase />}>
 					<Stack direction={{ lgDown: "column", lg: "row" }} align="center">
 						<VStack flex={1} maxW={{ lgDown: "md" }} justify="center">
 							<Heading>アイコン</Heading>

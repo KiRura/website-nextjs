@@ -42,6 +42,7 @@ export function Links() {
 					h="full"
 					flexDir="row"
 					bg={{ base: "bg.panel", ...(link.href && { _hover: "bg.muted" }) }}
+					transition="backgrounds"
 				>
 					<Box flex={1} overflow="hidden">
 						<Card.Body gap="1.5">
@@ -76,6 +77,7 @@ export function Links() {
 										base: copied === i ? "fg" : "fg.subtle",
 										_hover: "fg",
 									}}
+									transition="common"
 									fontSize="sm"
 									fontFamily="mono"
 									textAlign="right"

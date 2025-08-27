@@ -1,4 +1,4 @@
-import { Button, Card, Group, SimpleGrid } from "@chakra-ui/react";
+import { Button, Card, Group, Icon, SimpleGrid } from "@chakra-ui/react";
 import NextLink from "next/link";
 import {
 	FaBlog,
@@ -10,8 +10,8 @@ import {
 
 const buttons = [
 	{
-		name: "Blog",
-		href: "https://blog.kirura.f5.si",
+		name: "Blog (WIP)",
+		href: "/posts",
 		icon: FaBlog,
 	},
 	{
@@ -31,23 +31,26 @@ const buttons = [
 	},
 ];
 
-export function TopButtons() {
-	const ButtonsComponent = buttons.map((data) => (
+const ButtonsComponent = buttons.map((data) => {
+	const external = data.href.startsWith("https://");
+	return (
 		<Button key={data.name} variant="subtle" borderColor="border" asChild>
-			<NextLink href={data.href} target="_blank">
+			<NextLink href={data.href} target={external ? "_blank" : undefined}>
 				<data.icon />
 				{data.name}
+				{external ? (
+					<Icon size="xs" color="fg.subtle">
+						<FaUpRightFromSquare />
+					</Icon>
+				) : null}
 			</NextLink>
 		</Button>
-	));
+	);
+});
 
+export function TopButtons() {
 	return (
-		<Card.Root size="sm" bg="bg" shadow="lg">
-			<Card.Header alignItems="center">
-				<Card.Title color="fg.subtle">
-					<FaUpRightFromSquare />
-				</Card.Title>
-			</Card.Header>
+		<Card.Root flexDir="row" divideX="1px" size="sm" bg="bg" shadow="lg">
 			<Card.Body>
 				<Group attached hideBelow="md">
 					{ButtonsComponent}

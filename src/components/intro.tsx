@@ -88,7 +88,7 @@ function TextsToLinks({
 				return (
 					<Flex key={thing.name} gap="0.5">
 						・
-						<Link asChild variant="underline" colorPalette="orange">
+						<Link asChild colorPalette="orange">
 							<NextLink href={thing.href} target="_blank">
 								{thing.name}
 								<Icon boxSize="0.7em">
@@ -134,7 +134,7 @@ const intros = [
 				things={[
 					{
 						name: "自己紹介の投稿",
-						href: "https://blog.kirura.f5.si/posts/u00ox7m9qwi5",
+						href: "/posts/u00ox7m9qwi5",
 					},
 				]}
 			/>

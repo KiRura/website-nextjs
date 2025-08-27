@@ -1,5 +1,11 @@
 import { Container, EmptyState, VStack } from "@chakra-ui/react";
+import type { Metadata } from "next";
 import { FaXmark } from "react-icons/fa6";
+
+export const metadata: Metadata = {
+	title: "404: 無いものは無い",
+	description: "ここはどこ お前は誰",
+};
 
 export default function NotFound() {
 	return (
