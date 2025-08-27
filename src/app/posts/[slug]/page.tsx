@@ -10,11 +10,35 @@ import {
 	Text,
 	VStack,
 } from "@chakra-ui/react";
+import type { Metadata } from "next";
 import NextImage from "next/image";
+import { notFound } from "next/navigation";
 import { FaRotateRight } from "react-icons/fa6";
 import { ToClientLocaleDate } from "@/components/to_locale_date";
 import { Prose } from "@/components/ui/prose";
 import { getDetail } from "@/lib/microcms";
+
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+	const { slug } = await params;
+	const res = await getDetail(slug).catch(() => notFound());
+
+	return {
+		title: `${res.title} - Blog`,
+		description: res.subtitle,
+		...(res.coverImage && {
+			openGraph: {
+				images: { url: res.coverImage.url, alt: res.coverImage.alt },
+			},
+			twitter: {
+				card: "summary_large_image",
+			},
+		}),
+	};
+}
 
 export default async function Page({
 	params,
@@ -22,7 +46,7 @@ export default async function Page({
 	params: Promise<{ slug: string }>;
 }) {
 	const { slug } = await params;
-	const res = await getDetail(slug);
+	const res = await getDetail(slug).catch(() => notFound());
 
 	return (
 		<Container maxW="3xl" centerContent py="12" spaceY="12">

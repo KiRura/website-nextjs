@@ -1,8 +1,14 @@
 import { Container, Heading, SimpleGrid, Stack } from "@chakra-ui/react";
+import type { Metadata } from "next";
 import { FaPenNib } from "react-icons/fa6";
 import { PostCard, RecentPostCards } from "@/components/post_card";
 import { Aria } from "@/components/ui/aria";
 import { getList } from "@/lib/microcms";
+
+export const metadata: Metadata = {
+	title: "Blog",
+	description: "しがないブログ",
+};
 
 export default async function Page() {
 	const posts = await getList();

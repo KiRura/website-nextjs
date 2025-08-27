@@ -25,7 +25,13 @@ export function Deps() {
 		const DepIcon = Icons[dep.name];
 
 		return (
-			<Card.Root key={dep.name} size="sm" h="full" bg={{ _hover: "bg.muted" }}>
+			<Card.Root
+				key={dep.name}
+				size="sm"
+				h="full"
+				bg={{ _hover: "bg.muted" }}
+				transition="backgrounds"
+			>
 				<Card.Header>
 					<Flex align="start" justify="space-between" gap="2.5">
 						<HStack>

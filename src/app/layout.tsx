@@ -8,9 +8,9 @@ import Header from "@/components/header";
 import { Provider } from "@/components/ui/provider";
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://kirura.f5.si"),
+	metadataBase: new URL("https://www.kirura.f5.si"),
 	title: { template: "%s - きるら", default: "きるら" },
-	description: "しがない個人サイト with Chakra UI v3",
+	description: "しがない個人サイト",
 	icons: `/kirura_rounded.png`,
 	twitter: {
 		card: "summary",
@@ -19,9 +19,7 @@ export const metadata: Metadata = {
 		images: `/kirura.png`,
 		locale: "ja_JP",
 		type: "website",
-	},
-	authors: {
-		name: "きるら",
+		siteName: "きるら",
 	},
 };
 
