@@ -42,6 +42,7 @@ export function Herta() {
 						}, 1000),
 					);
 				}}
+				cursor="button"
 				{...config.inAnimation}
 			>
 				<NextImage

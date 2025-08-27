@@ -82,6 +82,7 @@ export function Theme() {
 				rounded="sm"
 				cursor="switch"
 				bg={{ _hover: "bg.muted" }}
+				transition="backgrounds"
 			>
 				<Switch.HiddenInput />
 				<Switch.Label>
