@@ -30,7 +30,6 @@ function KiRura() {
 
 export function ZZZ() {
 	const breakpoint = useBreakpointValue(["xs", "sm", "md"]);
-	console.log(breakpoint);
 	const kiRuras = Array.from({
 		length: breakpoint === "xs" ? 20 : breakpoint === "sm" ? 130 : 500,
 	})
