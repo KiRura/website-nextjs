@@ -16,7 +16,7 @@ import { notFound } from "next/navigation";
 import { FaRotateRight } from "react-icons/fa6";
 import { ToClientLocaleDate } from "@/components/to_locale_date";
 import { Prose } from "@/components/ui/prose";
-import { getDetail } from "@/lib/microcms";
+import { getDetail, getListIds } from "@/lib/microcms";
 
 export async function generateMetadata({
 	params,
@@ -27,16 +27,24 @@ export async function generateMetadata({
 	const res = await getDetail(slug).catch(() => notFound());
 
 	return {
-		title: `${res.title} - Blog`,
+		title: { absolute: res.title },
 		description: res.subtitle,
-		...(res.coverImage && {
-			openGraph: {
-				images: { url: res.coverImage.url, alt: res.coverImage.alt },
-			},
-			twitter: {
-				card: "summary_large_image",
-			},
-		}),
+		...(res.coverImage
+			? {
+					openGraph: {
+						images: { url: res.coverImage.url, alt: res.coverImage.alt },
+						siteName: "Blog - きるら",
+					},
+					twitter: {
+						card: "summary_large_image",
+					},
+				}
+			: {
+					openGraph: {
+						images: "/kirura_rounded.png",
+						siteName: "Blog - きるら",
+					},
+				}),
 	};
 }
 
@@ -143,6 +151,8 @@ export default async function Page({
 	);
 }
 
-export function generateStaticParams() {
-	return [];
+export async function generateStaticParams() {
+	const posts = await getListIds();
+
+	return posts.map((id) => ({ slug: id }));
 }

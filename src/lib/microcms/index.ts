@@ -24,6 +24,13 @@ export async function getList() {
 	});
 }
 
+export async function getListIds() {
+	return await cmsClient.getAllContentIds({
+		endpoint: "blog",
+		customRequestInit,
+	});
+}
+
 export async function getDetail(id: string) {
 	return await cmsClient.getListDetail<PostType>({
 		endpoint: "blog",
