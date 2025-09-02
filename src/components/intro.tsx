@@ -89,7 +89,7 @@ function TextsToLinks({
 					<Flex key={thing.name} gap="0.5">
 						・
 						<Link asChild colorPalette="orange">
-							<NextLink href={thing.href} target="_blank">
+							<NextLink href={thing.href} target="_blank" prefetch={false}>
 								{thing.name}
 								<Icon boxSize="0.7em">
 									<FaUpRightFromSquare />

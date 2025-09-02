@@ -61,7 +61,11 @@ export function Links() {
 										{link.href ? (
 											<Link asChild variant="underline">
 												<LinkOverlay asChild>
-													<NextLink href={link.href} target="_blank">
+													<NextLink
+														href={link.href}
+														target="_blank"
+														prefetch={false}
+													>
 														{link.name}
 													</NextLink>
 												</LinkOverlay>

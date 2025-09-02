@@ -66,7 +66,7 @@ export function MaybeICanUseThese() {
 					<VStack align="start">
 						<Heading asChild>
 							<Link colorPalette="orange" variant="underline" asChild>
-								<NextLink href={lang.href} target="_blank">
+								<NextLink href={lang.href} target="_blank" prefetch={false}>
 									{lang.name}
 								</NextLink>
 							</Link>
