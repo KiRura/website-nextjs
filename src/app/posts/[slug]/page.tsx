@@ -35,16 +35,15 @@ export async function generateMetadata({
 						images: { url: res.coverImage.url, alt: res.coverImage.alt },
 						siteName: "Blog - きるら",
 					},
-					twitter: {
-						card: "summary_large_image",
-					},
 				}
 			: {
 					openGraph: {
-						images: "/kirura_rounded.png",
 						siteName: "Blog - きるら",
 					},
 				}),
+		twitter: {
+			card: "summary_large_image",
+		},
 	};
 }
 
