@@ -46,7 +46,6 @@ const likes = [
 const disLikes = [
 	{
 		name: "今の高校",
-		href: "https://github.com/KiRura/ksg",
 	},
 	{
 		name: "Apple",

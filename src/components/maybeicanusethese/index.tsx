@@ -20,7 +20,6 @@ const langs = [
 		description: "ガワしか作ったことない",
 		attachments: [
 			{ src: "discord_jc.mp4", type: "video" },
-			{ src: "discord_jc_2.mp4", type: "video" },
 		],
 		colSpan: {
 			xl: 2,
