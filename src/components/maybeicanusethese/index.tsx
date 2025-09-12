@@ -18,9 +18,7 @@ const langs = [
 		name: "Jetpack Compose",
 		href: "https://developer.android.com/develop/ui/compose",
 		description: "ガワしか作ったことない",
-		attachments: [
-			{ src: "discord_jc.mp4", type: "video" },
-		],
+		attachments: [{ src: "discord_jc.mp4", type: "video" }],
 		colSpan: {
 			xl: 2,
 		},
