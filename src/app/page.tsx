@@ -9,6 +9,7 @@ import {
 	HStack,
 	Image,
 	Link,
+	Separator,
 	SimpleGrid,
 	Stack,
 	Text,
@@ -35,32 +36,47 @@ export default function Home() {
 		<>
 			<ZZZ />
 			<Container pb="10" spaceY="16">
-				<Flex
-					align="center"
-					direction="column"
-					gap={{ smDown: "4", sm: "8" }}
-					pt={{ lgDown: "32", lg: "48" }}
-					pb={{ lgDown: "16", lg: "32" }}
-					flexWrap={{ smDown: "wrap" }}
-				>
-					<Heading
-						size={{
-							mdDown: "5xl",
-							md: "6xl",
-						}}
-						fontFamily="var(--font-monaspace-neon), var(--font-noto-sans-jp), monospace"
-						filter="drop-shadow(0px 4px 8px {colors.gray.900/30})"
+				<Flex justify="center">
+					<VStack
+						gap={{ smDown: "4", sm: "6" }}
+						pt={{ lgDown: "32", lg: "48" }}
+						pb={{ lgDown: "16", lg: "32" }}
+						flexWrap={{ smDown: "wrap" }}
 					>
-						Hello!,
-						<br />
-						<Highlight
-							query={["きるら", "(7)KiRura"]}
-							styles={{ color: "orange.300" }}
+						<Text
+							fontSize={{
+								smDown: "3xl",
+								sm: "4xl",
+								md: "5xl",
+								lg: "6xl",
+							}}
+							fontWeight="semibold"
+							fontFamily="var(--font-monaspace-neon), var(--font-noto-sans-jp), monospace"
+							filter={{
+								base: "drop-shadow(0px 4px 4px {colors.bg})",
+								_dark: "drop-shadow(0px 4px 6px {colors.bg/60})",
+							}}
 						>
-							きるら, (7)KiRura,
-						</Highlight>
-					</Heading>
-					<TopButtons />
+							Hello!,
+							<br />
+							<Highlight
+								query={["きるら", "(7)KiRura"]}
+								styles={{
+									color: "orange.300",
+									fontSize: { smDown: "4xl", sm: "5xl", md: "6xl", lg: "7xl" },
+									fontWeight: "bold",
+								}}
+							>
+								きるら, (7)KiRura,
+							</Highlight>
+						</Text>
+						<Separator
+							w="full"
+							size="lg"
+							borderColor={{ base: "blackAlpha.300", _dark: "whiteAlpha.300" }}
+						/>
+						<TopButtons />
+					</VStack>
 				</Flex>
 				<Aria title="Links" icon={<FaLink />}>
 					<SimpleGrid
