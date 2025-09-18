@@ -10,6 +10,7 @@ import {
 	useBreakpointValue,
 } from "@chakra-ui/react";
 import { config } from "@/config";
+import { sliceByNumber } from "@/lib/slice-array";
 
 function KiRura() {
 	return (
@@ -21,7 +22,6 @@ function KiRura() {
 			letterSpacing={12}
 			h="fit"
 			lineHeight={0.95}
-			color="bg.subtle"
 		>
 			KiRura
 		</Text>
@@ -29,21 +29,23 @@ function KiRura() {
 }
 
 export function ZZZ() {
-	const breakpoint = useBreakpointValue(["xs", "sm", "md"]);
+	const breakpoint = useBreakpointValue(["sm", "md", "lg", "xl", "2xl"]);
 	const kiRuras = Array.from({
-		length: breakpoint === "xs" ? 20 : breakpoint === "sm" ? 130 : 500,
+		length:
+			breakpoint === "sm"
+				? 2 * 4
+				: breakpoint === "md"
+					? 2 * 4 * 6
+					: breakpoint === "lg"
+						? 2 * 4 * 6
+						: breakpoint === "xl"
+							? 2 * 4 * 8
+							: 2 * 4 * 10,
 	})
 		.fill(0)
 		.map(() => KiRura);
-	const doubleKiRuras = [];
-	for (let i = 0; i < kiRuras.length; i++) {
-		doubleKiRuras.push(kiRuras.splice(i, 4));
-	}
-
-	const splitKiRuras = [];
-	for (let i = 0; i < doubleKiRuras.length; i++) {
-		splitKiRuras.push(doubleKiRuras.splice(i, 5));
-	}
+	const doubleKiRuras = sliceByNumber(kiRuras, 2);
+	const splitKiRuras = sliceByNumber(doubleKiRuras, 4);
 
 	return (
 		<ClientOnly>
@@ -51,9 +53,9 @@ export function ZZZ() {
 				zIndex={0}
 				pos="absolute"
 				overflow="hidden"
-				maxW="full"
-				h="full"
-				maxH="75rem"
+				w="vw"
+				top="-40"
+				h="60rem"
 				{...config.inAnimation}
 			>
 				<Bleed
@@ -67,11 +69,19 @@ export function ZZZ() {
 				/>
 				<Box rotate={{ smDown: "-90deg", sm: "-45deg" }}>
 					{splitKiRuras.map((kiRuras, i) => (
-						<HStack key={Math.random()}>
+						<HStack
+							key={Math.random()}
+							color="fg/3"
+							{...(splitKiRuras.length / 2 <= i &&
+								breakpoint !== "sm" && {
+									bg: "orange.300",
+									color: "white/15",
+								})}
+						>
 							{kiRuras.map((doubleKiRuras) => (
 								<HStack
 									key={Math.random()}
-									animation={`slide-to-${i % 2 === 0 ? "left" : "right"}-full 200s linear infinite`}
+									animation={`slide-to-${i % 2 === 0 ? "left" : "right"}-full 100s linear infinite`}
 								>
 									{doubleKiRuras.map((KiRura) => (
 										<KiRura key={Math.random()} />
