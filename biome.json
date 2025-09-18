@@ -9,10 +9,10 @@
 		"ignoreUnknown": false,
 		"includes": [
 			"**",
-			"!**/.next",
-			"!**/.open-next",
-			"!**/.wrangler",
-			"!**/public",
+			"!.next/**/*",
+			"!.open-next/**/*",
+			"!.wrangler/**/*",
+			"!public/**/*",
 			"!src/app/license/licenses.json"
 		]
 	},
