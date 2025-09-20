@@ -53,7 +53,7 @@ export function ZZZ() {
 				zIndex={0}
 				pos="absolute"
 				overflow="hidden"
-				w="vw"
+				w="full"
 				top="-40"
 				h="60rem"
 				{...config.inAnimation}
