@@ -1,4 +1,11 @@
-import { Button, Card, Group, Icon, SimpleGrid } from "@chakra-ui/react";
+import {
+	Button,
+	Card,
+	Group,
+	HStack,
+	Icon,
+	SimpleGrid,
+} from "@chakra-ui/react";
 import NextLink from "next/link";
 import {
 	FaBlog,
@@ -34,10 +41,20 @@ const buttons = [
 const ButtonsComponent = buttons.map((data) => {
 	const external = data.href.startsWith("https://");
 	return (
-		<Button key={data.name} variant="subtle" borderColor="border" asChild>
+		<Button
+			key={data.name}
+			variant="subtle"
+			borderColor="border"
+			asChild
+			size={{ smDown: "xs", sm: "md" }}
+			justifyContent="space-between"
+			gap="2"
+		>
 			<NextLink href={data.href} target={external ? "_blank" : undefined}>
-				<data.icon />
-				{data.name}
+				<HStack gap={{ smDown: "1.5", sm: "2" }}>
+					<data.icon />
+					{data.name}
+				</HStack>
 				{external ? (
 					<Icon size="xs" color="fg.subtle">
 						<FaUpRightFromSquare />
