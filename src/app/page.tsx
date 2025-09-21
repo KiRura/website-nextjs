@@ -1,15 +1,15 @@
 import {
 	Box,
+	Center,
 	ClientOnly,
 	Container,
 	DataList,
-	Flex,
 	Heading,
 	Highlight,
 	HStack,
+	Icon,
 	Image,
 	Link,
-	Separator,
 	SimpleGrid,
 	Stack,
 	Text,
@@ -18,15 +18,14 @@ import {
 import NextImage from "next/image";
 import NextLink from "next/link";
 import {
+	FaAngleDown,
 	FaDatabase,
 	FaLink,
 	FaUpRightFromSquare,
-	FaWrench,
 } from "react-icons/fa6";
 import { Herta } from "@/components/herta";
 import { Intro } from "@/components/intro";
 import { Links } from "@/components/links";
-import { MaybeICanUseThese } from "@/components/maybeicanusethese";
 import { TopButtons } from "@/components/top-buttons";
 import { Aria } from "@/components/ui/aria";
 import { ZZZ } from "@/components/zzz";
@@ -36,48 +35,42 @@ export default function Home() {
 		<>
 			<ZZZ />
 			<Container pb="10" spaceY="16">
-				<Flex justify="center">
-					<VStack
-						gap={{ smDown: "4", sm: "6" }}
-						pt={{ lgDown: "32", lg: "48" }}
-						pb={{ lgDown: "16", lg: "32" }}
-						flexWrap={{ smDown: "wrap" }}
+				<Center
+					flexDir="column"
+					minH="94vh"
+					gap={{ smDown: "4", sm: "6" }}
+					py="10"
+				>
+					<Text
+						fontSize={["5xl", "6xl", "6xl", "7xl"]}
+						fontWeight="semibold"
+						fontFamily="var(--font-monaspace-neon), var(--font-noto-sans-jp), monospace"
+						filter={{
+							base: "drop-shadow(0px 4px 4px {colors.bg})",
+							_dark: "drop-shadow(0px 4px 6px {colors.bg/60})",
+						}}
+						whiteSpace="pre-wrap"
 					>
-						<Text
-							fontSize={{
-								smDown: "3xl",
-								sm: "4xl",
-								md: "5xl",
-								lg: "6xl",
-							}}
-							fontWeight="semibold"
-							fontFamily="var(--font-monaspace-neon), var(--font-noto-sans-jp), monospace"
-							filter={{
-								base: "drop-shadow(0px 4px 4px {colors.bg})",
-								_dark: "drop-shadow(0px 4px 6px {colors.bg/60})",
+						Hello!,
+						<br />
+						<Highlight
+							query={["きるら", "(7)KiRura"]}
+							styles={{
+								color: "orange.300",
+								fontWeight: "bold",
 							}}
 						>
-							Hello!,
-							<br />
-							<Highlight
-								query={["きるら", "(7)KiRura"]}
-								styles={{
-									color: "orange.300",
-									fontSize: { smDown: "4xl", sm: "5xl", md: "6xl", lg: "7xl" },
-									fontWeight: "bold",
-								}}
-							>
-								きるら, (7)KiRura,
-							</Highlight>
-						</Text>
-						<Separator
-							w="full"
-							size="lg"
-							borderColor={{ base: "blackAlpha.300", _dark: "whiteAlpha.300" }}
-						/>
-						<TopButtons />
-					</VStack>
-				</Flex>
+							{"きるら,\n(7)KiRura,"}
+						</Highlight>
+					</Text>
+					<TopButtons />
+					<Icon color="fg.subtle">
+						<FaAngleDown />
+					</Icon>
+				</Center>
+				<Center>
+					<Text color="fg.muted">改修中...</Text>
+				</Center>
 				<Aria title="Links" icon={<FaLink />}>
 					<SimpleGrid
 						columns={{
@@ -157,7 +150,7 @@ export default function Home() {
 						</VStack>
 					</Stack>
 				</Aria>
-				<Aria title="まあまあできる (作り途中)" icon={<FaWrench />}>
+				{/* <Aria title="まあまあできる (作り途中)" icon={<FaWrench />}>
 					<SimpleGrid
 						columns={{
 							mdDown: 1,
@@ -168,7 +161,7 @@ export default function Home() {
 					>
 						<MaybeICanUseThese />
 					</SimpleGrid>
-				</Aria>
+				</Aria> */}
 			</Container>
 			<Box borderTopWidth={1}>
 				<Container pt="8" pb="28" centerContent>

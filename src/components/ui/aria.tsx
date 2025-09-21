@@ -1,16 +1,14 @@
 import {
 	Box,
 	BoxProps,
-	Center,
-	ChakraComponent,
 	Heading,
 	HStack,
 	Icon,
 	Separator,
-	StackProps,
-	VStack,
+	Text,
+	TextProps,
 } from "@chakra-ui/react";
-import type { JSX, RefAttributes } from "react";
+import type { JSX } from "react";
 
 export function Aria(
 	props: BoxProps & {
@@ -19,19 +17,18 @@ export function Aria(
 		children: JSX.Element | JSX.Element[];
 	},
 ) {
+	const { title, icon, children, ...restProps } = props;
+
 	return (
-		<Box spaceY="4" {...props} title={undefined}>
-			<HStack overflow="hidden">
-				<Separator variant="dashed" borderColor="border.emphasized" flex="1" />
-				<HStack mx="2">
-					<Icon boxSize="6">{props.icon}</Icon>
-					<Heading size="2xl" overflowWrap="anywhere">
-						{props.title}
-					</Heading>
+		<Box spaceY="4" {...restProps}>
+			<HStack overflow="hidden" gap="4">
+				<HStack fontSize="5xl" gap="3.5" fontWeight="semibold">
+					<Icon>{icon}</Icon>
+					<Text>{title}</Text>
 				</HStack>
 				<Separator variant="dashed" borderColor="border.emphasized" flex="1" />
 			</HStack>
-			{props.children}
+			{children}
 		</Box>
 	);
 }

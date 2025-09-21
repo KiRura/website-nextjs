@@ -17,11 +17,10 @@ export default function Header() {
 			as="header"
 			pos="sticky"
 			zIndex="docked"
-			bg="bg/90"
+			bg="bg"
 			top="0px"
 			borderBottomWidth="1px"
 			hideBelow="sm"
-			backdropFilter="blur(8px)"
 		>
 			<Container>
 				<HStack justify="space-between" py="2">

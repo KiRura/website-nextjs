@@ -9,6 +9,7 @@ import {
 	Text,
 	useBreakpointValue,
 } from "@chakra-ui/react";
+import { useId } from "react";
 import { config } from "@/config";
 import { sliceByNumber } from "@/lib/slice-array";
 
@@ -47,6 +48,8 @@ export function ZZZ() {
 	const doubleKiRuras = sliceByNumber(kiRuras, 2);
 	const splitKiRuras = sliceByNumber(doubleKiRuras, 4);
 
+	const id = useId();
+
 	return (
 		<ClientOnly>
 			<Center
@@ -54,9 +57,11 @@ export function ZZZ() {
 				pos="absolute"
 				overflow="hidden"
 				w="full"
-				top="-40"
-				h="60rem"
+				h="94vh"
 				{...config.inAnimation}
+				smDown={{
+					bg: "orange.300",
+				}}
 			>
 				<Bleed
 					pos="absolute"
@@ -70,21 +75,21 @@ export function ZZZ() {
 				<Box rotate={{ smDown: "-90deg", sm: "-45deg" }}>
 					{splitKiRuras.map((kiRuras, i) => (
 						<HStack
-							key={Math.random()}
-							color="fg/3"
+							key={`${id}-split-${Math.random() * (i + 1)}`}
+							color={{ smDown: "whiteAlpha.300", sm: "whiteAlpha.50" }}
 							{...(splitKiRuras.length / 2 <= i &&
 								breakpoint !== "sm" && {
 									bg: "orange.300",
-									color: "white/15",
+									color: "whiteAlpha.300",
 								})}
 						>
 							{kiRuras.map((doubleKiRuras) => (
 								<HStack
-									key={Math.random()}
+									key={`${id}-double-${Math.random() * (i + 1)}`}
 									animation={`slide-to-${i % 2 === 0 ? "left" : "right"}-full 100s linear infinite`}
 								>
 									{doubleKiRuras.map((KiRura) => (
-										<KiRura key={Math.random()} />
+										<KiRura key={`${id}-KiRura-${Math.random() * (i + 1)}`} />
 									))}
 								</HStack>
 							))}
