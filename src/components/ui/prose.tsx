@@ -21,13 +21,13 @@ export const Prose = chakra("div", {
 		fontSize: "sm",
 		lineHeight: "1.7em",
 		[inWhere("& p")]: {
-			marginTop: "1em",
-			marginBottom: "1em",
+			m: "1em",
 		},
 		[inWhere("& blockquote")]: {
 			marginTop: "1.285em",
 			marginBottom: "1.285em",
 			paddingInline: "1.285em",
+			mx: "1em",
 			borderInlineStartWidth: "0.25em",
 			color: "fg",
 		},
@@ -139,18 +139,22 @@ export const Prose = chakra("div", {
 			fontWeight: "400",
 		},
 		[inWhere("& ol")]: {
-			marginTop: "1em",
-			marginBottom: "1em",
+			m: "1em",
 			paddingInlineStart: "1.5em",
 		},
+		[inWhere("& ol p")]: {
+			mx: "0em",
+		},
 		[inWhere("& ul")]: {
-			marginTop: "1em",
-			marginBottom: "1em",
+			m: "1em",
 			paddingInlineStart: "1.5em",
 		},
 		[inWhere("& li")]: {
 			marginTop: "0.285em",
 			marginBottom: "0.285em",
+		},
+		[inWhere("& li ul")]: {
+			mx: "0em",
 		},
 		[inWhere("& ol > li")]: {
 			paddingInlineStart: "0.4em",
