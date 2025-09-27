@@ -128,7 +128,7 @@ export const links: Links[] = [
 	{
 		accountId: "802728892",
 		name: "スタレ",
-		description: "ピノコニーまでやれ",
+		description: "信じて オンパロスも明るいですよ",
 		href: "https://hsr.hoyoverse.com/",
 		icon: FaTrain,
 		category: "game",

@@ -167,7 +167,7 @@ export default function Home() {
 				<Container pt="8" pb="28" centerContent>
 					<ClientOnly>
 						<Image
-							src={`https://count.getloli.com/@KiRura?name=website${process.env.NODE_ENV === "development" ? "-dev" : ""}&darkmode=auto`}
+							src={`https://count.getloli.com/@KiRura-website${process.env.NODE_ENV === "development" ? "-dev" : ""}?darkmode=auto`}
 						/>
 					</ClientOnly>
 					<Text color="bg" hideBelow="sm">

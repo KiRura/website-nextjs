@@ -59,6 +59,9 @@ export default function RootLayout({
 				<meta name="darkreader-lock" />
 			</head>
 			<body>
+				<p style={{ display: "none" }}>技術的ヲタクは世界を救う</p>
+				<p style={{ display: "none" }}>芸術的ヲタクは心身を救う</p>
+				<p style={{ display: "none" }}>絶望と希望は紙一重</p>
 				<Provider>
 					<Box minH="vh">
 						<Header />

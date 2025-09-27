@@ -21,7 +21,11 @@ export function Settings() {
 							<Drawer.Title>設定</Drawer.Title>
 						</Drawer.Header>
 						<Drawer.Body>
-							<Aria title="明暗" icon={<FaPalette />}>
+							<Aria
+								title="明暗"
+								icon={<FaPalette />}
+								titleProps={{ fontSize: "2xl" }}
+							>
 								<Theme />
 							</Aria>
 						</Drawer.Body>
