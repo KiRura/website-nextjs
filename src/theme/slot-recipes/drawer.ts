@@ -21,10 +21,10 @@ export const drawerSlotRecipe = defineSlotRecipe({
 			bg: `
 				repeating-linear-gradient(
 					45deg,
-					{colors.bg/20},
-					{colors.bg/20} 5px,
-					{colors.bg.inverted/5} 5px,
-					{colors.bg.inverted/5} 10px
+					{colors.bg/70},
+					{colors.bg/70} 5px,
+					{colors.bg/76} 5px,
+					{colors.bg/76} 10px
 				)
   			`,
 			pos: "fixed",
