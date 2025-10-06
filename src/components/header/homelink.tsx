@@ -13,6 +13,7 @@ export function HomeLink({ footer }: { footer?: boolean }) {
 	return (
 		<Tooltip content="🤔" open={i >= 10} disabled={i < 10} showArrow>
 			<Link
+				focusRingOffset="-2px"
 				asChild
 				fontWeight="bold"
 				onClick={() => {

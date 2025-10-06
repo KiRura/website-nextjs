@@ -13,7 +13,24 @@ export function Herta() {
 		setKurukuru([new Audio("/kuru1.flac"), new Audio("/kuru2.flac")]);
 	}, []);
 
-	if (kurukuru.length)
+	if (kurukuru.length) {
+		function onClick() {
+			window.scrollTo({ top: 0, behavior: "smooth" });
+
+			if (timeoutId) clearTimeout(timeoutId);
+			setPlaying(true);
+
+			const audio = kurukuru[Math.round(Math.random() * (kurukuru.length - 1))];
+			audio.volume = 0.3;
+			audio.play();
+
+			setTimeoutId(
+				setTimeout(() => {
+					setPlaying(false);
+				}, 1000),
+			);
+		}
+
 		return (
 			<Image
 				asChild
@@ -25,23 +42,9 @@ export function Herta() {
 				right={{ sm: "0" }}
 				maxW={{ smDown: "20", sm: "32" }}
 				w="full"
-				onClick={() => {
-					window.scrollTo({ top: 0, behavior: "smooth" });
-
-					if (timeoutId) clearTimeout(timeoutId);
-					setPlaying(true);
-
-					const audio =
-						kurukuru[Math.round(Math.random() * (kurukuru.length - 1))];
-					audio.volume = 0.3;
-					audio.play();
-
-					setTimeoutId(
-						setTimeout(() => {
-							setPlaying(false);
-						}, 1000),
-					);
-				}}
+				tabIndex={0}
+				onClick={onClick}
+				onKeyDown={onClick}
 				cursor="button"
 				{...config.inAnimation}
 			>
@@ -55,4 +58,5 @@ export function Herta() {
 				/>
 			</Image>
 		);
+	}
 }
