@@ -75,6 +75,7 @@ export function ZZZ() {
 				<Box rotate={{ smDown: "-90deg", sm: "-45deg" }}>
 					{splitKiRuras.map((kiRuras, i) => (
 						<HStack
+							mt="-1px"
 							key={`${id}-split-${Math.random() * (i + 1)}`}
 							color={{ smDown: "whiteAlpha.300", sm: "whiteAlpha.50" }}
 							{...(splitKiRuras.length / 2 <= i &&
