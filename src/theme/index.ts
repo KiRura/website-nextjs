@@ -5,6 +5,7 @@ import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react";
 // import { keyframes } from "./keyframes";
 // import { layerStyles } from "./layer-styles";
 import { recipes } from "./recipes";
+import { slotRecipes } from "./slot-recipes";
 // import { semanticTokens } from "./semantic-tokens";
 // import { slotRecipes } from "./slot-recipes";
 // import { textStyles } from "./text-styles";
@@ -21,7 +22,7 @@ const themeConfig = defineConfig({
 		tokens,
 		// semanticTokens,
 		recipes,
-		// slotRecipes,
+		slotRecipes,
 		// textStyles,
 		// layerStyles,
 		// animationStyles,

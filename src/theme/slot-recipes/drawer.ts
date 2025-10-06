@@ -27,11 +27,15 @@ export const drawerSlotRecipe = defineSlotRecipe({
 			_open: {
 				animationName: "fade-in",
 				animationDuration: "slow",
+				transitionDuration: "slow",
 			},
 			_closed: {
 				animationName: "fade-out",
 				animationDuration: "moderate",
+				transitionDuration: "moderate",
 			},
+			backdropFilter: { _open: "blur(8px)" },
+			transition: "backgrounds",
 		},
 		positioner: {
 			display: "flex",
