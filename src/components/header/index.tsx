@@ -1,10 +1,4 @@
-import {
-	Box,
-	Container,
-	HStack,
-	IconButton,
-	StackSeparator,
-} from "@chakra-ui/react";
+import { Bleed, Box, Container, HStack, IconButton } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
 import { HomeLink } from "./homelink";
@@ -24,8 +18,9 @@ export default function Header() {
 		>
 			<Container>
 				<HStack justify="space-between" py="2">
-					<HStack overflow="hidden" separator={<StackSeparator />}>
+					<HStack gap="0" overflow="hidden">
 						<HomeLink />
+						<Bleed h="2em" w="4" borderRightWidth={1} />
 						<Pages />
 					</HStack>
 					<HStack pos="sticky" right={0}>
