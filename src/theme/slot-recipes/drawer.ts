@@ -17,7 +17,16 @@ export const drawerSlotRecipe = defineSlotRecipe({
 	className: "chakra-drawer",
 	base: {
 		backdrop: {
-			bg: "blackAlpha.500",
+			// bg: "blackAlpha.500",
+			bg: `
+				repeating-linear-gradient(
+					45deg,
+					{colors.bg/20},
+					{colors.bg/20} 5px,
+					{colors.bg.inverted/5} 5px,
+					{colors.bg.inverted/5} 10px
+				)
+  			`,
 			pos: "fixed",
 			insetInlineStart: 0,
 			top: 0,
@@ -34,7 +43,7 @@ export const drawerSlotRecipe = defineSlotRecipe({
 				animationDuration: "moderate",
 				transitionDuration: "moderate",
 			},
-			backdropFilter: { _open: "blur(8px)" },
+			backdropFilter: "blur(8px)",
 			transition: "backgrounds",
 		},
 		positioner: {
