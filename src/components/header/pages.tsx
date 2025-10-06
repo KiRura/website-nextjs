@@ -1,12 +1,6 @@
 "use client";
 
-import {
-	Bleed,
-	Box,
-	Button,
-	ButtonGroup,
-	type ButtonProps,
-} from "@chakra-ui/react";
+import { Bleed, Box, Button, ButtonGroup } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -39,55 +33,53 @@ export const pages = [
 	},
 ];
 
-export function Pages(props: ButtonProps) {
+export function Pages() {
 	const path = usePathname();
+	const rootPath = path.split("/")[1] ?? "";
 
 	return (
-		<Box pos="relative" rounded="sm" borderWidth={1} overflow="hidden">
-			<Bleed
-				pos="absolute"
-				zIndex="docked"
-				left={0}
-				w="4"
-				h="full"
-				bgGradient="to-r"
-				gradientFrom="bg"
-				gradientTo="transparent"
-				pointerEvents="none"
-			/>
-			<Bleed
-				pos="absolute"
-				zIndex="docked"
-				right={0}
-				w="4"
-				h="full"
-				bgGradient="to-l"
-				gradientFrom="bg"
-				gradientTo="transparent"
-				pointerEvents="none"
-			/>
-			<Box overflow="auto">
-				<ButtonGroup attached>
-					{pages.map((page, i) => {
-						let active = false;
-						if (
-							page.href === path ||
-							(page.href !== "/" && path.match(page.href))
-						)
-							active = true;
+		<Box pos="relative" overflow="hidden">
+			{new Array(2).fill(0).map((_, i) => (
+				<Bleed
+					// biome-ignore lint/suspicious/noArrayIndexKey: <動かないから>
+					key={i}
+					pos="absolute"
+					zIndex="docked"
+					w="4"
+					h="full"
+					gradientFrom="bg"
+					gradientTo="transparent"
+					pointerEvents="none"
+					{...(i === 0
+						? { left: 0, bgGradient: "to-r" }
+						: { right: 0, bgGradient: "to-l" })}
+				/>
+			))}
+			<Box overflow="auto" scrollbarWidth="thin" px="4">
+				<ButtonGroup wordWrap="normal" whiteSpace="nowrap" attached>
+					{pages.map((page) => {
+						const active = `/${rootPath}` === page.href;
 
 						return (
 							<Button
 								key={page.href}
-								variant="outline"
-								color={active ? "orange.fg" : "fg.muted"}
-								borderY={0}
-								border={i === 0 || i === pages.length - 1 ? 0 : undefined}
+								variant="plain"
+								rounded="none"
+								color={{ base: "fg.muted", _hover: "fg" }}
+								borderColor={{ base: "border", _hover: "border.emphasized" }}
+								borderWidth={0}
+								borderBottomWidth="2px"
+								{...(active && {
+									color: { base: "orange.fg", _hover: "fg" },
+									borderColor: {
+										base: "orange.emphasized",
+										_hover: "orange.focusRing",
+									},
+								})}
 								asChild
-								{...props}
 							>
 								<NextLink href={page.href}>
-									{page.icon ? <page.icon /> : null}
+									{page.icon && <page.icon />}
 									{page.name}
 								</NextLink>
 							</Button>

@@ -68,15 +68,16 @@ export function ZZZ() {
 					w="full"
 					h="full"
 					bgGradient="to-b"
-					gradientFrom="transparent"
+					gradientFrom={["bg/50", "transparent"]}
 					gradientTo="bg"
 					zIndex={1}
 				/>
 				<Box rotate={{ smDown: "-90deg", sm: "-45deg" }}>
 					{splitKiRuras.map((kiRuras, i) => (
 						<HStack
+							my="-1px"
 							key={`${id}-split-${Math.random() * (i + 1)}`}
-							color={{ smDown: "whiteAlpha.300", sm: "whiteAlpha.50" }}
+							color={{ smDown: "whiteAlpha.300", sm: "fg/3" }}
 							{...(splitKiRuras.length / 2 <= i &&
 								breakpoint !== "sm" && {
 									bg: "orange.300",

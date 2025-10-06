@@ -14,6 +14,10 @@ const likes = [
 		href: "https://www.mihoyo.com",
 	},
 	{
+		name: "Claude",
+		href: "https://claude.ai",
+	},
+	{
 		name: "タルレミ・エラ",
 		href: "https://lit.link/tallemiella",
 	},
@@ -46,6 +50,12 @@ const likes = [
 const disLikes = [
 	{
 		name: "今の高校",
+	},
+	{
+		name: "ChatGPT",
+	},
+	{
+		name: "Gemini",
 	},
 	{
 		name: "Apple",
