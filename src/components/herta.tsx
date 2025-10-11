@@ -1,6 +1,6 @@
 "use client";
 
-import { Image } from "@chakra-ui/react";
+import { Button, Image, Presence } from "@chakra-ui/react";
 import NextImage from "next/image";
 import { useEffect, useState } from "react";
 import { config } from "@/config";
@@ -13,50 +13,70 @@ export function Herta() {
 		setKurukuru([new Audio("/kuru1.flac"), new Audio("/kuru2.flac")]);
 	}, []);
 
-	if (kurukuru.length) {
-		function onClick() {
-			window.scrollTo({ top: 0, behavior: "smooth" });
+	if (!kurukuru.length) return null;
 
-			if (timeoutId) clearTimeout(timeoutId);
-			setPlaying(true);
+	function onClick() {
+		window.scrollTo({ top: 0, behavior: "smooth" });
 
-			const audio = kurukuru[Math.round(Math.random() * (kurukuru.length - 1))];
-			audio.volume = 0.3;
-			audio.play();
+		if (timeoutId) clearTimeout(timeoutId);
+		setPlaying(true);
 
-			setTimeoutId(
-				setTimeout(() => {
-					setPlaying(false);
-				}, 1000),
-			);
-		}
+		const audio = kurukuru[Math.round(Math.random() * (kurukuru.length - 1))];
+		audio.volume = 0.3;
+		audio.play();
 
-		return (
-			<Image
-				asChild
-				pos={{ smDown: "absolute", sm: "fixed" }}
-				zIndex={{ sm: "overlay" }}
-				bottom={0}
-				left={{ smDown: "50%" }}
-				ml={{ smDown: "-10" }}
-				right={{ sm: "0" }}
-				maxW={{ smDown: "20", sm: "32" }}
-				w="full"
-				tabIndex={0}
-				onClick={onClick}
-				onKeyDown={onClick}
-				cursor="button"
-				{...config.inAnimation}
-			>
-				<NextImage
-					src={playing ? "/kurukuru.webp" : "/herta.webp"}
-					alt="kurukuru~ herta"
-					width={500}
-					height={500}
-					unoptimized
-					priority
-				/>
-			</Image>
+		setTimeoutId(
+			setTimeout(() => {
+				setPlaying(false);
+			}, 1000),
 		);
 	}
+
+	const imageProps = {
+		alt: "kurukuru~ herta",
+		width: 500,
+		height: 500,
+		unoptimized: true,
+		priority: true,
+	};
+
+	return (
+		<Button
+			variant="plain"
+			pos="absolute"
+			bottom={0}
+			w="fit"
+			h="fit"
+			onClick={onClick}
+			{...config.inAnimation}
+			p="0"
+		>
+			<Presence
+				present={playing}
+				_closed={{
+					animation: "ease-in",
+					animationName: "slide-to-bottom-full",
+					animationDuration: "slower",
+				}}
+				pos="fixed"
+				bottom={{ smDown: "56px", sm: "0" }}
+			>
+				<Image maxW="32" asChild>
+					<NextImage src="/kurukuru.webp" {...imageProps} />
+				</Image>
+			</Presence>
+			{!playing && (
+				<Image
+					maxW="32"
+					animation="esae-in"
+					animationName="slide-from-bottom-full"
+					animationDuration="slowest"
+					filter="drop-shadow(0 0 6px {colors.fg.inverted/80})"
+					asChild
+				>
+					<NextImage src="/herta.webp" {...imageProps} />
+				</Image>
+			)}
+		</Button>
+	);
 }
