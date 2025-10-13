@@ -115,7 +115,7 @@ export function HomeLink({ footer }: { footer?: boolean }) {
 								aspectRatio="square"
 							>
 								<NextImage
-									src="/kirura/512.png"
+									src="/kirura/512p.png"
 									alt="kirura logo"
 									width={512}
 									height={512}

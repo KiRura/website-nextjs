@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 	metadataBase: new URL("https://www.kirura.f5.si"),
 	title: { template: "%s - きるら", default: "きるら" },
 	description: "しがない個人サイト",
-	icons: `/kirura_rounded.png`,
+	icons: { icon: `/kirura/rounded/favicon.ico`, shortcut: "/kirura/512p.png" },
 	twitter: {
 		card: "summary",
 	},
