@@ -62,7 +62,7 @@ export function Herta() {
 				bottom={{ smDown: "56px", sm: "0" }}
 			>
 				<Image maxW="32" asChild>
-					<NextImage src="/kurukuru.webp" {...imageProps} />
+					<NextImage src="/kurukuru.webp" {...imageProps} loading="eager" />
 				</Image>
 			</Presence>
 			{!playing && (
@@ -74,7 +74,7 @@ export function Herta() {
 					filter="drop-shadow(0 0 6px {colors.fg.inverted/80})"
 					asChild
 				>
-					<NextImage src="/herta.webp" {...imageProps} />
+					<NextImage src="/herta.webp" {...imageProps} loading="eager" />
 				</Image>
 			)}
 		</Button>
