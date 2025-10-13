@@ -104,10 +104,10 @@ export default async function Page({
 						<HStack align="start" gap="3">
 							<Image asChild rounded="full" boxSize="11">
 								<NextImage
-									src="/kirura.png"
+									src="/kirura/768p.png"
 									alt="kirura icon"
-									width={400}
-									height={400}
+									width={768}
+									height={768}
 								/>
 							</Image>
 							<VStack align="start" gap="0.5">
