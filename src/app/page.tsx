@@ -6,12 +6,10 @@ import {
 	DataList,
 	Heading,
 	Highlight,
-	HStack,
 	Icon,
 	Image,
 	Link,
 	SimpleGrid,
-	Stack,
 	Text,
 	VStack,
 } from "@chakra-ui/react";
@@ -37,7 +35,7 @@ export default function Home() {
 			<Container pb="10" spaceY="16">
 				<Center
 					flexDir="column"
-					minH="94vh"
+					minH="94vh" // ズームアウト時に大変なことになる
 					gap={{ smDown: "4", sm: "6" }}
 					py="10"
 				>
@@ -85,60 +83,70 @@ export default function Home() {
 					</SimpleGrid>
 				</Aria>
 				<Aria title="Intro" icon={<FaDatabase />}>
-					<Stack direction={{ lgDown: "column", lg: "row" }} align="center">
-						<VStack flex={1} maxW={{ lgDown: "md" }} justify="center">
-							<Heading>アイコン</Heading>
-							<HStack align="start" justify="center">
-								<VStack w="44%">
-									<Image
-										asChild
-										rounded="full"
-										aspectRatio="square"
-										w="full"
-										maxW="xs"
-										borderWidth="2px"
-										borderStyle="solid"
-									>
-										<NextImage
-											src="/kirura.png"
-											alt="kirura icon"
-											height={400}
-											width={400}
-										/>
-									</Image>
-									<Text fontSize="sm" color="fg.subtle" textAlign="center">
-										ブランド的なもの
-										<br />
-										プロジェクトファイルは紛失した
-									</Text>
-								</VStack>
-								<VStack w="44%">
-									<Image
-										asChild
-										rounded="full"
-										borderWidth="2px"
-										borderStyle="solid"
-									>
-										<NextImage
-											src="/kirura_2.png"
-											alt="kirura icon 2"
-											height={400}
-											width={400}
-										/>
-									</Image>
-									<Text fontSize="sm" color="fg.subtle" textAlign="center">
-										Art:{" "}
-										<Link asChild colorPalette="orange">
-											<NextLink href="https://x.com/meltqc" target="_blank">
-												@meltqc
-												<FaUpRightFromSquare />
-											</NextLink>
-										</Link>
-									</Text>
-								</VStack>
-							</HStack>
-						</VStack>
-						<VStack flex={1}>
+					<SimpleGrid
+						columns={{ lgDown: 1, lg: 2 }}
+						gap="4"
+						alignItems="center"
+					>
+						<Center>
+							<VStack maxW={{ lgDown: "lg" }}>
+								<Heading>アイコン</Heading>
+								<SimpleGrid columns={2} gap="4">
+									<VStack>
+										<Image
+											asChild
+											rounded="full"
+											aspectRatio="square"
+											borderWidth="2px"
+											borderStyle="solid"
+										>
+											<NextImage
+												src="/kirura/2048p.png"
+												alt="kirura icon"
+												height={2048}
+												width={2048}
+												unoptimized
+											/>
+										</Image>
+										<Text fontSize="sm" color="fg.subtle" textAlign="center">
+											ブランド的なもの
+											<br />
+											4年ぐらい使い続けた400x400のjpegのものをベースに
+											<Link colorPalette="orange" asChild>
+												<NextLink href="/brand">SVG</NextLink>
+											</Link>
+											に作り直した
+										</Text>
+									</VStack>
+									<VStack>
+										<Image
+											asChild
+											rounded="full"
+											borderWidth="2px"
+											borderStyle="solid"
+										>
+											<NextImage
+												src="/kirura/amagi.png"
+												alt="kirura icon 2"
+												height={652}
+												width={652}
+												unoptimized
+											/>
+										</Image>
+										<Text fontSize="sm" color="fg.subtle" textAlign="center">
+											Art:{" "}
+											<Link asChild colorPalette="orange">
+												<NextLink href="https://x.com/meltqc" target="_blank">
+													@meltqc
+													<FaUpRightFromSquare />
+												</NextLink>
+											</Link>
+										</Text>
+									</VStack>
+								</SimpleGrid>
+							</VStack>
+						</Center>
+						<VStack>
 							<DataList.Root
 								variant="bold"
 								orientation="horizontal"
@@ -148,7 +156,7 @@ export default function Home() {
 								<Intro />
 							</DataList.Root>
 						</VStack>
-					</Stack>
+					</SimpleGrid>
 				</Aria>
 				{/* <Aria title="まあまあできる (作り途中)" icon={<FaWrench />}>
 					<SimpleGrid
@@ -168,6 +176,7 @@ export default function Home() {
 					<ClientOnly>
 						<Image
 							src={`https://count.getloli.com/@KiRura-website${process.env.NODE_ENV === "development" ? "-dev" : ""}?darkmode=auto`}
+							fetchPriority="low"
 						/>
 					</ClientOnly>
 					<Text color="bg" hideBelow="sm">
