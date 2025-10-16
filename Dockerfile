@@ -5,9 +5,9 @@ RUN mkdir -p /temp/dev
 COPY package.json bun.lock* /temp/dev/
 RUN <<EOF
 cd /temp/dev
-bun i -d rclone.js --frozen-lockfile \ 
-bun i --frozen-lockfile --production \
-bun i -d license-report --frozen-lockfile
+bun i -d rclone.js
+bun i --production
+bun i -d license-report
 EOF
 
 FROM base AS release
