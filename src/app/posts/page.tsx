@@ -10,6 +10,22 @@ export const metadata: Metadata = {
 	description: "しがないブログ",
 };
 
+function TopHeading({ hidden }: { hidden?: boolean }) {
+	return (
+		<Heading
+			hideBelow="md"
+			size={{ mdDown: "6xl", md: "7xl" }}
+			visibility={!hidden ? undefined : "hidden"}
+		>
+			The
+			<br />
+			Latest
+			<br />
+			Post
+		</Heading>
+	);
+}
+
 export default async function Page() {
 	const posts = await getList();
 	const latest = posts.contents[0];
@@ -18,23 +34,18 @@ export default async function Page() {
 	return (
 		<Container py="12" spaceY="12">
 			<Stack
-				direction={{ smDown: "column", sm: "row" }}
+				direction={{ mdDown: "column", md: "row" }}
 				gap="8"
 				w="full"
 				justify="center"
 				align="center"
 			>
-				<Heading hideBelow="sm" size={{ mdDown: "6xl", md: "7xl" }}>
-					The
-					<br />
-					Latest
-					<br />
-					Post
-				</Heading>
-				<Heading hideFrom="sm" size="5xl">
+				<TopHeading />
+				<Heading hideFrom="md" size={["5xl", "6xl"]}>
 					The Latest Post
 				</Heading>
 				<PostCard post={latest} />
+				<TopHeading hidden />
 			</Stack>
 			<Aria title="Recents" icon={<FaPenNib />}>
 				<SimpleGrid columns={[1, 1, 2, 2, 3]} gap="2">

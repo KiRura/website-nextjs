@@ -50,6 +50,7 @@ export function Herta() {
 			onClick={onClick}
 			{...config.inAnimation}
 			p="0"
+			borderWidth="0"
 		>
 			<Presence
 				present={playing}
