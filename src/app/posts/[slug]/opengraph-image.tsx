@@ -8,8 +8,13 @@ export const size = {
 
 export const contentType = "image/png";
 
-export default async function Image({ params }: { params: { slug: string } }) {
-	const post = await getDetail(params.slug).catch(() => {});
+export default async function Image({
+	params,
+}: {
+	params: Promise<{ slug: string }>;
+}) {
+	const { slug } = await params;
+	const post = await getDetail(slug).catch(() => {});
 	if (!post) return;
 
 	const [interBold, interRegular, notoSansJPBold, notoSansJPRegular] =
