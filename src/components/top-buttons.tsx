@@ -1,11 +1,4 @@
-import {
-	Button,
-	Card,
-	Group,
-	HStack,
-	Icon,
-	SimpleGrid,
-} from "@chakra-ui/react";
+import { Button, Card, HStack, Icon, SimpleGrid } from "@chakra-ui/react";
 import NextLink from "next/link";
 import {
 	FaBlog,
@@ -17,7 +10,7 @@ import {
 
 const buttons = [
 	{
-		name: "Blog (WIP)",
+		name: "Blog",
 		href: "/posts",
 		icon: FaBlog,
 	},
@@ -38,7 +31,7 @@ const buttons = [
 	},
 ];
 
-const ButtonsComponent = buttons.map((data) => {
+const ButtonsComponent = buttons.map((data, i) => {
 	const external = data.href.startsWith("https://");
 	return (
 		<Button
@@ -49,14 +42,31 @@ const ButtonsComponent = buttons.map((data) => {
 			size={{ smDown: "xs", sm: "md" }}
 			justifyContent="space-between"
 			gap="2"
+			sm={{
+				...(buttons.length !== i + 1
+					? {
+							roundedRight: "none",
+							mr: "-1px",
+							...(i !== 0 && {
+								rounded: "none",
+							}),
+						}
+					: {
+							roundedLeft: "none",
+						}),
+			}}
 		>
 			<NextLink href={data.href} target={external ? "_blank" : undefined}>
-				<HStack gap={{ smDown: "1.5", sm: "2" }}>
+				<HStack gap={{ mdDown: "1.5", md: "2" }}>
 					<data.icon />
 					{data.name}
 				</HStack>
 				{external ? (
-					<Icon size="xs" color="fg.subtle">
+					<Icon
+						ml={{ mdDown: "0.5", md: "2" }}
+						boxSize={{ mdDown: "0.7rem", md: "0.9rem" }}
+						color="fg.subtle"
+					>
 						<FaUpRightFromSquare />
 					</Icon>
 				) : null}
@@ -69,10 +79,10 @@ export function TopButtons() {
 	return (
 		<Card.Root flexDir="row" divideX="1px" size="sm" bg="bg" shadow="lg">
 			<Card.Body>
-				<Group attached hideBelow="md">
-					{ButtonsComponent}
-				</Group>
-				<SimpleGrid columns={2} gap="1.5" hideFrom="md">
+				<SimpleGrid
+					columns={{ mdDown: 2, md: 4 }}
+					gap={{ mdDown: "1.5", md: "0" }}
+				>
 					{ButtonsComponent}
 				</SimpleGrid>
 			</Card.Body>

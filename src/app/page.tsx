@@ -66,9 +66,6 @@ export default function Home() {
 						<FaAngleDown />
 					</Icon>
 				</Center>
-				<Center>
-					<Text color="fg.muted">改修中...</Text>
-				</Center>
 				<Aria title="Links" icon={<FaLink />}>
 					<SimpleGrid
 						columns={{
@@ -158,18 +155,6 @@ export default function Home() {
 						</VStack>
 					</SimpleGrid>
 				</Aria>
-				{/* <Aria title="まあまあできる (作り途中)" icon={<FaWrench />}>
-					<SimpleGrid
-						columns={{
-							mdDown: 1,
-							mdToXl: 2,
-							xl: 4,
-						}}
-						gap="2"
-					>
-						<MaybeICanUseThese />
-					</SimpleGrid>
-				</Aria> */}
 			</Container>
 			<Box borderTopWidth={1}>
 				<Container pt="8" pb="28" centerContent>
