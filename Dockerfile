@@ -1,11 +1,16 @@
-FROM oven/bun
-RUN apt update
-RUN apt upgrade -y
+FROM oven/bun:latest AS base
 
-COPY package.json bun.lock* ./
-RUN bun i
+FROM base AS install
+RUN mkdir -p /temp/dev
+COPY package.json bun.lock* /temp/dev/
+RUN cd /temp/dev && bun i --frozen-lockfile --production && bun i -d license-report --frozen-lockfile
 
+FROM base as release
+COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
+
+ENV NODE_ENV=production
 RUN bun run build
 
+USER bun
 CMD [ "bun", "run", "start" ]
