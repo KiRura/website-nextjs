@@ -1,4 +1,5 @@
 import { Box, Container, Link, Text } from "@chakra-ui/react";
+import type { Metadata } from "next";
 import type { IconType } from "react-icons";
 import {
 	FaBezierCurve,
@@ -8,6 +9,11 @@ import {
 	FaUpRightFromSquare,
 } from "react-icons/fa6";
 import { Aria } from "@/components/ui/aria";
+
+export const metadata: Metadata = {
+	title: "ロゴについて",
+	description: "svg, png, 旧アイコン",
+};
 
 const logos: {
 	category: {

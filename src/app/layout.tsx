@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 		card: "summary",
 	},
 	openGraph: {
-		images: `/kirura.png`,
+		images: `/kirura/768p.png`,
 		locale: "ja_JP",
 		type: "website",
 		siteName: "きるら",
