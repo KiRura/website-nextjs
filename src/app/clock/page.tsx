@@ -6,14 +6,8 @@ import {
 	Switch,
 	VStack,
 } from "@chakra-ui/react";
-import type { Metadata } from "next";
 import { useEffect, useState } from "react";
 import Loading from "../loading";
-
-export const metadata: Metadata = {
-	title: "時計",
-	description: "丸のプログレス型の年月日時分秒の時計",
-};
 
 type Progresses = {
 	year: number;
