@@ -42,5 +42,8 @@
 		"rclone.js",
 		"sharp",
 		"workerd"
-	]
+	],
+	"engines": {
+		"node": ">=22"
+	}
 }
