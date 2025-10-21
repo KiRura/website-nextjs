@@ -19,7 +19,7 @@ export function Footer() {
 				<Flex justify="space-between" align="center" py="2">
 					<Pages />
 					<Group>
-						<IconButton variant="outline" asChild>
+						<IconButton variant="ghost" asChild>
 							<NextLink
 								href="https://github.com/KiRura/website-nextjs"
 								target="_blank"

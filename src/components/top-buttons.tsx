@@ -42,7 +42,7 @@ const ButtonsComponent = buttons.map((data, i) => {
 			size={{ smDown: "xs", sm: "md" }}
 			justifyContent="space-between"
 			gap="2"
-			sm={{
+			md={{
 				...(buttons.length !== i + 1
 					? {
 							roundedRight: "none",
@@ -77,7 +77,14 @@ const ButtonsComponent = buttons.map((data, i) => {
 
 export function TopButtons() {
 	return (
-		<Card.Root flexDir="row" divideX="1px" size="sm" bg="bg" shadow="lg">
+		<Card.Root
+			flexDir="row"
+			divideX="1px"
+			size="sm"
+			bg="bg"
+			shadow="lg"
+			rounded="lg"
+		>
 			<Card.Body>
 				<SimpleGrid
 					columns={{ mdDown: 2, md: 4 }}
