@@ -1,166 +1,93 @@
-import { DataList, Flex, HStack, Icon, Link } from "@chakra-ui/react";
-import NextLink from "next/link";
-import {
-	FaBlog,
-	FaPerson,
-	FaThumbsDown,
-	FaThumbsUp,
-	FaUpRightFromSquare,
-} from "react-icons/fa6";
+import { HStack, Link, List, Table } from "@chakra-ui/react";
+import { differenceInYears } from "date-fns";
+import type { IconType } from "react-icons";
+import { FaCalendar, FaThumbsUp } from "react-icons/fa6";
 
-const likes = [
-	{
-		name: "miHoYo",
-		href: "https://www.mihoyo.com",
-	},
-	{
-		name: "Claude",
-		href: "https://claude.ai",
-	},
-	{
-		name: "タルレミ・エラ",
-		href: "https://lit.link/tallemiella",
-	},
-	{
-		name: "LΛMPLIGHT",
-		href: "https://lamplight0.sakura.ne.jp/a",
-	},
-	{
-		name: "FUZI × MAAS - Circle of Karma",
-		href: "https://youtu.be/lW_Ae03xvM0",
-	},
-	{
-		name: "Lizardry",
-		href: "https://x.com/Lizardry_dev",
-	},
-	{
-		name: "tayama",
-		href: "https://x.com/tayama222",
-	},
-	{
-		name: "Rafutsuri",
-		href: "https://lit.link/rafutsuri",
-	},
-	{
-		name: "柊マグネタイト",
-		href: "https://x.com/hiiragi_magne",
-	},
-];
-
-const disLikes = [
-	{
-		name: "今の高校",
-	},
-	{
-		name: "ChatGPT",
-	},
-	{
-		name: "Gemini",
-	},
-	{
-		name: "Apple",
-	},
-	{
-		name: "Discord",
-	},
-	{
-		name: "Riot Games",
-	},
-	{
-		name: "ニトリ",
-		href: "https://x.com/i/status/1885911562457858488",
-	},
-	{
-		name: "明治エッセルスーパーカップ SNS広報",
-		href: "https://x.com/i/status/1929471107523899612",
-	},
-];
-
-function TextsToLinks({
-	things,
-}: {
-	things: {
+const info: {
+	title: {
+		icon: IconType;
+		name: string;
+	};
+	contents: {
 		name: string;
 		href?: string;
+		csrOnly?: boolean;
 	}[];
-}) {
-	return (
-		<Flex direction="column" gap="1">
-			{things.map((thing) => {
-				if (!thing.href)
-					return (
-						<Flex key={thing.name} gap="0.5">
-							・<div>{thing.name}</div>
-						</Flex>
-					);
-
-				return (
-					<Flex key={thing.name} gap="0.5">
-						・
-						<Link asChild colorPalette="orange">
-							<NextLink href={thing.href} target="_blank" prefetch={false}>
-								{thing.name}
-								<Icon boxSize="0.7em">
-									<FaUpRightFromSquare />
-								</Icon>
-							</NextLink>
-						</Link>
-					</Flex>
-				);
-			})}
-		</Flex>
-	);
-}
-
-const intros = [
+}[] = [
 	{
-		title: "好き",
-		description: <TextsToLinks things={likes} />,
-		icon: FaThumbsUp,
+		title: {
+			icon: FaThumbsUp,
+			name: "Likes",
+		},
+		contents: [
+			{
+				name: "Circle of Karma",
+				href: "https://song.link/s/5KlOBnqEoMmudysmYt762W",
+			},
+			{
+				name: "Hello Dust Town",
+				href: "https://song.link/s/61pJ3mvnw1fRxcrXZGRbfx",
+			},
+			{ name: "Caftaphata", href: "https://youtu.be/cMnuMjXeHrY" },
+			{ name: "言葉遊び", href: "https://youtu.be/eGS-IjCUEzA" },
+			{ name: "一龠", href: "https://youtu.be/iWzUxFQQAKY" },
+			{ name: "Blue Girl", href: "https://youtu.be/qPbW8ZAdnBU" },
+			{ name: "Birds", href: "https://youtu.be/YhUZ6_2oy4I" },
+			{ name: "Dance Alive", href: "https://youtu.be/q24o6ljQYPc" },
+			{ name: "Dopamine", href: "https://youtu.be/qlrpeYdm9Ec" },
+			{ name: "Dopamine (DnB Remix)", href: "https://youtu.be/GBuKYAN0RbM" },
+		],
 	},
 	{
-		title: "嫌い",
-		description: <TextsToLinks things={disLikes} />,
-		icon: FaThumbsDown,
-	},
-	{
-		title: "年齢",
-		description: (
-			<TextsToLinks
-				things={[
-					{
-						name: "17歳 / 高3",
-					},
-				]}
-			/>
-		),
-		icon: FaPerson,
-	},
-	{
-		title: "ブログ",
-		description: (
-			<TextsToLinks
-				things={[
-					{
-						name: "自己紹介の投稿",
-						href: "/posts/u00ox7m9qwi5",
-					},
-				]}
-			/>
-		),
-		icon: FaBlog,
+		title: {
+			icon: FaCalendar,
+			name: "Age",
+		},
+		contents: [
+			{
+				name: `${differenceInYears(new Date(), new Date(2008, 2, 17))}歳 / 高3`,
+			},
+		],
 	},
 ];
 
 export function Intro() {
-	return intros.map((intro, _i) => (
-		<DataList.Item key={intro.title} pt="4">
-			<DataList.ItemLabel>
-				<HStack>
-					<intro.icon /> {intro.title}
-				</HStack>
-			</DataList.ItemLabel>
-			<DataList.ItemValue>{intro.description}</DataList.ItemValue>
-		</DataList.Item>
-	));
+	return (
+		<Table.Root w={{ md: "fit" }}>
+			<Table.Body>
+				{info.map((info) => (
+					<Table.Row key={info.title.name}>
+						<Table.Cell minW="32">
+							<HStack gap="1.5">
+								<info.title.icon /> {info.title.name}
+							</HStack>
+						</Table.Cell>
+						<Table.Cell>
+							<List.Root gap="1">
+								{info.contents.map((content) =>
+									content.href ? (
+										<List.Item key={content.href}>
+											<Link
+												href={content.href}
+												target="_blank"
+												colorPalette="orange"
+											>
+												{content.name}
+											</Link>
+										</List.Item>
+										// ) : content.csrOnly ? (
+										// 	<ClientOnly key={content.name.toString()}>
+										// 		<List.Item>{content.name}</List.Item>
+										// 	</ClientOnly>
+									) : (
+										<List.Item key={content.name}>{content.name}</List.Item>
+									),
+								)}
+							</List.Root>
+						</Table.Cell>
+					</Table.Row>
+				))}
+			</Table.Body>
+		</Table.Root>
+	);
 }

@@ -4,7 +4,6 @@ import {
 	ClientOnly,
 	Container,
 	DataList,
-	Heading,
 	Highlight,
 	Icon,
 	Image,
@@ -18,6 +17,7 @@ import NextLink from "next/link";
 import {
 	FaAngleDown,
 	FaDatabase,
+	FaIcons,
 	FaLink,
 	FaUpRightFromSquare,
 } from "react-icons/fa6";
@@ -79,70 +79,65 @@ export default function Home() {
 						<Links />
 					</SimpleGrid>
 				</Aria>
-				<Aria title="Intro" icon={<FaDatabase />}>
-					<SimpleGrid
-						columns={{ lgDown: 1, lg: 2 }}
-						gap="4"
-						alignItems="center"
-					>
+				<SimpleGrid columns={{ lgDown: 1, lg: 2 }} gap="4">
+					<Aria title="Icons" icon={<FaIcons />}>
 						<Center>
-							<VStack maxW={{ lgDown: "lg" }}>
-								<Heading>アイコン</Heading>
-								<SimpleGrid columns={2} gap="4">
-									<VStack>
-										<Image
-											asChild
-											rounded="full"
-											aspectRatio="square"
-											borderWidth="2px"
-											borderStyle="solid"
-										>
-											<NextImage
-												src="/kirura/2048p.png"
-												alt="kirura icon"
-												height={2048}
-												width={2048}
-												unoptimized
-											/>
-										</Image>
-										<Text fontSize="sm" color="fg.subtle" textAlign="center">
-											ブランド的なもの
-											<br />
-											4年ぐらい使い続けた400x400のjpegのものをベースに
-											<Link colorPalette="orange" asChild>
-												<NextLink href="/brand">SVG</NextLink>
-											</Link>
-											に作り直した
-										</Text>
-									</VStack>
-									<VStack>
-										<Image
-											asChild
-											rounded="full"
-											borderWidth="2px"
-											borderStyle="solid"
-										>
-											<NextImage
-												src="/kirura/amagi.png"
-												alt="kirura icon 2"
-												height={652}
-												width={652}
-												unoptimized
-											/>
-										</Image>
-										<Text fontSize="sm" color="fg.subtle" textAlign="center">
-											Art:{" "}
-											<Link asChild colorPalette="orange">
-												<NextLink href="https://x.com/meltqc" target="_blank">
-													@meltqc
-													<FaUpRightFromSquare />
-												</NextLink>
-											</Link>
-										</Text>
-									</VStack>
-								</SimpleGrid>
-							</VStack>
+							<SimpleGrid columns={2} gap="4">
+								<VStack>
+									<Image
+										asChild
+										rounded="full"
+										aspectRatio="square"
+										borderWidth="2px"
+										borderStyle="solid"
+									>
+										<NextImage
+											src="/kirura/2048p.png"
+											alt="kirura icon"
+											height={2048}
+											width={2048}
+											unoptimized
+										/>
+									</Image>
+									<Text fontSize="sm" color="fg.subtle" textAlign="center">
+										ブランド的なもの
+										<br />
+										4年ぐらい使い続けた400x400のjpegのものをベースに
+										<Link colorPalette="orange" asChild>
+											<NextLink href="/brand">SVG</NextLink>
+										</Link>
+										に作り直した
+									</Text>
+								</VStack>
+								<VStack>
+									<Image
+										asChild
+										rounded="full"
+										borderWidth="2px"
+										borderStyle="solid"
+									>
+										<NextImage
+											src="/kirura/amagi.png"
+											alt="kirura icon 2"
+											height={652}
+											width={652}
+											unoptimized
+										/>
+									</Image>
+									<Text fontSize="sm" color="fg.subtle" textAlign="center">
+										Art:{" "}
+										<Link asChild colorPalette="orange">
+											<NextLink href="https://x.com/meltqc" target="_blank">
+												@meltqc
+												<FaUpRightFromSquare />
+											</NextLink>
+										</Link>
+									</Text>
+								</VStack>
+							</SimpleGrid>
 						</Center>
+					</Aria>
+					<Aria title="Intro" icon={<FaDatabase />}>
 						<VStack>
 							<DataList.Root
 								variant="bold"
@@ -153,8 +148,8 @@ export default function Home() {
 								<Intro />
 							</DataList.Root>
 						</VStack>
-					</SimpleGrid>
-				</Aria>
+					</Aria>
+				</SimpleGrid>
 			</Container>
 			<Box borderTopWidth={1}>
 				<Container pt="8" pb="28" centerContent>

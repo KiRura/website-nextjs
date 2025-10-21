@@ -1,6 +1,6 @@
 "use client";
 
-import { Bleed, Box, Button, ButtonGroup } from "@chakra-ui/react";
+import { Bleed, Box, Button, ButtonGroup, Icon } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { FaBlog, FaClock, FaFileSignature } from "react-icons/fa6";
@@ -25,7 +25,6 @@ export const pages = [
 
 export function Pages() {
 	const path = usePathname();
-	const rootPath = path.split("/")[1] ?? "";
 
 	return (
 		<Box pos="relative" overflow="hidden">
@@ -46,30 +45,39 @@ export function Pages() {
 				/>
 			))}
 			<Box overflow="auto" scrollbarWidth="thin" px="4">
-				<ButtonGroup wordWrap="normal" whiteSpace="nowrap" attached>
+				<ButtonGroup wordWrap="normal" whiteSpace="nowrap" gap="6">
 					{pages.map((page) => {
-						const active = `/${rootPath}` === page.href;
+						const active = path.startsWith(page.href);
 
 						return (
 							<Button
 								key={page.href}
 								variant="plain"
 								rounded="none"
+								px="0"
 								color={{ base: "fg.muted", _hover: "fg" }}
-								borderColor={{ base: "border", _hover: "border.emphasized" }}
+								borderBottomColor={{
+									_hover: "border",
+								}}
+								fontSize="sm"
 								borderWidth={0}
-								borderBottomWidth="2px"
+								borderYWidth="2px"
 								{...(active && {
 									color: { base: "orange.fg", _hover: "fg" },
-									borderColor: {
+									borderBottomColor: {
 										base: "orange.emphasized",
 										_hover: "orange.focusRing",
 									},
+									fontWeight: "medium",
 								})}
 								asChild
 							>
 								<NextLink href={page.href}>
-									{page.icon && <page.icon />}
+									{page.icon && (
+										<Icon size="sm">
+											<page.icon />
+										</Icon>
+									)}
 									{page.name}
 								</NextLink>
 							</Button>

@@ -8,9 +8,8 @@ import {
 	HStack,
 	Icon,
 	Link,
-	LinkBox,
 	LinkOverlay,
-	Text,
+	Span,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
@@ -36,112 +35,111 @@ export function Links() {
 
 	return links.map((link, i) => {
 		return (
-			<LinkBox key={link.name}>
-				<Card.Root
-					size="sm"
-					h="full"
-					flexDir="row"
-					bg={{ base: "bg.panel", ...(link.href && { _hover: "bg.muted" }) }}
-					transition="backgrounds"
-				>
-					<Box flex={1} overflow="hidden">
-						<Card.Body gap="1.5">
-							<Flex
-								gap="2.5"
-								justify="space-between"
-								align="start"
-								overflow="hidden"
+			<Card.Root
+				key={link.name}
+				size="sm"
+				h="full"
+				flexDir="row"
+				bg={{ base: "bg.panel", ...(link.href && { _hover: "bg.muted" }) }}
+				transition="backgrounds"
+			>
+				<Box flex={1} overflow="hidden">
+					<Card.Body gap="1.5" pr={link.href ? "0.5" : undefined}>
+						<Flex
+							gap="2.5"
+							justify="space-between"
+							align="start"
+							overflow="hidden"
+						>
+							<HStack
+								color={{
+									base: link.href ? "fg" : "fg.muted",
+									_hover: "orange.fg",
+								}}
+								transition="common"
 							>
-								<HStack>
-									<link.icon />
-									<Card.Title
-										asChild={Boolean(link.href)}
-										color={link.href ? "fg" : "fg.muted"}
-									>
-										{link.href ? (
+								<link.icon />
+								<Card.Title color="inherit" asChild={Boolean(link.href)}>
+									{link.href ? (
+										<LinkOverlay asChild>
 											<Link asChild variant="underline">
-												<LinkOverlay asChild>
-													<NextLink
-														href={link.href}
-														target="_blank"
-														prefetch={false}
-													>
-														{link.name}
-													</NextLink>
-												</LinkOverlay>
+												<NextLink
+													href={link.href}
+													target="_blank"
+													prefetch={false}
+												>
+													{link.name}
+												</NextLink>
 											</Link>
-										) : (
-											link.name
-										)}
-									</Card.Title>
-								</HStack>
-								<Link
-									fontStyle="italic"
-									color={{
-										base: copied === i ? "fg" : "fg.subtle",
-										_hover: "fg",
-									}}
-									transition="common"
-									fontSize="sm"
-									fontFamily="mono"
-									textAlign="right"
-									variant="underline"
-									onClick={() => {
-										try {
-											navigator.clipboard.writeText(link.accountId);
-											setCopied(i);
-										} catch (_) {
-											setErrored(i);
-										}
-									}}
+										</LinkOverlay>
+									) : (
+										link.name
+									)}
+								</Card.Title>
+							</HStack>
+							<Link
+								fontStyle="italic"
+								color={{
+									base: copied === i ? "fg" : "fg.subtle",
+									_hover: "fg",
+								}}
+								transition="common"
+								transitionProperty="color"
+								fontSize="sm"
+								fontFamily="mono"
+								textAlign="right"
+								onClick={() => {
+									try {
+										navigator.clipboard.writeText(link.accountId);
+										setCopied(i);
+									} catch (_) {
+										setErrored(i);
+									}
+								}}
+								overflow="hidden"
+								zIndex="base"
+							>
+								<Span
 									overflow="hidden"
-									zIndex="base"
+									textOverflow="ellipsis"
+									whiteSpace="nowrap"
 								>
-									<Text
-										overflow="hidden"
-										textOverflow="ellipsis"
-										whiteSpace="nowrap"
-										pr="0.5"
-									>
-										{link.accountId}
-									</Text>
-									<Box
-										asChild
-										animation="ease-out"
-										animationDuration="slow"
-										animationName="scale-in, fade-in"
-										pos="sticky"
-										right={0}
-									>
-										<Icon>
-											{copied === i ? (
-												<FaCheck />
-											) : errored === i ? (
-												<FaXmark />
-											) : (
-												<FaCopy />
-											)}
-										</Icon>
-									</Box>
-								</Link>
-							</Flex>
-							<Card.Description fontSize="md">
-								{link.description}
-							</Card.Description>
-						</Card.Body>
-						{link.external ? (
-							<Card.Footer justifyContent="end">
-								<link.external />
-							</Card.Footer>
-						) : null}
-					</Box>
-					{link.href ? (
-						<Center color="fg.muted" p="1.5" borderLeftWidth={1}>
-							<FaUpRightFromSquare />
-						</Center>
+									{link.accountId}
+								</Span>
+								<Box
+									asChild
+									animation="ease-out"
+									animationDuration="slow"
+									animationName="scale-in, fade-in"
+									pos="sticky"
+									right={0}
+								>
+									<Icon>
+										{copied === i ? (
+											<FaCheck />
+										) : errored === i ? (
+											<FaXmark />
+										) : (
+											<FaCopy />
+										)}
+									</Icon>
+								</Box>
+							</Link>
+						</Flex>
+						<Card.Description>{link.description}</Card.Description>
+					</Card.Body>
+					{link.external ? (
+						<Card.Footer justifyContent="end">
+							<link.external />
+						</Card.Footer>
 					) : null}
-				</Card.Root>
-			</LinkBox>
+				</Box>
+				{link.href ? (
+					<Center color="bg.emphasized" p="1.5">
+						<FaUpRightFromSquare />
+					</Center>
+				) : null}
+			</Card.Root>
 		);
 	});
 }

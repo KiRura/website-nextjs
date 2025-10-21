@@ -15,25 +15,24 @@ export default function Header() {
 			top="0px"
 			borderBottomWidth="1px"
 			hideBelow="sm"
+			py="2.5"
 		>
-			<Container>
-				<HStack justify="space-between" py="2">
-					<HStack gap="0" overflow="hidden">
-						<HomeLink />
-						<Bleed h="2em" w="4" borderRightWidth={1} />
-						<Pages />
-					</HStack>
-					<HStack pos="sticky" right={0}>
-						<IconButton variant="outline" asChild>
-							<NextLink
-								href="https://github.com/KiRura/website-nextjs"
-								target="_blank"
-							>
-								<FaGithub />
-							</NextLink>
-						</IconButton>
-						<Settings />
-					</HStack>
+			<Container centerContent flexDir="row" justifyContent="space-between">
+				<HStack gap="0" overflow="hidden">
+					<HomeLink />
+					<Bleed h="2em" w="4" borderRightWidth={1} />
+					<Pages />
+				</HStack>
+				<HStack pos="sticky" right={0}>
+					<IconButton variant="ghost" asChild>
+						<NextLink
+							href="https://github.com/KiRura/website-nextjs"
+							target="_blank"
+						>
+							<FaGithub />
+						</NextLink>
+					</IconButton>
+					<Settings />
 				</HStack>
 			</Container>
 		</Box>
