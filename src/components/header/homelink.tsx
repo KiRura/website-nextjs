@@ -120,6 +120,7 @@ export function HomeLink({ footer }: { footer?: boolean }) {
 						width={512}
 						height={512}
 						priority
+						loading="eager"
 					/>
 				</Image>
 				<Span {...(!footer && { hideBelow: "md" })}>KiRura</Span>
