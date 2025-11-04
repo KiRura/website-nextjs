@@ -66,7 +66,7 @@ export default function Home() {
 						<FaAngleDown />
 					</Icon>
 				</Center>
-				<Aria title="Links" icon={<FaLink />}>
+				<Aria title="関連" icon={<FaLink />}>
 					<SimpleGrid
 						columns={{
 							mdDown: 1,
@@ -80,7 +80,7 @@ export default function Home() {
 					</SimpleGrid>
 				</Aria>
 				<SimpleGrid columns={{ lgDown: 1, lg: 2 }} gap="4">
-					<Aria title="Icons" icon={<FaIcons />}>
+					<Aria title="画像" icon={<FaIcons />}>
 						<Center>
 							<SimpleGrid columns={2} gap="4">
 								<VStack>
@@ -125,7 +125,7 @@ export default function Home() {
 										/>
 									</Image>
 									<Text fontSize="sm" color="fg.subtle" textAlign="center">
-										Art:{" "}
+										絵:{" "}
 										<Link asChild colorPalette="orange">
 											<NextLink href="https://x.com/meltqc" target="_blank">
 												@meltqc
@@ -137,7 +137,7 @@ export default function Home() {
 							</SimpleGrid>
 						</Center>
 					</Aria>
-					<Aria title="Intro" icon={<FaDatabase />}>
+					<Aria title="情報" icon={<FaDatabase />}>
 						<VStack>
 							<DataList.Root
 								variant="bold"

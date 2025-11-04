@@ -14,12 +14,12 @@ export function Theme() {
 
 	const modes = [
 		{
-			name: "ライト",
+			name: "明",
 			icon: FaSun,
 			value: "light",
 		},
 		{
-			name: "ダーク",
+			name: "暗",
 			icon: FaMoon,
 			value: "dark",
 		},

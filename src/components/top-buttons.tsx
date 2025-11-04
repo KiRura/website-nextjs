@@ -10,7 +10,7 @@ import {
 
 const buttons = [
 	{
-		name: "Blog",
+		name: "呟き",
 		href: "/posts",
 		icon: FaBlog,
 	},

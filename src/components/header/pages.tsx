@@ -7,12 +7,12 @@ import { FaBlog, FaClock, FaFileSignature } from "react-icons/fa6";
 
 export const pages = [
 	{
-		name: "Blog (WIP)",
+		name: "呟き",
 		href: "/posts",
 		icon: FaBlog,
 	},
 	{
-		name: "Clock",
+		name: "時計",
 		href: "/clock",
 		icon: FaClock,
 	},
