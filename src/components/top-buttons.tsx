@@ -2,37 +2,40 @@ import { Button, Card, HStack, Icon, SimpleGrid } from "@chakra-ui/react";
 import NextLink from "next/link";
 import {
 	FaBlog,
+	FaDiscord,
 	FaGithub,
 	FaTwitter,
 	FaUpRightFromSquare,
-	FaYoutube,
 } from "react-icons/fa6";
 
 const buttons = [
 	{
-		name: "Blog",
+		name: "呟き",
 		href: "/posts",
 		icon: FaBlog,
 	},
 	{
-		name: "YouTube",
-		href: "https://www.youtube.com/channel/UCmPBPQzdqk3LhvxpadSdzDA",
-		icon: FaYoutube,
+		name: "Discord",
+		href: "/discord",
+		icon: FaDiscord,
+		external: true,
 	},
+
 	{
 		name: "Twitter",
 		href: "https://twitter.com/i/user/1165939887998025728",
 		icon: FaTwitter,
+		external: true,
 	},
 	{
 		name: "GitHub",
 		href: "https://github.com/KiRura",
 		icon: FaGithub,
+		external: true,
 	},
 ];
 
 const ButtonsComponent = buttons.map((data, i) => {
-	const external = data.href.startsWith("https://");
 	return (
 		<Button
 			key={data.name}
@@ -56,12 +59,12 @@ const ButtonsComponent = buttons.map((data, i) => {
 						}),
 			}}
 		>
-			<NextLink href={data.href} target={external ? "_blank" : undefined}>
+			<NextLink href={data.href} target={data.external ? "_blank" : undefined}>
 				<HStack gap={{ mdDown: "1.5", md: "2" }}>
 					<data.icon />
 					{data.name}
 				</HStack>
-				{external ? (
+				{data.external ? (
 					<Icon
 						ml={{ mdDown: "0.5", md: "2" }}
 						boxSize={{ mdDown: "0.7rem", md: "0.9rem" }}

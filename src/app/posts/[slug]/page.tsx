@@ -13,7 +13,7 @@ import {
 import type { Metadata } from "next";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
-import { FaRotateRight } from "react-icons/fa6";
+import { FaPen, FaRotateRight } from "react-icons/fa6";
 import { ToClientLocaleDate } from "@/components/to_locale_date";
 import { Prose } from "@/components/ui/prose";
 import { getDetail, getListIds } from "@/lib/microcms";
@@ -56,41 +56,43 @@ export default async function Page({
 	const res = await getDetail(slug).catch(() => notFound());
 
 	return (
-		<Container maxW="3xl" centerContent py="12" spaceY="12">
+		// デザイン変更後特に調整無し 要リファクタリング
+		<Container maxW="3xl" centerContent py="12" spaceY="4">
+			<Box
+				w="full"
+				{...(res.coverImage && {
+					bgImg: `url(${res.coverImage.url})`,
+					bgPos: "center",
+					bgSize: "cover",
+					bgBlendMode: "overlay",
+					bgColor: { base: "bg/65", _dark: "bg/90" },
+				})}
+				overflow="hidden"
+				rounded="lg"
+				borderWidth="1px"
+			>
+				<Center
+					p={["6", "8", "12", "16", "20"]}
+					{...(res.coverImage && {
+						backdropFilter: "blur(8px)",
+					})}
+				>
+					<Heading size={["2xl", "3xl", "4xl", "5xl", "6xl"]}>
+						{res.title}
+					</Heading>
+				</Center>
+			</Box>
 			<VStack
 				w="full"
 				gap="0"
 				borderWidth={1}
-				rounded="2xl"
+				rounded="lg"
 				overflow="hidden"
 				separator={<StackSeparator />}
 			>
-				<Box
-					w="full"
-					{...(res.coverImage && {
-						bgImg: `url(${res.coverImage.url})`,
-						bgPos: "center",
-						bgSize: "cover",
-						bgBlendMode: "overlay",
-						bgColor: { base: "bg/65", _dark: "bg/90" },
-					})}
-				>
-					<Center
-						p={["6", "8", "12", "16", "20"]}
-						{...(res.coverImage && {
-							backdropFilter: "blur(8px)",
-						})}
-					>
-						<Heading size={["2xl", "3xl", "4xl", "5xl", "6xl"]}>
-							{res.title}
-						</Heading>
-					</Center>
-				</Box>
 				<Stack
 					direction={{ mdDown: "column", md: "row" }}
 					w="full"
-					align={{ md: "start" }}
-					justify={{ md: "space-between" }}
 					gap="0"
 					separator={<StackSeparator />}
 				>
@@ -112,34 +114,41 @@ export default async function Page({
 							</Image>
 							<VStack align="start" gap="0.5">
 								<HStack align="start">
-									<Text fontWeight="bold" color="orange.fg">
+									<Text fontWeight="bold" color="orange.fg" whiteSpace="nowrap">
 										きるら
 									</Text>
-									{res.publishedAt ? (
-										<ToClientLocaleDate
-											color="fg.muted"
-											fontSize="sm"
-											date={res.publishedAt}
-										/>
-									) : null}
 								</HStack>
 								{res.subtitle ? (
 									<Text>{res.subtitle}</Text>
 								) : (
 									<Text color="fg.muted" fontStyle="italic">
-										サブタイトルがありません。
+										サブタイトルがないです
 									</Text>
 								)}
 							</VStack>
 						</HStack>
 					</VStack>
-					<VStack p="4" color="fg.muted">
-						<HStack gap="1.5">
-							<FaRotateRight />
-							<Text>最終更新</Text>
-						</HStack>
-						<ToClientLocaleDate fontFamily="mono" date={res.updatedAt} />
-					</VStack>
+					{res.publishedAt && (
+						<Center
+							flexDir={{ smDown: "column", md: "column" }}
+							gap={["1", "5", "1"]}
+							p="5"
+							color="fg.muted"
+							fontSize="sm"
+							fontFamily="mono"
+						>
+							<HStack gap="1.5">
+								<FaPen />
+								<ToClientLocaleDate date={res.publishedAt} />
+							</HStack>
+							{res.publishedAt !== res.updatedAt && (
+								<HStack gap="1.5">
+									<FaRotateRight />
+									<ToClientLocaleDate date={res.updatedAt} />
+								</HStack>
+							)}
+						</Center>
+					)}
 				</Stack>
 			</VStack>
 			<Prose maxW="none" size="lg" w="full">

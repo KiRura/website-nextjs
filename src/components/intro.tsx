@@ -17,7 +17,7 @@ const info: {
 	{
 		title: {
 			icon: FaThumbsUp,
-			name: "Likes",
+			name: "好き",
 		},
 		contents: [
 			{
@@ -41,7 +41,7 @@ const info: {
 	{
 		title: {
 			icon: FaCalendar,
-			name: "Age",
+			name: "年齢",
 		},
 		contents: [
 			{

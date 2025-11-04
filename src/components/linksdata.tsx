@@ -15,6 +15,7 @@ import {
 	FaTrain,
 	FaTrash,
 	FaWind,
+	FaYoutube,
 } from "react-icons/fa6";
 
 export type Links = {
@@ -44,15 +45,7 @@ export const links: Links[] = [
 		icon: FaToolbox,
 		category: "social",
 	},
-	{
-		accountId: "/discord",
-		name: "Discord Server",
-		description:
-			"GitHubのコミット通知とかTwitch配信の通知とかたまにTwitterに載せる程でもないお知らせが来たりとかする",
-		href: "/discord",
-		icon: FaDiscord,
-		category: "social",
-	},
+
 	{
 		accountId: "KiRura",
 		name: "GitLab",
@@ -140,6 +133,14 @@ export const links: Links[] = [
 		href: "https://www.houkai3rd.com/",
 		icon: FaFire,
 		category: "game",
+	},
+	{
+		accountId: "@7kirura",
+		name: "YouTube",
+		description: "ゴミ",
+		href: "https://www.youtube.com/channel/UCmPBPQzdqk3LhvxpadSdzDA",
+		icon: FaYoutube,
+		category: "social",
 	},
 	{
 		accountId: "きるら",
