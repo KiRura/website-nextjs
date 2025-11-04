@@ -15,7 +15,7 @@ import {
 import NextImage from "next/image";
 import NextLink from "next/link";
 import {
-	FaAngleDown,
+	FaAnglesDown,
 	FaDatabase,
 	FaIcons,
 	FaLink,
@@ -63,7 +63,7 @@ export default function Home() {
 					</Text>
 					<TopButtons />
 					<Icon color="fg.subtle">
-						<FaAngleDown />
+						<FaAnglesDown />
 					</Icon>
 				</Center>
 				<Aria title="関連" icon={<FaLink />}>
@@ -79,7 +79,10 @@ export default function Home() {
 						<Links />
 					</SimpleGrid>
 				</Aria>
-				<SimpleGrid columns={{ lgDown: 1, lg: 2 }} gap="4">
+				<SimpleGrid
+					columns={{ lgDown: 1, lg: 2 }}
+					gap={{ lgDown: "16", lg: "4" }}
+				>
 					<Aria title="画像" icon={<FaIcons />}>
 						<Center>
 							<SimpleGrid columns={2} gap="4">

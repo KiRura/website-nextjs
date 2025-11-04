@@ -80,8 +80,8 @@ export function Links() {
 							<Link
 								fontStyle="italic"
 								color={{
-									base: copied === i ? "fg" : "fg.subtle",
-									_hover: "fg",
+									base: copied === i ? "blue.fg" : "fg.subtle",
+									_hover: "blue.fg",
 								}}
 								transition="common"
 								transitionProperty="color"
