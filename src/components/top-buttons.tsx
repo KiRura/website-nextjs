@@ -59,7 +59,11 @@ const ButtonsComponent = buttons.map((data, i) => {
 						}),
 			}}
 		>
-			<NextLink href={data.href} target={data.external ? "_blank" : undefined}>
+			<NextLink
+				href={data.href}
+				target={data.external ? "_blank" : undefined}
+				prefetch={false}
+			>
 				<HStack gap={{ mdDown: "1.5", md: "2" }}>
 					<data.icon />
 					{data.name}
