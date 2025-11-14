@@ -1,188 +1,178 @@
 "use client";
 import {
+	Box,
+	ClientOnly,
 	Container,
-	DataList,
+	Heading,
 	ProgressCircle,
+	SimpleGrid,
 	Switch,
+	Text,
 	VStack,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 import Loading from "../loading";
-
-type Progresses = {
-	year: number;
-	month: number;
-	week: number;
-	day: number;
-	hour: number;
-	minute: number;
-	second: number;
-};
-
-// GPT-4o君に頑張って貰った関数
-function calculateProgresses(date: Date): Progresses {
-	const startOfYear = new Date(date.getFullYear(), 0, 1);
-	const startOfNextYear = new Date(date.getFullYear() + 1, 0, 1);
-	const yearProgress =
-		((date.getTime() - startOfYear.getTime()) /
-			(startOfNextYear.getTime() - startOfYear.getTime())) *
-		100;
-
-	const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-	const startOfNextMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-	const monthProgress =
-		((date.getTime() - startOfMonth.getTime()) /
-			(startOfNextMonth.getTime() - startOfMonth.getTime())) *
-		100;
-
-	const dayOfWeek = date.getDay();
-	const startOfWeek = new Date(date);
-	startOfWeek.setDate(date.getDate() - dayOfWeek);
-	startOfWeek.setHours(0, 0, 0, 0);
-	const endOfWeek = new Date(startOfWeek);
-	endOfWeek.setDate(startOfWeek.getDate() + 7);
-	const weekProgress =
-		((date.getTime() - startOfWeek.getTime()) /
-			(endOfWeek.getTime() - startOfWeek.getTime())) *
-		100;
-
-	const startOfDay = new Date(date);
-	startOfDay.setHours(0, 0, 0, 0);
-	const endOfDay = new Date(startOfDay);
-	endOfDay.setDate(startOfDay.getDate() + 1);
-	const dayProgress =
-		((date.getTime() - startOfDay.getTime()) /
-			(endOfDay.getTime() - startOfDay.getTime())) *
-		100;
-
-	const startOfHour = new Date(date);
-	startOfHour.setMinutes(0, 0, 0);
-	const endOfHour = new Date(startOfHour);
-	endOfHour.setHours(startOfHour.getHours() + 1);
-	const hourProgress =
-		((date.getTime() - startOfHour.getTime()) /
-			(endOfHour.getTime() - startOfHour.getTime())) *
-		100;
-
-	const startOfMinute = new Date(date);
-	startOfMinute.setSeconds(0, 0);
-	const endOfMinute = new Date(startOfMinute);
-	endOfMinute.setMinutes(startOfMinute.getMinutes() + 1);
-	const minuteProgress =
-		((date.getTime() - startOfMinute.getTime()) /
-			(endOfMinute.getTime() - startOfMinute.getTime())) *
-		100;
-
-	const startOfSecond = new Date(date);
-	startOfSecond.setMilliseconds(0);
-	const endOfSecond = new Date(startOfSecond);
-	endOfSecond.setSeconds(startOfSecond.getSeconds() + 1);
-	const secondProgress =
-		((date.getTime() - startOfSecond.getTime()) /
-			(endOfSecond.getTime() - startOfSecond.getTime())) *
-		100;
-
-	return {
-		year: yearProgress,
-		month: monthProgress,
-		week: weekProgress,
-		day: dayProgress,
-		hour: hourProgress,
-		minute: minuteProgress,
-		second: secondProgress,
-	};
-}
 
 const colors = ["purple", "blue", "teal", "green", "yellow", "orange", "red"];
 
+function calcProgress(now: Date, start: Date, end: Date) {
+	return (now.getTime() - start.getTime()) / (end.getTime() - start.getTime());
+}
+
 export default function Page() {
-	const [mounted, setMounted] = useState(false);
-	const [progresses, setProgresses] = useState<Progresses>(
-		calculateProgresses(new Date()),
-	);
+	const [now, setNow] = useState(new Date());
 
 	const [prevSecond, setPrevSecond] = useState(new Date().getSeconds());
 	const [enableMilli, setEnableMilli] = useState(false);
 
-	useEffect(() => {
-		setMounted(true);
-	}, []);
+	const onExecInterval = useEffectEvent(() => {
+		const _now = new Date();
+		if (enableMilli || prevSecond !== _now.getSeconds()) {
+			setNow(_now);
+			if (!enableMilli) setPrevSecond(_now.getSeconds());
+		}
+	});
 
 	useEffect(() => {
-		const interval = setInterval(() => {
-			if (enableMilli || prevSecond !== new Date().getSeconds())
-				setProgresses(calculateProgresses(new Date()));
-
-			if (!enableMilli) setPrevSecond(new Date().getSeconds());
-		}, 1);
+		const interval = setInterval(onExecInterval);
 
 		return () => clearInterval(interval);
-	}, [enableMilli, prevSecond]);
+	}, []);
 
-	if (!mounted) return <Loading />;
+	const [y, M, w, d, h, m, s] = [
+		now.getFullYear(),
+		now.getMonth(),
+		now.getDay(),
+		now.getDate(),
+		now.getHours(),
+		now.getMinutes(),
+		now.getSeconds(),
+	];
 
 	const progressData = [
-		{ label: "days / a year", value: progresses.year },
-		{ label: "days / a month", value: progresses.month },
-		{ label: "days / this week", value: progresses.week },
-		{ label: "hours / a day", value: progresses.day },
-		{ label: "minutes / an hour", value: progresses.hour },
-		{ label: "seconds / a minute", value: progresses.minute },
+		{
+			key: "year",
+			label: `${y}年`,
+			value: calcProgress(now, new Date(y, 0), new Date(y + 1, 0)),
+		},
+		{
+			key: "month",
+			label: `${M + 1}月`,
+			value: calcProgress(now, new Date(y, M), new Date(y, M + 1)),
+		},
+		{
+			key: "day",
+			label: `${["日", "月", "火", "水", "木", "金", "土"][now.getDay()]}曜日`,
+			value: calcProgress(
+				now,
+				new Date(y, M, d - w),
+				new Date(y, M, 7 - w + d),
+			),
+		},
+		{
+			key: "date",
+			label: `${now.getDate()}日`,
+			value: calcProgress(now, new Date(y, M, d), new Date(y, M, d + 1)),
+		},
+		{
+			key: "hour",
+			label: `${now.getHours()}時`,
+			value: calcProgress(now, new Date(y, M, d, h), new Date(y, M, d, h + 1)),
+		},
+		{
+			key: "minute",
+			label: `${now.getMinutes()}分`,
+			value: calcProgress(
+				now,
+				new Date(y, M, d, h, m),
+				new Date(y, M, d, h, m + 1),
+			),
+		},
 	];
+
 	if (enableMilli)
-		progressData.push({ label: "milli / a second", value: progresses.second });
+		progressData.push({
+			key: "second",
+			label: `${now.getSeconds()}秒`,
+			value: calcProgress(
+				now,
+				new Date(y, M, d, h, m, s),
+				new Date(y, M, d, h, m, s + 1),
+			),
+		});
+
+	function calcSizes(index?: number) {
+		return new Array(5)
+			.fill(0)
+			.map(
+				(_, ii) =>
+					`${(progressData.length - (index ?? 0)) * (ii + 1) * (ii === 0 ? 32 : 16) + ii * 8}px`,
+			);
+	}
+
+	const nums = progressData.map((progress, i) => (
+		<VStack key={progress.key}>
+			<Box pt="4" fontFamily="mono" whiteSpace="nowrap">
+				<Heading fontFamily="inherit" color={`${colors[i]}.fg`}>
+					{progress.label}
+				</Heading>
+				<Text>
+					{`${progress.value < 0.1 ? "0" : ""}${(Math.floor(progress.value * 100_000000) / 1000000).toFixed(6)}%`}
+				</Text>
+			</Box>
+		</VStack>
+	));
 
 	return (
-		<Container centerContent alignItems="end" py="4">
-			{progressData.map((data, i) => (
-				<ProgressCircle.Root
-					key={data.label}
-					value={data.value}
-					pos="absolute"
-					left={new Array(5).fill(0).map((_, ii) => `${i * ((ii + 1) * 8)}px`)}
-					top={new Array(5)
-						.fill(0)
-						.map((_, ii) => `${i * ((ii + 1) * 8) + 40}px`)}
-					colorPalette={colors[i]}
-				>
-					<ProgressCircle.Circle
-						css={{
-							"--size": new Array(5)
-								.fill(0)
-								.map(
-									(_, ii) =>
-										`${(progressData.length - i) * (ii + 1) * 16 + 64}px`,
-								),
-							"--thickness": ["3px", "5px", "7px", "9px", "11px"],
-						}}
-					>
-						<ProgressCircle.Track stroke="bg.muted" />
-						<ProgressCircle.Range transition="none" />
-					</ProgressCircle.Circle>
-				</ProgressCircle.Root>
-			))}
-			<VStack maxW="1/2" w="full">
-				<Switch.Root
-					checked={enableMilli}
-					onCheckedChange={(e) => setEnableMilli(e.checked)}
-				>
-					<Switch.HiddenInput />
-					<Switch.Control />
-					<Switch.Label>ミリ秒</Switch.Label>
-				</Switch.Root>
-				<DataList.Root divideY="1px" borderWidth={1} rounded="md" pb="5" px="4">
-					{progressData.map((progress, i) => (
-						<DataList.Item key={progress.label} pt="4">
-							<DataList.ItemLabel color={`${colors[i]}.fg`}>
-								{progress.label}
-							</DataList.ItemLabel>
-							<DataList.ItemValue fontFamily="mono">
-								{`${progress.value < 10 ? "0" : ""}${progress.value.toFixed(6)}%`}
-							</DataList.ItemValue>
-						</DataList.Item>
-					))}
-				</DataList.Root>
-			</VStack>
-		</Container>
+		<ClientOnly fallback={<Loading />}>
+			<Container py="4">
+				<SimpleGrid columns={[1, 2]} alignItems="center">
+					<Box px="4" my="4" pos="relative" h={calcSizes()} w="full">
+						{progressData.map((data, i) => (
+							<ProgressCircle.Root
+								key={data.key}
+								value={data.value * 100}
+								pos="absolute"
+								top="50%"
+								left="50%"
+								translate="-50% -50%"
+								colorPalette={colors[i]}
+								transition="all"
+							>
+								<ProgressCircle.Circle
+									css={{
+										"--size": calcSizes(i),
+										"--thickness": ["4px", "4px", "6px", "8px", "10px"],
+									}}
+								>
+									<ProgressCircle.Track stroke="bg.muted" />
+									<ProgressCircle.Range
+										transition={
+											data.key === "second" || now.getSeconds() === 0
+												? "none"
+												: undefined
+										}
+										transitionDuration="fastest"
+									/>
+								</ProgressCircle.Circle>
+							</ProgressCircle.Root>
+						))}
+					</Box>
+					<VStack m="4">
+						<Switch.Root
+							checked={enableMilli}
+							onCheckedChange={(e) => setEnableMilli(e.checked)}
+						>
+							<Switch.Label>ミリ秒</Switch.Label>
+							<Switch.HiddenInput />
+							<Switch.Control />
+						</Switch.Root>
+						<SimpleGrid gap="4" w="full" minChildWidth="28">
+							{nums}
+						</SimpleGrid>
+					</VStack>
+				</SimpleGrid>
+			</Container>
+		</ClientOnly>
 	);
 }
