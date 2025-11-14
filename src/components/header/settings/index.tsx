@@ -5,7 +5,6 @@ import {
 	IconButton,
 	Portal,
 	Skeleton,
-	Text,
 } from "@chakra-ui/react";
 import { FaGear, FaPalette } from "react-icons/fa6";
 import { Aria } from "@/components/ui/aria";
@@ -42,14 +41,14 @@ export function Settings() {
 									<Theme />
 								</Aria>
 							</Drawer.Body>
-							<Drawer.Footer flexDir="column" alignItems="start">
+							{/* <Drawer.Footer flexDir="column" alignItems="start">
 								<Text fontWeight="bold">Safari (WebKit)をご利用の方へ</Text>
 								<Text>
 									上記ブラウザエンジンにおけるデバッグ及び調整は一切行っておりません。如何なる視覚的なバグや挙動のバグも修正を行わず、あらゆる要望も受け付けません。
 									<br />
 									直近のSafariでフッターがアドレスバーに重なってしまうバグを確認していますが、Safari側の標準に従わない独自的な実装により発生しており、またそれに対する解決策も存在していません。
 								</Text>
-							</Drawer.Footer>
+							</Drawer.Footer> */}
 							<Drawer.CloseTrigger asChild>
 								<CloseButton />
 							</Drawer.CloseTrigger>
