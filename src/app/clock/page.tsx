@@ -30,6 +30,7 @@ export default function Page() {
 	const onExecInterval = useEffectEvent(() => {
 		const _now = new Date();
 		if (enableMilli || prevSecond !== _now.getSeconds()) {
+			if (!enableMilli) _now.setMilliseconds(0);
 			setNow(_now);
 			if (!enableMilli) setPrevSecond(_now.getSeconds());
 		}
