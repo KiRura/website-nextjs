@@ -1,7 +1,10 @@
 export const config = {
 	inAnimation: {
-		animation: "ease-out",
 		animationDuration: "slow",
 		animationName: "fade-in",
+	},
+	outAnimation: {
+		animationDuration: "slow",
+		animationName: "fade-out",
 	},
 };
