@@ -25,7 +25,7 @@ type Licenses = {
 
 const licenses: Licenses[] = [
 	{
-		title: "monaspace",
+		title: "Monaspace",
 		license: [
 			{
 				name: "SIL OPEN FONT LICENSE Version 1.1",

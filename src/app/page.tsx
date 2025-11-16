@@ -32,12 +32,12 @@ export default function Home() {
 	return (
 		<>
 			<ZZZ />
-			<Container pb="10" spaceY="16">
+			<Container as="main" pb="10" spaceY="8">
 				<Center
 					flexDir="column"
-					minH="94vh" // ズームアウト時に大変なことになる
+					minH={{ "2xlDown": "94vh", "2xl": "60rem" }}
 					gap={{ smDown: "4", sm: "6" }}
-					py="10"
+					py="4"
 				>
 					<Text
 						fontSize={["5xl", "6xl", "6xl", "7xl"]}
@@ -81,7 +81,7 @@ export default function Home() {
 				</Aria>
 				<SimpleGrid
 					columns={{ lgDown: 1, lg: 2 }}
-					gap={{ lgDown: "16", lg: "4" }}
+					gap={{ lgDown: "8", lg: "4" }}
 				>
 					<Aria title="画像" icon={<FaIcons />}>
 						<Center>
@@ -140,17 +140,17 @@ export default function Home() {
 							</SimpleGrid>
 						</Center>
 					</Aria>
-					<Aria title="情報" icon={<FaDatabase />}>
-						<VStack>
-							<DataList.Root
-								variant="bold"
-								orientation="horizontal"
-								justifyContent="center"
-								divideY="1px"
-							>
+					<Aria
+						title="情報"
+						h="inherit"
+						childrenBoxProps={{ h: "auto" }}
+						icon={<FaDatabase />}
+					>
+						<Center my="auto">
+							<DataList.Root variant="bold" orientation="horizontal">
 								<Intro />
 							</DataList.Root>
-						</VStack>
+						</Center>
 					</Aria>
 				</SimpleGrid>
 			</Container>

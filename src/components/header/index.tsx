@@ -11,11 +11,12 @@ export default function Header() {
 			as="header"
 			pos="sticky"
 			zIndex="docked"
-			bg="bg"
-			top="0px"
+			top="0"
+			py="2"
+			bg="bg/80"
 			borderBottomWidth="1px"
+			backdropFilter="blur(25px)"
 			hideBelow="sm"
-			py="2.5"
 		>
 			<Container centerContent flexDir="row" justifyContent="space-between">
 				<HStack gap="0" overflow="hidden">

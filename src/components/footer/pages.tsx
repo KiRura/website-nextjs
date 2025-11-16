@@ -12,12 +12,14 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
+import { useRef } from "react";
 import { FaBars } from "react-icons/fa6";
 import { HomeLink } from "../header/homelink";
 import { pages } from "../header/pages";
 
 export function Pages() {
 	const path = usePathname();
+	const containerRef = useRef(null);
 
 	return (
 		<ClientOnly
@@ -36,12 +38,12 @@ export function Pages() {
 				<Portal>
 					<Drawer.Backdrop hideFrom="sm" />
 					<Drawer.Positioner hideFrom="sm">
-						<Drawer.Content bg="bg">
+						<Drawer.Content ref={containerRef} bg="bg">
 							<Drawer.Header justifyContent="center">
-								<HomeLink footer />
+								<HomeLink containerRef={containerRef} />
 							</Drawer.Header>
 							<Drawer.Body mb="6">
-								<SimpleGrid columns={2} gap="1.5" w="full">
+								<SimpleGrid columns={2} gap="2" w="full">
 									{
 										pages.map((page) => {
 											const active = path.startsWith(page.href);
@@ -49,7 +51,7 @@ export function Pages() {
 											return (
 												<Drawer.ActionTrigger key={page.href} asChild>
 													<Button
-														variant={active ? "solid" : "outline"}
+														variant={active ? "solid" : "surface"}
 														justifyContent="start"
 														asChild
 													>

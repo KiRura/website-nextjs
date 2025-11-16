@@ -13,6 +13,8 @@ import {
 	VStack,
 } from "@chakra-ui/react";
 import { useEffect, useEffectEvent, useState } from "react";
+import { FaClock } from "react-icons/fa6";
+import { Aria } from "@/components/ui/aria";
 import { config } from "@/config";
 import Loading from "../loading";
 
@@ -114,88 +116,82 @@ export default function Page() {
 			);
 	}
 
-	const nums = progressData.map((progress, i) => (
-		<VStack key={progress.key} align="start">
-			<Box fontFamily="mono" whiteSpace="nowrap">
-				<Heading fontFamily="inherit" color={`${colors[i]}.fg`}>
-					{progress.label}
-				</Heading>
-				<Presence
-					present={progress.value !== null}
-					_open={config.inAnimation}
-					_closed={config.outAnimation}
-				>
-					<Text>
-						{`${
-							(progress.value ?? 0) < 0.1 ? "0" : ""
-						}${(Math.floor((progress.value ?? 0) * 100_000000) / 1000000).toFixed(6)}%`}
-					</Text>
-				</Presence>
-			</Box>
-		</VStack>
-	));
-
 	return (
 		<ClientOnly fallback={<Loading />}>
 			<Container py="8" spaceY="8">
-				<VStack>
-					<Switch.Root
-						checked={enableMilli}
-						onCheckedChange={(e) => setEnableMilli(e.checked)}
-					>
-						<Switch.Label>ミリ秒</Switch.Label>
-						<Switch.HiddenInput />
-						<Switch.Control />
-					</Switch.Root>
-				</VStack>
-				<SimpleGrid columns={[1, 2]} gap="4">
-					<Box pos="relative" h={calcSizes()} w="full">
-						{progressData.map((data, i) => (
-							<Presence
-								present={data.value !== null}
-								key={data.key}
-								_open={config.inAnimation}
-								_closed={config.outAnimation}
-							>
-								<ProgressCircle.Root
-									key={data.key}
-									value={
-										data.key === "second" && !enableMilli
-											? 0.01
-											: (data.value ?? 0) * 100
-									}
-									pos="absolute"
-									top="50%"
-									left="50%"
-									translate="-50% -50%"
-									colorPalette={colors[i]}
-								>
-									<ProgressCircle.Circle
-										css={{
-											"--size": calcSizes(i),
-											"--thickness": ["4px", "4px", "6px", "8px", "10px"],
-										}}
-									>
-										<ProgressCircle.Track stroke="bg.muted" />
-										<ProgressCircle.Range
-											transition={enableMilli || s === 0 ? "none" : undefined}
-											transitionDuration={
-												!enableMilli && data.key === "second"
-													? "slow"
-													: "fastest"
-											}
-										/>
-									</ProgressCircle.Circle>
-								</ProgressCircle.Root>
-							</Presence>
-						))}
-					</Box>
-					<VStack h="full" justify="center">
-						<SimpleGrid gap="4" w="full" minChildWidth="28">
-							{nums}
-						</SimpleGrid>
+				<Aria title="時計" icon={<FaClock />}>
+					<VStack>
+						<Switch.Root
+							checked={enableMilli}
+							onCheckedChange={(e) => setEnableMilli(e.checked)}
+						>
+							<Switch.Label>ミリ秒</Switch.Label>
+							<Switch.HiddenInput />
+							<Switch.Control />
+						</Switch.Root>
 					</VStack>
-				</SimpleGrid>
+					<SimpleGrid columns={[1, 2]} gap="4">
+						<Box pos="relative" h={calcSizes()} w="full">
+							{progressData.map((data, i) => (
+								<Presence
+									present={data.value !== null}
+									key={data.key}
+									_open={config.inAnimation}
+									_closed={config.outAnimation}
+								>
+									<ProgressCircle.Root
+										key={data.key}
+										value={
+											data.key === "second" && !enableMilli
+												? 0.01
+												: (data.value ?? 0) * 100
+										}
+										pos="absolute"
+										top="50%"
+										left="50%"
+										translate="-50% -50%"
+										colorPalette={colors[i]}
+									>
+										<ProgressCircle.Circle
+											css={{
+												"--size": calcSizes(i),
+												"--thickness": ["4px", "4px", "6px", "8px", "10px"],
+											}}
+										>
+											<ProgressCircle.Track stroke="bg.muted" />
+											<ProgressCircle.Range
+												transition={enableMilli || s === 0 ? "none" : undefined}
+												transitionDuration={
+													!enableMilli && data.key === "second"
+														? "slow"
+														: "fastest"
+												}
+											/>
+										</ProgressCircle.Circle>
+									</ProgressCircle.Root>
+								</Presence>
+							))}
+						</Box>
+						<VStack h="full" justify="center">
+							<SimpleGrid gap="4" w="full" minChildWidth="28">
+								{progressData.map((progress, i) => (
+									<VStack key={progress.key}>
+										<Box fontFamily="mono" whiteSpace="nowrap">
+											<Heading fontFamily="inherit" color={`${colors[i]}.fg`}>
+												{progress.label}
+											</Heading>
+											<Text>
+												{`${
+													(progress.value ?? 0) < 0.1 ? "0" : ""
+												}${(Math.floor((progress.value ?? 0) * 100 * 10 ** 6) / 10 ** 6).toFixed(6)}%`}
+											</Text>
+										</Box>
+									</VStack>
+								))}
+							</SimpleGrid>
+						</VStack>
+					</SimpleGrid>
+				</Aria>
 			</Container>
 		</ClientOnly>
 	);

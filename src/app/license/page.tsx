@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 export default function Page() {
 	return (
-		<Container py="4" spaceY="8" centerContent>
-			<Aria title="依存関係" icon={<FaFileImport />} w="full">
+		<Container py="4" spaceY="8">
+			<Aria title="依存関係" icon={<FaFileImport />}>
 				<SimpleGrid
 					columns={{
 						smDown: 1,
@@ -27,7 +27,7 @@ export default function Page() {
 					<Deps />
 				</SimpleGrid>
 			</Aria>
-			<Aria title="ライセンス" icon={<FaFileSignature />} w="full" maxW="3xl">
+			<Aria title="ライセンス" icon={<FaFileSignature />}>
 				<VStack>
 					<Licenses />
 				</VStack>

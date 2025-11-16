@@ -19,7 +19,7 @@ export function Settings() {
 				</Skeleton>
 			}
 		>
-			<Drawer.Root>
+			<Drawer.Root lazyMount unmountOnExit>
 				<Drawer.Trigger asChild>
 					<IconButton variant="ghost">
 						<FaGear />
@@ -29,14 +29,17 @@ export function Settings() {
 					<Drawer.Backdrop />
 					<Drawer.Positioner>
 						<Drawer.Content>
-							<Drawer.Header>
+							<Drawer.Header borderBottomWidth="1px" py="2" pr="2.5">
 								<Drawer.Title>設定</Drawer.Title>
+								<Drawer.CloseTrigger asChild>
+									<CloseButton pos="static" />
+								</Drawer.CloseTrigger>
 							</Drawer.Header>
-							<Drawer.Body>
+							<Drawer.Body paddingBlock="6">
 								<Aria
 									title="明暗"
 									icon={<FaPalette />}
-									titleProps={{ fontSize: "2xl" }}
+									titleProps={{ fontSize: "2xl", gap: "3" }}
 								>
 									<Theme />
 								</Aria>
@@ -49,9 +52,6 @@ export function Settings() {
 									直近のSafariでフッターがアドレスバーに重なってしまうバグを確認していますが、Safari側の標準に従わない独自的な実装により発生しており、またそれに対する解決策も存在していません。
 								</Text>
 							</Drawer.Footer> */}
-							<Drawer.CloseTrigger asChild>
-								<CloseButton />
-							</Drawer.CloseTrigger>
 						</Drawer.Content>
 					</Drawer.Positioner>
 				</Portal>

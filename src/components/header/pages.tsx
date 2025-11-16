@@ -1,6 +1,6 @@
 "use client";
 
-import { Bleed, Box, Button, ButtonGroup, Icon } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Icon } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { FaBlog, FaClock, FaFileSignature } from "react-icons/fa6";
@@ -28,7 +28,7 @@ export function Pages() {
 
 	return (
 		<Box pos="relative" overflow="hidden">
-			{new Array(2).fill(0).map((_, i) => (
+			{/* {new Array(2).fill(0).map((_, i) => (
 				<Bleed
 					// biome-ignore lint/suspicious/noArrayIndexKey: <動かないから>
 					key={i}
@@ -43,9 +43,9 @@ export function Pages() {
 						? { left: 0, bgGradient: "to-r" }
 						: { right: 0, bgGradient: "to-l" })}
 				/>
-			))}
+			))} */}
 			<Box overflow="auto" scrollbarWidth="thin" px="4">
-				<ButtonGroup wordWrap="normal" whiteSpace="nowrap" gap="6">
+				<ButtonGroup whiteSpace="nowrap" gap="6">
 					{pages.map((page) => {
 						const active = path.startsWith(page.href);
 
@@ -53,6 +53,7 @@ export function Pages() {
 							<Button
 								key={page.href}
 								variant="plain"
+								bg="transparent"
 								rounded="none"
 								px="0"
 								color={{ base: "fg.muted", _hover: "fg" }}

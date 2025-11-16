@@ -65,7 +65,7 @@ export default function RootLayout({
 				<Provider>
 					<Box minH="vh">
 						<Header />
-						<main style={{ position: "relative" }}>{children}</main>
+						{children}
 					</Box>
 					<Footer />
 				</Provider>

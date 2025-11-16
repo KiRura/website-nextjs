@@ -2,18 +2,18 @@
 
 import {
 	Button,
+	ButtonGroup,
+	ClientOnly,
 	Clipboard,
 	Image,
 	Link,
-	Popover,
+	Menu,
 	Portal,
-	Separator,
-	SimpleGrid,
 	Span,
 } from "@chakra-ui/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { useEffect, useState } from "react";
+import { type RefObject, useState } from "react";
 import { FaHouse } from "react-icons/fa6";
 import { Tooltip } from "../ui/tooltip";
 
@@ -69,38 +69,16 @@ const svg = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
   </g>
 </svg>`;
 
-export function HomeLink({ footer }: { footer?: boolean }) {
+export function HomeLink({
+	containerRef,
+}: {
+	containerRef?: RefObject<HTMLElement | null>;
+}) {
 	const [i, setI] = useState(0);
 	const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
-	const [open, setOpen] = useState(false);
-	const [mount, setMount] = useState(false);
-
-	useEffect(() => {
-		setMount(true);
-	}, []);
 
 	const link = (
-		<Link
-			as={Popover.Trigger}
-			asChild
-			fontWeight="bold"
-			fontSize="xl"
-			onClick={() => {
-				if (timeoutId) clearTimeout(timeoutId);
-				setI((i) => i + 1);
-
-				setTimeoutId(
-					setTimeout(() => {
-						setI(0);
-					}, 2000),
-				);
-			}}
-			onContextMenu={(event) => {
-				event.preventDefault();
-
-				setOpen(true);
-			}}
-		>
+		<Link asChild fontWeight="bold" fontSize="xl">
 			<NextLink
 				{...(i < 20
 					? { href: "/" }
@@ -123,67 +101,70 @@ export function HomeLink({ footer }: { footer?: boolean }) {
 						loading="eager"
 					/>
 				</Image>
-				<Span {...(!footer && { hideBelow: "md" })}>KiRura</Span>
+				<Span {...(containerRef === undefined && { hideBelow: "md" })}>
+					KiRura
+				</Span>
 			</NextLink>
 		</Link>
 	);
 
-	if (!mount) return link;
-
 	return (
-		<Popover.Root
-			open={open}
-			onOpenChange={(e) => setOpen(e.open)}
-			positioning={{ placement: "bottom-start" }}
-		>
-			<Popover.Trigger maxH="8">
+		<ClientOnly fallback={link}>
+			<Menu.Root positioning={{ placement: "bottom-start" }}>
 				<Tooltip content="🤔" open={i >= 10} disabled={i < 10} showArrow>
-					{link}
+					<Menu.ContextTrigger
+						asChild
+						onClick={() => {
+							if (timeoutId) clearTimeout(timeoutId);
+							setI((i) => i + 1);
+
+							setTimeoutId(
+								setTimeout(() => {
+									setI(0);
+								}, 2000),
+							);
+						}}
+					>
+						{link}
+					</Menu.ContextTrigger>
 				</Tooltip>
-			</Popover.Trigger>
-			<Portal>
-				<Popover.Positioner>
-					<Popover.Content>
-						<Popover.Arrow />
-						<Popover.Body spaceY="4">
-							<SimpleGrid w="full" gap="4" columns={2}>
-								<Clipboard.Root value={svg}>
+				<Portal container={containerRef}>
+					<Menu.Positioner>
+						<Menu.Content spaceY="4" p="4">
+							<ButtonGroup variant="surface" attached grow>
+								<Clipboard.Root asChild value={svg}>
 									<Clipboard.Trigger asChild>
-										<Button variant="outline">
+										<Button py="2" h="fit" flexDir="column">
 											<Clipboard.Indicator />
 											SVGをコピー
 										</Button>
 									</Clipboard.Trigger>
 								</Clipboard.Root>
-								<Popover.CloseTrigger asChild>
-									<Button variant="outline" asChild>
-										<NextLink href="/brand">
-											<Image rounded="full" boxSize="6" minW="6" asChild>
-												<NextImage
-													src="/kirura/512p.png"
-													alt="kirura logo"
-													width={512}
-													height={512}
-												/>
-											</Image>
-											ロゴについて
-										</NextLink>
-									</Button>
-								</Popover.CloseTrigger>
-							</SimpleGrid>
-							<Separator />
-							<Popover.CloseTrigger asChild>
-								<Button variant="outline" w="full" asChild>
-									<NextLink href="/">
-										<FaHouse />
-										ホーム
+								<Button py="2" h="fit" flexDir="column" asChild>
+									<NextLink href="/brand">
+										<Image rounded="full" boxSize="3.5" asChild>
+											<NextImage
+												src="/kirura/512p.png"
+												alt="kirura logo"
+												width={512}
+												height={512}
+											/>
+										</Image>
+										ロゴについて
 									</NextLink>
 								</Button>
-							</Popover.CloseTrigger>
-						</Popover.Body>
-					</Popover.Content>
-				</Popover.Positioner>
-			</Portal>
-		</Popover.Root>
+							</ButtonGroup>
+							<Menu.Separator />
+							<Button variant="surface" w="full" asChild>
+								<NextLink href="/">
+									<FaHouse />
+									ホーム
+								</NextLink>
+							</Button>
+						</Menu.Content>
+					</Menu.Positioner>
+				</Portal>
+			</Menu.Root>
+		</ClientOnly>
 	);
 }
