@@ -1,4 +1,5 @@
 "use client";
+
 import {
 	Box,
 	ClientOnly,
@@ -177,12 +178,7 @@ export default function Page() {
 									>
 										<ProgressCircle.Track stroke="bg.muted" />
 										<ProgressCircle.Range
-											transition={
-												(enableMilli && data.key === "second") ||
-												(data.key !== "second" && now.getSeconds() === 0)
-													? "none"
-													: undefined
-											}
+											transition={enableMilli || s === 0 ? "none" : undefined}
 											transitionDuration={
 												!enableMilli && data.key === "second"
 													? "slow"
