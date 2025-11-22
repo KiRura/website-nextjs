@@ -136,6 +136,8 @@ export function HomeLink({
 				open={rickrolled}
 				onOpenChange={(e) => setRickRolled(e.open)}
 				closeOnInteractOutside={false}
+				scrollBehavior="inside"
+				size={{ smDown: "full", sm: "md" }}
 			>
 				<Portal>
 					<Dialog.Backdrop />
@@ -145,7 +147,7 @@ export function HomeLink({
 								<Dialog.Title>You are RICKROLLED!</Dialog.Title>
 							</Dialog.Header>
 							<Dialog.Body>
-								<Image asChild>
+								<Image h="44vh" fit="contain" asChild>
 									<NextImage
 										src="https://media.tenor.com/q0Ejci9EQhcAAAAi/rick-astley-rick-roll.gif"
 										alt="Never gonna give you up gif"
@@ -155,18 +157,15 @@ export function HomeLink({
 									/>
 								</Image>
 							</Dialog.Body>
-							<Dialog.Footer>
+							<Dialog.Footer flexDir={["column", "row"]}>
 								<Dialog.ActionTrigger asChild>
-									<Button whiteSpace="normal" overflowWrap="break-word">
-										Never gonna give you up
-									</Button>
+									<Button w={["full", "fit"]}>Never gonna give you up</Button>
 								</Dialog.ActionTrigger>
 								<Button
-									whiteSpace="normal"
-									overflowWrap="break-word"
 									onClick={() => {
 										rickroll?.play();
 									}}
+									w={["full", "fit"]}
 									asChild
 								>
 									<NextLink
