@@ -8,7 +8,7 @@ import {
 	FaImage,
 	FaUpRightFromSquare,
 } from "react-icons/fa6";
-import { Aria } from "@/components/ui/aria";
+import Aria from "@/components/ui/aria";
 
 export const metadata: Metadata = {
 	title: "ロゴについて",
@@ -99,22 +99,26 @@ const logos: {
 
 export default function Page() {
 	return (
-		<Container maxW="2xl" py="8" spaceY="4">
+		<Container as="main" maxW="2xl" py="8" spaceY="4">
 			{logos.map((logo) => (
-				<Aria
-					key={logo.category.name}
-					title={logo.category.name}
-					icon={<logo.category.icon />}
-				>
-					{logo.files.map((file) => (
-						<Box key={file.href}>
-							<Link href={file.href} target="_blank" colorPalette="orange">
-								{file.name} <FaUpRightFromSquare />
-							</Link>
-							{file.description && <Text>{file.description}</Text>}
-						</Box>
-					))}
-				</Aria>
+				<Aria.Root key={logo.category.name}>
+					<Aria.TitleBar>
+						<Aria.Title>
+							<logo.category.icon />
+							{logo.category.name}
+						</Aria.Title>
+					</Aria.TitleBar>
+					<Aria.Body spaceY="3">
+						{logo.files.map((file) => (
+							<Box key={file.href}>
+								<Link href={file.href} target="_blank" colorPalette="orange">
+									{file.name} <FaUpRightFromSquare />
+								</Link>
+								{file.description && <Text>{file.description}</Text>}
+							</Box>
+						))}
+					</Aria.Body>
+				</Aria.Root>
 			))}
 		</Container>
 	);

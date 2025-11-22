@@ -4,6 +4,7 @@ import {
 	Bleed,
 	Box,
 	Center,
+	type CenterProps,
 	ClientOnly,
 	HStack,
 	Skeleton,
@@ -33,11 +34,12 @@ export function ZZZ({
 	abs,
 	accentColor,
 	accentBgColor,
+	...rest
 }: {
 	abs?: boolean;
 	accentColor?: string;
 	accentBgColor?: string;
-}) {
+} & CenterProps) {
 	const [scrollPos, setScrollPos] = useState(0);
 
 	useEffect(() => {
@@ -87,7 +89,7 @@ export function ZZZ({
 				opacity: 1 - scrollPos,
 				display: scrollPos >= 1 ? "none" : undefined,
 			})}
-			zIndex="-1"
+			{...rest}
 		>
 			<ClientOnly
 				fallback={
@@ -102,7 +104,7 @@ export function ZZZ({
 								"--end-color": "colors.bg",
 							}}
 						/>
-						{gradient}
+						{!abs && gradient}
 					</>
 				}
 			>
@@ -138,7 +140,7 @@ export function ZZZ({
 						</HStack>
 					))}
 				</Box>
-				{gradient}
+				{!abs && gradient}
 			</ClientOnly>
 		</Center>
 	);

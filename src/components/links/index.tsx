@@ -5,7 +5,6 @@ import {
 	Card,
 	Center,
 	Flex,
-	HStack,
 	Icon,
 	Link,
 	LinkOverlay,
@@ -14,7 +13,7 @@ import {
 import NextLink from "next/link";
 import { useEffect, useState } from "react";
 import { FaCheck, FaCopy, FaUpRightFromSquare, FaXmark } from "react-icons/fa6";
-import { links } from "./linksdata";
+import { links } from "./data";
 
 export function Links() {
 	const [copied, setCopied] = useState(-1);
@@ -45,38 +44,34 @@ export function Links() {
 			>
 				<Box flex={1} overflow="hidden">
 					<Card.Body gap="1.5" pr={link.href ? "0.5" : undefined}>
-						<Flex
-							gap="2.5"
-							justify="space-between"
-							align="start"
-							overflow="hidden"
-						>
-							<HStack
+						<Flex gap="2.5" justify="space-between" align="start">
+							<Card.Title
 								color={{
 									base: link.href ? "fg" : "fg.muted",
 									_hover: "orange.fg",
 								}}
+								asChild={Boolean(link.href)}
 								transition="common"
 							>
-								<link.icon />
-								<Card.Title color="inherit" asChild={Boolean(link.href)}>
-									{link.href ? (
-										<LinkOverlay asChild>
-											<Link asChild variant="underline">
-												<NextLink
-													href={link.href}
-													target="_blank"
-													prefetch={false}
-												>
-													{link.name}
-												</NextLink>
-											</Link>
-										</LinkOverlay>
-									) : (
-										link.name
-									)}
-								</Card.Title>
-							</HStack>
+								{link.href ? (
+									<LinkOverlay asChild>
+										<Link asChild variant="underline">
+											<NextLink
+												href={link.href}
+												target="_blank"
+												prefetch={false}
+											>
+												<Icon>
+													<link.icon />
+												</Icon>
+												{link.name}
+											</NextLink>
+										</Link>
+									</LinkOverlay>
+								) : (
+									link.name
+								)}
+							</Card.Title>
 							<Link
 								fontStyle="italic"
 								color={{
@@ -98,12 +93,9 @@ export function Links() {
 								}}
 								overflow="hidden"
 								zIndex="base"
+								whiteSpace="nowrap"
 							>
-								<Span
-									overflow="hidden"
-									textOverflow="ellipsis"
-									whiteSpace="nowrap"
-								>
+								<Span overflow="hidden" pr="0.5" textOverflow="ellipsis">
 									{link.accountId}
 								</Span>
 								<Box

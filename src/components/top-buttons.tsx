@@ -7,7 +7,7 @@ import {
 	FaTwitter,
 	FaUpRightFromSquare,
 } from "react-icons/fa6";
-import { Aria } from "./ui/aria";
+import Aria from "./ui/aria";
 
 const buttons = [
 	{
@@ -85,13 +85,15 @@ const ButtonsComponent = buttons.map((data, i) => {
 
 export function TopButtons() {
 	return (
-		<Aria childrenBoxProps={{ shadow: "lg" }}>
-			<SimpleGrid
-				columns={{ mdDown: 2, md: 4 }}
-				gap={{ mdDown: "1.5", md: "0" }}
-			>
-				{ButtonsComponent}
-			</SimpleGrid>
-		</Aria>
+		<Aria.Root shadow="lg">
+			<Aria.Body>
+				<SimpleGrid
+					columns={{ mdDown: 2, md: 4 }}
+					gap={{ mdDown: "1.5", md: "0" }}
+				>
+					{ButtonsComponent}
+				</SimpleGrid>
+			</Aria.Body>
+		</Aria.Root>
 	);
 }

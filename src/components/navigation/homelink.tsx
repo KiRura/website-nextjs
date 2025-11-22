@@ -2,9 +2,10 @@
 
 import {
 	Button,
-	ButtonGroup,
 	ClientOnly,
 	Clipboard,
+	CloseButton,
+	Dialog,
 	Image,
 	Link,
 	Menu,
@@ -13,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { type RefObject, useState } from "react";
+import { type RefObject, useEffect, useState } from "react";
 import { FaHouse } from "react-icons/fa6";
 import { Tooltip } from "../ui/tooltip";
 
@@ -75,14 +76,34 @@ export function HomeLink({
 	containerRef?: RefObject<HTMLElement | null>;
 }) {
 	const [i, setI] = useState(0);
+	const [rickrolled, setRickRolled] = useState(false);
+	const [rickroll, setRickroll] = useState<HTMLAudioElement | null>(null);
 	const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
+
+	useEffect(() => {
+		const audio = new Audio("/you_are_rickrolled.opus");
+		audio.volume = 0.5;
+		setRickroll(audio);
+	}, []);
+
+	useEffect(() => {
+		if (!rickrolled && i >= 21) {
+			setRickRolled(true);
+			rickroll?.play();
+			return () => rickroll?.remove();
+		}
+	}, [rickrolled, i, rickroll]);
 
 	const link = (
 		<Link asChild fontWeight="bold" fontSize="xl">
 			<NextLink
 				{...(i < 20
 					? { href: "/" }
-					: { href: "https://youtu.be/dQw4w9WgXcQ", target: "_blank" })}
+					: {
+							href: "https://youtu.be/dQw4w9WgXcQ?t=4s",
+							target: "_blank",
+							prefetch: false,
+						})}
 			>
 				<Image
 					asChild
@@ -110,6 +131,57 @@ export function HomeLink({
 
 	return (
 		<ClientOnly fallback={link}>
+			<Dialog.Root
+				lazyMount
+				open={rickrolled}
+				onOpenChange={(e) => setRickRolled(e.open)}
+				closeOnInteractOutside={false}
+			>
+				<Portal>
+					<Dialog.Backdrop />
+					<Dialog.Positioner>
+						<Dialog.Content>
+							<Dialog.Header>
+								<Dialog.Title>You are RICKROLLED!</Dialog.Title>
+							</Dialog.Header>
+							<Dialog.Body>
+								<Image asChild>
+									<NextImage
+										src="https://media.tenor.com/q0Ejci9EQhcAAAAi/rick-astley-rick-roll.gif"
+										alt="Never gonna give you up gif"
+										width={498}
+										height={498}
+										unoptimized
+									/>
+								</Image>
+							</Dialog.Body>
+							<Dialog.Footer>
+								<Dialog.ActionTrigger asChild>
+									<Button whiteSpace="normal">Never gonna give you up</Button>
+								</Dialog.ActionTrigger>
+								<Button
+									whiteSpace="normal"
+									onClick={() => {
+										rickroll?.play();
+									}}
+									asChild
+								>
+									<NextLink
+										href="https://youtu.be/dQw4w9WgXcQ?t=4s"
+										target="_blank"
+										prefetch={false}
+									>
+										Gonna give you up
+									</NextLink>
+								</Button>
+							</Dialog.Footer>
+							<Dialog.CloseTrigger asChild>
+								<CloseButton size="sm" />
+							</Dialog.CloseTrigger>
+						</Dialog.Content>
+					</Dialog.Positioner>
+				</Portal>
+			</Dialog.Root>
 			<Menu.Root positioning={{ placement: "bottom-start" }}>
 				<Tooltip content="🤔" open={i >= 10} disabled={i < 10} showArrow>
 					<Menu.ContextTrigger
@@ -130,37 +202,35 @@ export function HomeLink({
 				</Tooltip>
 				<Portal container={containerRef}>
 					<Menu.Positioner>
-						<Menu.Content spaceY="4" p="4">
-							<ButtonGroup variant="surface" attached grow>
-								<Clipboard.Root asChild value={svg}>
-									<Clipboard.Trigger asChild>
-										<Button py="2" h="fit" flexDir="column">
-											<Clipboard.Indicator />
-											SVGをコピー
-										</Button>
-									</Clipboard.Trigger>
-								</Clipboard.Root>
-								<Button py="2" h="fit" flexDir="column" asChild>
-									<NextLink href="/brand">
-										<Image rounded="full" boxSize="3.5" asChild>
-											<NextImage
-												src="/kirura/512p.png"
-												alt="kirura logo"
-												width={512}
-												height={512}
-											/>
-										</Image>
-										ロゴについて
-									</NextLink>
-								</Button>
-							</ButtonGroup>
+						<Menu.Content>
+							<Clipboard.Root value={svg}>
+								<Clipboard.Trigger asChild>
+									<Menu.Item value="copy-svg" closeOnSelect={false}>
+										<Clipboard.Indicator />
+										SVGをコピー
+									</Menu.Item>
+								</Clipboard.Trigger>
+							</Clipboard.Root>
+							<Menu.Item value="brand" display="flex" asChild>
+								<NextLink href="/brand">
+									<Image rounded="full" boxSize="3.5" asChild>
+										<NextImage
+											src="/kirura/512p.png"
+											alt="kirura logo"
+											width={512}
+											height={512}
+										/>
+									</Image>
+									ロゴについて
+								</NextLink>
+							</Menu.Item>
 							<Menu.Separator />
-							<Button variant="surface" w="full" asChild>
+							<Menu.Item value="home" asChild>
 								<NextLink href="/">
 									<FaHouse />
 									ホーム
 								</NextLink>
-							</Button>
+							</Menu.Item>
 						</Menu.Content>
 					</Menu.Positioner>
 				</Portal>

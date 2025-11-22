@@ -8,6 +8,6 @@ export const fonts = defineTokens.fonts({
 		value: "var(--font-inter), var(--font-noto-sans-jp), sans-serif",
 	},
 	mono: {
-		value: "var(--font-monaspace-neon), var(--font-m-plus-1-code), monospace",
+		value: "var(--font-google-sans-code), var(--font-m-plus-1-code), monospace",
 	},
 });

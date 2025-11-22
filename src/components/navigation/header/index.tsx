@@ -1,9 +1,9 @@
 import { Bleed, Box, Container, HStack, IconButton } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
-import { HomeLink } from "./homelink";
+import { HomeLink } from "../homelink";
+import { Settings } from "../settings";
 import { Pages } from "./pages";
-import { Settings } from "./settings";
 
 export default function Header() {
 	return (
@@ -19,7 +19,7 @@ export default function Header() {
 			hideBelow="sm"
 		>
 			<Container centerContent flexDir="row" justifyContent="space-between">
-				<HStack gap="0" overflow="hidden">
+				<HStack gap="0" overflow="hidden" as="nav">
 					<HomeLink />
 					<Bleed h="2em" w="4" borderRightWidth={1} />
 					<Pages />

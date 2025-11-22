@@ -1,16 +1,7 @@
-"use client";
-
-import {
-	Accordion,
-	Heading,
-	Link,
-	Span,
-	Switch,
-	VStack,
-} from "@chakra-ui/react";
+import { Accordion, Heading, Link, Span } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useState } from "react";
 import { FaUpRightFromSquare } from "react-icons/fa6";
+import Aria from "../ui/aria";
 
 type ChildLicenses = {
 	name: string;
@@ -131,21 +122,10 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 ];
 
 export default function Licenses() {
-	const [multiple, setMultiple] = useState(true);
-	return (
-		<>
-			<Switch.Root
-				checked={multiple}
-				onCheckedChange={(e) => setMultiple(e.checked)}
-			>
-				<Switch.HiddenInput />
-				<Switch.Control>
-					<Switch.Thumb />
-				</Switch.Control>
-				<Switch.Label>複数展開</Switch.Label>
-			</Switch.Root>
-			{licenses.map((license) => (
-				<VStack key={license.title} w="full">
+	return licenses.map((license) => (
+		<Aria.Root key={license.title} shadow="none">
+			<Aria.TitleBar>
+				<Aria.Title asChild>
 					{license.href ? (
 						<Link
 							fontSize="xl"
@@ -162,24 +142,29 @@ export default function Licenses() {
 					) : (
 						<Heading>{license.title}</Heading>
 					)}
-					<Accordion.Root multiple={multiple} collapsible variant="enclosed">
-						{license.license.map((data, i) => (
-							<Accordion.Item key={data.name} value={`${i}`}>
-								<Accordion.ItemTrigger>
-									<Span flex={1}>{data.name}</Span> <Accordion.ItemIndicator />
-								</Accordion.ItemTrigger>
-								<Accordion.ItemContent
-									whiteSpace="pre-wrap"
-									fontFamily="mono"
-									fontSize="sm"
-								>
-									<Accordion.ItemBody>{data.content}</Accordion.ItemBody>
-								</Accordion.ItemContent>
-							</Accordion.Item>
-						))}
-					</Accordion.Root>
-				</VStack>
-			))}
-		</>
-	);
+				</Aria.Title>
+			</Aria.TitleBar>
+			<Aria.Body>
+				<Accordion.Root collapsible multiple variant="enclosed">
+					{license.license.map((data, i) => (
+						<Accordion.Item
+							key={`${license.title}-${data.name}`}
+							value={`${i}`}
+						>
+							<Accordion.ItemTrigger>
+								<Span flex={1}>{data.name}</Span> <Accordion.ItemIndicator />
+							</Accordion.ItemTrigger>
+							<Accordion.ItemContent
+								whiteSpace="pre-wrap"
+								fontFamily="mono"
+								fontSize="sm"
+							>
+								<Accordion.ItemBody>{data.content}</Accordion.ItemBody>
+							</Accordion.ItemContent>
+						</Accordion.Item>
+					))}
+				</Accordion.Root>
+			</Aria.Body>
+		</Aria.Root>
+	));
 }

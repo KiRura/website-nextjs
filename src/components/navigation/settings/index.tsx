@@ -7,7 +7,7 @@ import {
 	Skeleton,
 } from "@chakra-ui/react";
 import { FaGear, FaPalette } from "react-icons/fa6";
-import { Aria } from "@/components/ui/aria";
+import Aria from "@/components/ui/aria";
 import { Theme } from "./theme";
 
 export function Settings() {
@@ -36,13 +36,17 @@ export function Settings() {
 								</Drawer.CloseTrigger>
 							</Drawer.Header>
 							<Drawer.Body paddingBlock="6">
-								<Aria
-									title="明暗"
-									icon={<FaPalette />}
-									titleProps={{ fontSize: "2xl", gap: "3" }}
-								>
-									<Theme />
-								</Aria>
+								<Aria.Root shadow="none">
+									<Aria.TitleBar>
+										<Aria.Title size="xl">
+											<FaPalette />
+											明暗
+										</Aria.Title>
+									</Aria.TitleBar>
+									<Aria.Body>
+										<Theme />
+									</Aria.Body>
+								</Aria.Root>
 							</Drawer.Body>
 							{/* <Drawer.Footer flexDir="column" alignItems="start">
 								<Text fontWeight="bold">Safari (WebKit)をご利用の方へ</Text>

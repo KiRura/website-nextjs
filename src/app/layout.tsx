@@ -1,10 +1,14 @@
 import { Box } from "@chakra-ui/react";
 import type { Metadata, Viewport } from "next";
-import { Inter, M_PLUS_1_Code, Noto_Sans_JP } from "next/font/google";
-import localFont from "next/font/local";
+import {
+	Google_Sans_Code,
+	Inter,
+	M_PLUS_1_Code,
+	Noto_Sans_JP,
+} from "next/font/google";
 import type React from "react";
-import { Footer } from "@/components/footer";
-import Header from "@/components/header";
+import { Footer } from "@/components/navigation/footer";
+import Header from "@/components/navigation/header";
 import { Provider } from "@/components/ui/provider";
 
 export const metadata: Metadata = {
@@ -39,9 +43,9 @@ const mPlus1Code = M_PLUS_1_Code({
 	variable: "--font-m-plus-1-code",
 	subsets: ["latin"],
 });
-const monaspaceNeon = localFont({
-	src: "../font/MonaspaceNeonVarVF[wght,wdth,slnt].woff2",
-	variable: "--font-monaspace-neon",
+const googleSansCode = Google_Sans_Code({
+	variable: "--font-google-sans-code",
+	subsets: ["latin"],
 });
 
 export default function RootLayout({
@@ -52,7 +56,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="ja"
-			className={`${inter.variable} ${notoSansJp.variable} ${mPlus1Code.variable} ${monaspaceNeon.variable}`}
+			className={`${inter.variable} ${notoSansJp.variable} ${mPlus1Code.variable} ${googleSansCode.variable}`}
 			suppressHydrationWarning
 		>
 			<head>
@@ -61,7 +65,6 @@ export default function RootLayout({
 			<body>
 				<p style={{ display: "none" }}>技術的ヲタクは世界を救う</p>
 				<p style={{ display: "none" }}>芸術的ヲタクは心身を救う</p>
-				<p style={{ display: "none" }}>絶望と希望は紙一重</p>
 				<Provider>
 					<Box minH="vh">
 						<Header />

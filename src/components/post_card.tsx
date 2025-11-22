@@ -26,7 +26,7 @@ export function PostCard({
 }) {
 	return (
 		<Card.Root
-			w={{ smDown: "full" }}
+			w={{ mdDown: "full" }}
 			overflow="hidden"
 			h="fit"
 			size="lg"
