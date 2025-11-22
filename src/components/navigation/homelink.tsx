@@ -157,10 +157,13 @@ export function HomeLink({
 							</Dialog.Body>
 							<Dialog.Footer>
 								<Dialog.ActionTrigger asChild>
-									<Button whiteSpace="normal">Never gonna give you up</Button>
+									<Button whiteSpace="normal" overflowWrap="break-word">
+										Never gonna give you up
+									</Button>
 								</Dialog.ActionTrigger>
 								<Button
 									whiteSpace="normal"
+									overflowWrap="break-word"
 									onClick={() => {
 										rickroll?.play();
 									}}
