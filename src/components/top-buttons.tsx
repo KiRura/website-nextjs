@@ -1,4 +1,4 @@
-import { Button, Card, HStack, Icon, SimpleGrid } from "@chakra-ui/react";
+import { Button, HStack, Icon, SimpleGrid } from "@chakra-ui/react";
 import NextLink from "next/link";
 import {
 	FaBlog,
@@ -7,6 +7,7 @@ import {
 	FaTwitter,
 	FaUpRightFromSquare,
 } from "react-icons/fa6";
+import Aria from "./ui/aria";
 
 const buttons = [
 	{
@@ -84,22 +85,15 @@ const ButtonsComponent = buttons.map((data, i) => {
 
 export function TopButtons() {
 	return (
-		<Card.Root
-			flexDir="row"
-			divideX="1px"
-			size="sm"
-			bg="bg"
-			shadow="lg"
-			rounded="lg"
-		>
-			<Card.Body>
+		<Aria.Root shadow="lg">
+			<Aria.Body>
 				<SimpleGrid
 					columns={{ mdDown: 2, md: 4 }}
 					gap={{ mdDown: "1.5", md: "0" }}
 				>
 					{ButtonsComponent}
 				</SimpleGrid>
-			</Card.Body>
-		</Card.Root>
+			</Aria.Body>
+		</Aria.Root>
 	);
 }

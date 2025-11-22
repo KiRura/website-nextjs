@@ -1,7 +1,7 @@
 import { Box, Container, Flex, Group, IconButton } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FaGithub } from "react-icons/fa6";
-import { Settings } from "../header/settings";
+import { Settings } from "../settings";
 import { Pages } from "./pages";
 
 export function Footer() {

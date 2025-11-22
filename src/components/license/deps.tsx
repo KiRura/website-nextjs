@@ -1,6 +1,6 @@
 import {
 	Card,
-	Flex,
+	Center,
 	HStack,
 	Icon,
 	Link,
@@ -27,28 +27,26 @@ export function Deps() {
 		return (
 			<Card.Root
 				key={dep.name}
+				flexDir="row"
 				size="sm"
 				h="full"
 				bg={{ _hover: "bg.muted" }}
 				transition="backgrounds"
 			>
-				<Card.Header>
-					<Flex align="start" justify="space-between" gap="2.5">
-						<HStack>
-							<DepIcon />
-							<Card.Title asChild>
-								<LinkOverlay asChild>
-									<Link asChild variant="underline">
-										<NextLink href={link} target="_blank">
-											{dep.name}{" "}
-											<Icon boxSize="0.7em">
-												<FaUpRightFromSquare />
-											</Icon>
-										</NextLink>
-									</Link>
-								</LinkOverlay>
-							</Card.Title>
-						</HStack>
+				<Card.Body spaceY="3">
+					<HStack align="start" justify="space-between">
+						<Card.Title overflowWrap="anywhere" asChild>
+							<LinkOverlay asChild>
+								<Link asChild variant="underline">
+									<NextLink href={link} target="_blank">
+										<Icon>
+											<DepIcon />
+										</Icon>
+										{dep.name}
+									</NextLink>
+								</Link>
+							</LinkOverlay>
+						</Card.Title>
 						<Text
 							fontFamily="mono"
 							fontSize="sm"
@@ -57,15 +55,16 @@ export function Deps() {
 						>
 							{dep.installedVersion}
 						</Text>
-					</Flex>
-				</Card.Header>
-				<Card.Body>
-					<Flex>
-						<Tag.Root>
-							<Tag.Label>{dep.licenseType}</Tag.Label>
-						</Tag.Root>
-					</Flex>
+					</HStack>
+					<Tag.Root w="fit">
+						<Tag.Label>{dep.licenseType}</Tag.Label>
+					</Tag.Root>
 				</Card.Body>
+				<Center h="full" py="3" pr="3">
+					<Icon color="bg.emphasized">
+						<FaUpRightFromSquare />
+					</Icon>
+				</Center>
 			</Card.Root>
 		);
 	});

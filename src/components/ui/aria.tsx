@@ -3,46 +3,54 @@ import {
 	BoxProps,
 	ConditionalValue,
 	Heading,
+	HeadingProps,
 	HStack,
 	Icon,
 	Separator,
+	Span,
 	StackProps,
 	Text,
 	TextProps,
 } from "@chakra-ui/react";
-import type { JSX } from "react";
+import type { JSX, PropsWithChildren, ReactNode } from "react";
 
-export function Aria(
-	props: BoxProps & {
-		title: string;
-		titleProps?: StackProps;
-		icon: JSX.Element;
-		children: JSX.Element | JSX.Element[];
-	},
-) {
-	const { title, titleProps, icon, children, ...restProps } = props;
+function Root(props: BoxProps) {
+	return <Box bg="bg" rounded="lg" borderWidth="1px" shadow="lg" {...props} />;
+}
+
+function TitleBar(props: StackProps & { actions?: ReactNode }) {
+	const { children, actions, ...rest } = props;
 
 	return (
-		<Box spaceY="4" {...restProps}>
-			<HStack overflow="hidden" gap="4">
-				<Separator
-					hideBelow="sm"
-					variant="dashed"
-					borderColor="border.emphasized"
-					flex="1"
-				/>
-				<HStack
-					fontSize={["3xl", "4xl", "5xl"]}
-					gap={["2", "2.5", "3.5"]}
-					fontWeight="semibold"
-					{...titleProps}
-				>
-					<Icon>{icon}</Icon>
-					<Text>{title}</Text>
-				</HStack>
-				<Separator variant="dashed" borderColor="border.emphasized" flex="1" />
-			</HStack>
+		<HStack gap="3" mx="4" mt="4" justify="start" {...rest}>
 			{children}
-		</Box>
+			<Separator variant="dashed" flex={1} />
+			{actions}
+		</HStack>
 	);
 }
+
+function Title(props: HeadingProps) {
+	return (
+		<Heading
+			display="flex"
+			alignItems="center"
+			as="h2"
+			lineHeight={1}
+			size={["xl", "2xl", "3xl"]}
+			gap="2"
+			{...props}
+		/>
+	);
+}
+
+function Body(props: BoxProps) {
+	return <Box m="4" {...props} />;
+}
+
+export default {
+	Root,
+	TitleBar,
+	Title,
+	Body,
+};

@@ -25,24 +25,24 @@ import { Herta } from "@/components/herta";
 import { Intro } from "@/components/intro";
 import { Links } from "@/components/links";
 import { TopButtons } from "@/components/top-buttons";
-import { Aria } from "@/components/ui/aria";
+import Aria from "@/components/ui/aria";
 import { ZZZ } from "@/components/zzz";
 
 export default function Home() {
 	return (
 		<>
 			<ZZZ />
-			<Container pb="10" spaceY="16">
+			<Container as="main" pb="10" spaceY="8">
 				<Center
 					flexDir="column"
-					minH="94vh" // ズームアウト時に大変なことになる
+					minH={{ "2xlDown": "94vh", "2xl": "60rem" }}
 					gap={{ smDown: "4", sm: "6" }}
-					py="10"
+					py="4"
 				>
 					<Text
 						fontSize={["5xl", "6xl", "6xl", "7xl"]}
 						fontWeight="semibold"
-						fontFamily="var(--font-monaspace-neon), var(--font-noto-sans-jp), monospace"
+						fontFamily="var(--font-google-sans-code), var(--font-noto-sans-jp), monospace"
 						filter={{
 							base: "drop-shadow(0px 4px 4px {colors.bg})",
 							_dark: "drop-shadow(0px 4px 6px {colors.bg/60})",
@@ -66,92 +66,111 @@ export default function Home() {
 						<FaAnglesDown />
 					</Icon>
 				</Center>
-				<Aria title="関連" icon={<FaLink />}>
-					<SimpleGrid
-						columns={{
-							mdDown: 1,
-							md: 2,
-							lg: 3,
-							xl: 4,
-						}}
-						gap="2"
-					>
-						<Links />
-					</SimpleGrid>
-				</Aria>
+				<Aria.Root>
+					<Aria.TitleBar>
+						<Aria.Title>
+							<FaLink />
+							関連
+						</Aria.Title>
+					</Aria.TitleBar>
+					<Aria.Body>
+						<SimpleGrid
+							columns={{
+								mdDown: 1,
+								md: 2,
+								lg: 3,
+								xl: 4,
+							}}
+							gap="2"
+						>
+							<Links />
+						</SimpleGrid>
+					</Aria.Body>
+				</Aria.Root>
 				<SimpleGrid
 					columns={{ lgDown: 1, lg: 2 }}
-					gap={{ lgDown: "16", lg: "4" }}
+					gap={{ lgDown: "8", lg: "4" }}
 				>
-					<Aria title="画像" icon={<FaIcons />}>
-						<Center>
-							<SimpleGrid columns={2} gap="4">
-								<VStack>
-									<Image
-										asChild
-										rounded="full"
-										aspectRatio="square"
-										borderWidth="2px"
-										borderStyle="solid"
-									>
-										<NextImage
-											src="/kirura/2048p.png"
-											alt="kirura icon"
-											height={2048}
-											width={2048}
-											unoptimized
-										/>
-									</Image>
-									<Text fontSize="sm" color="fg.subtle" textAlign="center">
-										ブランド的なもの
-										<br />
-										4年ぐらい使い続けた400x400のjpegのものをベースに
-										<Link colorPalette="orange" asChild>
-											<NextLink href="/brand">SVG</NextLink>
-										</Link>
-										に作り直した
-									</Text>
-								</VStack>
-								<VStack>
-									<Image
-										asChild
-										rounded="full"
-										borderWidth="2px"
-										borderStyle="solid"
-									>
-										<NextImage
-											src="/kirura/amagi.png"
-											alt="kirura icon 2"
-											height={652}
-											width={652}
-											unoptimized
-										/>
-									</Image>
-									<Text fontSize="sm" color="fg.subtle" textAlign="center">
-										絵:{" "}
-										<Link asChild colorPalette="orange">
-											<NextLink href="https://x.com/meltqc" target="_blank">
-												@meltqc
-												<FaUpRightFromSquare />
-											</NextLink>
-										</Link>
-									</Text>
-								</VStack>
-							</SimpleGrid>
-						</Center>
-					</Aria>
-					<Aria title="情報" icon={<FaDatabase />}>
-						<VStack>
-							<DataList.Root
-								variant="bold"
-								orientation="horizontal"
-								justifyContent="center"
-								divideY="1px"
-							>
-								<Intro />
-							</DataList.Root>
-						</VStack>
-					</Aria>
+					<Aria.Root>
+						<Aria.TitleBar>
+							<Aria.Title>
+								<FaIcons />
+								画像
+							</Aria.Title>
+						</Aria.TitleBar>
+						<Aria.Body>
+							<Center>
+								<SimpleGrid columns={2} gap="4">
+									<VStack>
+										<Image
+											asChild
+											rounded="full"
+											aspectRatio="square"
+											borderWidth="2px"
+											borderStyle="solid"
+										>
+											<NextImage
+												src="/kirura/2048p.png"
+												alt="kirura icon"
+												height={2048}
+												width={2048}
+												unoptimized
+											/>
+										</Image>
+										<Text fontSize="sm" color="fg.subtle" textAlign="center">
+											ブランド的なもの
+											<br />
+											4年ぐらい使い続けた400x400のjpegのものをベースに
+											<Link colorPalette="orange" asChild>
+												<NextLink href="/brand">SVG</NextLink>
+											</Link>
+											に作り直した
+										</Text>
+									</VStack>
+									<VStack>
+										<Image
+											asChild
+											rounded="full"
+											borderWidth="2px"
+											borderStyle="solid"
+										>
+											<NextImage
+												src="/kirura/amagi.png"
+												alt="kirura icon 2"
+												height={652}
+												width={652}
+												unoptimized
+											/>
+										</Image>
+										<Text fontSize="sm" color="fg.subtle" textAlign="center">
+											絵:{" "}
+											<Link asChild colorPalette="orange">
+												<NextLink href="https://x.com/meltqc" target="_blank">
+													@meltqc
+													<FaUpRightFromSquare />
+												</NextLink>
+											</Link>
+										</Text>
+									</VStack>
+								</SimpleGrid>
+							</Center>
+						</Aria.Body>
+					</Aria.Root>
+					<Aria.Root>
+						<Aria.TitleBar>
+							<Aria.Title>
+								<FaDatabase />
+								情報
+							</Aria.Title>
+						</Aria.TitleBar>
+						<Aria.Body>
+							<Center>
+								<DataList.Root variant="bold" orientation="horizontal">
+									<Intro />
+								</DataList.Root>
+							</Center>
+						</Aria.Body>
+					</Aria.Root>
 				</SimpleGrid>
 			</Container>
 			<Box borderTopWidth={1}>

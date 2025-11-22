@@ -56,8 +56,7 @@ export default async function Page({
 	const res = await getDetail(slug).catch(() => notFound());
 
 	return (
-		// デザイン変更後特に調整無し 要リファクタリング
-		<Container maxW="3xl" centerContent py="12" spaceY="4">
+		<Container as="main" centerContent py="12" spaceY="4">
 			<Box
 				w="full"
 				{...(res.coverImage && {
@@ -151,7 +150,7 @@ export default async function Page({
 					)}
 				</Stack>
 			</VStack>
-			<Prose maxW="none" size="lg" w="full">
+			<Prose maxW="2xl" size="lg" w="full">
 				{/** biome-ignore lint/security/noDangerouslySetInnerHtml: microCMSからのHTMLであるため */}
 				<div dangerouslySetInnerHTML={{ __html: res.content }} />
 			</Prose>
