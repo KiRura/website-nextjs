@@ -3,7 +3,7 @@ import {
 	Center,
 	ClientOnly,
 	Container,
-	DataList,
+	Em,
 	Highlight,
 	Icon,
 	Image,
@@ -110,14 +110,13 @@ export default function Home() {
 											borderStyle="solid"
 										>
 											<NextImage
-												src="/kirura/2048p.png"
+												src="/static/kirura/768p.png"
 												alt="kirura icon"
-												height={2048}
-												width={2048}
-												unoptimized
+												height={768}
+												width={768}
 											/>
 										</Image>
-										<Text fontSize="sm" color="fg.subtle" textAlign="center">
+										<Em fontSize="sm" color="fg.muted" textAlign="center">
 											ブランド的なもの
 											<br />
 											4年ぐらい使い続けた400x400のjpegのものをベースに
@@ -125,7 +124,7 @@ export default function Home() {
 												<NextLink href="/brand">SVG</NextLink>
 											</Link>
 											に作り直した
-										</Text>
+										</Em>
 									</VStack>
 									<VStack>
 										<Image
@@ -135,14 +134,13 @@ export default function Home() {
 											borderStyle="solid"
 										>
 											<NextImage
-												src="/kirura/amagi.png"
+												src="/static/kirura/amagi.png"
 												alt="kirura icon 2"
 												height={652}
 												width={652}
-												unoptimized
 											/>
 										</Image>
-										<Text fontSize="sm" color="fg.subtle" textAlign="center">
+										<Em fontSize="sm" color="fg.muted" textAlign="center">
 											絵:{" "}
 											<Link asChild colorPalette="orange">
 												<NextLink href="https://x.com/meltqc" target="_blank">
@@ -150,7 +148,7 @@ export default function Home() {
 													<FaUpRightFromSquare />
 												</NextLink>
 											</Link>
-										</Text>
+										</Em>
 									</VStack>
 								</SimpleGrid>
 							</Center>
@@ -165,20 +163,19 @@ export default function Home() {
 						</Aria.TitleBar>
 						<Aria.Body>
 							<Center>
-								<DataList.Root variant="bold" orientation="horizontal">
-									<Intro />
-								</DataList.Root>
+								<Intro />
 							</Center>
 						</Aria.Body>
 					</Aria.Root>
 				</SimpleGrid>
 			</Container>
 			<Box borderTopWidth={1}>
-				<Container pt="8" pb="28" centerContent>
+				<Container pt="8" centerContent>
 					<ClientOnly>
 						<Image
 							src={`https://count.getloli.com/@KiRura-website${process.env.NODE_ENV === "development" ? "-dev" : ""}?darkmode=auto`}
 							fetchPriority="low"
+							alt="moe counter"
 						/>
 					</ClientOnly>
 					<Text color="bg" hideBelow="sm">
