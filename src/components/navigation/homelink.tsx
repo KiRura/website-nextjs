@@ -114,10 +114,10 @@ export function HomeLink({
 					mr={{ md: "0.5" }}
 				>
 					<NextImage
-						src="/kirura/512p.png"
+						src="/static/kirura/512p.png"
 						alt="kirura logo"
-						width={512}
-						height={512}
+						width={96}
+						height={96}
 						priority
 						loading="eager"
 					/>

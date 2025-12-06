@@ -51,7 +51,7 @@ export function Deps() {
 							fontFamily="mono"
 							fontSize="sm"
 							fontStyle="italic"
-							color="fg.subtle"
+							color="fg.muted"
 						>
 							{dep.installedVersion}
 						</Text>

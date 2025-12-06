@@ -32,7 +32,7 @@ export function Pages() {
 			{() => (
 				<Drawer.Root placement="bottom">
 					<Drawer.Trigger asChild>
-						<IconButton variant="outline">
+						<IconButton variant="outline" aria-label="pages">
 							<FaBars />
 						</IconButton>
 					</Drawer.Trigger>

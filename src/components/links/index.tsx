@@ -2,6 +2,7 @@
 
 import {
 	Box,
+	Button,
 	Card,
 	Center,
 	Flex,
@@ -72,12 +73,16 @@ export function Links() {
 									link.name
 								)}
 							</Card.Title>
-							<Link
+							<Button
+								variant="plain"
 								fontStyle="italic"
 								color={{
-									base: copied === i ? "blue.fg" : "fg.subtle",
+									base: copied === i ? "blue.fg" : "fg.muted",
 									_hover: "blue.fg",
 								}}
+								p="0"
+								h="fit"
+								borderWidth="0"
 								transition="common"
 								transitionProperty="color"
 								fontSize="sm"
@@ -98,27 +103,26 @@ export function Links() {
 								<Span overflow="hidden" pr="0.5" textOverflow="ellipsis">
 									{link.accountId}
 								</Span>
-								<Box
-									asChild
+								<Icon
 									animation="ease-out"
 									animationDuration="slow"
 									animationName="scale-in, fade-in"
 									pos="sticky"
+									boxSize="4"
+									aspectRatio="square"
 									right={0}
 								>
-									<Icon>
-										{copied === i ? (
-											<FaCheck />
-										) : errored === i ? (
-											<FaXmark />
-										) : (
-											<FaCopy />
-										)}
-									</Icon>
-								</Box>
-							</Link>
+									{copied === i ? (
+										<FaCheck />
+									) : errored === i ? (
+										<FaXmark />
+									) : (
+										<FaCopy />
+									)}
+								</Icon>
+							</Button>
 						</Flex>
-						<Card.Description>{link.description}</Card.Description>
+						<Card.Description color="fg">{link.description}</Card.Description>
 					</Card.Body>
 					{link.external ? (
 						<Card.Footer justifyContent="end">

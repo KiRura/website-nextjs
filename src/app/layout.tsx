@@ -15,12 +15,15 @@ export const metadata: Metadata = {
 	metadataBase: new URL("https://www.kirura.f5.si"),
 	title: { template: "%s - きるら", default: "きるら" },
 	description: "しがない個人サイト",
-	icons: { icon: `/kirura/rounded/favicon.ico`, shortcut: "/kirura/512p.png" },
+	icons: {
+		icon: `/static/kirura/rounded/favicon.ico`,
+		shortcut: "/static/kirura/512p.png",
+	},
 	twitter: {
 		card: "summary",
 	},
 	openGraph: {
-		images: `/kirura/768p.png`,
+		images: `/static/kirura/768p.png`,
 		locale: "ja_JP",
 		type: "website",
 		siteName: "きるら",

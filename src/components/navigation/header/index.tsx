@@ -25,7 +25,7 @@ export default function Header() {
 					<Pages />
 				</HStack>
 				<HStack pos="sticky" right={0}>
-					<IconButton variant="ghost" asChild>
+					<IconButton variant="ghost" aria-label="source code" asChild>
 						<NextLink
 							href="https://github.com/KiRura/website-nextjs"
 							target="_blank"

@@ -21,7 +21,7 @@ export function Settings() {
 		>
 			<Drawer.Root lazyMount unmountOnExit>
 				<Drawer.Trigger asChild>
-					<IconButton variant="ghost">
+					<IconButton variant="ghost" aria-label="settings">
 						<FaGear />
 					</IconButton>
 				</Drawer.Trigger>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Image, Presence } from "@chakra-ui/react";
+import { Bleed, Button, Image, Presence } from "@chakra-ui/react";
 import NextImage from "next/image";
 import { useEffect, useState } from "react";
 import { config } from "@/config";
@@ -34,23 +34,22 @@ export function Herta() {
 
 	const imageProps = {
 		alt: "kurukuru~ herta",
-		width: 500,
-		height: 500,
-		unoptimized: true,
+		width: 192,
+		height: 192,
 		priority: true,
 	};
 
 	return (
 		<Button
 			variant="plain"
-			pos="absolute"
 			bottom={0}
 			w="fit"
 			h="fit"
 			onClick={onClick}
 			{...config.inAnimation}
 			p="0"
-			borderWidth="0"
+			borderWidth="1px"
+			borderColor="border"
 		>
 			<Presence
 				present={playing}
@@ -62,13 +61,20 @@ export function Herta() {
 				pos="fixed"
 				bottom={{ smDown: "56px", sm: "0" }}
 			>
-				<Image maxW="32" asChild>
-					<NextImage src="/kurukuru.webp" {...imageProps} loading="eager" />
+				<Image h="20" w="fit" fit="contain" asChild>
+					<NextImage
+						src="/kurukuru.webp"
+						{...imageProps}
+						unoptimized
+						loading="eager"
+					/>
 				</Image>
 			</Presence>
-			{!playing && (
+			{!playing ? (
 				<Image
-					maxW="32"
+					w="fit"
+					h="20"
+					fit="contain"
 					animation="esae-in"
 					animationName="slide-from-bottom-full"
 					animationDuration="slowest"
@@ -77,6 +83,8 @@ export function Herta() {
 				>
 					<NextImage src="/herta.webp" {...imageProps} loading="eager" />
 				</Image>
+			) : (
+				<Bleed h="20" />
 			)}
 		</Button>
 	);
