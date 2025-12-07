@@ -5,6 +5,7 @@ import {
 	SiNextdotjs,
 	SiReact,
 	SiRemark,
+	SiSupabase,
 	SiSwr,
 } from "react-icons/si";
 
@@ -26,4 +27,6 @@ export const Icons: IconsType = {
 	"@opennextjs/cloudflare": FaCloudflare,
 	"date-fns": FaClock,
 	"microcms-js-sdk": FaDatabase,
+	"@supabase/supabase-js": SiSupabase,
+	"next-turnstile": FaCloudflare,
 };

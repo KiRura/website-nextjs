@@ -3,13 +3,23 @@
 import { Box, Button, ButtonGroup, Icon } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
-import { FaBlog, FaClock, FaFileSignature } from "react-icons/fa6";
+import {
+	FaBlog,
+	FaClock,
+	FaFileSignature,
+	FaPaintbrush,
+} from "react-icons/fa6";
 
 export const pages = [
 	{
 		name: "呟き",
 		href: "/posts",
 		icon: FaBlog,
+	},
+	{
+		name: "PixelArt",
+		href: "/pixel-art",
+		icon: FaPaintbrush,
 	},
 	{
 		name: "時計",
