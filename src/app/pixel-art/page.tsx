@@ -58,7 +58,7 @@ export default function Page() {
 	const [pixels, setPixels] = useState<PixelsType[]>(initPixels());
 	const [title, setTitle] = useState("");
 	const [mode, setMode] = useState<"draw" | "erase" | "pipette">("draw");
-	const [color, setColor] = useState(parseColor("#ffffffff"));
+	const [color, setColor] = useState(parseColor("#fc835cff"));
 	const [uploadDialog, setUploadDialog] = useState(false);
 	const [uploading, setUploading] = useState(false);
 	const [result, setResult] = useState<{
