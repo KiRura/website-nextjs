@@ -10,7 +10,9 @@ import {
 	ColorPicker,
 	Container,
 	Dialog,
+	DownloadTrigger,
 	Em,
+	FileUpload,
 	Flex,
 	Heading,
 	HStack,
@@ -30,18 +32,25 @@ import {
 	FaCheck,
 	FaEraser,
 	FaEyeDropper,
+	FaFileExport,
+	FaFileImport,
 	FaPaintbrush,
 	FaRotateRight,
+	FaTrashCan,
 } from "react-icons/fa6";
 import { useColorMode } from "@/components/ui/color-mode";
+import { Tooltip } from "@/components/ui/tooltip";
+import { config } from "@/config";
 import type { PixelsType } from "@/interface/pixel-art";
 import { uploadPixels } from "@/lib/pixel-art";
+import parsePixels from "@/lib/pixel-art/parser";
 import Loading from "../loading";
 
 type SavedPixelsType = {
 	uuid: string;
 	title: string;
 	createdAt: Date;
+	savedAt: Date;
 	pixels: PixelsType[];
 };
 
@@ -99,11 +108,13 @@ export default function Page() {
 				uuid: string;
 				title: string;
 				pixels: PixelsType[];
-				createdAt: string;
+				createdAt?: string;
+				savedAt?: string;
 			}[] = JSON.parse(_saved);
-			parsedData = parsed.map(({ createdAt, ...rest }) => ({
+			parsedData = parsed.map(({ createdAt, savedAt, ...rest }) => ({
 				...rest,
-				createdAt: new Date(createdAt),
+				createdAt: new Date(createdAt ?? 0),
+				savedAt: new Date(savedAt ?? 0),
 			}));
 		} catch (e) {
 			setError(`保存されていた絵の読み込みに失敗しました\n${e}`);
@@ -310,6 +321,7 @@ export default function Page() {
 												key={`pixels-saved-${data.uuid}`}
 												size="sm"
 												minW="48"
+												{...config.inAnimation}
 											>
 												<Card.Header>
 													<Card.Title>{data.title}</Card.Title>
@@ -331,7 +343,23 @@ export default function Page() {
 													</SimpleGrid>
 												</Card.Body>
 												<Card.Footer>
-													<Em>{format(data.createdAt, "yyyy-MM-dd")}</Em>
+													<Tooltip
+														content={
+															data.createdAt.getTime()
+																? data.createdAt.toISOString()
+																: "不明な日時"
+														}
+													>
+														<Em
+															fontFamily="mono"
+															fontSize="sm"
+															color="fg.muted"
+														>
+															{data.createdAt.getTime()
+																? format(data.createdAt, "M/d HH:mm")
+																: "??/??"}
+														</Em>
+													</Tooltip>
 												</Card.Footer>
 											</Card.Root>
 										))}
@@ -341,6 +369,124 @@ export default function Page() {
 							<ScrollArea.Scrollbar orientation="horizontal" />
 							<ScrollArea.Corner />
 						</ScrollArea.Root>
+						<HStack>
+							<ButtonGroup variant="surface" grow attached>
+								<FileUpload.Root
+									accept="application/json"
+									onFileAccept={async ({ files }) => {
+										let _parsed: {
+											uuid: string;
+											title: string;
+											createdAt: string;
+											pixels: PixelsType[];
+											savedAt?: string;
+										}[];
+										try {
+											_parsed = JSON.parse(await files[0].text());
+										} catch (e) {
+											setError(`インポートに失敗しました\n${e}`);
+											return;
+										}
+										const errors: { title: string; error: string }[] = [];
+										const parsed: SavedPixelsType[] = [];
+										for (const data of _parsed) {
+											const res = parsePixels(data.pixels);
+											if (res.error) {
+												errors.push({ title: data.title, error: res.message });
+												continue;
+											}
+											const { createdAt, savedAt, ...rest } = data;
+											parsed.push({
+												...rest,
+												createdAt: new Date(createdAt),
+												savedAt: new Date(savedAt ?? 0),
+											});
+										}
+
+										if (errors.length)
+											setError(
+												errors
+													.map((error) => `${error.title}: ${error.error}`)
+													.join("\n"),
+											);
+										setSaved((prevSaved) => {
+											const data = [
+												...parsed,
+												...prevSaved.filter(
+													(saved) =>
+														!parsed.some((data) => saved.uuid === data.uuid),
+												),
+											];
+											data.sort(
+												(a, b) => a.savedAt.getTime() - b.savedAt.getTime(),
+											);
+											localStorage.setItem(
+												"pixel_art_saved",
+												JSON.stringify(data),
+											);
+											return data;
+										});
+									}}
+								>
+									<FileUpload.HiddenInput />
+									<FileUpload.Trigger asChild>
+										<Button>
+											<FaFileImport />
+											インポート
+										</Button>
+									</FileUpload.Trigger>
+								</FileUpload.Root>
+								<DownloadTrigger
+									data={JSON.stringify(saved)}
+									fileName="saved_pixels.json"
+									mimeType="application/json"
+									asChild
+								>
+									<Button>
+										<FaFileExport />
+										エクスポート
+									</Button>
+								</DownloadTrigger>
+							</ButtonGroup>
+							<Dialog.Root placement="center">
+								<Dialog.Trigger asChild>
+									<IconButton variant="outline">
+										<FaTrashCan />
+									</IconButton>
+								</Dialog.Trigger>
+								<Portal>
+									<Dialog.Backdrop />
+									<Dialog.Positioner>
+										<Dialog.Content>
+											<Dialog.Header>
+												<Dialog.Title>本当に削除しますか？</Dialog.Title>
+											</Dialog.Header>
+											<Dialog.Body>
+												<Text>
+													エクスポート済みのデータがあれば復元できます。
+												</Text>
+											</Dialog.Body>
+											<Dialog.Footer>
+												<Dialog.ActionTrigger asChild>
+													<Button
+														colorPalette="red"
+														onClick={() => {
+															setSaved([]);
+															localStorage.removeItem("pixel_art_saved");
+														}}
+													>
+														はい
+													</Button>
+												</Dialog.ActionTrigger>
+												<Dialog.ActionTrigger asChild>
+													<Button variant="outline">いいえ</Button>
+												</Dialog.ActionTrigger>
+											</Dialog.Footer>
+										</Dialog.Content>
+									</Dialog.Positioner>
+								</Portal>
+							</Dialog.Root>
+						</HStack>
 					</Container>
 					<Dialog.Root
 						placement="center"
@@ -399,8 +545,9 @@ export default function Page() {
 										<Button
 											onClick={() => {
 												if (!result) return;
+												const data = { ...result, savedAt: new Date() };
 												setSaved((prevSaved) => {
-													const newSaved = [...prevSaved, result];
+													const newSaved = [...prevSaved, data];
 													localStorage.setItem(
 														"pixel_art_saved",
 														JSON.stringify(newSaved),
