@@ -42,6 +42,7 @@ export function Links() {
 				flexDir="row"
 				bg={{ base: "bg.panel", ...(link.href && { _hover: "bg.muted" }) }}
 				transition="backgrounds"
+				overflow="hidden"
 			>
 				<Box flex={1} overflow="hidden">
 					<Card.Body gap="1.5" pr={link.href ? "0.5" : undefined}>
@@ -82,11 +83,14 @@ export function Links() {
 								}}
 								p="0"
 								h="fit"
+								w="full"
+								maxW="2/5"
 								borderWidth="0"
 								transition="common"
 								transitionProperty="color"
 								fontSize="sm"
 								fontFamily="mono"
+								justifyContent="end"
 								textAlign="right"
 								onClick={() => {
 									try {

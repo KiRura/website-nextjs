@@ -1,4 +1,10 @@
-import { HStack, Link, List, Table } from "@chakra-ui/react";
+import {
+	HStack,
+	Link,
+	List,
+	Table,
+	type TableRootProps,
+} from "@chakra-ui/react";
 import { differenceInYears } from "date-fns";
 import type { IconType } from "react-icons";
 import { FaCalendar, FaThumbsUp } from "react-icons/fa6";
@@ -51,13 +57,13 @@ const info: {
 	},
 ];
 
-export function Intro() {
+export function Intro(props: TableRootProps) {
 	return (
-		<Table.Root w={{ md: "fit" }}>
+		<Table.Root {...props}>
 			<Table.Body>
 				{info.map((info) => (
 					<Table.Row key={info.title.name}>
-						<Table.Cell minW="32">
+						<Table.Cell w="2/5">
 							<HStack gap="1.5">
 								<info.title.icon /> {info.title.name}
 							</HStack>
