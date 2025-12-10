@@ -185,7 +185,7 @@ export default function Page() {
 		let parsed: SavedPixelArtFromLocalStorageType[];
 		try {
 			parsed = SavedPixelArtFromLocalStorage.array().parse(
-				await files[0].text(),
+				JSON.parse(await files[0].text()),
 			);
 		} catch (e) {
 			return setError(
