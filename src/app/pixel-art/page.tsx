@@ -259,12 +259,15 @@ export default function Page() {
 																setTitle("");
 																localStorage.removeItem(Storage.Drawing);
 															}}
+															rounded="none"
 														>
 															はい
 														</Button>
 													</Dialog.ActionTrigger>
 													<Dialog.ActionTrigger asChild>
-														<Button variant="outline">いいえ</Button>
+														<Button variant="outline" rounded="none">
+															いいえ
+														</Button>
 													</Dialog.ActionTrigger>
 												</Dialog.Footer>
 											</Dialog.Content>
@@ -345,7 +348,10 @@ export default function Page() {
 							<Dialog.Root
 								placement="center"
 								open={uploadDialog}
-								onOpenChange={(e) => setUploadDialog(e.open)}
+								onOpenChange={(e) => {
+									if (!e.open) setToken(null);
+									setUploadDialog(e.open);
+								}}
 								fontFamily="dot"
 							>
 								<Dialog.Trigger asChild>
