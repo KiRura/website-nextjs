@@ -3,7 +3,8 @@
 	"version": "0.1.0",
 	"scripts": {
 		"dev": "next dev --webpack",
-		"build": "bun run dep:gen && next build --webpack",
+		"dev-b": "bun run dep:gen && next build --webpack",
+		"build": "bunx @chakra-ui/cli typegen ./src/theme/index.ts && bun run dev-b",
 		"start": "next start",
 		"check": "biome check --write --unsafe . && tsc",
 		"dep:gen": "license-report --only=prod --config license-report-config.json > src/app/license/licenses.json",
