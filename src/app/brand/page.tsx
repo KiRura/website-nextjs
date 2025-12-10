@@ -111,7 +111,11 @@ export default function Page() {
 					<Aria.Body spaceY="3">
 						{logo.files.map((file) => (
 							<Box key={file.href}>
-								<Link href={file.href} target="_blank" colorPalette="orange">
+								<Link
+									href={`/static${file.href}`}
+									target="_blank"
+									colorPalette="orange"
+								>
 									{file.name} <FaUpRightFromSquare />
 								</Link>
 								{file.description && <Text>{file.description}</Text>}
