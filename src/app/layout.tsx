@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import type { Metadata, Viewport } from "next";
 import {
+	DotGothic16,
 	Google_Sans_Code,
 	Inter,
 	M_PLUS_1_Code,
@@ -50,6 +51,11 @@ const googleSansCode = Google_Sans_Code({
 	variable: "--font-google-sans-code",
 	subsets: ["latin"],
 });
+const dotGothic16 = DotGothic16({
+	weight: ["400"],
+	variable: "--font-dot-gothic-16",
+	subsets: ["latin"],
+});
 
 export default function RootLayout({
 	children,
@@ -59,12 +65,9 @@ export default function RootLayout({
 	return (
 		<html
 			lang="ja"
-			className={`${inter.variable} ${notoSansJp.variable} ${mPlus1Code.variable} ${googleSansCode.variable}`}
+			className={`${inter.variable} ${notoSansJp.variable} ${dotGothic16.variable} ${mPlus1Code.variable} ${googleSansCode.variable}`}
 			suppressHydrationWarning
 		>
-			<head>
-				<meta name="darkreader-lock" />
-			</head>
 			<body>
 				<p style={{ display: "none" }}>技術的ヲタクは世界を救う</p>
 				<p style={{ display: "none" }}>芸術的ヲタクは心身を救う</p>
