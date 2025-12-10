@@ -1,26 +1,19 @@
 import {
+	Bleed,
 	Box,
 	Center,
 	ClientOnly,
 	Container,
-	Em,
+	GridItem,
 	Highlight,
 	Icon,
 	Image,
-	Link,
 	SimpleGrid,
 	Text,
 	VStack,
 } from "@chakra-ui/react";
 import NextImage from "next/image";
-import NextLink from "next/link";
-import {
-	FaAnglesDown,
-	FaDatabase,
-	FaIcons,
-	FaLink,
-	FaUpRightFromSquare,
-} from "react-icons/fa6";
+import { FaAnglesDown, FaLink } from "react-icons/fa6";
 import { Herta } from "@/components/herta";
 import { Intro } from "@/components/intro";
 import { Links } from "@/components/links";
@@ -70,7 +63,7 @@ export default function Home() {
 					<Aria.TitleBar>
 						<Aria.Title>
 							<FaLink />
-							関連
+							Links
 						</Aria.Title>
 					</Aria.TitleBar>
 					<Aria.Body>
@@ -87,86 +80,66 @@ export default function Home() {
 						</SimpleGrid>
 					</Aria.Body>
 				</Aria.Root>
-				<SimpleGrid
-					columns={{ lgDown: 1, lg: 2 }}
-					gap={{ lgDown: "8", lg: "4" }}
-				>
-					<Aria.Root>
-						<Aria.TitleBar>
-							<Aria.Title>
-								<FaIcons />
-								画像
-							</Aria.Title>
-						</Aria.TitleBar>
-						<Aria.Body>
-							<Center>
-								<SimpleGrid columns={2} gap="4">
-									<VStack>
-										<Image
-											asChild
-											rounded="full"
-											aspectRatio="square"
-											borderWidth="2px"
-											borderStyle="solid"
-										>
-											<NextImage
-												src="/static/kirura/768p.png"
-												alt="kirura icon"
-												height={768}
-												width={768}
-											/>
-										</Image>
-										<Em fontSize="sm" color="fg.muted" textAlign="center">
-											ブランド的なもの
-											<br />
-											4年ぐらい使い続けた400x400のjpegのものをベースに
-											<Link colorPalette="orange" asChild>
-												<NextLink href="/brand">SVG</NextLink>
-											</Link>
-											に作り直した
-										</Em>
-									</VStack>
-									<VStack>
-										<Image
-											asChild
-											rounded="full"
-											borderWidth="2px"
-											borderStyle="solid"
-										>
-											<NextImage
-												src="/static/kirura/amagi.png"
-												alt="kirura icon 2"
-												height={652}
-												width={652}
-											/>
-										</Image>
-										<Em fontSize="sm" color="fg.muted" textAlign="center">
-											絵:{" "}
-											<Link asChild colorPalette="orange">
-												<NextLink href="https://x.com/meltqc" target="_blank">
-													@meltqc
-													<FaUpRightFromSquare />
-												</NextLink>
-											</Link>
-										</Em>
-									</VStack>
-								</SimpleGrid>
-							</Center>
-						</Aria.Body>
-					</Aria.Root>
-					<Aria.Root>
-						<Aria.TitleBar>
-							<Aria.Title>
-								<FaDatabase />
-								情報
-							</Aria.Title>
-						</Aria.TitleBar>
-						<Aria.Body>
-							<Center>
+				<SimpleGrid columns={[1, 1, 2, 2, 3]} gap="4">
+					<GridItem colSpan={1}>
+						<Aria.Root overflow="hidden">
+							<Box pos="relative" aspectRatio={15 / 5}>
+								<Image asChild>
+									<NextImage src="/banner.jpg" alt="バナー画像" fill />
+								</Image>
+								<Bleed
+									pos="absolute"
+									w="full"
+									h="full"
+									bgGradient="to-b"
+									gradientFrom="bg/10"
+									gradientTo="bg"
+								/>
+								<VStack
+									p="4"
+									pb="0"
+									pos="absolute"
+									bottom="0"
+									w="full"
+									align="start"
+									filter={{
+										base: "drop-shadow(0px 4px 4px {colors.bg})",
+										_dark: "drop-shadow(0px 4px 6px {colors.bg/60})",
+									}}
+									lineHeight={1.1}
+								>
+									<Text fontSize={["2xl", "4xl"]} fontWeight="bolder">
+										About to
+									</Text>
+								</VStack>
+							</Box>
+							<Aria.TitleBar mt="0">
+								<Aria.Title
+									lineHeight={1.1}
+									fontSize={["3xl", "4xl", "5xl"]}
+									color="orange.fg"
+									fontWeight="bolder"
+								>
+									きるら / (7)KiRura
+								</Aria.Title>
+							</Aria.TitleBar>
+							<Aria.Body spaceY="1">
+								<Text>
+									しがない多趣味学生
+									<br />
+									ゲーム・このサイト(Next.js)・なんか凄い色々
+								</Text>
 								<Intro />
-							</Center>
-						</Aria.Body>
-					</Aria.Root>
+							</Aria.Body>
+						</Aria.Root>
+					</GridItem>
+					<GridItem colSpan={{ xlDown: 1, xl: 2 }}>
+						<Aria.Root h="full">
+							<Aria.TitleBar>
+								<Aria.Title>最近の呟き(眠い 後で実装する)</Aria.Title>
+							</Aria.TitleBar>
+						</Aria.Root>
+					</GridItem>
 				</SimpleGrid>
 			</Container>
 			<Box borderTopWidth={1}>
@@ -178,12 +151,14 @@ export default function Home() {
 							alt="moe counter"
 						/>
 					</ClientOnly>
-					<Text color="bg" hideBelow="sm">
-						ヘッダーにある左上のアイコンを連打するとサプライズがあるよ！
-					</Text>
-					<Text color="bg" hideFrom="sm">
-						メニューにあるKiRuraを連打するとサプライズがあるよ！
-					</Text>
+					<Box borderXWidth="2px">
+						<Text color="bg" hideBelow="sm">
+							ヘッダーにある左上のアイコンを連打するとサプライズがあるよ！
+						</Text>
+						<Text color="bg" hideFrom="sm">
+							メニューにあるKiRuraを連打するとサプライズがあるよ！
+						</Text>
+					</Box>
 					<Herta />
 				</Container>
 			</Box>
