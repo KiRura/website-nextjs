@@ -1,6 +1,7 @@
 import {
 	Card,
 	Center,
+	Flex,
 	HStack,
 	Icon,
 	Link,
@@ -56,9 +57,11 @@ export function Deps() {
 							{dep.installedVersion}
 						</Text>
 					</HStack>
-					<Tag.Root w="fit">
-						<Tag.Label>{dep.licenseType}</Tag.Label>
-					</Tag.Root>
+					<Flex h="full" align="end">
+						<Tag.Root w="fit">
+							<Tag.Label>{dep.licenseType}</Tag.Label>
+						</Tag.Root>
+					</Flex>
 				</Card.Body>
 				<Center h="full" py="3" pr="3">
 					<Icon color="bg.emphasized">

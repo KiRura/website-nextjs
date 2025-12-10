@@ -7,20 +7,19 @@ import {
 	ButtonGroup,
 	Card,
 	ClientOnly,
+	Code,
 	ColorPicker,
 	Container,
 	Dialog,
 	DownloadTrigger,
 	Em,
 	FileUpload,
-	Flex,
 	Heading,
 	HStack,
 	IconButton,
 	Input,
 	Portal,
 	parseColor,
-	ScrollArea,
 	Separator,
 	SimpleGrid,
 	Text,
@@ -30,6 +29,7 @@ import { Turnstile } from "next-turnstile";
 import { useEffect, useState } from "react";
 import {
 	FaCheck,
+	FaDownload,
 	FaEraser,
 	FaEyeDropper,
 	FaFileExport,
@@ -37,22 +37,24 @@ import {
 	FaPaintbrush,
 	FaRotateRight,
 	FaTrashCan,
+	FaUpload,
 } from "react-icons/fa6";
+import z, { ZodError } from "zod";
 import { useColorMode } from "@/components/ui/color-mode";
 import { Tooltip } from "@/components/ui/tooltip";
 import { config } from "@/config";
-import type { PixelsType } from "@/interface/pixel-art";
+import {
+	DrawingPixelArt,
+	type DrawingPixelArtType,
+	type PixelType,
+	type ResponsePixelArtType,
+	SavedPixelArt,
+	SavedPixelArtFromLocalStorage,
+	type SavedPixelArtFromLocalStorageType,
+	type SavedPixelArtType,
+} from "@/interface/pixel-art";
 import { uploadPixels } from "@/lib/pixel-art";
-import parsePixels from "@/lib/pixel-art/parser";
 import Loading from "../loading";
-
-type SavedPixelsType = {
-	uuid: string;
-	title: string;
-	createdAt: Date;
-	savedAt: Date;
-	pixels: PixelsType[];
-};
 
 if (!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY)
 	throw new Error("Turnstileのサイトキーがありません");
@@ -61,68 +63,156 @@ function initPixels() {
 	return new Array(5 * 5).fill(0).map((_, i) => ({ index: i, color: null }));
 }
 
+enum Storage {
+	Drawing = "pixel_art",
+	Saved = "pixel_art_saved",
+}
+
 export default function Page() {
 	const { colorMode } = useColorMode();
 	const [token, setToken] = useState<string | null>(null);
-	const [pixels, setPixels] = useState<PixelsType[]>(initPixels());
+	const [pixels, setPixels] = useState<PixelType[]>(initPixels());
 	const [title, setTitle] = useState("");
 	const [mode, setMode] = useState<"draw" | "erase" | "pipette">("draw");
 	const [color, setColor] = useState(parseColor("#fc835cff"));
 	const [uploadDialog, setUploadDialog] = useState(false);
 	const [uploading, setUploading] = useState(false);
-	const [result, setResult] = useState<{
-		uuid: string;
-		title: string;
-		createdAt: Date;
-		pixels: PixelsType[];
-	} | null>(null);
-	const [saved, setSaved] = useState<SavedPixelsType[]>([]);
+	const [responsePixelArt, setResponsePixelArt] =
+		useState<ResponsePixelArtType | null>(null);
+	const [saved, setSaved] = useState<SavedPixelArtType[]>([]);
 	const [savedIndicator, setSavedIndicator] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-		const title = localStorage.getItem("pixel_art_title");
-		setTitle(title ?? "");
+		const savedDrawing = localStorage.getItem(Storage.Drawing);
+		if (!savedDrawing) return;
 
-		const saved = localStorage.getItem("pixel_art");
-		if (!saved) return;
-		let parsed: PixelsType[];
-
+		let parsed: DrawingPixelArtType;
 		try {
-			parsed = JSON.parse(saved);
+			parsed = DrawingPixelArt.parse(JSON.parse(savedDrawing));
 		} catch (e) {
-			setError(`保存されていた絵の読み込みに失敗しました\n${e}`);
+			setError(
+				`描き途中の絵の読み込みに失敗しました\n${e instanceof ZodError ? e.message : e}`,
+			);
 			return;
 		}
 
-		setPixels(parsed);
+		setTitle(parsed.title);
+		setPixels(parsed.pixels);
 	}, []);
 
 	useEffect(() => {
-		const _saved = localStorage.getItem("pixel_art_saved");
-		if (!_saved) return;
-		let parsedData: SavedPixelsType[];
+		const savedPixelArts = localStorage.getItem(Storage.Saved);
+		if (!savedPixelArts) return;
 
+		let parsedToDate: SavedPixelArtType[];
 		try {
-			const parsed: {
-				uuid: string;
-				title: string;
-				pixels: PixelsType[];
-				createdAt?: string;
-				savedAt?: string;
-			}[] = JSON.parse(_saved);
-			parsedData = parsed.map(({ createdAt, savedAt, ...rest }) => ({
-				...rest,
-				createdAt: new Date(createdAt ?? 0),
-				savedAt: new Date(savedAt ?? 0),
-			}));
+			const parsed = z
+				.array(SavedPixelArtFromLocalStorage)
+				.parse(JSON.parse(savedPixelArts));
+			parsedToDate = z.array(SavedPixelArt).parse(
+				parsed.map(({ publishedAt, savedAt, ...rest }) => ({
+					...rest,
+					publishedAt: new Date(publishedAt),
+					savedAt: new Date(savedAt),
+				})),
+			);
 		} catch (e) {
-			setError(`保存されていた絵の読み込みに失敗しました\n${e}`);
+			setError(
+				`保存されていた絵の読み込みに失敗しました\n${e instanceof ZodError ? e.message : e}`,
+			);
 			return;
 		}
 
-		setSaved(parsedData);
+		setSaved(parsedToDate);
 	}, []);
+
+	function changePixel(pixel: PixelType, index: number) {
+		if (mode === "pipette" && pixel.color) {
+			setColor(parseColor(pixel.color));
+			setMode("draw");
+			return;
+		}
+		setPixels((pixels) => {
+			const newPixels = pixels.map((pixel, i) =>
+				i === index
+					? { ...pixel, color: mode === "draw" ? color.toString("hexa") : null }
+					: pixel,
+			);
+			localStorage.setItem(
+				Storage.Drawing,
+				JSON.stringify({ title, pixels: newPixels }),
+			);
+			return newPixels;
+		});
+	}
+
+	async function upload() {
+		if (!token) return;
+		setUploading(true);
+		const res = await uploadPixels({
+			title: title || "無題",
+			pixels,
+			token,
+		});
+		setUploading(false);
+		setUploadDialog(false);
+		if (res.error) return setError(res.message);
+		setTitle("");
+		setPixels(initPixels());
+		localStorage.removeItem(Storage.Drawing);
+		setResponsePixelArt(res);
+	}
+
+	function saveResponse() {
+		if (!responsePixelArt) return;
+		const data = {
+			...responsePixelArt,
+			savedAt: new Date(),
+		};
+		setSaved((prevSaved) => {
+			const newSaved = [...prevSaved, data];
+			localStorage.setItem(Storage.Saved, JSON.stringify(newSaved));
+			return newSaved;
+		});
+		setSavedIndicator(true);
+		setTimeout(() => {
+			setSavedIndicator(false);
+			setResponsePixelArt(null);
+		}, 1000);
+	}
+
+	async function importSavedArts({ files }: { files: File[] }) {
+		let parsed: SavedPixelArtFromLocalStorageType[];
+		try {
+			parsed = SavedPixelArtFromLocalStorage.array().parse(
+				await files[0].text(),
+			);
+		} catch (e) {
+			return setError(
+				`インポートに失敗しました\n${e instanceof ZodError ? e.message : e}`,
+			);
+		}
+		const parsedToDate: SavedPixelArtType[] = parsed.map(
+			({ publishedAt, savedAt, ...rest }) => ({
+				...rest,
+				publishedAt: new Date(publishedAt),
+				savedAt: new Date(savedAt),
+			}),
+		);
+
+		setSaved((prevSaved) => {
+			const data = [
+				...parsedToDate,
+				...prevSaved.filter(
+					(saved) => !parsed.some((data) => saved.uuid === data.uuid),
+				),
+			];
+			data.sort((a, b) => a.savedAt.getTime() - b.savedAt.getTime());
+			localStorage.setItem(Storage.Saved, JSON.stringify(data));
+			return data;
+		});
+	}
 
 	return (
 		<ClientOnly fallback={<Loading />}>
@@ -160,8 +250,7 @@ export default function Page() {
 															onClick={() => {
 																setPixels(initPixels());
 																setTitle("");
-																localStorage.removeItem("pixel_art");
-																localStorage.removeItem("pixel_art_title");
+																localStorage.removeItem(Storage.Drawing);
 															}}
 														>
 															はい
@@ -176,7 +265,19 @@ export default function Page() {
 									</Portal>
 								</Dialog.Root>
 							</HStack>
-							<SimpleGrid columns={5} borderWidth="1px">
+							<SimpleGrid
+								columns={5}
+								borderWidth="1px"
+								bgImage={`
+									repeating-linear-gradient(
+										45deg,
+										{colors.bg.panel},
+										{colors.bg.panel} 5px,
+										{colors.bg.emphasized} 5px,
+										{colors.bg.emphasized} 10px
+									)
+  								`}
+							>
 								{pixels.map((pixel, i) => (
 									<IconButton
 										variant="plain"
@@ -187,21 +288,7 @@ export default function Page() {
 										rounded="none"
 										borderColor="border.emphasized"
 										bgColor={pixel.color ?? "transparent"}
-										onClick={() => {
-											if (mode === "pipette" && pixel.color) {
-												setColor(parseColor(pixel.color));
-												setMode("draw");
-												return;
-											}
-											const newPixels = [...pixels];
-											newPixels[i].color =
-												mode === "draw" ? color.toString("hexa") : null;
-											setPixels(newPixels);
-											localStorage.setItem(
-												"pixel_art",
-												JSON.stringify(newPixels),
-											);
-										}}
+										onClick={() => changePixel(pixel, i)}
 									/>
 								))}
 							</SimpleGrid>
@@ -277,28 +364,7 @@ export default function Page() {
 												<Button
 													loading={uploading}
 													disabled={!token}
-													onClick={async () => {
-														if (!token) return;
-														setUploading(true);
-														const res = await uploadPixels({
-															title: title ?? "無題",
-															pixels,
-															token,
-														});
-														setUploading(false);
-														setUploadDialog(false);
-														if (res.error) return setError(res.message);
-														setTitle("");
-														setPixels(initPixels());
-														if (!res.uuid || !res.pixels)
-															return setError(res.message);
-														setResult({
-															uuid: res.uuid,
-															title: res.title ?? "無題",
-															pixels: res.pixels,
-															createdAt: new Date(res.created_at ?? 0),
-														});
-													}}
+													onClick={upload}
 												>
 													はい
 												</Button>
@@ -312,121 +378,11 @@ export default function Page() {
 							</Dialog.Root>
 						</Box>
 						<Separator w="full" />
-						<ScrollArea.Root maxW="8xl" size="xs">
-							<ScrollArea.Viewport>
-								<ScrollArea.Content>
-									<Flex gap="4" flexWrap="nowrap">
-										{saved.map((data) => (
-											<Card.Root
-												key={`pixels-saved-${data.uuid}`}
-												size="sm"
-												minW="48"
-												{...config.inAnimation}
-											>
-												<Card.Header>
-													<Card.Title>{data.title}</Card.Title>
-												</Card.Header>
-												<Card.Body display="flex" alignItems="center">
-													<SimpleGrid columns={5} w="fit" borderWidth="1px">
-														{data.pixels.map((pixel) => (
-															<Bleed
-																w="8"
-																h="8"
-																aspectRatio="square"
-																key={`pixel-saved-${data.uuid}-${pixel.index}`}
-																rounded="none"
-																borderWidth="1px"
-																borderColor="border.emphasized"
-																bgColor={pixel.color ?? "transparent"}
-															/>
-														))}
-													</SimpleGrid>
-												</Card.Body>
-												<Card.Footer>
-													<Tooltip
-														content={
-															data.createdAt.getTime()
-																? data.createdAt.toISOString()
-																: "不明な日時"
-														}
-													>
-														<Em
-															fontFamily="mono"
-															fontSize="sm"
-															color="fg.muted"
-														>
-															{data.createdAt.getTime()
-																? format(data.createdAt, "M/d HH:mm")
-																: "??/??"}
-														</Em>
-													</Tooltip>
-												</Card.Footer>
-											</Card.Root>
-										))}
-									</Flex>
-								</ScrollArea.Content>
-							</ScrollArea.Viewport>
-							<ScrollArea.Scrollbar orientation="horizontal" />
-							<ScrollArea.Corner />
-						</ScrollArea.Root>
 						<HStack>
 							<ButtonGroup variant="surface" grow attached>
 								<FileUpload.Root
 									accept="application/json"
-									onFileAccept={async ({ files }) => {
-										let _parsed: {
-											uuid: string;
-											title: string;
-											createdAt: string;
-											pixels: PixelsType[];
-											savedAt?: string;
-										}[];
-										try {
-											_parsed = JSON.parse(await files[0].text());
-										} catch (e) {
-											setError(`インポートに失敗しました\n${e}`);
-											return;
-										}
-										const errors: { title: string; error: string }[] = [];
-										const parsed: SavedPixelsType[] = [];
-										for (const data of _parsed) {
-											const res = parsePixels(data.pixels);
-											if (res.error) {
-												errors.push({ title: data.title, error: res.message });
-												continue;
-											}
-											const { createdAt, savedAt, ...rest } = data;
-											parsed.push({
-												...rest,
-												createdAt: new Date(createdAt),
-												savedAt: new Date(savedAt ?? 0),
-											});
-										}
-
-										if (errors.length)
-											setError(
-												errors
-													.map((error) => `${error.title}: ${error.error}`)
-													.join("\n"),
-											);
-										setSaved((prevSaved) => {
-											const data = [
-												...parsed,
-												...prevSaved.filter(
-													(saved) =>
-														!parsed.some((data) => saved.uuid === data.uuid),
-												),
-											];
-											data.sort(
-												(a, b) => a.savedAt.getTime() - b.savedAt.getTime(),
-											);
-											localStorage.setItem(
-												"pixel_art_saved",
-												JSON.stringify(data),
-											);
-											return data;
-										});
-									}}
+									onFileAccept={importSavedArts}
 								>
 									<FileUpload.HiddenInput />
 									<FileUpload.Trigger asChild>
@@ -472,7 +428,7 @@ export default function Page() {
 														colorPalette="red"
 														onClick={() => {
 															setSaved([]);
-															localStorage.removeItem("pixel_art_saved");
+															localStorage.removeItem(Storage.Saved);
 														}}
 													>
 														はい
@@ -487,6 +443,66 @@ export default function Page() {
 								</Portal>
 							</Dialog.Root>
 						</HStack>
+						<SimpleGrid columns={[2, 2, 3, 4, 6]}>
+							{saved.map((data) => (
+								<Card.Root
+									key={`pixels-saved-${data.uuid}`}
+									size="sm"
+									w="max"
+									{...config.inAnimation}
+								>
+									<Card.Header>
+										<Card.Title>{data.title}</Card.Title>
+									</Card.Header>
+									<Card.Body display="flex" alignItems="center">
+										<SimpleGrid columns={5} w="max" borderWidth="1px">
+											{data.pixels.map((pixel) => (
+												<Bleed
+													w={["6", "8"]}
+													h={["6", "8"]}
+													aspectRatio="square"
+													key={`pixel-saved-${data.uuid}-${pixel.index}`}
+													rounded="none"
+													borderWidth="1px"
+													borderColor="border.emphasized"
+													bgColor={pixel.color ?? "transparent"}
+												/>
+											))}
+										</SimpleGrid>
+									</Card.Body>
+									<Card.Footer flexDir="column" alignItems="start">
+										{[
+											{
+												icon: <FaUpload />,
+												label: "投稿日",
+												date: data.publishedAt,
+											},
+											{
+												icon: <FaDownload />,
+												label: "保存日",
+												date: data.savedAt,
+											},
+										].map((date) => (
+											<Tooltip
+												key={`${date.label}-${data.uuid}`}
+												content={date.date.toISOString()}
+											>
+												<HStack
+													color="fg.muted"
+													fontFamily="mono"
+													fontSize="sm"
+													as="p"
+													gap="1"
+												>
+													{date.icon}
+													<Em>{format(date.date, "MM/dd HH:mm")}</Em>
+												</HStack>
+											</Tooltip>
+										))}
+									</Card.Footer>
+								</Card.Root>
+							))}
+						</SimpleGrid>
 					</Container>
 					<Dialog.Root
 						placement="center"
@@ -501,7 +517,9 @@ export default function Page() {
 										<Dialog.Title>エラーが発生しました</Dialog.Title>
 									</Dialog.Header>
 									<Dialog.Body>
-										<Text>{error}</Text>
+										<Code size="lg" whiteSpace="pre-wrap">
+											{error}
+										</Code>
 									</Dialog.Body>
 									<Dialog.Footer>
 										<Dialog.ActionTrigger asChild>
@@ -514,8 +532,8 @@ export default function Page() {
 					</Dialog.Root>
 					<Dialog.Root
 						placement="center"
-						open={result !== null}
-						onOpenChange={() => setResult(null)}
+						open={responsePixelArt !== null}
+						onOpenChange={() => setResponsePixelArt(null)}
 					>
 						<Portal>
 							<Dialog.Backdrop />
@@ -525,9 +543,9 @@ export default function Page() {
 										<Dialog.Title>交換しました</Dialog.Title>
 									</Dialog.Header>
 									<Dialog.Body>
-										<Heading>{result?.title}</Heading>
+										<Heading>{responsePixelArt?.title}</Heading>
 										<SimpleGrid columns={5} borderWidth="1px">
-											{result?.pixels.map((pixel) => (
+											{responsePixelArt?.pixels.map((pixel) => (
 												<IconButton
 													variant="plain"
 													w="full"
@@ -542,25 +560,7 @@ export default function Page() {
 										</SimpleGrid>
 									</Dialog.Body>
 									<Dialog.Footer>
-										<Button
-											onClick={() => {
-												if (!result) return;
-												const data = { ...result, savedAt: new Date() };
-												setSaved((prevSaved) => {
-													const newSaved = [...prevSaved, data];
-													localStorage.setItem(
-														"pixel_art_saved",
-														JSON.stringify(newSaved),
-													);
-													return newSaved;
-												});
-												setSavedIndicator(true);
-												setTimeout(() => {
-													setSavedIndicator(false);
-													setResult(null);
-												}, 1000);
-											}}
-										>
+										<Button onClick={saveResponse}>
 											{savedIndicator ? <FaCheck /> : "保存する"}
 										</Button>
 										<Dialog.ActionTrigger asChild>

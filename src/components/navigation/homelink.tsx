@@ -217,7 +217,7 @@ export function HomeLink({
 								<NextLink href="/brand">
 									<Image rounded="full" boxSize="3.5" asChild>
 										<NextImage
-											src="/kirura/512p.png"
+											src="/static/kirura/512p.png"
 											alt="kirura logo"
 											width={512}
 											height={512}

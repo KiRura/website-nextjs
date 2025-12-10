@@ -7,6 +7,7 @@ import {
 	SiRemark,
 	SiSupabase,
 	SiSwr,
+	SiZod,
 } from "react-icons/si";
 
 type IconsType = {
@@ -29,4 +30,5 @@ export const Icons: IconsType = {
 	"microcms-js-sdk": FaDatabase,
 	"@supabase/supabase-js": SiSupabase,
 	"next-turnstile": FaCloudflare,
+	zod: SiZod,
 };

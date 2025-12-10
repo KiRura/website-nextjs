@@ -1,32 +1,11 @@
 import { defineRecipe } from "@chakra-ui/react";
+import { containerRecipe as recipe } from "@chakra-ui/react/theme";
 import { config } from "@/config";
 
 export const containerRecipe = defineRecipe({
-	className: "chakra-container",
+	...recipe,
 	base: {
-		position: "relative",
-		maxWidth: "8xl",
-		w: "100%",
-		mx: "auto",
-		px: {
-			base: "4",
-			md: "6",
-			lg: "8",
-		},
+		...recipe.base,
 		...config.inAnimation,
-	},
-	variants: {
-		centerContent: {
-			true: {
-				display: "flex",
-				flexDirection: "column",
-				alignItems: "center",
-			},
-		},
-		fluid: {
-			true: {
-				maxWidth: "full",
-			},
-		},
 	},
 });
