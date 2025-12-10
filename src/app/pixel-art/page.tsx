@@ -224,7 +224,12 @@ export default function Page() {
 								<Input
 									value={title}
 									onChange={(e) => setTitle(e.target.value)}
-									onBlur={() => localStorage.setItem("pixel_art_title", title)}
+									onBlur={() =>
+										localStorage.setItem(
+											Storage.Drawing,
+											JSON.stringify({ title, pixels }),
+										)
+									}
 									variant="flushed"
 									flex={1}
 									placeholder="無題 (7文字まで)"
