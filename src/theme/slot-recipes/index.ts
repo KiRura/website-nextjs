@@ -1,3 +1,4 @@
+import { dialogSlotRecipe } from "./dialog";
 import { drawerSlotRecipe } from "./drawer";
 
 export const slotRecipes = {
@@ -12,7 +13,7 @@ export const slotRecipes = {
 	// checkboxCard: checkboxCardSlotRecipe,
 	// collapsible: collapsibleSlotRecipe,
 	// dataList: dataListSlotRecipe,
-	// dialog: dialogSlotRecipe,
+	dialog: dialogSlotRecipe,
 	drawer: drawerSlotRecipe,
 	// 	editable: editableSlotRecipe,
 	// 	emptyState: emptyStateSlotRecipe,

@@ -12,7 +12,6 @@ import {
 	Container,
 	Dialog,
 	DownloadTrigger,
-	Em,
 	FileUpload,
 	Heading,
 	HStack,
@@ -224,22 +223,30 @@ export default function Page() {
 								<Input
 									value={title}
 									onChange={(e) => setTitle(e.target.value)}
-									onBlur={() => localStorage.setItem("pixel_art_title", title)}
-									variant="flushed"
+									onBlur={() =>
+										localStorage.setItem(
+											Storage.Drawing,
+											JSON.stringify({ title, pixels }),
+										)
+									}
+									borderWidth="1px"
+									borderColor="border"
+									rounded="none"
+									variant="subtle"
 									flex={1}
 									placeholder="無題 (7文字まで)"
 									maxLength={7}
 								/>
-								<Dialog.Root placement="center">
+								<Dialog.Root placement="center" fontFamily="dot">
 									<Dialog.Trigger asChild>
-										<IconButton variant="outline">
+										<IconButton variant="outline" rounded="none">
 											<FaRotateRight />
 										</IconButton>
 									</Dialog.Trigger>
 									<Portal>
 										<Dialog.Backdrop />
 										<Dialog.Positioner>
-											<Dialog.Content>
+											<Dialog.Content rounded="none">
 												<Dialog.Header>
 													<Dialog.Title>本当にリセットしますか？</Dialog.Title>
 												</Dialog.Header>
@@ -293,21 +300,24 @@ export default function Page() {
 								))}
 							</SimpleGrid>
 							<HStack justify="space-between">
-								<ButtonGroup variant="surface" attached>
+								<ButtonGroup variant="surface" borderWidth="1px" attached>
 									<IconButton
 										variant={mode === "draw" ? "solid" : undefined}
+										rounded="none"
 										onClick={() => setMode("draw")}
 									>
 										<FaPaintbrush />
 									</IconButton>
 									<IconButton
 										variant={mode === "erase" ? "solid" : undefined}
+										rounded="none"
 										onClick={() => setMode("erase")}
 									>
 										<FaEraser />
 									</IconButton>
 									<IconButton
 										variant={mode === "pipette" ? "solid" : undefined}
+										rounded="none"
 										onClick={() => setMode("pipette")}
 									>
 										<FaEyeDropper />
@@ -319,15 +329,13 @@ export default function Page() {
 								>
 									<ColorPicker.HiddenInput />
 									<ColorPicker.Control>
-										<ColorPicker.Trigger cursor="button" />
+										<ColorPicker.Trigger rounded="none" cursor="button" />
 									</ColorPicker.Control>
 									<Portal>
 										<ColorPicker.Positioner>
-											<ColorPicker.Content>
-												<ColorPicker.Area />
-												<HStack>
-													<ColorPicker.Sliders />
-												</HStack>
+											<ColorPicker.Content rounded="none">
+												<ColorPicker.Area rounded="none" />
+												<ColorPicker.Sliders rounded="none" />
 											</ColorPicker.Content>
 										</ColorPicker.Positioner>
 									</Portal>
@@ -338,18 +346,21 @@ export default function Page() {
 								placement="center"
 								open={uploadDialog}
 								onOpenChange={(e) => setUploadDialog(e.open)}
+								fontFamily="dot"
 							>
 								<Dialog.Trigger asChild>
-									<Button w="full">交換する</Button>
+									<Button rounded="none" w="full">
+										交換する
+									</Button>
 								</Dialog.Trigger>
 								<Portal>
 									<Dialog.Backdrop />
 									<Dialog.Positioner>
-										<Dialog.Content>
+										<Dialog.Content rounded="none">
 											<Dialog.Header>
 												<Dialog.Title>本当に交換しますか？</Dialog.Title>
 											</Dialog.Header>
-											<Dialog.Body>
+											<Dialog.Body spaceY="2">
 												<Text>
 													一度交換すると描いた絵は二度と見られなくなります。
 												</Text>
@@ -365,11 +376,14 @@ export default function Page() {
 													loading={uploading}
 													disabled={!token}
 													onClick={upload}
+													rounded="none"
 												>
 													はい
 												</Button>
 												<Dialog.ActionTrigger asChild>
-													<Button variant="outline">いいえ</Button>
+													<Button variant="outline" rounded="none">
+														いいえ
+													</Button>
 												</Dialog.ActionTrigger>
 											</Dialog.Footer>
 										</Dialog.Content>
@@ -379,14 +393,14 @@ export default function Page() {
 						</Box>
 						<Separator w="full" />
 						<HStack>
-							<ButtonGroup variant="surface" grow attached>
+							<ButtonGroup variant="surface" attached>
 								<FileUpload.Root
 									accept="application/json"
 									onFileAccept={importSavedArts}
 								>
 									<FileUpload.HiddenInput />
 									<FileUpload.Trigger asChild>
-										<Button>
+										<Button rounded="none">
 											<FaFileImport />
 											インポート
 										</Button>
@@ -398,22 +412,22 @@ export default function Page() {
 									mimeType="application/json"
 									asChild
 								>
-									<Button>
+									<Button rounded="none">
 										<FaFileExport />
 										エクスポート
 									</Button>
 								</DownloadTrigger>
 							</ButtonGroup>
-							<Dialog.Root placement="center">
+							<Dialog.Root placement="center" fontFamily="dot">
 								<Dialog.Trigger asChild>
-									<IconButton variant="outline">
+									<IconButton rounded="none" variant="outline">
 										<FaTrashCan />
 									</IconButton>
 								</Dialog.Trigger>
 								<Portal>
 									<Dialog.Backdrop />
 									<Dialog.Positioner>
-										<Dialog.Content>
+										<Dialog.Content rounded="none">
 											<Dialog.Header>
 												<Dialog.Title>本当に削除しますか？</Dialog.Title>
 											</Dialog.Header>
@@ -430,12 +444,15 @@ export default function Page() {
 															setSaved([]);
 															localStorage.removeItem(Storage.Saved);
 														}}
+														rounded="none"
 													>
 														はい
 													</Button>
 												</Dialog.ActionTrigger>
 												<Dialog.ActionTrigger asChild>
-													<Button variant="outline">いいえ</Button>
+													<Button variant="outline" rounded="none">
+														いいえ
+													</Button>
 												</Dialog.ActionTrigger>
 											</Dialog.Footer>
 										</Dialog.Content>
@@ -449,6 +466,7 @@ export default function Page() {
 									key={`pixels-saved-${data.uuid}`}
 									size="sm"
 									w="max"
+									rounded="none"
 									{...config.inAnimation}
 								>
 									<Card.Header>
@@ -487,15 +505,9 @@ export default function Page() {
 												key={`${date.label}-${data.uuid}`}
 												content={date.date.toISOString()}
 											>
-												<HStack
-													color="fg.muted"
-													fontFamily="mono"
-													fontSize="sm"
-													as="p"
-													gap="1"
-												>
+												<HStack color="fg.muted" fontSize="sm" as="p" gap="1">
 													{date.icon}
-													<Em>{format(date.date, "MM/dd HH:mm")}</Em>
+													{format(date.date, "MM/dd HH:mm")}
 												</HStack>
 											</Tooltip>
 										))}
@@ -508,22 +520,23 @@ export default function Page() {
 						placement="center"
 						open={error !== null}
 						onOpenChange={() => setError(null)}
+						fontFamily="dot"
 					>
 						<Portal>
 							<Dialog.Backdrop />
 							<Dialog.Positioner>
-								<Dialog.Content>
+								<Dialog.Content rounded="none">
 									<Dialog.Header>
 										<Dialog.Title>エラーが発生しました</Dialog.Title>
 									</Dialog.Header>
 									<Dialog.Body>
-										<Code size="lg" whiteSpace="pre-wrap">
+										<Code size="lg" whiteSpace="pre-wrap" rounded="none">
 											{error}
 										</Code>
 									</Dialog.Body>
 									<Dialog.Footer>
 										<Dialog.ActionTrigger asChild>
-											<Button>分かった</Button>
+											<Button rounded="none">分かった</Button>
 										</Dialog.ActionTrigger>
 									</Dialog.Footer>
 								</Dialog.Content>
@@ -534,15 +547,16 @@ export default function Page() {
 						placement="center"
 						open={responsePixelArt !== null}
 						onOpenChange={() => setResponsePixelArt(null)}
+						fontFamily="dot"
 					>
 						<Portal>
 							<Dialog.Backdrop />
 							<Dialog.Positioner>
-								<Dialog.Content>
+								<Dialog.Content rounded="none">
 									<Dialog.Header>
 										<Dialog.Title>交換しました</Dialog.Title>
 									</Dialog.Header>
-									<Dialog.Body>
+									<Dialog.Body spaceY="2">
 										<Heading>{responsePixelArt?.title}</Heading>
 										<SimpleGrid columns={5} borderWidth="1px">
 											{responsePixelArt?.pixels.map((pixel) => (
@@ -560,11 +574,13 @@ export default function Page() {
 										</SimpleGrid>
 									</Dialog.Body>
 									<Dialog.Footer>
-										<Button onClick={saveResponse}>
+										<Button rounded="none" onClick={saveResponse}>
 											{savedIndicator ? <FaCheck /> : "保存する"}
 										</Button>
 										<Dialog.ActionTrigger asChild>
-											<Button variant="outline">閉じる</Button>
+											<Button variant="outline" rounded="none">
+												閉じる
+											</Button>
 										</Dialog.ActionTrigger>
 									</Dialog.Footer>
 								</Dialog.Content>
