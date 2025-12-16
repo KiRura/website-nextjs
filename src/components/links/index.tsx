@@ -83,7 +83,7 @@ export function Links() {
 								}}
 								p="0"
 								h="fit"
-								w="full"
+								w="fit"
 								maxW="2/5"
 								borderWidth="0"
 								transition="common"
