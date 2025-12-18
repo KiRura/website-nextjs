@@ -14,9 +14,9 @@ import type { Metadata } from "next";
 import NextImage from "next/image";
 import { notFound } from "next/navigation";
 import { FaPen, FaRotateRight } from "react-icons/fa6";
-import { ToClientLocaleDate } from "@/components/to_locale_date";
+import { ToClientLocaleDate } from "@/components/to-locale-date";
 import { Prose } from "@/components/ui/prose";
-import { getDetail, getListIds } from "@/lib/microcms";
+import { getDetail, getListIds } from "@/lib/blog";
 
 export async function generateMetadata({
 	params,
@@ -33,12 +33,12 @@ export async function generateMetadata({
 			? {
 					openGraph: {
 						images: { url: res.coverImage.url, alt: res.coverImage.alt },
-						siteName: "Blog - きるら",
+						siteName: "呟き - きるら",
 					},
 				}
 			: {
 					openGraph: {
-						siteName: "Blog - きるら",
+						siteName: "呟き - きるら",
 					},
 				}),
 		twitter: {

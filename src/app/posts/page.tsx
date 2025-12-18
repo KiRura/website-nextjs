@@ -1,10 +1,10 @@
 import { Container, Heading, SimpleGrid, Stack } from "@chakra-ui/react";
 import type { Metadata } from "next";
 import { FaPenNib } from "react-icons/fa6";
-import { PostCard, RecentPostCards } from "@/components/post_card";
+import { PostCard, RecentPostCards } from "@/components/post-card";
 import Aria from "@/components/ui/aria";
 import { ZZZ } from "@/components/zzz";
-import { getList } from "@/lib/microcms";
+import { getList } from "@/lib/blog";
 
 export const metadata: Metadata = {
 	title: "Blog",
