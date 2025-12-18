@@ -1,7 +1,7 @@
 import { ClientOnly, Skeleton, Text, type TextProps } from "@chakra-ui/react";
 import type { RefAttributes } from "react";
-import { FormatClientLocaleDate } from "./to_client_locale_date";
-import { FormatLocaleDate } from "./to_locale_date";
+import { FormatClientLocaleDate } from "./to-client-locale-date";
+import { FormatLocaleDate } from "./to-locale-date";
 
 export function ToClientLocaleDate(
 	props: TextProps & RefAttributes<HTMLParagraphElement> & { date?: string },

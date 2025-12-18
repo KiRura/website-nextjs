@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { getDetail } from "@/lib/microcms";
+import { getDetail } from "@/lib/blog";
 
 export const size = {
 	width: 1600,

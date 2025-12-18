@@ -1,14 +1,16 @@
 import type { MicroCMSImage } from "microcms-js-sdk";
 
-export type ListPostType = {
+type PostType = {
 	title: string;
 	subtitle?: string;
 	coverImage?: MicroCMSImage;
 };
 
-export type PostType = {
+type PostWithContentType = {
 	title: string;
 	subtitle?: string;
 	coverImage?: MicroCMSImage;
 	content: string;
 };
+
+export type { PostType, PostWithContentType };

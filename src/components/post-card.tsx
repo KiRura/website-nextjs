@@ -1,3 +1,4 @@
+import { PostType, PostWithContentType } from "@/interface/blog";
 import {
 	Box,
 	Card,
@@ -15,14 +16,13 @@ import type {
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { FaAngleRight } from "react-icons/fa6";
-import type { ListPostType, PostType } from "@/lib/microcms/interfaces";
 
 export function PostCard({
 	post,
 }: {
 	post:
-		| (ListPostType & MicroCMSContentId & MicroCMSDate)
-		| (PostType & MicroCMSContentId & MicroCMSDate);
+		| (PostType & MicroCMSContentId & MicroCMSDate)
+		| (PostWithContentType & MicroCMSContentId & MicroCMSDate);
 }) {
 	return (
 		<Card.Root
@@ -71,7 +71,7 @@ export function PostCard({
 export function RecentPostCards({
 	posts,
 }: {
-	posts: MicroCMSListResponse<ListPostType>;
+	posts: MicroCMSListResponse<PostType>;
 }) {
 	return posts.contents.map((post) => (
 		<Card.Root
