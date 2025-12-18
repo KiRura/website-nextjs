@@ -1,7 +1,7 @@
 import {
 	type CustomRequestInit,
-	MicroCMSQueries,
 	createClient,
+	type MicroCMSQueries,
 } from "microcms-js-sdk";
 import type { PostType, PostWithContentType } from "../interface/blog";
 
