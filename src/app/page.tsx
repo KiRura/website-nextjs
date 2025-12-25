@@ -138,6 +138,9 @@ export default function Home() {
 							<Aria.TitleBar>
 								<Aria.Title>最近の呟き(眠い 後で実装する)</Aria.Title>
 							</Aria.TitleBar>
+							{/* <Aria.Body>
+								<TopPosts />
+							</Aria.Body> */}
 						</Aria.Root>
 					</GridItem>
 				</SimpleGrid>

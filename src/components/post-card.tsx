@@ -1,4 +1,3 @@
-import { PostType, PostWithContentType } from "@/interface/blog";
 import {
 	Box,
 	Card,
@@ -16,6 +15,7 @@ import type {
 import NextImage from "next/image";
 import NextLink from "next/link";
 import { FaAngleRight } from "react-icons/fa6";
+import type { PostType, PostWithContentType } from "@/interface/blog";
 
 export function PostCard({
 	post,
