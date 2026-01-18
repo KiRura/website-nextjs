@@ -1,5 +1,6 @@
 import { dialogSlotRecipe } from "./dialog";
 import { drawerSlotRecipe } from "./drawer";
+import { tableSlotRecipe } from "./table";
 
 export const slotRecipes = {
 	// accordion: accordionSlotRecipe,
@@ -38,7 +39,7 @@ export const slotRecipes = {
 	// 	stat: statSlotRecipe,
 	// 	steps: stepsSlotRecipe,
 	// 	switch: switchSlotRecipe,
-	// 	table: tableSlotRecipe,
+	table: tableSlotRecipe,
 	// 	tabs: tabsSlotRecipe,
 	// 	tag: tagSlotRecipe,
 	// 	toast: toastSlotRecipe,
