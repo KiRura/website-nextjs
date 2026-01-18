@@ -51,12 +51,9 @@ export default async function Page() {
 		<Container as="main" py="8" spaceY="8">
 			<SimpleGrid columns={{ mdDown: 1, md: 2 }} gap="4">
 				{categories.map((category) => (
-					<Aria.Root key={`deps-${category.label}`}>
+					<Aria.Root key={`deps-${category.label}`} as="section">
 						<Aria.TitleBar>
-							<Aria.Title>
-								<FaFileImport />
-								{category.label}
-							</Aria.Title>
+							<Aria.Title as="h1">{category.label}</Aria.Title>
 						</Aria.TitleBar>
 						<Aria.Body>
 							<Table.Root variant="outline" striped>
