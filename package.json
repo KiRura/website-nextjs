@@ -3,13 +3,12 @@
 	"version": "0.1.0",
 	"scripts": {
 		"dev": "next dev --webpack",
-		"dev:build": "bun run dep:gen && next build --webpack",
-		"build": "chakra typegen ./src/theme/index.ts && bun run dev:build",
+		"prepare": "chakra typegen ./src/theme/index.ts",
+		"build": "next build --webpack",
 		"start": "next start",
 		"lint": "biome lint && tsc",
 		"check": "biome check && tsc",
-		"check:fix": "biome check --write --unsafe && tsc",
-		"dep:gen": "license-report --only=prod --config license-report-config.json > src/app/license/licenses.json"
+		"check:fix": "biome check --write --unsafe && tsc"
 	},
 	"dependencies": {
 		"@chakra-ui/react": "^3.31.0",
@@ -34,14 +33,6 @@
 		"license-report": "^6.8.1",
 		"typescript": "^5.9.3"
 	},
-	"trustedDependencies": [
-		"@biomejs/biome",
-		"@vercel/speed-insights",
-		"esbuild",
-		"rclone.js",
-		"sharp",
-		"workerd"
-	],
 	"engines": {
 		"node": ">=22"
 	}
