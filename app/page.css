@@ -1,0 +1,6 @@
+@keyframes stroke-animation {
+	to {
+		stroke-width: var(--sizes-1);
+		stroke-dasharray: 7 3;
+	}
+}
