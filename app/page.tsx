@@ -3,6 +3,7 @@
 import {
 	Box,
 	Button,
+	Card,
 	Container,
 	Flex,
 	HStack,
@@ -10,9 +11,11 @@ import {
 	Text,
 } from "@chakra-ui/react";
 import isMobile from "ismobilejs";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { KiRuraIcon } from "@/components/icons";
 import "./page.css";
+import { LuArrowDown } from "react-icons/lu";
+import { links } from "@/lib/const/links";
 
 export default () => {
 	const [topHeadingX, setTopHeadingX] = useState(0);
@@ -26,8 +29,8 @@ export default () => {
 		document.addEventListener("mousemove", onMouseMove);
 
 		function handleOrientation(e: DeviceOrientationEvent) {
-			if (e.beta) setTopHeadingY(e.beta * 0.8);
-			if (e.gamma) setTopHeadingX(e.gamma * 0.8);
+			if (e.beta) setTopHeadingY(e.beta * 1.2);
+			if (e.gamma) setTopHeadingX(e.gamma * 1.2);
 		}
 		if (isMobile(window.navigator).any)
 			window.addEventListener("deviceorientation", handleOrientation);
@@ -39,13 +42,20 @@ export default () => {
 		};
 	}, []);
 
+	const [selectedLink, setSelectedLink] = useState(0);
+	function calcLinkPos(i: number) {
+		return (selectedLink - i) * 5 + 75;
+	}
+
+	const linksSectionRef = useRef<HTMLDivElement | null>(null);
+
 	return (
-		<Container as="main">
-			<Flex
-				my="10"
+		<Box as="main" spaceY="8">
+			<Container
+				display="flex"
 				flexDir="column"
-				justify="center"
-				maxW="full"
+				justifyContent="center"
+				minH="vh"
 				borderYWidth="2px"
 			>
 				<Text
@@ -109,9 +119,14 @@ export default () => {
 						size="xl"
 						minW="44"
 						mdDown={{ minW: "0", w: "full" }}
-						disabled
+						onClick={() =>
+							linksSectionRef.current?.scrollIntoView({
+								behavior: "smooth",
+								block: "center",
+							})
+						}
 					>
-						工事中
+						<LuArrowDown />
 					</Button>
 				</Flex>
 				<Text
@@ -125,7 +140,86 @@ export default () => {
 				>
 					こんにちは！
 				</Text>
+			</Container>
+			<Flex
+				as="section"
+				ref={linksSectionRef}
+				pos="relative"
+				justify="end"
+				maxW="full"
+				h={["40rem", "40rem", "55rem"]}
+				align="center"
+				overflow="hidden"
+				_after={{
+					content: `""`,
+					bgImage:
+						"linear-gradient(to bottom, {colors.bg}, transparent 30%, transparent 70%, {colors.bg})",
+					mask: "linear-gradient(to bottom, {colors.bg}, transparent 30%, transparent 70%, {colors.bg})",
+					backdropFilter: "blur({blurs.xl})",
+					pos: "absolute",
+					h: "full",
+					w: "full",
+					pointerEvents: "none",
+				}}
+			>
+				<Box
+					rounded="full"
+					h="150%"
+					aspectRatio="square"
+					mr={{
+						smDown: "-800px",
+						sm: "-700px",
+						md: "-1100px",
+						xl: "-1000px",
+						"2xl": "-800px",
+					}}
+					bgColor="bg.panel"
+					borderWidth="4px"
+				>
+					{links.map((link, i) => (
+						<Box
+							data-active={selectedLink === i || undefined}
+							data-hidden={
+								calcLinkPos(i) > 100 || calcLinkPos(i) < 50 || undefined
+							}
+							w="fit"
+							key={`link-${link.label}-${link.id}`}
+							offsetPath="border-box"
+							offsetRotate="0deg"
+							transitionProperty="offset-distance"
+							transitionDuration="slow"
+							style={{
+								offsetDistance: `${calcLinkPos(i)}%`,
+							}}
+							_hidden={{
+								visibility: "hidden",
+							}}
+						>
+							<Card.Root
+								as="button"
+								cursor="button"
+								_hover={{ bgColor: "bg.subtle" }}
+								transition="all"
+								w="72"
+								variant="subtle"
+								borderWidth="1px"
+								onClick={() => setSelectedLink(i)}
+								css={{
+									"[data-active] &": {
+										bgColor: "bg.panel",
+										shadow: "md",
+									},
+								}}
+							>
+								<Card.Body>
+									<Card.Title>{link.label}</Card.Title>
+									<Card.Description>{link.description}</Card.Description>
+								</Card.Body>
+							</Card.Root>
+						</Box>
+					))}
+				</Box>
 			</Flex>
-		</Container>
+		</Box>
 	);
 };
