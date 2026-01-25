@@ -160,6 +160,7 @@ export default () => {
 					h: "full",
 					w: "full",
 					pointerEvents: "none",
+					touchAction: "none",
 				}}
 			>
 				<Box
