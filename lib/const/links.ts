@@ -3,6 +3,7 @@ import {
 	LuBot,
 	LuCircleDashed,
 	LuClock,
+	LuFactory,
 	LuFlame,
 	LuInstagram,
 	LuMail,
@@ -72,7 +73,7 @@ const links: {
 	},
 	{
 		id: "1301188343",
-		label: "ZZZ",
+		label: "Zenless Zone Zero",
 		description: "全人類やれ",
 		href: "https://zenless.hoyoverse.com/",
 		icon: LuCircleDashed,
@@ -80,7 +81,7 @@ const links: {
 	},
 	{
 		id: "802728892",
-		label: "スタレ",
+		label: "崩壊：スターレイル",
 		description: "信じて オンパロスも明るいですよ",
 		href: "https://hsr.hoyoverse.com/",
 		icon: LuTrainTrack,
@@ -92,6 +93,14 @@ const links: {
 		description: "全人類やれ",
 		href: "https://store.steampowered.com/app/2514960/Refind_Self",
 		icon: LuBot,
+		category: "game",
+	},
+	{
+		id: "4921184031",
+		label: "Arknights:Endfield",
+		description: "UIが本当に素晴らしい",
+		href: "https://endfield.gryphline.com/",
+		icon: LuFactory,
 		category: "game",
 	},
 	{

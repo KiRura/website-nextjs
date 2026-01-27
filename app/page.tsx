@@ -3,18 +3,23 @@
 import {
 	Box,
 	Button,
+	ButtonGroup,
 	Card,
+	Clipboard,
 	Container,
 	Flex,
+	Heading,
 	HStack,
+	Icon,
+	IconButton,
 	Span,
 	Text,
+	VStack,
 } from "@chakra-ui/react";
-import isMobile from "ismobilejs";
 import { useEffect, useRef, useState } from "react";
-import { KiRuraIcon } from "@/components/icons";
+import { KiRuraColorIcon } from "@/components/icons";
 import "./page.css";
-import { LuArrowDown } from "react-icons/lu";
+import { LuArrowDown, LuExternalLink } from "react-icons/lu";
 import { links } from "@/lib/const/links";
 
 export default () => {
@@ -28,23 +33,24 @@ export default () => {
 		}
 		document.addEventListener("mousemove", onMouseMove);
 
-		function handleOrientation(e: DeviceOrientationEvent) {
-			if (e.beta) setTopHeadingY(e.beta * 1.2);
-			if (e.gamma) setTopHeadingX(e.gamma * 1.2);
-		}
-		if (isMobile(window.navigator).any)
-			window.addEventListener("deviceorientation", handleOrientation);
+		// function handleOrientation(e: DeviceOrientationEvent) {
+		// 	if (e.beta) setTopHeadingY(e.beta * 1.2);
+		// 	if (e.gamma) setTopHeadingX(e.gamma * 1.2);
+		// }
+		// if (isMobile(window.navigator).any)
+		// 	window.addEventListener("deviceorientation", handleOrientation);
 
 		return () => {
 			document.removeEventListener("mousemove", onMouseMove);
-			if (isMobile(window.navigator).any)
-				window.removeEventListener("deviceorientation", handleOrientation);
+			// if (isMobile(window.navigator).any)
+			// 	window.removeEventListener("deviceorientation", handleOrientation);
 		};
 	}, []);
 
-	const [selectedLink, setSelectedLink] = useState(0);
+	const [selectedLinkIndex, setSelectedLinkIndex] = useState(0);
+	const selectedLink = links[selectedLinkIndex];
 	function calcLinkPos(i: number) {
-		return (selectedLink - i) * 5 + 75;
+		return (selectedLinkIndex - i) * 4 + 75;
 	}
 
 	const linksSectionRef = useRef<HTMLDivElement | null>(null);
@@ -93,12 +99,11 @@ export default () => {
 								h={["16", "28", "36", "44"]}
 								w="auto"
 								aspectRatio="square"
-								color="bg.panel"
-								bgColor="fg.muted"
+								bgColor="gray.100"
 								borderWidth="1px"
 								aria-hidden
 							>
-								<KiRuraIcon />
+								<KiRuraColorIcon />
 							</Box>
 							<Span letterSpacing="tight" color="fg.muted" lineHeight={1}>
 								<Span
@@ -145,17 +150,21 @@ export default () => {
 				as="section"
 				ref={linksSectionRef}
 				pos="relative"
-				justify="end"
 				maxW="full"
 				h={["40rem", "40rem", "55rem"]}
 				align="center"
 				overflow="hidden"
+				justifyContent="space-between"
+				mdDown={{
+					flexDir: "column",
+				}}
 				_after={{
 					content: `""`,
-					bgImage:
-						"linear-gradient(to bottom, {colors.bg}, transparent 30%, transparent 70%, {colors.bg})",
-					mask: "linear-gradient(to bottom, {colors.bg}, transparent 30%, transparent 70%, {colors.bg})",
-					backdropFilter: "blur({blurs.xl})",
+					bgImage: {
+						mdDown:
+							"linear-gradient(to right, {colors.bg}, transparent 15%, transparent 85%, {colors.bg})",
+						md: "linear-gradient(to bottom, {colors.bg}, transparent 30%, transparent 70%, {colors.bg})",
+					},
 					pos: "absolute",
 					h: "full",
 					w: "full",
@@ -163,32 +172,86 @@ export default () => {
 					touchAction: "none",
 				}}
 			>
+				<VStack
+					key={`link-content-${selectedLink.label}-${selectedLink.id}`}
+					h="full"
+					align="start"
+					justify="start"
+					py={{ mdDown: "12", md: "52" }}
+					pb={{ mdDown: "24" }}
+					px={{ mdDown: "16", md: "20", lg: "40", xl: "48" }}
+					pr={{ md: "32" }}
+					flex="1"
+					maxW={{ md: "80%" }}
+					w={{ mdDown: "full" }}
+					animationName="fade-in, slide-from-left"
+					animationDuration="slow"
+				>
+					<Icon aria-hidden fontSize="7xl" color="fg.muted">
+						<selectedLink.icon />
+					</Icon>
+					<Box as="hgroup" mb="4">
+						<Heading
+							as="h3"
+							size={{ smDown: "5xl", sm: "6xl", md: "7xl" }}
+							overflowWrap="anywhere"
+							animationName="pulse"
+							animationTimingFunction="linear"
+							animationDuration={`${16 * 4}ms`}
+							animationIterationCount={3}
+						>
+							{selectedLink.label}
+						</Heading>
+						<Text color="fg.muted" fontSize="lg">
+							{selectedLink.description}
+						</Text>
+					</Box>
+					<ButtonGroup size="xl" flexWrap="wrap">
+						<IconButton aria-label="リンクを開く" asChild>
+							<a href={selectedLink.href} target="_blank">
+								<LuExternalLink />
+							</a>
+						</IconButton>
+						<Clipboard.Root value={selectedLink.id}>
+							<Clipboard.Trigger asChild>
+								<Button variant="outline" fontFamily="mono">
+									<Clipboard.ValueText />
+									<Clipboard.Indicator />
+								</Button>
+							</Clipboard.Trigger>
+						</Clipboard.Root>
+					</ButtonGroup>
+				</VStack>
 				<Box
 					rounded="full"
 					h="150%"
 					aspectRatio="square"
+					mdDown={{
+						rotate: "-270deg",
+						mb: "-800px",
+					}}
 					mr={{
-						smDown: "-800px",
-						sm: "-700px",
 						md: "-1100px",
 						xl: "-1000px",
-						"2xl": "-800px",
+						"2xl": "-600px",
 					}}
 					bgColor="bg.panel"
 					borderWidth="4px"
 				>
 					{links.map((link, i) => (
 						<Box
-							data-active={selectedLink === i || undefined}
+							data-active={selectedLinkIndex === i || undefined}
 							data-hidden={
 								calcLinkPos(i) > 100 || calcLinkPos(i) < 50 || undefined
 							}
 							w="fit"
 							key={`link-${link.label}-${link.id}`}
 							offsetPath="border-box"
-							offsetRotate="0deg"
+							offsetRotate={{ mdDown: "-90deg", md: "0deg" }}
 							transitionProperty="offset-distance"
 							transitionDuration="slow"
+							animationName="offset-from-100, fade-in"
+							animationDuration="700ms"
 							style={{
 								offsetDistance: `${calcLinkPos(i)}%`,
 							}}
@@ -197,25 +260,36 @@ export default () => {
 							}}
 						>
 							<Card.Root
-								as="button"
 								cursor="button"
 								_hover={{ bgColor: "bg.subtle" }}
 								transition="all"
-								w="72"
+								w={{ md: "48" }}
 								variant="subtle"
 								borderWidth="1px"
-								onClick={() => setSelectedLink(i)}
+								onClick={() => setSelectedLinkIndex(i)}
 								css={{
 									"[data-active] &": {
 										bgColor: "bg.panel",
 										shadow: "md",
 									},
 								}}
+								asChild
 							>
-								<Card.Body>
-									<Card.Title>{link.label}</Card.Title>
-									<Card.Description>{link.description}</Card.Description>
-								</Card.Body>
+								<button
+									type="button"
+									disabled={
+										!(
+											i - selectedLinkIndex < 3 && i - selectedLinkIndex > -3
+										) || undefined
+									}
+								>
+									<Card.Body>
+										<Card.Title hideBelow="md">{link.label}</Card.Title>
+										<Card.Title hideFrom="md" aria-label={link.label}>
+											<link.icon />
+										</Card.Title>
+									</Card.Body>
+								</button>
 							</Card.Root>
 						</Box>
 					))}

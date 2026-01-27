@@ -4,3 +4,9 @@
 		stroke-dasharray: 7 3;
 	}
 }
+
+@keyframes offset-from-100 {
+	from {
+		offset-distance: 100%;
+	}
+}
