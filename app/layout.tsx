@@ -37,10 +37,12 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="ja" suppressHydrationWarning>
-			<body
-				className={`${zalandoSans.variable} ${notoSansJP.variable} ${googleSansCode.variable}`}
-			>
+		<html
+			lang="ja"
+			suppressHydrationWarning
+			className={`${zalandoSans.variable} ${notoSansJP.variable} ${googleSansCode.variable}`}
+		>
+			<body>
 				<Provider>{children}</Provider>
 			</body>
 		</html>
