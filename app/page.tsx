@@ -17,9 +17,9 @@ import {
 	VStack,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
-import { KiRuraColorIcon } from "@/components/icons";
 import "./page.css";
 import { LuArrowDown, LuExternalLink } from "react-icons/lu";
+import { KiRuraColorIcon } from "@/components/icons";
 import { links } from "@/lib/const/links";
 
 export default () => {
@@ -58,6 +58,7 @@ export default () => {
 	return (
 		<Box as="main" spaceY="8">
 			<Container
+				as="section"
 				display="flex"
 				flexDir="column"
 				justifyContent="center"
@@ -93,8 +94,8 @@ export default () => {
 					py="4"
 					gap="4"
 				>
-					<Text as="h1">
-						<HStack gap={["4", "4", "5", "6"]}>
+					<HStack asChild gap={["4", "4", "5", "6"]}>
+						<Text as="h1">
 							<Box
 								h={["16", "28", "36", "44"]}
 								w="auto"
@@ -117,8 +118,8 @@ export default () => {
 									7KiRura,
 								</Span>
 							</Span>
-						</HStack>
-					</Text>
+						</Text>
+					</HStack>
 					<Button
 						variant="surface"
 						size="xl"
