@@ -1,21 +1,14 @@
-FROM oven/bun:latest AS base
+FROM node:24-alpine
 
-FROM base AS install
-RUN mkdir -p /temp/dev
-COPY package.json bun.lock* /temp/dev/
-RUN <<EOF
-cd /temp/dev
-bun i -d rclone.js
-bun i --production
-bun i -d license-report
-EOF
+RUN apk -U upgrade
+RUN apk add curl wget pnpm
 
-FROM base AS release
-COPY --from=install /temp/dev/node_modules node_modules
+WORKDIR /app
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm i
+
 COPY . .
+RUN pnpm run build
 
-ENV NODE_ENV=production
-RUN bun run build
-
-USER bun
-CMD [ "bun", "run", "start" ]
+CMD [ "pnpm", "run", "start" ]
