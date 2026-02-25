@@ -9,7 +9,7 @@ import {
 	Table,
 } from "@chakra-ui/react";
 import type { Metadata } from "next";
-import { FaFileImport, FaUpRightFromSquare } from "react-icons/fa6";
+import { FaUpRightFromSquare } from "react-icons/fa6";
 import z from "zod";
 import Aria from "@/components/ui/aria";
 
