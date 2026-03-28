@@ -6,7 +6,7 @@ RUN apk add curl wget pnpm
 WORKDIR /app
 
 COPY . .
-RUN pnpm i
+RUN pnpm i --frozen-lockfile
 RUN pnpm run build
 
-CMD [ "bun", "run", "start" ]
+CMD [ "bun", "run", "--bun", "start" ]
