@@ -1,4 +1,4 @@
-FROM node:25-alpine
+FROM oven/bun:alpine
 
 RUN apk -U upgrade
 RUN apk add curl wget pnpm
@@ -9,4 +9,4 @@ COPY . .
 RUN pnpm i
 RUN pnpm run build
 
-CMD [ "pnpm", "run", "start" ]
+CMD [ "bun", "run", "start" ]
